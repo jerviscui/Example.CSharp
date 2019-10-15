@@ -61,10 +61,18 @@ namespace FixedTest
 
             Console.WriteLine(obj.x);
             Console.WriteLine(obj.y);
+            Console.WriteLine();
 
+            Console.WriteLine(nameof(ArrayAndString_Test));
             ArrayAndString_Test();
+            Console.WriteLine();
+
+            Console.WriteLine(nameof(Span_Test));
             Span_Test();
-            FixedSizeBuffers_Test();
+            Console.WriteLine();
+
+            Console.WriteLine(nameof(FixedSizeBuffers_Test));
+            FixedSizeBuffers_Test();            
         }
 
         unsafe static void ArrayAndString_Test()
@@ -101,6 +109,9 @@ namespace FixedTest
             {
                 *p = 1;
             }
+
+            //todo: how to print span?
+            Console.WriteLine(string.Join(',', s.ToArray()));
         }
 
         struct SB
