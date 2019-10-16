@@ -106,7 +106,7 @@ namespace FixedTest
         {
             var s = new Span<int>(new int[] { 0, 2, 3 });
 
-            fixed (int* p = s)
+            fixed (int* p = s)//等价于(int* p = &s.GetPinnableReference())
             {
                 *p = 1;
             }
