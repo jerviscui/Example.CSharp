@@ -33,6 +33,15 @@ namespace RefTest
             }
 
             ClassRefVariable_Test();
+
+            Console.WriteLine();
+            var b1 = new B();
+            var b2 = new B();
+
+            RefParameter_Test(ref b1, b2);
+
+            Console.WriteLine(b1.n);
+            Console.WriteLine(b2.n);
         }
 
         class B
@@ -44,6 +53,7 @@ namespace RefTest
             {
                 return ref x;
             }
+
         }
 
         static void ClassRefVariable_Test()
@@ -57,6 +67,15 @@ namespace RefTest
             refx = 15;
 
             Console.WriteLine(b.x);
+        }
+
+        static void RefParameter_Test(ref B refb, B b)//B** refb, B* b
+        {
+            b.x = 10;
+            b.n = "10";
+
+            refb.x = 20;
+            refb.n = "20";
         }
     }
 }
