@@ -36,12 +36,27 @@ namespace RefTest
 
             Console.WriteLine();
             var b1 = new B();
-            var b2 = new B();
 
-            RefParameter_Test(ref b1, b2);
+            RefParameter_Test(ref b1, b1);
 
             Console.WriteLine(b1.n);
-            Console.WriteLine(b2.n);
+
+            Console.WriteLine();
+            int a = 1;
+            int aa = 2;
+            unsafe
+            {
+                Print.Address((long)&a);
+                Print.Address((long)&aa);
+            }
+            ValueParameter_Test(a, ref aa);
+
+            Console.WriteLine();
+            unsafe
+            {
+                Print.Address((long)&aa);
+            }
+            InValueParameter_Test(a, aa);
         }
 
         class B
@@ -71,11 +86,34 @@ namespace RefTest
 
         static void RefParameter_Test(ref B refb, B b)//B** refb, B* b
         {
+            Console.WriteLine(refb == b);
+
             b.x = 10;
             b.n = "10";
 
             refb.x = 20;
             refb.n = "20";
+        }
+
+        static unsafe void ValueParameter_Test(int a, ref int refa)
+        {
+            int* p = &a;
+            Print.Address((long)p);
+
+            fixed (int* pp = &refa)
+            {
+                Print.Address((long)pp);
+            }
+        }
+
+        static unsafe void InValueParameter_Test(int a, in int refa)
+        {
+            //refa = 10;//refa 是只读变量
+
+            fixed (int* pp = &refa)
+            {
+                Print.Address((long)pp);
+            }
         }
     }
 }
