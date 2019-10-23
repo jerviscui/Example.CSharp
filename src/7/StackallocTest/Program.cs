@@ -9,8 +9,8 @@ namespace StackallocTest
     {
         unsafe static void Main(string[] args)
         {
-            Console.WriteLine(nameof(StackOverflow_Test));
-            StackOverflow_Test();
+            //Console.WriteLine(nameof(StackOverflow_Test));
+            //StackOverflow_Test();
 
             unsafe
             {
@@ -29,11 +29,15 @@ namespace StackallocTest
                 }
             }
 
+            Console.WriteLine();
             Span_Test();
             Console.WriteLine();
+
+            Console.WriteLine(nameof(StructAlloc_Test));
+            StructAlloc_Test();
         }
 
-        unsafe static void Span_Test()
+        static unsafe void Span_Test()
         {
             var a = stackalloc byte[8];
             Print.Address((long)a);
@@ -55,7 +59,7 @@ namespace StackallocTest
 
         static int i = 0;
 
-        unsafe static void StackOverflow_Test()
+        static unsafe void StackOverflow_Test()
         {
             const int len = 1024;//1k
             //run on my computer, the max stack size 1494k, more than will throw StackOverflowException
@@ -68,6 +72,37 @@ namespace StackallocTest
                 Console.WriteLine(i);
                 Print.Address((long)a);
             }
+        }
+
+        struct A<T> where T : unmanaged
+        {
+            public int X;
+
+            public int Y;
+        }
+
+        static unsafe void StructAlloc_Test()
+        {
+            //C# 8.0 才支持非托管构造类型
+            //var n = sizeof(A<int>);
+            //Console.WriteLine(n);
+
+            //Span<A<int>> arr = stackalloc A<int>[]
+            //{
+            //    new A<int>() { X = 1, Y = 1 },
+            //    new A<int>() { X = 2, Y = 2 },
+            //    new A<int>() { X = 3, Y = 3 }
+            //};
+
+            //fixed (A<int>* p = arr)
+            //{
+            //    var p1 = p + 1;
+
+            //    Print.Address((long)p);
+            //    Print.Address((long)p1);
+
+            //    Console.WriteLine(p1->X);
+            //}
         }
     }
 }
