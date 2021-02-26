@@ -55,6 +55,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LocalFunctionTest", "9\Loca
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MemoryCacheTest", "9\MemoryCacheTest\MemoryCacheTest.csproj", "{C0267974-CC3F-4EBD-9F78-372217CA06A9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DelegateTest", "9\DelegateTest\DelegateTest.csproj", "{D7D11E87-4734-4B5D-A96D-443CCD5A60E9}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -125,6 +127,10 @@ Global
 		{C0267974-CC3F-4EBD-9F78-372217CA06A9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{C0267974-CC3F-4EBD-9F78-372217CA06A9}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{C0267974-CC3F-4EBD-9F78-372217CA06A9}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D7D11E87-4734-4B5D-A96D-443CCD5A60E9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D11E87-4734-4B5D-A96D-443CCD5A60E9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D11E87-4734-4B5D-A96D-443CCD5A60E9}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D11E87-4734-4B5D-A96D-443CCD5A60E9}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -145,6 +151,7 @@ Global
 		{AC907FFE-674B-43AC-B376-B0EF0131AD72} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
 		{9EB027BD-BB7E-4008-8C87-AD4AC9E90D5E} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
 		{C0267974-CC3F-4EBD-9F78-372217CA06A9} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
+		{D7D11E87-4734-4B5D-A96D-443CCD5A60E9} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
