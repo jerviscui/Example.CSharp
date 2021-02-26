@@ -7,7 +7,7 @@ namespace StackallocTest
 {
     class Program
     {
-        unsafe static void Main(string[] args)
+        static unsafe void Main(string[] args)
         {
             //Console.WriteLine(nameof(StackOverflow_Test));
             //StackOverflow_Test();

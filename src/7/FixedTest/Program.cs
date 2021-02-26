@@ -23,7 +23,7 @@ namespace FixedTest
             public int y;
         }
 
-        unsafe static void Main(string[] args)
+        static unsafe void Main(string[] args)
         {
             var obj = new P();
 
@@ -76,7 +76,7 @@ namespace FixedTest
             FixedSizeBuffers_Test();            
         }
 
-        unsafe static void ArrayAndString_Test()
+        static unsafe void ArrayAndString_Test()
         {
             int[] arr = { 1, 2, 3, 4, 5 };
             string s = "test";
@@ -102,7 +102,7 @@ namespace FixedTest
             }
         }
 
-        unsafe static void Span_Test()
+        static unsafe void Span_Test()
         {
             var s = new Span<int>(new int[] { 0, 2, 3 });
 
@@ -110,8 +110,7 @@ namespace FixedTest
             {
                 *p = 1;
             }
-
-            //todo: how to print span?
+            
             Console.WriteLine(string.Join(',', s.ToArray()));
         }
 
@@ -129,7 +128,7 @@ namespace FixedTest
             public int x;
         }
 
-        unsafe static void FixedSizeBuffers_Test()
+        static unsafe void FixedSizeBuffers_Test()
         {
             var a1 = new SB() { arr = new int[5] };
             var a2 = new FSB();

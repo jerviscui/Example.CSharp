@@ -1,13 +1,24 @@
 ﻿using System;
+using System.Threading.Tasks;
 
 namespace ValueTaskTest
 {
     class Program
     {
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
-            //todo: test
-            Console.WriteLine("Hello World!");
+            await MultiplyAsync(0, 1);
+            await MultiplyAsync(1, 1);
+        }
+
+        private static async ValueTask<int> MultiplyAsync(int x, int y)
+        {
+            if (x == 0 || y == 0)
+            {
+                return 0;
+            }
+
+            return await Task.Run(() => x * y);
         }
     }
 }

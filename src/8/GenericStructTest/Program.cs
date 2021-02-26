@@ -54,6 +54,7 @@ namespace GenericStructTest
 
         static unsafe void ReferenceStruct_Test()
         {
+            //todo: complete
             //var n = sizeof(B<T>);
         }
     }
