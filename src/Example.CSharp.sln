@@ -64,6 +64,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "plugins", "plugins", "{6301
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MapsterTest", "plugins\MapsterTest\MapsterTest.csproj", "{698C7247-0C84-4D19-8180-9C40C06354C2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CacheManagerTest", "plugins\CacheManagerTest\CacheManagerTest.csproj", "{C3182D34-D4D9-4AA4-A300-C38CB03F038D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -142,6 +144,10 @@ Global
 		{698C7247-0C84-4D19-8180-9C40C06354C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{698C7247-0C84-4D19-8180-9C40C06354C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{698C7247-0C84-4D19-8180-9C40C06354C2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C3182D34-D4D9-4AA4-A300-C38CB03F038D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C3182D34-D4D9-4AA4-A300-C38CB03F038D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C3182D34-D4D9-4AA4-A300-C38CB03F038D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C3182D34-D4D9-4AA4-A300-C38CB03F038D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -164,6 +170,7 @@ Global
 		{C0267974-CC3F-4EBD-9F78-372217CA06A9} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
 		{D7D11E87-4734-4B5D-A96D-443CCD5A60E9} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
 		{698C7247-0C84-4D19-8180-9C40C06354C2} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
+		{C3182D34-D4D9-4AA4-A300-C38CB03F038D} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
