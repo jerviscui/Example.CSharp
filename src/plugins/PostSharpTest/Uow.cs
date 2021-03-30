@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using PostSharp.Aspects;
@@ -32,6 +33,36 @@ namespace PostSharpTest
     [Serializable]
     public class UowMethodAspect : MethodInterceptionAspect, IUow
     {
+        /// <summary>Initializes the current aspect.</summary>
+        /// <param name="method">Method to which the current aspect is applied.</param>
+        public override void RuntimeInitialize(MethodBase method)
+        {
+            base.RuntimeInitialize(method);
+        }
+
+        /// <summary>
+        ///   Method invoked at build time to initialize the instance fields of the current aspect. This method is invoked
+        ///   before any other build-time method.
+        /// </summary>
+        /// <param name="method">Method to which the current aspect is applied</param>
+        /// <param name="aspectInfo">Reserved for future usage.</param>
+        public override void CompileTimeInitialize(MethodBase method, AspectInfo aspectInfo)
+        {
+            base.CompileTimeInitialize(method, aspectInfo);
+        }
+
+        /// <summary>
+        ///   Method invoked at build time to ensure that the aspect has been applied to the right target.
+        /// </summary>
+        /// <param name="method">Method to which the aspect has been applied</param>
+        /// <returns>
+        /// <c>true</c> if the aspect was applied to an acceptable field, otherwise
+        ///       <c>false</c>.</returns>
+        public override bool CompileTimeValidate(MethodBase method)
+        {
+            return base.CompileTimeValidate(method);
+        }
+
         /// <summary>
         ///   Method invoked <i>instead</i> of the method to which the aspect has been applied.
         /// </summary>
