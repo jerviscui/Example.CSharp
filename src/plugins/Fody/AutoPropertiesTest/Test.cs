@@ -13,14 +13,12 @@ namespace AutoPropertiesTest
         [GetInterceptor]
         private T? GetValue<T>(string name, Type propertyType, PropertyInfo propertyInfo, FieldInfo fieldInfo, object fieldValue, T? genricFieldValue, ref T? refToBackingField)
         {
-            //todo cuizj: generic type default value
             return default;
         }
 
         [SetInterceptor]
         private void SetValue<T>(string name, Type propertyType, PropertyInfo propertyInfo, FieldInfo fieldInfo, object newValue, T? genricNewValue, out T? refToBackingField)
         {
-            //todo cuizj: generic type default value
             refToBackingField = default;
         }
 
