@@ -69,6 +69,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostSharpTest", "plugins\PostSharpTest\PostSharpTest.csproj", "{DAEEDCD5-B112-4228-A82F-C2AB7F7ECC75}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Fody", "Fody", "{803D011F-EC6A-43AF-8FEE-D0A98E62A72C}"
+	ProjectSection(SolutionItems) = preProject
+		plugins\Fody\Directory.Build.props = plugins\Fody\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ConfigureAwaitTest", "plugins\Fody\ConfigureAwaitTest\ConfigureAwaitTest.csproj", "{4A4529A9-C3DC-4B2B-98AB-E7B05A250B7E}"
 EndProject
@@ -76,7 +79,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AutoPropertiesTest", "plugi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MethodBoundaryAspectTest", "plugins\Fody\MethodBoundaryAspectTest\MethodBoundaryAspectTest.csproj", "{0992801A-DD34-4C60-B505-A400880607BD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LazyTest", "plugins\Fody\LazyTest\LazyTest.csproj", "{7BD23287-1E86-4CD1-A257-DCF88511F47F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LazyTest", "plugins\Fody\LazyTest\LazyTest.csproj", "{7BD23287-1E86-4CD1-A257-DCF88511F47F}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodDecoratorTest", "plugins\Fody\MethodDecoratorTest\MethodDecoratorTest.csproj", "{AE394863-CA02-4DCF-B33C-84F96552D401}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -180,6 +185,10 @@ Global
 		{7BD23287-1E86-4CD1-A257-DCF88511F47F}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BD23287-1E86-4CD1-A257-DCF88511F47F}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BD23287-1E86-4CD1-A257-DCF88511F47F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AE394863-CA02-4DCF-B33C-84F96552D401}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AE394863-CA02-4DCF-B33C-84F96552D401}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AE394863-CA02-4DCF-B33C-84F96552D401}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AE394863-CA02-4DCF-B33C-84F96552D401}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -209,6 +218,7 @@ Global
 		{A21B27AB-FB43-472F-8684-C6DB9532D548} = {803D011F-EC6A-43AF-8FEE-D0A98E62A72C}
 		{0992801A-DD34-4C60-B505-A400880607BD} = {803D011F-EC6A-43AF-8FEE-D0A98E62A72C}
 		{7BD23287-1E86-4CD1-A257-DCF88511F47F} = {803D011F-EC6A-43AF-8FEE-D0A98E62A72C}
+		{AE394863-CA02-4DCF-B33C-84F96552D401} = {803D011F-EC6A-43AF-8FEE-D0A98E62A72C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
