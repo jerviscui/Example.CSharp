@@ -11,9 +11,9 @@ namespace MethodDecoratorTest
 {
     public class LogAttribute : Attribute, IMethodDecorator
     {
-        private uint MaximumLength { get; set; }
+        public uint MaximumLength { get; set; }
 
-        private uint MinimumLength { get; set; }
+        public uint MinimumLength { get; set; }
 
         public LogAttribute(uint maximumLength, uint minimumLength)
         {

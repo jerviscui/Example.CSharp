@@ -1,8 +1,14 @@
 ﻿using System;
+using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 
 namespace MethodDecoratorTest
 {
+    [Log(30, 1)]
     public class Test
     {
         [Log(20, 10)]
@@ -17,12 +23,23 @@ namespace MethodDecoratorTest
         }
 
         [Log(10, 1)]
-        public void Show()
+        public Test Show()
         {
+            //MethodBase methodFromHandle = MethodBase.GetMethodFromHandle((RuntimeMethodHandle)/*OpCode not supported: LdMemberToken*/, typeof(Test).TypeHandle);
+            //Attribute[] customAttributes = Attribute.GetCustomAttributes(methodFromHandle, typeof(LogAttribute));
+            IEnumerable<LogAttribute> customAttributes = typeof(Test).GetMethod(nameof(Show))!.GetCustomAttributes<LogAttribute>();
+
+            foreach (var customAttribute in customAttributes)
+            {
+                Console.WriteLine($"{customAttribute.MaximumLength}+{customAttribute.MinimumLength}");
+            }
+
             Console.WriteLine($"{Name} {Text}");
+
+            return this;
         }
 
-        [Log(10, 1)]
+        [Log(10, 2)]
         public Task ShowAsync()
         {
             Console.WriteLine($"{Name} {Text}");
@@ -30,7 +47,7 @@ namespace MethodDecoratorTest
             return Task.CompletedTask;
         }
 
-        [Log(10, 1)]
+        [Log(10, 3)]
         public async Task ShowAsync2()
         {
             Console.WriteLine($"{Name} {Text}");
