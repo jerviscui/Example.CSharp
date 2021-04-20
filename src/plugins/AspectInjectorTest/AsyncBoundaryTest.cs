@@ -30,18 +30,19 @@ namespace AspectInjectorTest
     }
 
     [AsyncMethod]
-    public class AsyncTest
+    public class AsyncBoundaryTest
     {
         public Task Test()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
-            return Task.Delay(10);
+            return Task.Delay(1000).ContinueWith(task => Console.WriteLine("Test"));
         }
 
         public async Task AwaitTest()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
-            await Task.Delay(10);
+            await Task.Delay(1000);
+            Console.WriteLine("AwaitTest");
         }
 
         public async Task AwaitTest2()

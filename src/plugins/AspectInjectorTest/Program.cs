@@ -12,11 +12,18 @@ namespace AspectInjectorTest
             //new PropTest().S = "";
             //throw ArgumentException
 
-            var t = new AsyncTest();
-
+            var t = new AsyncBoundaryTest();
             await t.Test();
+            Console.WriteLine();
             await t.AwaitTest();
 
+            Console.WriteLine();
+            var tt = new AsyncAroundTest();
+            tt.SyncTest();
+
+            await tt.Test();
+            Console.WriteLine();
+            await tt.AwaitTest();
         }
     }
 }

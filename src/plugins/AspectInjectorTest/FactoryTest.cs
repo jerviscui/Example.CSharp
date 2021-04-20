@@ -11,9 +11,9 @@ namespace AspectInjectorTest
     public class MethodFactoryAspect
     {
         [Advice(Kind.Before, Targets = Target.Method)]
-        public void OnBefore([Argument(Source.Triggers)] Attribute[] attributes, 
-            [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)]string name, 
-            [Argument(Source.Instance)]object instance)
+        public void OnBefore([Argument(Source.Triggers)] Attribute[] attributes,
+            [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)] string name,
+            [Argument(Source.Instance)] object instance)
         {
 
         }
@@ -32,7 +32,7 @@ namespace AspectInjectorTest
 
     }
 
-    public class AspectFactory
+    public static class AspectFactory
     {
         public static IServiceProvider? ServiceProvider { get; set; }
 
