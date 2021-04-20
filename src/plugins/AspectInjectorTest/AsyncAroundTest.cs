@@ -9,8 +9,8 @@ using AspectInjector.Broker;
 namespace AspectInjectorTest
 {
     [Aspect(Scope.PerInstance)]
-    [Injection(typeof(ArroundAttribute))]
-    public class ArroundAttribute : Attribute
+    [Injection(typeof(AroundAttribute))]
+    public class AroundAttribute : Attribute
     {
         [Advice(Kind.Around, Targets = Target.Method)]
         public object Handle([Argument(Source.Triggers)] Attribute[] attributes,
@@ -32,7 +32,7 @@ namespace AspectInjectorTest
         }
     }
 
-    [Arround]
+    [Around]
     public class AsyncAroundTest
     {
         public void SyncTest()
