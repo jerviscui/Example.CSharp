@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
+using System.Threading;
 
 namespace TypeHandleTest
 {
@@ -20,6 +22,8 @@ namespace TypeHandleTest
             Console.WriteLine();
             new Test().ReferenceGenericHandle();
 
+            Console.WriteLine();
+            new HandleTest().RuntimeHandleAndType();
 
             Console.ReadKey();
         }
@@ -39,8 +43,9 @@ namespace TypeHandleTest
             {
                 if (t.IsGenericType) continue;
                 MethodInfo[] mbs = t.GetMethods(BindingFlags.Instance | BindingFlags.Static |
-                                                BindingFlags.Public | BindingFlags.NonPublic |
-                                                BindingFlags.FlattenHierarchy);
+                                                BindingFlags.Public | BindingFlags.NonPublic | 
+                                                BindingFlags.FlattenHierarchy)
+                    .Where(o => o.DeclaringType is not null && !o.DeclaringType.IsGenericType).ToArray();
                 methodInfos.AddRange(mbs);
             }
 
@@ -52,8 +57,9 @@ namespace TypeHandleTest
             List<RuntimeMethodHandle>? methodHandles;
             methodHandles = methodInfos.ConvertAll(m => m.MethodHandle);
             Show("Holding MethodInfo and RuntimeMethodHandle");
-            GC.KeepAlive(methodHandles);//阻止缓存被过早垃圾回收
 
+            GC.KeepAlive(methodHandles);//阻止缓存被过早垃圾回收
+            methodInfos.Clear();
             methodInfos = null;//现在允许缓存垃圾回收
             Show("After freeing MethodInfo objects");
 
@@ -62,14 +68,18 @@ namespace TypeHandleTest
             GC.KeepAlive(methodHandles);//阻止缓存被过早垃圾回收
             GC.KeepAlive(methodInfos);//阻止缓存被过早垃圾回收
 
+            methodInfos.Clear();
             methodInfos = null;//现在允许缓存垃圾回收
+            methodHandles.Clear();
             methodHandles = null;//现在允许缓存垃圾回收
             Show("after freeing MethodInfo and MethodHandle objects");
 
             void Show(string s)
             {
-
+                Thread.Sleep(100);
                 GC.Collect();
+                Thread.Sleep(100);
+                Console.WriteLine($"Heap Size = {GC.GetTotalMemory(false),11} - {s}");
             }
         }
     }

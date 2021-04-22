@@ -68,6 +68,7 @@ namespace TypeHandleTest
             var method = typeof(TestClass).GetMethod(nameof(TestClass.Method))!;
             var attributes = method.GetCustomAttributes<MyAttribute>(true);
 
+            Console.WriteLine("GetCustomAttributes");
             foreach (var myAttribute in attributes)
             {
                 myAttribute.Do();
@@ -86,6 +87,7 @@ namespace TypeHandleTest
             var methodHandle = methodInfo.MethodHandle;
             var m2 = MethodBase.GetMethodFromHandle(methodHandle)!;
 
+            Console.WriteLine("GetMethodFromHandle");
             var array = Attribute.GetCustomAttributes(m2, typeof(MyAttribute), true);
             for (int i = 0; i < array.Length; i++)
             {
@@ -104,7 +106,8 @@ namespace TypeHandleTest
             var methodInfo = type.GetMethod(nameof(GenericTestClass<int>.Generic))!;
             var methodHandle = methodInfo.MethodHandle;
             var m2 = MethodBase.GetMethodFromHandle(methodHandle, typeHandle)!;
-            
+
+            Console.WriteLine("GetGenericMethodFromHandle");
             var array = Attribute.GetCustomAttributes(m2, typeof(MyAttribute), true);
             for (int i = 0; i < array.Length; i++)
             {
@@ -120,8 +123,8 @@ namespace TypeHandleTest
             var mA = typeof(GenericTestClass<A>).GetMethod(nameof(GenericTestClass<A>.Generic));
             var mB = typeof(GenericTestClass<B>).GetMethod(nameof(GenericTestClass<B>.Generic));
 
-            Console.WriteLine($"{mA.MethodHandle.Value}");
-            Console.WriteLine($"{mB.MethodHandle.Value}");
+            Console.WriteLine($"AGenericMethodHandle {mA.MethodHandle.Value}");
+            Console.WriteLine($"BGenericMethodHandle {mB.MethodHandle.Value}");
             //mA.MethodHandle.Value == mB.MethodHandle.Value
             //generic arguments is reference type, the Method has same MethodHandle
         }
