@@ -12,76 +12,16 @@ namespace TypeHandleTest
         {
             Console.WriteLine("Hello World!");
 
-            //new Test().GetAttributes();
-            //Console.WriteLine();
-            //new Test().Handle();
-            //Console.WriteLine();
-            //new Test().GenericHandle();
-            //Console.WriteLine();
-            //new Test().ReferenceGenericHandle();
+            new Test().GetAttributes();
+            Console.WriteLine();
+            new Test().Handle();
+            Console.WriteLine();
+            new Test().GenericHandle();
+            Console.WriteLine();
+            new Test().ReferenceGenericHandle();
 
-            new InLineTest().Test();
 
             Console.ReadKey();
-        }
-    }
-
-    public class InLineTest
-    {
-        class MyBaseClass: IMyInterface
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public virtual void MyFunc() { }
-        }
-
-        interface IMyInterface
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            void MyFunc();
-        }
-
-        class MyClass : MyBaseClass
-        {
-            [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            public override void MyFunc() { }
-        }
-
-        public void Test()
-        {
-            //new MyBaseClass().MyFunc();
-            //new MyClass().MyFunc();
-            //((IMyInterface)new MyClass()).MyFunc();
-            new Dictionary<>()
-            //使用时：
-            MyBaseClass myBaseClass = new();
-            MyClass myClass = new();
-            IMyInterface myInterface = myClass;
-
-            Stopwatch stopwatch = new();
-            stopwatch.Start();
-            for (int i = 0; i < 1_000_000_000; i++)
-            {
-                myClass.MyFunc();
-            }
-            stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds); //300
-
-            myBaseClass = myClass; //多次赋值以使JIT编译器无法确认该变量的运行时类型
-            stopwatch.Restart();
-            for (int i = 0; i < 1_000_000_000; i++)
-            {
-                myBaseClass.MyFunc();
-            }
-            stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds); //1816
-
-            stopwatch.Restart();
-            for (int i = 0; i < 1_000_000_000; i++)
-            {
-                myInterface.MyFunc();
-            }
-            stopwatch.Stop();
-            Console.WriteLine(stopwatch.ElapsedMilliseconds); //295
         }
     }
 
