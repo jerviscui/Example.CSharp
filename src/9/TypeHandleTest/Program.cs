@@ -1,10 +1,7 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.CompilerServices;
-using System.Threading;
+using BenchmarkDotNet.Running;
 
 namespace TypeHandleTest
 {
@@ -12,75 +9,22 @@ namespace TypeHandleTest
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            BenchmarkRunner.Run<BenchmarkTests>();
 
-            new Test().GetAttributes();
-            Console.WriteLine();
-            new Test().Handle();
-            Console.WriteLine();
-            new Test().GenericHandle();
-            Console.WriteLine();
-            new Test().ReferenceGenericHandle();
+            //Console.WriteLine("Hello World!");
 
-            Console.WriteLine();
-            new HandleTest().RuntimeHandleAndType();
+            //new Test().GetAttributes();
+            //Console.WriteLine();
+            //new Test().Handle();
+            //Console.WriteLine();
+            //new Test().GenericHandle();
+            //Console.WriteLine();
+            //new Test().ReferenceGenericHandle();
 
-            Console.ReadKey();
-        }
-    }
+            //Console.WriteLine();
+            //new HandleSizeTest().RuntimeHandleAndType();
 
-    public class HandleTest
-    {
-        public void RuntimeHandleAndType()
-        {
-            var a = 1 == 1;
-
-            Show("Before doing anything");
-
-            //从MSCorlib.dll中地所有方法构建methodInfos 对象缓存
-            List<MethodBase>? methodInfos = new List<MethodBase>();
-            foreach (Type t in typeof(object).Assembly.GetExportedTypes())
-            {
-                if (t.IsGenericType) continue;
-                MethodInfo[] mbs = t.GetMethods(BindingFlags.Instance | BindingFlags.Static |
-                                                BindingFlags.Public | BindingFlags.NonPublic | 
-                                                BindingFlags.FlattenHierarchy)
-                    .Where(o => o.DeclaringType is not null && !o.DeclaringType.IsGenericType).ToArray();
-                methodInfos.AddRange(mbs);
-            }
-
-            //显示当绑定所有方法之后，方法的个数和堆的大小
-            Console.WriteLine("# of Methods={0:###,###}", methodInfos.Count);
-            Show("After building cache of MethodInfo objects");
-
-            //为所有MethodInfo对象构建RuntimeMethodHandle缓存
-            List<RuntimeMethodHandle>? methodHandles;
-            methodHandles = methodInfos.ConvertAll(m => m.MethodHandle);
-            Show("Holding MethodInfo and RuntimeMethodHandle");
-
-            GC.KeepAlive(methodHandles);//阻止缓存被过早垃圾回收
-            methodInfos.Clear();
-            methodInfos = null;//现在允许缓存垃圾回收
-            Show("After freeing MethodInfo objects");
-
-            methodInfos = methodHandles.ConvertAll(r => MethodBase.GetMethodFromHandle(r)!);
-            Show("Size of heap after re-creating methodinfo objects");
-            GC.KeepAlive(methodHandles);//阻止缓存被过早垃圾回收
-            GC.KeepAlive(methodInfos);//阻止缓存被过早垃圾回收
-
-            methodInfos.Clear();
-            methodInfos = null;//现在允许缓存垃圾回收
-            methodHandles.Clear();
-            methodHandles = null;//现在允许缓存垃圾回收
-            Show("after freeing MethodInfo and MethodHandle objects");
-
-            void Show(string s)
-            {
-                Thread.Sleep(100);
-                GC.Collect();
-                Thread.Sleep(100);
-                Console.WriteLine($"Heap Size = {GC.GetTotalMemory(false),11} - {s}");
-            }
+            //Console.ReadKey();
         }
     }
 }
