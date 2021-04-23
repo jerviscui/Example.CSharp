@@ -1,9 +1,9 @@
-﻿using PostSharp.Aspects;
-using System;
+﻿using System;
 using System.Threading;
 using System.Threading.Tasks;
+using PostSharp.Aspects;
 
-namespace PostSharpTest
+namespace MethodBoundaryTest
 {
     [Serializable]
     public class MyBoundaryAspectAttribute : OnMethodBoundaryAspect
@@ -59,14 +59,14 @@ namespace PostSharpTest
             return Task.Delay(1000).ContinueWith(task => Console.WriteLine("Test"));
         }
 
-        public async Task AwaitTest()
+        public async Task AwaitTaskTest()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
             await Task.Delay(1000);
             Console.WriteLine("AwaitTest");
         }
 
-        public async Task<int> AwaitTest2()
+        public async Task<int> AwaitGenericTaskTest()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
             await Task.Delay(1000);
