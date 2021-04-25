@@ -12,8 +12,8 @@ namespace LocalFunctionTest
         public static async Task Test()
         {
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId} Test");
-            //var t = NoLocalFunc(6);
-            var t = LocalFunc(6);//LocalFunc() 在这里抛出异常
+            var t = NoLocalFunc(6);
+            //var t = LocalFunc(6);//LocalFunc() 在这里抛出异常
             Console.WriteLine("Got the task");
 
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId} Test");

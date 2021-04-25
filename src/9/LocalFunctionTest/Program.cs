@@ -1,14 +1,28 @@
 ﻿using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace LocalFunctionTest
 {
     class Program
     {
-        static async Task Main(string[] args)
+        static void Main(string[] args)
         {
-            LocalFunctionWithEnumerable.Test();
+            //LocalFunctionWithEnumerable.Test();
             //await LocalFunctionWithTask.Test();
+
+            SimpleTask().GetAwaiter().GetResult();
+        }
+
+        public static async Task SimpleTask()
+        {
+            Console.WriteLine("test");
+        }
+
+        public static Task SyncTask()
+        {
+            Console.WriteLine("test");
+            return Task.CompletedTask;
         }
     }
 }
