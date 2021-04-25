@@ -11,18 +11,45 @@ namespace LocalFunctionTest
             //LocalFunctionWithEnumerable.Test();
             //await LocalFunctionWithTask.Test();
 
-            SimpleTask().GetAwaiter().GetResult();
+            TaskTest.SimpleTask().GetAwaiter().GetResult();
         }
 
-        public static async Task SimpleTask()
+        class TaskTest
         {
-            Console.WriteLine("test");
+            public static async Task SimpleTask()
+            {
+                Console.WriteLine("SimpleTask");
+            }
+
+            public static async Task<int> GenericTask()
+            {
+                Console.WriteLine("GenericTask");
+                return await Task.FromResult(3);
+            }
+
+            public static async ValueTask<int> ValueTask()
+            {
+                return await System.Threading.Tasks.ValueTask.FromResult(3);
+            }
         }
 
-        public static Task SyncTask()
+        class SyncTaskTest
         {
-            Console.WriteLine("test");
-            return Task.CompletedTask;
+            public static Task SyncTask()
+            {
+                Console.WriteLine("test");
+                return Task.CompletedTask;
+            }
+
+            public static Task<int> SyncGenericTask()
+            {
+                return Task.FromResult(3);
+            }
+
+            public static ValueTask<int> SyncValueTask()
+            {
+                return ValueTask.FromResult(3);
+            }
         }
     }
 }
