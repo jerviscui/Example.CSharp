@@ -98,6 +98,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostSharp", "PostSharp", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostSharpTest", "plugins\PostSharpTest\PostSharpTest.csproj", "{6E297C14-E936-4A8B-A6D7-A1B68F0DD444}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskGuidanceTest", "9\TaskGuidanceTest\TaskGuidanceTest.csproj", "{F3198E3C-75E6-41E4-8122-010740A63124}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -224,6 +226,10 @@ Global
 		{6E297C14-E936-4A8B-A6D7-A1B68F0DD444}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6E297C14-E936-4A8B-A6D7-A1B68F0DD444}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6E297C14-E936-4A8B-A6D7-A1B68F0DD444}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F3198E3C-75E6-41E4-8122-010740A63124}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F3198E3C-75E6-41E4-8122-010740A63124}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F3198E3C-75E6-41E4-8122-010740A63124}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F3198E3C-75E6-41E4-8122-010740A63124}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -260,6 +266,7 @@ Global
 		{F207D1F1-8DB6-4F11-BB7F-9D068D2D2261} = {0A7655FA-A22D-4B68-AC27-EC6BD24C4209}
 		{0A7655FA-A22D-4B68-AC27-EC6BD24C4209} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{6E297C14-E936-4A8B-A6D7-A1B68F0DD444} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
+		{F3198E3C-75E6-41E4-8122-010740A63124} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
