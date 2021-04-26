@@ -35,27 +35,28 @@ namespace TaskGuidanceTest
                 var s = new StackTrace().GetFrames();
                 foreach (var stackFrame in s)
                 {
-                    Console.WriteLine(stackFrame.ToString());
+                    var m = stackFrame.GetMethod();
+                    Console.WriteLine($"{m.Module,-28} {m.DeclaringType,-103} {m.Name}");
                 }
                 Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId}");
                 //调用堆栈输出
-                //MoveNext at offset 754 in file: line: column < filename unknown >:0:0
-                //ExecutionContextCallback at offset 21 in file: line: column < filename unknown >:0:0
-                //RunInternal at offset 128 in file: line: column < filename unknown >:0:0
-                //MoveNext at offset 147 in file: line: column < filename unknown >:0:0
-                //MoveNext at offset 12 in file: line: column < filename unknown >:0:0
-                //<OutputWaitEtwEvents>b__12_0 at offset 266 in file: line: column < filename unknown >:0:0
-                //Invoke at offset 33 in file: line: column < filename unknown >:0:0
-                //RunOrScheduleAction at offset 106 in file: line: column < filename unknown >:0:0
-                //RunContinuations at offset 213 in file: line: column < filename unknown >:0:0
-                //FinishContinuations at offset 54 in file: line: column < filename unknown >:0:0
-                //FinishStageThree at offset 47 in file: line: column < filename unknown >:0:0
-                //FinishStageTwo at offset 384 in file: line: column < filename unknown >:0:0
-                //ExecuteWithThreadLocal at offset 516 in file: line: column < filename unknown >:0:0
-                //ExecuteEntryUnsafe at offset 83 in file: line: column < filename unknown >:0:0
-                //ExecuteFromThreadPool at offset 10 in file: line: column < filename unknown >:0:0
-                //Dispatch at offset 442 in file: line: column < filename unknown >:0:0
-                //PerformWaitCallback at offset 10 in file: line: column < filename unknown >:0:0
+                //TaskGuidanceTest.dll         TaskGuidanceTest.Program+TaskTest+<SimpleTask2>d__2                                                     MoveNext
+                //System.Private.CoreLib.dll   System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[TResult,TStateMachine]  ExecutionContextCallback
+                //System.Private.CoreLib.dll   System.Threading.ExecutionContext                                                                       RunInternal
+                //System.Private.CoreLib.dll   System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[TResult,TStateMachine]  MoveNext
+                //System.Private.CoreLib.dll   System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[TResult,TStateMachine]  MoveNext
+                //System.Private.CoreLib.dll   System.Runtime.CompilerServices.TaskAwaiter+<>c                                                         <OutputWaitEtwEvents>b__12_0
+                //System.Private.CoreLib.dll   System.Runtime.CompilerServices.AsyncMethodBuilderCore+ContinuationWrapper                              Invoke
+                //System.Private.CoreLib.dll   System.Threading.Tasks.AwaitTaskContinuation                                                            RunOrScheduleAction
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             RunContinuations
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             FinishContinuations
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             FinishStageThree
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             FinishStageTwo
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             ExecuteWithThreadLocal
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             ExecuteEntryUnsafe
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             ExecuteFromThreadPool
+                //System.Private.CoreLib.dll   System.Threading.ThreadPoolWorkQueue                                                                    Dispatch
+                //System.Private.CoreLib.dll   System.Threading._ThreadPoolWaitCallback                                                                PerformWaitCallback
             }
 
             public static async Task<int> GenericTask()
