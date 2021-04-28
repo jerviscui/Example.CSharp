@@ -6,14 +6,15 @@ using System.Threading.Tasks;
 
 namespace TaskGuidanceTest
 {
-    class Program
+    partial class Program
     {
         static void Main(string[] args)
         {
-            Console.WriteLine(SynchronizationContext.Current?.GetType().Name);
-            var t = TaskTest.SimpleTask2();
-            var awaiter = t.GetAwaiter();
-            awaiter.GetResult();//阻塞主线程
+            //var t = TaskTest.SimpleTask2();
+            //var awaiter = t.GetAwaiter();
+            //awaiter.GetResult();//阻塞主线程
+
+            SynchronizationContextTest.Test();
         }
 
         public class TaskTest
@@ -35,8 +36,7 @@ namespace TaskGuidanceTest
                 {
                     //Thread.Sleep(1000 * 10);
                     Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}");
-                    Console.WriteLine(SynchronizationContext.Current?.GetType().Name);
-                },TaskCreationOptions.LongRunning).ConfigureAwait(false);
+                }, TaskCreationOptions.LongRunning).ConfigureAwait(false);
                 //await Task.Delay(1000 * 30).ContinueWith(_ => Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}"), TaskContinuationOptions.AttachedToParent).ConfigureAwait(false);
                 var s = new StackTrace().GetFrames();
                 foreach (var stackFrame in s)
