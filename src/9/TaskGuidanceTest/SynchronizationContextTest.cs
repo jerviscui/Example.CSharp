@@ -57,7 +57,7 @@ namespace TaskGuidanceTest
             {
                 Console.WriteLine($"DirectReturn_GetContextTest {Thread.CurrentThread.ManagedThreadId}");
 
-                //等待 Task 之前已经生成结果，Result 会在调用线程同步执行
+                //等待 Task 之前已经生成结果，Result 会被调用线程同步执行
                 await Task.FromResult(1).ConfigureAwait(false);
                 //output: SynchronizationContext
                 Console.WriteLine(SynchronizationContext.Current?.GetType().Name ?? "null");

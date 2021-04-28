@@ -10,11 +10,13 @@ namespace TaskGuidanceTest
     {
         static void Main(string[] args)
         {
-            //var t = TaskTest.SimpleTask2();
-            //var awaiter = t.GetAwaiter();
-            //awaiter.GetResult();//阻塞主线程
+            var t = TaskTest.SimpleTask2();
+            var awaiter = t.GetAwaiter();
+            awaiter.GetResult();//阻塞主线程
 
-            SynchronizationContextTest.Test();
+            //SynchronizationContextTest.Test();
+
+            //CultureTest.Test();
         }
 
         public class TaskTest
@@ -28,13 +30,13 @@ namespace TaskGuidanceTest
             {
                 Console.WriteLine("SimpleTask");
             }
-
+            
             public static async Task SimpleTask2()
             {
                 Console.WriteLine($"SimpleTask2 {Thread.CurrentThread.ManagedThreadId}");
                 await Task.Factory.StartNew(() =>
                 {
-                    //Thread.Sleep(1000 * 10);
+                    Thread.Sleep(1000 * 10);
                     Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}");
                 }, TaskCreationOptions.LongRunning).ConfigureAwait(false);
                 //await Task.Delay(1000 * 30).ContinueWith(_ => Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}"), TaskContinuationOptions.AttachedToParent).ConfigureAwait(false);
