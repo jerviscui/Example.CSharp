@@ -33,19 +33,22 @@ namespace TaskGuidanceTest
             
             public static async Task SimpleTask2()
             {
+                //1
                 Console.WriteLine($"SimpleTask2 {Thread.CurrentThread.ManagedThreadId}");
                 await Task.Factory.StartNew(() =>
                 {
                     Thread.Sleep(1000 * 10);
+                    //5
                     Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}");
-                }, TaskCreationOptions.LongRunning).ConfigureAwait(false);
-                //await Task.Delay(1000 * 30).ContinueWith(_ => Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}"), TaskContinuationOptions.AttachedToParent).ConfigureAwait(false);
+                });
                 var s = new StackTrace().GetFrames();
                 foreach (var stackFrame in s)
                 {
                     var m = stackFrame.GetMethod();
                     Console.WriteLine($"{m.Module,-28} {m.DeclaringType,-103} {m.Name}");
                 }
+                AsyncTaskMethodBuilder
+                //5
                 Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId}");
                 //调用堆栈输出
                 //TaskGuidanceTest.dll         TaskGuidanceTest.Program+TaskTest+<SimpleTask2>d__2                                                     MoveNext
@@ -64,7 +67,7 @@ namespace TaskGuidanceTest
                 //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             ExecuteEntryUnsafe
                 //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             ExecuteFromThreadPool
                 //System.Private.CoreLib.dll   System.Threading.ThreadPoolWorkQueue                                                                    Dispatch
-                //System.Private.CoreLib.dll   System.Threading._ThreadPoolWaitCallback                                                                PerformWaitCallback
+                //System.Private.CoreLib.dll   System.Threading._ThreadPoolWaitCallback                                                                PerformWaitCallback                                                                         ThreadStart                                                           PerformWaitCallback
             }
 
             public static async Task<int> GenericTask()
