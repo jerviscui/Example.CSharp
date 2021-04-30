@@ -30,7 +30,7 @@ namespace TaskGuidanceTest
             {
                 Console.WriteLine("SimpleTask");
             }
-            
+
             public static async Task SimpleTask2()
             {
                 //1
@@ -40,14 +40,13 @@ namespace TaskGuidanceTest
                     Thread.Sleep(1000 * 10);
                     //5
                     Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}");
-                });
+                }, TaskCreationOptions.LongRunning);
                 var s = new StackTrace().GetFrames();
                 foreach (var stackFrame in s)
                 {
                     var m = stackFrame.GetMethod();
                     Console.WriteLine($"{m.Module,-28} {m.DeclaringType,-103} {m.Name}");
                 }
-                AsyncTaskMethodBuilder
                 //5
                 Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId}");
                 //调用堆栈输出
