@@ -10,13 +10,15 @@ namespace TaskGuidanceTest
     {
         static void Main(string[] args)
         {
-            var t = TaskTest.SimpleTask2();
-            var awaiter = t.GetAwaiter();
-            awaiter.GetResult();//阻塞主线程
+            //var t = TaskTest.SimpleTask2();
+            //var awaiter = t.GetAwaiter();
+            //awaiter.GetResult();//阻塞主线程
 
             //SynchronizationContextTest.Test();
-
+            
             //CultureTest.Test();
+
+            ChildTaskTest.Test();
         }
 
         public class TaskTest
@@ -66,7 +68,44 @@ namespace TaskGuidanceTest
                 //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             ExecuteEntryUnsafe
                 //System.Private.CoreLib.dll   System.Threading.Tasks.Task                                                                             ExecuteFromThreadPool
                 //System.Private.CoreLib.dll   System.Threading.ThreadPoolWorkQueue                                                                    Dispatch
-                //System.Private.CoreLib.dll   System.Threading._ThreadPoolWaitCallback                                                                PerformWaitCallback                                                                         ThreadStart                                                           PerformWaitCallback
+                //System.Private.CoreLib.dll   System.Threading._ThreadPoolWaitCallback                                                                PerformWaitCallback
+            }
+
+            public static async Task ContinuationTask()
+            {
+                //1
+                Console.WriteLine($"ChildTask {Thread.CurrentThread.ManagedThreadId}");
+                await Task.Factory.StartNew(() =>
+                {
+                    Thread.Sleep(1000 * 1);
+                    //4
+                    Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}");
+                }).ContinueWith(task =>
+                {
+                    //child task
+                    //5
+                    Console.WriteLine($"child {Thread.CurrentThread.ManagedThreadId}");
+
+                    var s = new StackTrace().GetFrames();
+                    foreach (var stackFrame in s)
+                    {
+                        var m = stackFrame.GetMethod();
+                        Console.WriteLine($"{m.Module,-28} {m.DeclaringType,-50} {m.Name}");
+                    }
+                }, TaskContinuationOptions.AttachedToParent);
+
+                //5
+                Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId}");
+
+                //TaskGuidanceTest.dll         TaskGuidanceTest.Program+ChildTaskTest+<>c         <ChildTask>b__1_1
+                //System.Private.CoreLib.dll   System.Threading.Tasks.ContinuationTaskFromTask    InnerInvoke
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task+<>c                    <.cctor>b__277_0
+                //System.Private.CoreLib.dll   System.Threading.ExecutionContext                  RunFromThreadPoolDispatchLoop
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                        ExecuteWithThreadLocal
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                        ExecuteEntryUnsafe
+                //System.Private.CoreLib.dll   System.Threading.Tasks.Task                        ExecuteFromThreadPool
+                //System.Private.CoreLib.dll   System.Threading.ThreadPoolWorkQueue               Dispatch
+                //System.Private.CoreLib.dll   System.Threading._ThreadPoolWaitCallback           PerformWaitCallback                                                               PerformWaitCallback
             }
 
             public static async Task<int> GenericTask()
