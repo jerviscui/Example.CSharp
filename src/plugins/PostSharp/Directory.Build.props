@@ -1,7 +1,7 @@
 <Project>
 
 	<ItemGroup>
-		<PackageReference Include="PostSharp" Version="6.9.2-rc" PrivateAssets="All" />
+		<PackageReference Include="PostSharp" Version="6.9.5" PrivateAssets="All" />
 	</ItemGroup>
 
 	<Import Project="$([MSBuild]::GetPathOfFileAbove('Directory.Build.props', '$(MSBuildThisFileDirectory)../'))" />

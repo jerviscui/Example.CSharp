@@ -89,7 +89,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "VirtualMethodTest", "9\Virt
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ForeachTest", "9\ForeachTest\ForeachTest.csproj", "{BB3F9E72-A02E-4C1E-8513-B3A961C8CC8F}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MethodBoundaryTest", "plugins\PostSharp\MethodBoundaryTest\MethodBoundaryTest.csproj", "{F207D1F1-8DB6-4F11-BB7F-9D068D2D2261}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MethodBoundaryTest", "plugins\PostSharp\MethodBoundaryTest\MethodBoundaryTest.csproj", "{F207D1F1-8DB6-4F11-BB7F-9D068D2D2261}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostSharp", "PostSharp", "{0A7655FA-A22D-4B68-AC27-EC6BD24C4209}"
 	ProjectSection(SolutionItems) = preProject
@@ -98,7 +98,11 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "PostSharp", "PostSharp", "{
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostSharpTest", "plugins\PostSharpTest\PostSharpTest.csproj", "{6E297C14-E936-4A8B-A6D7-A1B68F0DD444}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaskGuidanceTest", "9\TaskGuidanceTest\TaskGuidanceTest.csproj", "{F3198E3C-75E6-41E4-8122-010740A63124}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TaskGuidanceTest", "9\TaskGuidanceTest\TaskGuidanceTest.csproj", "{F3198E3C-75E6-41E4-8122-010740A63124}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "LocationInterceptionTest", "plugins\PostSharp\LocationInterceptionTest\LocationInterceptionTest.csproj", "{1D3954DA-2A24-4A6E-8DC9-066A18CE8B9D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "InfoOfTest", "plugins\Fody\InfoOfTest\InfoOfTest.csproj", "{578093D3-BF5E-4C5B-B969-1D0C8F882DD3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -230,6 +234,14 @@ Global
 		{F3198E3C-75E6-41E4-8122-010740A63124}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F3198E3C-75E6-41E4-8122-010740A63124}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F3198E3C-75E6-41E4-8122-010740A63124}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1D3954DA-2A24-4A6E-8DC9-066A18CE8B9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1D3954DA-2A24-4A6E-8DC9-066A18CE8B9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1D3954DA-2A24-4A6E-8DC9-066A18CE8B9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1D3954DA-2A24-4A6E-8DC9-066A18CE8B9D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{578093D3-BF5E-4C5B-B969-1D0C8F882DD3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{578093D3-BF5E-4C5B-B969-1D0C8F882DD3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{578093D3-BF5E-4C5B-B969-1D0C8F882DD3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{578093D3-BF5E-4C5B-B969-1D0C8F882DD3}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -267,6 +279,8 @@ Global
 		{0A7655FA-A22D-4B68-AC27-EC6BD24C4209} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{6E297C14-E936-4A8B-A6D7-A1B68F0DD444} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{F3198E3C-75E6-41E4-8122-010740A63124} = {44F4C987-F653-42AA-A239-C0BC411F56A9}
+		{1D3954DA-2A24-4A6E-8DC9-066A18CE8B9D} = {0A7655FA-A22D-4B68-AC27-EC6BD24C4209}
+		{578093D3-BF5E-4C5B-B969-1D0C8F882DD3} = {803D011F-EC6A-43AF-8FEE-D0A98E62A72C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}

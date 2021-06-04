@@ -1,6 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using AutoProperties;
@@ -16,19 +18,34 @@ namespace AutoPropertiesTest
         }
 
         [SetInterceptor]
-        protected void CheckLength<T>(T genricNewValue, out T refToBackingField)
+        protected void CheckLength<T>(T genricNewValue, out T refToBackingField, PropertyInfo propertyInfo, string name)
         {
-            if (genricNewValue is string value)
+            if (propertyInfo.PropertyType != typeof(string))
             {
-                if (value.Length == 0)
+                throw new NotImplementedException();
+            }
+
+            var lengthAttribute = LengthAttribute;
+            if (genricNewValue is string value && lengthAttribute is not null)
+            {
+                if (value.Length < lengthAttribute.MinimumLength)
                 {
-                    throw new ArgumentException();
+                    //throw new ArgumentException();
+                    Console.WriteLine($"{name} length must >= {lengthAttribute.MinimumLength}");
+                }
+
+                if (value.Length > lengthAttribute.MaximumLength)
+                {
+                    Console.WriteLine($"{name} length must <= {lengthAttribute.MaximumLength}");
                 }
             }
 
             refToBackingField = genricNewValue;
         }
 
+        private static readonly StringLengthAttribute? LengthAttribute = typeof(InheritTest).GetProperty("Name")!.GetCustomAttribute<StringLengthAttribute>();
+        
+        [StringLength(5)]
         public string Name { get; set; }
 
         [InterceptIgnore]
@@ -36,8 +53,8 @@ namespace AutoPropertiesTest
 
         public InheritTest(string name, string text)
         {
-            Name = name;
-            Text = text;
+            //Name = name;
+            //Text = text;
         }
     }
 

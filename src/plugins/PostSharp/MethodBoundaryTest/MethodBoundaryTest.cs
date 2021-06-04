@@ -1,7 +1,9 @@
 ﻿using System;
+using System.Reflection;
 using System.Threading;
 using System.Threading.Tasks;
 using PostSharp.Aspects;
+using PostSharp.Extensibility;
 
 namespace MethodBoundaryTest
 {
@@ -45,32 +47,66 @@ namespace MethodBoundaryTest
         }
     }
 
-    [MyBoundaryAspect]
-    public class MethodBoundaryTest
+    [MyBoundaryAspect(AttributeTargetElements = MulticastTargets.Method,
+        AttributeTargetMemberAttributes = MulticastAttributes.Public)]
+    public class SyncMethodBoundaryTest
     {
-        public void Test()
+        public int Test()
+        {
+            Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
+            return 1;
+        }
+
+        private Task PrivateTask()
+        {
+            return Task.CompletedTask;
+        }
+    }
+
+    [MyBoundaryAspect(AttributeTargetElements = MulticastTargets.Method)]
+    public class AsyncMethodBoundaryTest
+    {
+        public async void AsyncTest()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
         }
 
-        public Task TaskTest()
+        public Task NoneAwaitTaskTest()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
-            return Task.Delay(1000).ContinueWith(task => Console.WriteLine("Test"));
+            return Task.Factory.StartNew(() =>
+            {
+                Console.WriteLine($"NoneAwaitTaskTest {Thread.CurrentThread.ManagedThreadId}");
+            });
         }
 
         public async Task AwaitTaskTest()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
-            await Task.Delay(1000);
-            Console.WriteLine("AwaitTest");
+            await Task.Factory.StartNew(() =>
+            {
+                Console.WriteLine($"AwaitTaskTest {Thread.CurrentThread.ManagedThreadId}");
+            });
         }
+    }
 
-        public async Task<int> AwaitGenericTaskTest()
+    [MyBoundaryAspect(AttributeTargetElements = MulticastTargets.Method)]
+    public class TaskMethodBoundaryTest
+    {
+        public async Task<int> ContinuationTest()
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId}");
-            await Task.Delay(1000);
-            Console.WriteLine("AwaitTest");
+            await Task.Factory.StartNew(() =>
+            {
+                Thread.Sleep(100);
+                Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId}");
+            }).ContinueWith(_ =>
+            {
+                Thread.Sleep(100);
+                Console.WriteLine($"continuation task {Thread.CurrentThread.ManagedThreadId}");
+            });
+
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
 
             return 1;
         }

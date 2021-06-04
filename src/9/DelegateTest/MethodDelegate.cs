@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -25,14 +26,14 @@ namespace DelegateTest
             {
                 method.Invoke(b, null);
             }
-            Console.WriteLine($"invoke  : {watch.ElapsedTicks / 10,10:##,###} us");
+            Print.Microsecond(watch, "invoke  :");
 
             watch.Restart();
             for (int i = 0; i < count; i++)
             {
                 d3();
             }
-            Console.WriteLine($"delegate: {watch.ElapsedTicks / 10,10:##,###} us");
+            Print.Microsecond(watch, "delegate:");
         }
 
         public static void StaticMethodTest()
