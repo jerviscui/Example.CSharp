@@ -12,36 +12,70 @@ namespace LocationInterceptionTest
 
             var watch = new Stopwatch();
 
-            watch.Start();
-            var t = new PropTest("", null);
+            //new
+            watch.Restart();
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var t = new PropTest("", null);
+            }
+            watch.Stop();
+            Print.Microsecond(watch);
+            
+            watch.Restart();
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var t = new PropTest2("", null);
+            }
             watch.Stop();
             Print.Microsecond(watch);
 
+            //new and set
             watch.Restart();
-            t.S = "";
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var t = new PropTest("", null);
+                t.S = "";
+            }
             watch.Stop();
             Print.Microsecond(watch);
+            
             watch.Restart();
-            t.S = "";
-            watch.Stop();
-            Print.Microsecond(watch);
-
-            Console.WriteLine();
-            watch.Restart();
-            var t2 = new PropTest2("", null);
-            watch.Stop();
-            Print.Microsecond(watch);
-
-            watch.Restart();
-            t2.S = "";
-            watch.Stop();
-            Print.Microsecond(watch);
-            watch.Restart();
-            t2.S = "";
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                var t = new PropTest2("", null);
+                t.S = "";
+            }
             watch.Stop();
             Print.Microsecond(watch);
 
-            //Console.WriteLine($"S:{t.S}\r\nN:{t.N}");
+
+            //watch.Restart();
+            //var t1 = new PropTest("", null);
+            //watch.Stop();
+            //Print.Microsecond(watch);
+            //watch.Restart();
+            //t1.S = "";
+            //watch.Stop();
+            //Print.Microsecond(watch);
+            //watch.Restart();
+            //t1.S = "";
+            //watch.Stop();
+            //Print.Microsecond(watch);
+
+            //Console.WriteLine();
+            //watch.Restart();
+            //var t2 = new PropTest2("", null);
+            //watch.Stop();
+            //Print.Microsecond(watch);
+
+            //watch.Restart();
+            //t2.S = "";
+            //watch.Stop();
+            //Print.Microsecond(watch);
+            //watch.Restart();
+            //t2.S = "";
+            //watch.Stop();
+            //Print.Microsecond(watch);
         }
     }
 }
