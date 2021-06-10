@@ -2,6 +2,7 @@
 using System.Diagnostics;
 using System.Threading;
 using PostSharp.Aspects;
+using PostSharp.Aspects.Internals;
 using PostSharp.Reflection;
 using PostSharp.Serialization;
 
@@ -17,9 +18,7 @@ namespace LocationInterceptionTest
         /// <inheritdoc />
         public override void OnGetValue(LocationInterceptionArgs args)
         {
-#if DEBUG
-            Console.WriteLine("OnGetValue");
-#endif
+            //Console.WriteLine("OnGetValue");
 
             args.ProceedGetValue();
         }
@@ -27,9 +26,7 @@ namespace LocationInterceptionTest
         /// <inheritdoc />
         public override void OnSetValue(LocationInterceptionArgs args)
         {
-#if DEBUG
-            Console.WriteLine("OnSetValue");
-#endif
+            //Console.WriteLine("OnSetValue");
 
             var s = (string?)args.Value;
 
@@ -37,28 +34,18 @@ namespace LocationInterceptionTest
             {
                 if (s!.Length < Min)
                 {
-#if DEBUG
-                    Console.WriteLine($"{args.LocationName} must greater or equal {Min}");
-#endif
+                    //Console.WriteLine($"{args.LocationName} must greater or equal {Min}");
                     return;
                 }
 
                 if (s!.Length > Max)
                 {
-#if DEBUG
-                    Console.WriteLine($"{args.LocationName} must less or equal {Max}");
-#endif
+                    //Console.WriteLine($"{args.LocationName} must less or equal {Max}");
                     return;
                 }
             }
 
             args.ProceedSetValue();
-        }
-
-        /// <inheritdoc />
-        public override void OnInstanceLocationInitialized(LocationInitializationArgs args)
-        {
-            base.OnInstanceLocationInitialized(args);
         }
 
         /// <inheritdoc />
@@ -89,9 +76,7 @@ namespace LocationInterceptionTest
     public class PropTest2
     {
         private string _s;
-
-        private bool AllowNull;
-
+        
         private int Max = 5;
         private int Min = 1;
 
@@ -101,26 +86,20 @@ namespace LocationInterceptionTest
 
             set
             {
-#if DEBUG
-                Console.WriteLine("OnSetValue");
-#endif
+                //Console.WriteLine("OnSetValue");
                 var s = (string?)value;
 
                 if (s is not null)
                 {
                     if (s!.Length < Min)
                     {
-#if DEBUG
-                        Console.WriteLine($"S must greater or equal {Min}");
-#endif
+                        //Console.WriteLine($"S must greater or equal {Min}");
                         return;
                     }
 
                     if (s!.Length > Max)
                     {
-#if DEBUG
-                        Console.WriteLine($"S must less or equal {Max}");
-#endif
+                        //Console.WriteLine($"S must less or equal {Max}");
                         return;
                     }
                 }
@@ -137,27 +116,20 @@ namespace LocationInterceptionTest
 
             set
             {
-#if DEBUG
-                Console.WriteLine("OnSetValue");
-#endif
-
+                //Console.WriteLine("OnSetValue");
                 var s = (string?)value;
 
                 if (s is not null)
                 {
                     if (s!.Length < Min)
                     {
-#if DEBUG
-                        Console.WriteLine($"N must greater or equal {Min}");
-#endif
+                        //Console.WriteLine($"N must greater or equal {Min}");
                         return;
                     }
 
                     if (s!.Length > Max)
                     {
-#if DEBUG
-                        Console.WriteLine($"N must less or equal {Max}");
-#endif
+                        //Console.WriteLine($"N must less or equal {Max}");
                         return;
                     }
                 }

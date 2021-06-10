@@ -8,11 +8,10 @@ namespace LocationInterceptionTest
     {
         static void Main(string[] args)
         {
-            //Console.WriteLine("Hello World!");
-
             var watch = new Stopwatch();
 
             //new
+            Console.WriteLine("\r\nnew weaved");
             watch.Restart();
             for (int i = 0; i < 1_000_000; i++)
             {
@@ -20,7 +19,8 @@ namespace LocationInterceptionTest
             }
             watch.Stop();
             Print.Microsecond(watch);
-            
+
+            Console.WriteLine("\r\nnew native");
             watch.Restart();
             for (int i = 0; i < 1_000_000; i++)
             {
@@ -28,8 +28,12 @@ namespace LocationInterceptionTest
             }
             watch.Stop();
             Print.Microsecond(watch);
+
+            //warm up
+            //new PropTest("", "").S = "";
 
             //new and set
+            Console.WriteLine("\r\nnew and set weaved");
             watch.Restart();
             for (int i = 0; i < 1_000_000; i++)
             {
@@ -38,7 +42,11 @@ namespace LocationInterceptionTest
             }
             watch.Stop();
             Print.Microsecond(watch);
-            
+
+            //warm up
+            //new PropTest2("", "").S = "";
+
+            Console.WriteLine("\r\nnew and set native");
             watch.Restart();
             for (int i = 0; i < 1_000_000; i++)
             {
@@ -48,7 +56,16 @@ namespace LocationInterceptionTest
             watch.Stop();
             Print.Microsecond(watch);
 
-
+            //output:
+            //new weaved
+            //        517 us
+            //new native
+            //     10,812 us
+            //new and set weaved
+            //     82,639 us
+            //new and set native
+            //     10,429 us
+            
             //watch.Restart();
             //var t1 = new PropTest("", null);
             //watch.Stop();
