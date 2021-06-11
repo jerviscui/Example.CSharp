@@ -1,7 +1,10 @@
-﻿namespace AspectInjectorTest
+﻿using System;
+using AspectInjector.Broker;
+
+namespace AspectInjectorTest
 {
     [Log]
-    public class Test
+    public class SyncBoundaryTest
     {
         public void PublicTest()
         {
