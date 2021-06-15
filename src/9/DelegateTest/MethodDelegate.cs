@@ -17,7 +17,7 @@ namespace DelegateTest
             var method = typeof(B).GetMethod(nameof(B.Test))!;
             var d3 = method.CreateDelegate<Action>(b);
 
-            int count = 1000_000;
+            int count = 1_000_000;
 
             var watch = new Stopwatch();
 
@@ -56,6 +56,8 @@ namespace DelegateTest
 
             var d4 = (Action)method2.CreateDelegate(typeof(Action));
             d4();
+
+
         }
 
         public static void ExpressionTest()

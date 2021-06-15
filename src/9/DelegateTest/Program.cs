@@ -1,4 +1,5 @@
 ﻿using System;
+using BenchmarkDotNet.Running;
 
 namespace DelegateTest
 {
@@ -6,11 +7,17 @@ namespace DelegateTest
     {
         static void Main(string[] args)
         {
-            MethodDelegate.DelegatePerformanceTest();
+            BenchmarkRunner.Run<Benchmark>();
 
-            MethodDelegate.StaticMethodTest();
+            //new DelegateTest().GetMehtodTest();
+            //Console.WriteLine();
+            //new DelegateTest().GetAndExecTest();
 
-            MethodDelegate.ExpressionTest();
+            //MethodDelegate.DelegatePerformanceTest();
+
+            //MethodDelegate.StaticMethodTest();
+
+            //MethodDelegate.ExpressionTest();
         }
     }
 }
