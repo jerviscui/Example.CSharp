@@ -7,23 +7,20 @@ namespace AspectInjectorTest
     {
         static async Task Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
-
             //new PropTest().S = "";
             //throw ArgumentException
 
-            var t = new AsyncBoundaryTest();
-            await t.Test();
+            var boundary = new BoundaryAsyncTest();
+            await boundary.AwaitTask();
             Console.WriteLine();
-            await t.AwaitTest();
+            await boundary.ContinueTask();
 
-            Console.WriteLine();
-            var tt = new AsyncAroundTest();
-            tt.SyncTest();
-
-            await tt.Test();
-            Console.WriteLine();
-            await tt.AwaitTest();
+            //Console.WriteLine();
+            //var tt = new AsyncAroundTest();
+            //tt.SyncTest();
+            //await tt.Test();
+            //Console.WriteLine();
+            //await tt.AwaitTest();
         }
     }
 }

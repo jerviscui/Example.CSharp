@@ -28,7 +28,7 @@ namespace AspectInjectorTest
     {
     }
 
-    [Aspect(Scope.Global)]
+    [Aspect(Scope.PerInstance)]
     [Injection(typeof(Together2Attribute))]
     public class Together2Attribute : Attribute
     {
