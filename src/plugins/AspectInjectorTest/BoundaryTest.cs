@@ -12,14 +12,14 @@ namespace AspectInjectorTest
         public void OnBefore([Argument(Source.Triggers)] Attribute[] attributes,
             [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)] string name)
         {
-            Console.WriteLine($"OnBefore {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"OnBefore {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         [Advice(Kind.After, Targets = Target.Method)]
         public void OnAfter([Argument(Source.Triggers)] Attribute[] attributes,
             [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)] string name)
         {
-            Console.WriteLine($"OnAfter {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"OnAfter {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
     }
 
@@ -34,7 +34,7 @@ namespace AspectInjectorTest
     {
         public void Method()
         {
-            Console.WriteLine($"Method {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"Method {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
     }
 
@@ -43,46 +43,46 @@ namespace AspectInjectorTest
     {
         public async void AsyncMethod()
         {
-            Console.WriteLine($"AsyncMethod {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"AsyncMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         public Task TaskMehtod()
         {
-            Console.WriteLine($"TaskMethod {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"TaskMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
             var task = Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
 
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
             return task;
         }
 
         public async Task AwaitTask()
         {
-            Console.WriteLine($"AwaitTask {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"AwaitTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         public async Task ContinueTask()
         {
-            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
             //OnBefore 4
             //ContinuTask 4
