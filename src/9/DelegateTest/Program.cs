@@ -7,7 +7,7 @@ namespace DelegateTest
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<Benchmark>();
+            //BenchmarkRunner.Run<BenchmarkTest>();
 
             //new DelegateTest().GetMehtodTest();
             //Console.WriteLine();
@@ -18,6 +18,8 @@ namespace DelegateTest
             //MethodDelegate.StaticMethodTest();
 
             //MethodDelegate.ExpressionTest();
+
+            MethodDelegate.GenericMethod();
         }
     }
 }

@@ -14,19 +14,19 @@ namespace MethodBoundaryAspectTest
         /// <inheritdoc />
         public override void OnEntry(MethodExecutionArgs arg)
         {
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnEntry {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnEntry {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnExit(MethodExecutionArgs arg)
         {
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnExit {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnExit {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnException(MethodExecutionArgs arg)
         {
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnException {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnException {Thread.CurrentThread.ManagedThreadId.ToString()}");
             arg.FlowBehavior = FlowBehavior.Continue;
         }
     }
@@ -37,20 +37,20 @@ namespace MethodBoundaryAspectTest
         //todo: not implement
         //public async void SyncMethod()
         //{
-        //    Console.WriteLine($"front {Thread.CurrentThread.ManagedThreadId}");
+        //    Console.WriteLine($"front {Thread.CurrentThread.ManagedThreadId.ToString()}");
         //}
 
         public Task TaskMethod()
         {
-            Console.WriteLine($"TaskMethod {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"TaskMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
             var task = Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
 
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
             return task;
 
             //OnEntry 1
@@ -62,27 +62,27 @@ namespace MethodBoundaryAspectTest
 
         public async Task AwaitTask()
         {
-            Console.WriteLine($"AwaitTask {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"AwaitTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         public async Task ContinueTask()
         {
-            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
             //AsyncTest.ContinueTask OnEntry 1
             //<ContinueTask>d__2.MoveNext OnEntry 1
@@ -102,16 +102,16 @@ namespace MethodBoundaryAspectTest
         [TaskLog]
         public async Task<int> ContinueTaskAndReturn()
         {
-            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
             return 1;
 
@@ -129,16 +129,16 @@ namespace MethodBoundaryAspectTest
     {
         public async Task<int> ContinueTaskAndReturn()
         {
-            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
             return 1;
 
@@ -162,7 +162,7 @@ namespace MethodBoundaryAspectTest
                 state = (int)(arg.Instance.GetType().GetField("<>1__state")?.GetValue(arg.Instance) ?? -100);
             }
 
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnEntry {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnEntry {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
@@ -174,7 +174,7 @@ namespace MethodBoundaryAspectTest
                 state = (int)(arg.Instance.GetType().GetField("<>1__state")?.GetValue(arg.Instance) ?? -100);
             }
 
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnExit {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnExit {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
@@ -186,7 +186,7 @@ namespace MethodBoundaryAspectTest
                 state = (int)(arg.Instance.GetType().GetField("<>1__state")?.GetValue(arg.Instance) ?? -100);
             }
 
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnException {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnException {Thread.CurrentThread.ManagedThreadId.ToString()}");
             arg.FlowBehavior = FlowBehavior.Continue;
         }
     }
@@ -196,16 +196,16 @@ namespace MethodBoundaryAspectTest
     {
         public async Task<int> ContinueTaskAndReturn()
         {
-            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId}");
+                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId}");
+            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
             return 1;
 

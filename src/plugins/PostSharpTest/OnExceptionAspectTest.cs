@@ -27,9 +27,9 @@ namespace PostSharpTest
             try
             {
                 throw new NullReferenceException("arugment error!");
-                Console.WriteLine("after");
+                //Console.WriteLine("after");
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 Console.WriteLine("catch 1");
                 throw;
