@@ -1,0 +1,4 @@
+﻿[*.{cs,vb}]
+
+# IDE0071: 简化内插
+dotnet_style_prefer_simplified_interpolation = true:none
