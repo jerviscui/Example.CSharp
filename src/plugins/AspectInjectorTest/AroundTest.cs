@@ -11,6 +11,70 @@ using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {
+    [Aspect(Scope.Global)]
+    [Injection(typeof(UniversalWrapper))]
+    public class UniversalWrapper : Attribute
+    {
+        private static readonly MethodInfo _asyncHandler = typeof(UniversalWrapper).GetMethod(nameof(UniversalWrapper.WrapAsync), BindingFlags.NonPublic | BindingFlags.Static)!;
+        private static readonly MethodInfo _syncHandler = typeof(UniversalWrapper).GetMethod(nameof(UniversalWrapper.WrapSync), BindingFlags.NonPublic | BindingFlags.Static)!;
+        private static readonly Type _voidTaskResult = Type.GetType("System.Threading.Tasks.VoidTaskResult")!;
+
+
+        [Advice(Kind.Around, Targets = Target.Method)]
+        public object? Handle(
+            [Argument(Source.Metadata)] MethodBase methodInfo,
+            [Argument(Source.Target)] Func<object[], object> target,
+            [Argument(Source.Arguments)] object[] args,
+            [Argument(Source.Name)] string name,
+            [Argument(Source.ReturnType)] Type retType
+            )
+        {
+            Console.WriteLine($"Before {name} {Thread.CurrentThread.ManagedThreadId.ToString()}");
+
+            if (typeof(Task).IsAssignableFrom(retType) && methodInfo.GetCustomAttributes<AsyncStateMachineAttribute>().Any()) //check if method is async, you can also check by statemachine attribute
+            {
+                var syncResultType = retType.IsConstructedGenericType ? retType.GenericTypeArguments[0] : _voidTaskResult;
+                var tgt = target;
+                return _asyncHandler.MakeGenericMethod(syncResultType).Invoke(this, new object[] { tgt, args, name });
+            }
+            else
+            {
+                retType = retType == typeof(void) ? typeof(object) : retType;
+                return _syncHandler.MakeGenericMethod(retType).Invoke(this, new object[] { target, args, name });
+            }
+        }
+
+        private static T? WrapSync<T>(Func<object[], object> target, object[] args, string name)
+        {
+            try
+            {
+                var result = (T)target(args);
+                Console.WriteLine($"After Sync method `{name}` {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Sync method `{name}` throws {e.GetType()} exception.");
+                return default;
+            }
+        }
+
+        private static async Task<T?> WrapAsync<T>(Func<object[], object> target, object[] args, string name)
+        {
+            try
+            {
+                var result = await ((Task<T>)target(args)).ConfigureAwait(false);
+                Console.WriteLine($"After Async method `{name}` {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                return result;
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine($"Async method `{name}` throws {e.GetType()} exception.");
+                return default;
+            }
+        }
+    }
+
     //todo: 实现异步方法 around，参考：https://github.com/pamidur/aspect-injector/blob/master/samples/UniversalWrapper/UniversalWrapper.cs
     public class AsyncAroundAspect
     {
@@ -21,10 +85,7 @@ namespace AspectInjectorTest
         protected static readonly MethodInfo SyncHandler = typeof(AsyncAroundAspect)
             .GetMethod(nameof(WrapSync), BindingFlags.NonPublic | BindingFlags.Static)!;
 
-        public bool IsAsync(Attribute[] triggers)
-        {
-            return triggers.Any(o => o is AsyncStateMachineAttribute);
-        }
+        public bool IsAsync(MethodBase methodInfo) => methodInfo.GetCustomAttributes<AsyncStateMachineAttribute>().Any();
 
         private string GetKey(Type type, string name, object[] args) =>
             $"{type.FullName}+{name}+{string.Join(",", args.Select(o => o.GetType().Name))}";
@@ -97,7 +158,7 @@ namespace AspectInjectorTest
                         task.GetAwaiter().GetResult();
                     }
                 }
-                
+
                 Console.WriteLine($"After {targetName} {Thread.CurrentThread.ManagedThreadId.ToString()}");
                 return result;
             }
@@ -112,12 +173,11 @@ namespace AspectInjectorTest
     [Injection(typeof(AroundAspect))]
     public class AroundAttribute : Attribute
     {
-
     }
 
     [Around]
     public class AroundSyncTest
-    {
+    {        
         public void Method()
         {
             Console.WriteLine($"Method {Thread.CurrentThread.ManagedThreadId.ToString()}");
@@ -130,7 +190,9 @@ namespace AspectInjectorTest
         }
     }
 
-    [Around]
+    //[Around]
+    [UniversalWrapper]
+
     public class AroundAsyncTest
     {
         public async void AsyncMethod()
@@ -167,17 +229,19 @@ namespace AspectInjectorTest
         {
             Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
-            await Task.Factory.StartNew(() =>
+            var result = await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
                 Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
-            }).ContinueWith(_ =>
+                return 10;
+            }).ContinueWith(t =>
             {
                 Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                return t.Result;
             });
 
             Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
-            return 10;
+            return result;
 
             //Before ContinueTask 1
             //ContinuTask 1
@@ -186,26 +250,6 @@ namespace AspectInjectorTest
             //continuation 5
             //After ContinueTask 1
             //result 10
-        }
-    }
-
-    public class AroundAsyncTest2
-    {
-        public async Task<int> ContinueTask()
-        {
-            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
-
-            await Task.Factory.StartNew(() =>
-            {
-                Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
-            }).ContinueWith(_ =>
-            {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
-            });
-
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
-            return 1;
         }
     }
 }

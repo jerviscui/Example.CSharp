@@ -90,7 +90,7 @@ namespace ForeachTest
                 }
                 watch.Stop();
                 t1 += watch.ElapsedMilliseconds;
-                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds}");
+                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds.ToString()}");
             }
             Console.WriteLine($"avg:{t1 / 10.0}");
 
@@ -106,7 +106,7 @@ namespace ForeachTest
                 }
                 watch.Stop();
                 t2 += watch.ElapsedMilliseconds;
-                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds}");
+                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds.ToString()}");
             }
             Console.WriteLine($"avg:{t2 / 10.0}");
 
@@ -135,7 +135,7 @@ namespace ForeachTest
                 }
                 watch.Stop();
                 t2 += watch.ElapsedMilliseconds;
-                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds}");
+                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds.ToString()}");
             }
             Console.WriteLine($"avg:{t2 / 10.0}");
 
@@ -159,7 +159,7 @@ namespace ForeachTest
                 }
                 watch.Stop();
                 t2 += watch.ElapsedMilliseconds;
-                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds}");
+                Console.WriteLine($"i={i},时间:{watch.ElapsedMilliseconds.ToString()}");
             }
             Console.WriteLine($"avg:{t2 / 10.0}");
 
