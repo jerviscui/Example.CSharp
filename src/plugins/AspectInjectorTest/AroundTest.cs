@@ -168,6 +168,28 @@ namespace AspectInjectorTest
                 throw;
             }
         }
+
+        //todo: 1. how about a separate async method
+        //2. use out parameter for return result 
+        public async Task Handle(
+            //[Argument(Source.Instance)] object instance, [Argument(Source.Type)] Type type,
+            //[Argument(Source.Metadata)] MethodBase methodInfo, [Argument(Source.Target)] Func<object[], object> func,
+            //[Argument(Source.Name)] string targetName, [Argument(Source.Arguments)] object[] arguments,
+            //[Argument(Source.ReturnType)] Type returnType,
+            //[Argument(Source.Triggers)] Attribute[] triggers
+            )
+        {
+            try
+            {
+                await Task.CompletedTask;
+                //set result
+            }
+            catch (Exception e)
+            {
+                Console.WriteLine(e);
+                throw;
+            }
+        }
     }
 
     [Injection(typeof(AroundAspect))]
