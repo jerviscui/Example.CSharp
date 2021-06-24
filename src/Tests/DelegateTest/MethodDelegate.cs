@@ -51,6 +51,10 @@ namespace DelegateTest
             d2();
             d3();
 
+            //CreateDelegate 不传入实例
+            var d33 = method.CreateDelegate<Action<B>>();
+            d33(b);
+
             var method2 = typeof(B).GetMethod(nameof(B.STest))!;
             method2.Invoke(null, null);
             
