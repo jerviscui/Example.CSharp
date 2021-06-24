@@ -11,7 +11,7 @@ namespace StringFormatTest
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<BenchmarkTest>();
+            //BenchmarkRunner.Run<BenchmarkTest>();
 
             //var watch = new Stopwatch();
             //watch.Restart();
@@ -51,8 +51,8 @@ namespace StringFormatTest
             //}
             //watch.Stop();
             //Print.Microsecond(watch);
-            ////118,433 us
-            ////277,884 us
+            ////233,697 us
+            ////277,426 us
         }
 
         public static string UnBoxTest()
@@ -94,12 +94,13 @@ namespace StringFormatTest
         public static string UnBoxFormatTest()
         {
             int a = 1;
-            return $"{a.ToString(),10:##,###}";
+            return $"{a.ToString("##,###")}";
 
-            //IL_0002: ldstr        "{0,10:##,###}"
-            //IL_0007: ldloca.s     a
-            //IL_0009: call         instance string [System.Runtime]System.Int32::ToString()
-            //IL_000e: call         string [System.Runtime]System.String::Format(string, object)
+            //IL_0003: ldstr        "{0,10}"
+            //IL_0008: ldloca.s     a
+            //IL_000a: ldstr        "##,###"
+            //IL_000f: call         instance string [System.Runtime]System.Int32::ToString(string)
+            //IL_0014: call         string [System.Runtime]System.String::Format(string, object)
         }
     }
 

@@ -98,6 +98,9 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "InfoOfTest", "plugins\Fody\InfoOfTest\InfoOfTest.csproj", "{578093D3-BF5E-4C5B-B969-1D0C8F882DD3}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{719AF6DF-48D1-4C7B-A8E9-493482D109DE}"
+	ProjectSection(SolutionItems) = preProject
+		Tests\Directory.Build.props = Tests\Directory.Build.props
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DelegateTest", "Tests\DelegateTest\DelegateTest.csproj", "{81E526D7-DA4C-4E38-B56B-A089FC4D1BBB}"
 EndProject

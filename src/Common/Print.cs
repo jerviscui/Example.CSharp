@@ -17,7 +17,7 @@ namespace Common
         //[SuppressMessage("ReSharper", "UseFormatSpecifierInInterpolation")]
         public static void Nanosecond(Stopwatch stopwatch, string title = "")
         {
-            Console.WriteLine($"{title} {(stopwatch.ElapsedTicks * 100).ToString(),10:##,###} ns");
+            Console.WriteLine($"{title} {(stopwatch.ElapsedTicks * 100).ToString("##,###"),10} ns");
         }
 
         /// <summary>
@@ -25,7 +25,7 @@ namespace Common
         /// </summary>
         public static void Microsecond(Stopwatch stopwatch, string title = "")
         {
-            Console.WriteLine($"{title} {(stopwatch.ElapsedTicks /10).ToString(),10:##,###} us");
+            Console.WriteLine($"{title} {(stopwatch.ElapsedTicks /10).ToString("##,###"),10} us");
         }
 
         /// <summary>
@@ -33,7 +33,7 @@ namespace Common
         /// </summary>
         public static void Millisecond(Stopwatch stopwatch, string title = "")
         {
-            Console.WriteLine($"{title} {stopwatch.ElapsedMilliseconds.ToString(),10:##,###} ms");
+            Console.WriteLine($"{title} {stopwatch.ElapsedMilliseconds.ToString("##,###"),10} ms");
         }
     }
 }
