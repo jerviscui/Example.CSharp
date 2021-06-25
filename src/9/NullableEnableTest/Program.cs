@@ -19,14 +19,15 @@ namespace NullableEnableTest
 
         public class A
         {
+            //CS8618	在退出构造函数时，不可为 null 的 属性“Name”必须包含非 null 值。
+            //请考虑将 属性 声明为可以为 null。
             private A()
             {
-                Name = string.Empty;
+                //Name = string.Empty;
             }
 
-            public string Name { get; set; }//CS8618	在退出构造函数时，不可为 null 的 属性“Name”必须包含非 null 值。
-                                            //请考虑将 属性 声明为可以为 null。
-            
+            public string Name { get; set; }
+
             public string? NameOrNull { get; set; }
 
             public static A? GetOrDefault(bool create)
@@ -37,6 +38,30 @@ namespace NullableEnableTest
                 }
 
                 return default;
+            }
+        }
+
+        public class B
+        {
+            public string S1 { get; set; }
+
+            public string S2 { get; set; }
+
+            public string S3 { get; set; }
+
+            //for ef proxy
+#pragma warning disable 8618
+            protected B()
+#pragma warning restore 8618
+            {
+                
+            }
+
+            public B(string s1, string s2, string s3)
+            {
+                S1 = s1;
+                S2 = s2;
+                S3 = s3;
             }
         }
     }

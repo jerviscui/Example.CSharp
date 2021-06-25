@@ -54,13 +54,14 @@ namespace DelegateTest
 
     public class B
     {
-        public string P1 { get; set; } = string.Empty;
+        //赋值为 null 不会有性能影响，string.Empty 会额外生成赋值 IL
+        public string P1 { get; set; } = null!;
 
-        public string P2 { get; set; } = string.Empty;
+        public string P2 { get; set; } = null!;
 
-        public string P3 { get; set; } = string.Empty;
+        public string P3 { get; set; } = null!;
 
-        public string P4 { get; set; } = string.Empty;
+        public string P4 { get; set; } = null!;
 
         public B(string p1)
         {
