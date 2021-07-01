@@ -31,7 +31,7 @@ namespace AutofacWebTest
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddTransient<IWeatherForecastService, WeatherForecastService>();
-            services.AddControllers();
+            services.AddControllers().AddControllersAsServices();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "AutofacWebTest", Version = "v1" });
@@ -78,9 +78,9 @@ namespace AutofacWebTest
             //_ = app.ApplicationServices.GetService<IWeatherForecastService>();
 
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
-            //预热 Container 无用
+            ////预热 Container 无用
             //AutofacContainer.Resolve<IWeatherForecastService>();
-            //默认
+            ////AddControllersAsServices()才能通过 Container 创建 Controller
             //AutofacContainer.Resolve<WeatherForecastController>();
         }
     }
