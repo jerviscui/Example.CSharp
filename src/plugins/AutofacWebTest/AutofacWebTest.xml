@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>AutofacWebTest</name>
+    </assembly>
+    <members>
+        <member name="T:AutofacWebTest.Controllers.WeatherForecastController">
+            <summary>
+            WeatherForecastController
+            </summary>
+        </member>
+        <member name="M:AutofacWebTest.Controllers.WeatherForecastController.Get">
+            <inheritdoc cref="M:AutofacWebTest.Services.IWeatherForecastService.Get"/>
+        </member>
+        <member name="M:AutofacWebTest.Services.IWeatherForecastService.Get">
+            <summary>
+            Gets this instance.
+            </summary>
+        </member>
+        <member name="T:AutofacWebTest.Services.WeatherForecastService">
+            <summary>
+            Weather Forecast Service
+            </summary>
+        </member>
+        <member name="M:AutofacWebTest.Services.WeatherForecastService.Get">
+            <inheritdoc />
+        </member>
+    </members>
+</doc>
