@@ -46,7 +46,7 @@ namespace TaskGuidanceTest
                 var s = new StackTrace().GetFrames();
                 foreach (var stackFrame in s)
                 {
-                    var m = stackFrame.GetMethod();
+                    var m = stackFrame.GetMethod()!;
                     Console.WriteLine($"{m.Module,-28} {m.DeclaringType,-103} {m.Name}");
                 }
                 //5
@@ -89,7 +89,7 @@ namespace TaskGuidanceTest
                     var s = new StackTrace().GetFrames();
                     foreach (var stackFrame in s)
                     {
-                        var m = stackFrame.GetMethod();
+                        var m = stackFrame.GetMethod()!;
                         Console.WriteLine($"{m.Module,-28} {m.DeclaringType,-50} {m.Name}");
                     }
                 }, TaskContinuationOptions.AttachedToParent);
