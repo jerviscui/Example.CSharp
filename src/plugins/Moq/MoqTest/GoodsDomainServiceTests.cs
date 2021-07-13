@@ -23,6 +23,7 @@ namespace MoqTest
         [Fact]
         public void CreateGoods_UseMoqIdGenerator_Test()
         {
+            //method returns value
             var mock = new Mock<IIdGenerator>();
             mock.Setup(generator => generator.Create()).Returns(10);
             var goodsDomainService = new GoodsDomainService(mock.Object);
@@ -35,6 +36,7 @@ namespace MoqTest
         [Fact]
         public void CreateGoods_UseMoqIdGenerator_Throw()
         {
+            //method throw exception
             var mock = new Mock<IIdGenerator>();
             mock.Setup(generator => generator.Create()).Throws(new NotImplementedException());
             var goodsDomainService = new GoodsDomainService(mock.Object);
@@ -45,6 +47,7 @@ namespace MoqTest
         [Fact]
         public void CreateGoods_UseMoqCodeGenerator_Test()
         {
+            //moq class protected virtual method
             var mock = new Mock<GoodsDomainService>(() => new GoodsDomainService(new DefaultIdGenerator()));
             mock.Protected().Setup<string>("CodeGenerator").Returns("moq code");
 
