@@ -24,7 +24,7 @@
 
         public PropName PropName { get; protected set; } = null!;
 
-        public virtual long PropNameId { get; protected set; }
+        public long PropNameId { get; protected set; }
 
 #pragma warning disable 8618
         protected PropValue()

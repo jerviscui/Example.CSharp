@@ -23,7 +23,7 @@ namespace MoqTest
         [Fact]
         public void PropNameRepository_MoqPublicMethod_Test()
         {
-            //moq class public method
+            //moq class public virtual method
             var mock = new Mock<PropNameRepository>();
             mock.Setup(repository => repository.DeletePropName(It.IsAny<long>())).Returns(true);
 
@@ -55,6 +55,8 @@ namespace MoqTest
             var result = mock.Object.Test();
 
             mock.Protected().Verify<bool>("PrivateMethodForTest", Times.Once(), ItExpr.IsAny<long>());
+            mock.Protected().Verify<bool>("PrivateMethodForTest", Times.Once(), 1L);
+            mock.Protected().Verify<bool>("PrivateMethodForTest", Times.Once(), ItExpr.Is<long>(l => l == 1));
             result.ShouldBe(true);
         }
     }
