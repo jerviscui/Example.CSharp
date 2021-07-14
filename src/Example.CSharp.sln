@@ -120,7 +120,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Moq", "Moq", "{91E7DD22-572
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoqTest", "plugins\Moq\MoqTest\MoqTest.csproj", "{1D901854-9F03-40BF-9700-129C6B10C60B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MoqTest.Domain", "plugins\Moq\MoqTest.Domain\MoqTest.Domain.csproj", "{172F9687-0CA6-4CFA-B339-BE850E96B5B8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoqTest.Domain", "plugins\Moq\MoqTest.Domain\MoqTest.Domain.csproj", "{172F9687-0CA6-4CFA-B339-BE850E96B5B8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DictionaryTest", "Tests\DictionaryTest\DictionaryTest.csproj", "{016E8F09-969A-4CDA-917D-3791985400C2}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -280,6 +282,10 @@ Global
 		{172F9687-0CA6-4CFA-B339-BE850E96B5B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{172F9687-0CA6-4CFA-B339-BE850E96B5B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{172F9687-0CA6-4CFA-B339-BE850E96B5B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{016E8F09-969A-4CDA-917D-3791985400C2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{016E8F09-969A-4CDA-917D-3791985400C2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{016E8F09-969A-4CDA-917D-3791985400C2}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{016E8F09-969A-4CDA-917D-3791985400C2}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -325,6 +331,7 @@ Global
 		{91E7DD22-5728-449C-A541-865C01BF1FAC} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{1D901854-9F03-40BF-9700-129C6B10C60B} = {91E7DD22-5728-449C-A541-865C01BF1FAC}
 		{172F9687-0CA6-4CFA-B339-BE850E96B5B8} = {91E7DD22-5728-449C-A541-865C01BF1FAC}
+		{016E8F09-969A-4CDA-917D-3791985400C2} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
