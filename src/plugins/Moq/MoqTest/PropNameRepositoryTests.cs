@@ -1,4 +1,5 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using Moq.Protected;
 using MoqTest.Domain.Prop;
 using Shouldly;
@@ -50,7 +51,9 @@ namespace MoqTest
         {
             //moq class protected virtual method
             var mock = new Mock<PropNameRepository>();
-            mock.Protected().Setup<bool>("PrivateMethodForTest", ItExpr.IsAny<long>()).Returns(true);
+            mock.Protected().Setup<bool>("PrivateMethodForTest", 1L).Returns(true);
+            mock.Protected().Setup<bool>("PrivateMethodForTest", ItExpr.Is<long>(l => l != 1))
+                .Throws<ArgumentException>();
             
             var result = mock.Object.Test();
 
