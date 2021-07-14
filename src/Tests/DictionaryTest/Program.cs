@@ -1,4 +1,6 @@
-﻿using BenchmarkDotNet.Running;
+﻿using System.Diagnostics;
+using BenchmarkDotNet.Running;
+using Common;
 
 namespace DictionaryTest
 {
@@ -6,13 +8,21 @@ namespace DictionaryTest
     {
         static void Main(string[] args)
         {
-            ////ToArray 快
-            //BenchmarkRunner.Run<ToArrayAndListTests>();
+            //var stopwatch = new Stopwatch();
+            //var t = new GetOrAddTests();
+            //t.AddByLock_Concurrent_Test();
+            //t.AddByRepeatCreate_Concurrent_Test();
 
-            ////array 最快，IEnumerable IList 有装箱，
-            //BenchmarkRunner.Run<ForeachTest>();
-            
-            ////Test();
+            //stopwatch.Restart();
+            //t.AddByLock_Concurrent_Test();
+            //stopwatch.Stop();
+            //Print.Microsecond(stopwatch);
+            //stopwatch.Restart();
+            //t.AddByRepeatCreate_Concurrent_Test();
+            //stopwatch.Stop();
+            //Print.Microsecond(stopwatch);
+
+            BenchmarkRunner.Run<GetOrAddTests>();
         }
     }
 }

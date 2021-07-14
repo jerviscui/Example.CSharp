@@ -7,7 +7,7 @@
 
 	<ItemGroup>
     <PackageReference Include="Microsoft.Extensions.Logging" Version="5.0.0" />
-    <PackageReference Include="PostSharp" Version="6.9.2-rc" PrivateAssets="All" />
+    <PackageReference Include="PostSharp" Version="6.9.5" PrivateAssets="All" />
   </ItemGroup>
 
 </Project>
