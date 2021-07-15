@@ -1,15 +1,14 @@
-﻿using System;
-using System.Diagnostics;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
-using Common;
 
-namespace DelegateTest
+namespace CtorTest
 {
     class Program
     {
         static void Main(string[] args)
         {
+            //new InitializerTest().Initializer_Ctor_ExecutionOrder();
+
             BenchmarkRunner.Run<BenchmarkTest>();
 
             //new A("p1");
