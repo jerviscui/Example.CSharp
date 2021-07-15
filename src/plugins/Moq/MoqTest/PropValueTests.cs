@@ -10,7 +10,7 @@ namespace MoqTest
     public class PropValueTests
     {
         [Fact]
-        public void ctor_MockPropName_Test()
+        public void Ctor_MockPropName_Test()
         {
             //arrange
             var mock = new Mock<PropName>();

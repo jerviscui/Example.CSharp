@@ -4,7 +4,7 @@
     {
         public virtual string Value { get; set; }
 
-        protected  virtual string PrivatePropForTest { get; set; }
+        protected virtual string PrivatePropForTest { get; set; } = null!;
 
         public void SetTest(string s)
         {

@@ -95,14 +95,10 @@ namespace DictionaryTest
             {
                 lock (_lock)
                 {
-                    if (_dic.TryGetValue(key, out string? exists))
-                    {
-                        value = exists;
-                    }
-                    else
+                    if (!_dic.TryGetValue(key, out value))
                     {
                         value = CreateValue();
-                        _dic.TryAdd(key, value);
+                        _dic.Add(key, value);
                     }
                 }
             }
