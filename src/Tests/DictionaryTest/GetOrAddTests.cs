@@ -14,7 +14,7 @@ namespace DictionaryTest
 
         private readonly object _lock = new();
 
-        [Benchmark]
+        //[Benchmark]
         public void AddByRepeatCreate_OneThread_Test()
         {
             var key = "repeat";
@@ -25,7 +25,7 @@ namespace DictionaryTest
             }
         }
 
-        [Benchmark]
+        //[Benchmark]
         public void AddByLock_OneThread_Test()
         {
             var key = "lock";
@@ -37,6 +37,7 @@ namespace DictionaryTest
         }
 
         [Benchmark]
+        //100 1000 10000
         public void AddByRepeatCreate_Concurrent_Test()
         {
             var s = "repeat";
@@ -80,13 +81,7 @@ namespace DictionaryTest
 
         private string GetOrAddByTpl(string key)
         {
-            if (!_dicConcurrent.TryGetValue(key, out string? value))
-            {
-                value = CreateValue();
-                value = _dicConcurrent.GetOrAdd(key, value);
-            }
-
-            return value;
+            return _dicConcurrent.GetOrAdd(key, s => CreateValue());;
         }
 
         private string GetOrAddByLock(string key)
