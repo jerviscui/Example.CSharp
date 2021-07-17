@@ -4,6 +4,7 @@ using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using ThreadState = System.Threading.ThreadState;
 
 namespace DictionaryTest
 {
@@ -62,26 +63,40 @@ namespace DictionaryTest
             sw.Stop();
             Print.Microsecond(sw, "dic   :");
 
-            //单线程插入 6 倍左右差距
-            //conDic:    983,642 us
-            //dic   :    171,558 us
+            //单线程插入 5 倍左右差距
+            //conDic:    659,331 us
+            //dic   :    128,337 us
         }
 
         public void MultiThreads_Test()
         {
-            Run(1, 100000, 10);
-            Run(10, 100000, 10);
-            Run(100, 100000, 10);
-            Run(1000, 100000, 10);
+            Run(1, 10000, 10);
+            Run(10, 10000, 10);
+            Run(100, 10000, 10);
+            Run(1000, 10000, 10);
+
+            //并发越高 ConcurrentDictionary 性能越好
+            //Threads: 1, items: 10000, cycles:10
+            //conDic:         19 us
+            //dic   :          2 us
+            //Threads: 10, items: 10000, cycles:10
+            //conDic:         13 us
+            //dic   :          2 us
+            //Threads: 100, items: 10000, cycles:10
+            //conDic:          6 us
+            //dic   :          8 us
+            //Threads: 1000, items: 10000, cycles:10
+            //conDic:         30 us
+            //dic   :  5,701,567 us
         }
 
         private void Run(int threads, int count, int cycles)
         {
-            //todo: fix
             Console.WriteLine("");
             Console.WriteLine($"Threads: {threads}, items: {count}, cycles:{cycles}");
 
             var semaphore = new SemaphoreSlim(0, threads);
+            //run ConcurrentDictionary
             var concurrentDictionary = new ConcurrentDictionary<int, string>();
             for (int i = 0; i < threads; i++)
             {
@@ -89,17 +104,18 @@ namespace DictionaryTest
                 t.Start();
             }
 
-            Thread.Sleep(1000);
+            semaphore.Release(threads);
+            Thread.Sleep(threads > 100 ? 5000 : 1000);
 
             var w = Stopwatch.StartNew();
-            semaphore.Release(threads);
             for (int i = 0; i < threads; i++)
             {
                 semaphore.Wait();
             }
-
+            w.Stop();
             Print.Microsecond(w, "conDic:");
 
+            //run Dictionary
             var dictionary = new Dictionary<int, string>();
             for (int i = 0; i < threads; i++)
             {
@@ -107,16 +123,18 @@ namespace DictionaryTest
                 t.Start();
             }
 
-            Thread.Sleep(1000);
+            semaphore.Release(threads);
+            Thread.Sleep(threads > 100 ? 5000 : 1000);
 
             w.Restart();
-            semaphore.Release(threads);
             for (int i = 0; i < threads; i++)
             {
                 semaphore.Wait();
             }
-
+            w.Stop();
             Print.Microsecond(w, "dic   :");
+
+            semaphore.Dispose();
         }
 
         private void Run(ConcurrentDictionary<int, string> dic, int elements, int cycles, SemaphoreSlim semaphore)
@@ -128,7 +146,10 @@ namespace DictionaryTest
                 {
                     for (int j = 0; j < elements; j++)
                     {
-                        var x = dic.GetOrAdd(i, x => x.ToString());
+                        dic.TryAdd(j, j.ToString());
+
+                        //get or add
+                        //dic.GetOrAdd(j, j1 => j1.ToString());
                     }
                 }
             }
@@ -147,18 +168,36 @@ namespace DictionaryTest
                 {
                     for (int j = 0; j < elements; j++)
                     {
-                        if (!dic.TryGetValue(i, out string? value))
+                        //ThrowInvalidOperationException_ConcurrentOperationsNotSupported
+                        //resolve by lock
+                        lock (dic)
                         {
-                            lock (dic)
-                            {
-                                if (!dic.TryGetValue(i, out value))
-                                {
-                                    dic[i] = value = i.ToString();
-                                }
-                            }
+                            dic.TryAdd(j, j.ToString());
                         }
 
-                        var x = value;
+                        //Stupid，不能并发问题
+                        //try
+                        //{
+                        //    dic.TryAdd(j, j.ToString());
+                        //}
+                        //catch (InvalidOperationException)
+                        //{
+                        //    dic.TryGetValue(j, out string? value);
+                        //    Console.WriteLine(value ?? "null");
+                        //}
+
+                        //get or add
+                        //if (!dic.TryGetValue(j, out string? value))
+                        //{
+                        //    lock (dic)
+                        //    {
+                        //        if (!dic.TryGetValue(j, out value))
+                        //        {
+                        //            dic[i] = value = j.ToString();
+                        //        }
+                        //    }
+                        //}
+                        //var x = value;
                     }
                 }
             }
