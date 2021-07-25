@@ -193,8 +193,10 @@ namespace AspectInjectorTest
             public int MethodWithInstance(int i)
             {
                 Func<DelegateCacheTestClass, object[], object> func = (o, args) => o.MethodWrap(args);
-
                 return (int)func.Invoke(this, new object[] { i });
+
+                //object func(DelegateCacheTestClass o, object[] args) => o.MethodWrap(args);
+                //return (int)func(this, new object[] { i });
             }
 
             private static Func<DelegateCacheTestClass, object[], object>? funcCache;

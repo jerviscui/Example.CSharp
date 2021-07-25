@@ -167,7 +167,9 @@ namespace MemoryTest
             public int Age { get; set; }
         }
 
+#pragma warning disable 1998
         static async Task Print(A[] arr, int start, int len)
+#pragma warning restore 1998
         {
             for (int i = start; i < arr.Length && i < start + len; i++)
             {

@@ -25,8 +25,7 @@ namespace TypeHandleTest
         [My(10)]
         class TestClass : Base
         {
-            [My(20)]
-            public string Prop { get; set; }
+            [My(20)] public string Prop { get; set; } = null!;
 
             [My(30)]
             [My(40)]
@@ -47,7 +46,7 @@ namespace TypeHandleTest
         class GenericTestClass<T>
         {
             [My(100)]
-            public void Generic<T>()
+            public void Generic<TIn>()
             {
 
             }

@@ -74,12 +74,12 @@ namespace StackallocTest
             }
         }
 
-        struct A<T> where T : unmanaged
-        {
-            public int X;
+        //struct A<T> where T : unmanaged
+        //{
+        //    public int X;
 
-            public int Y;
-        }
+        //    public int Y;
+        //}
 
         static unsafe void StructAlloc_Test()
         {

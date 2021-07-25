@@ -90,7 +90,7 @@ namespace Volo.Abp.Auditing
 
             for (var i = 0; i < parameters.Length; i++)
             {
-                dictionary[parameters[i].Name] = arguments[i];
+                dictionary[parameters[i].Name!] = arguments[i];
             }
 
             return dictionary;

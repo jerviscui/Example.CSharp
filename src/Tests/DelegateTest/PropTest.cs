@@ -13,9 +13,9 @@ namespace DelegateTest
     {
         class A
         {
-            public string S { get; set; }
+            public string S { get; set; } = null!;
 
-            public string Sp { get; protected set; }
+            public string Sp { get; protected set; } = null!;
         }
 
         private PropertyInfo GetProp() => typeof(A).GetProperty("S")!;

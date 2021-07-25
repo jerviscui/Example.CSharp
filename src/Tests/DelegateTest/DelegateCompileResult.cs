@@ -34,7 +34,7 @@ namespace DelegateTest
     /// </summary>
     public class Result3
     {
-        private static Func<int, int> _func;
+        private static Func<int, int> _func = null!;
 
         public void DelegateInit1()
         {

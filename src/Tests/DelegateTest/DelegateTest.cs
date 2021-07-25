@@ -95,7 +95,7 @@ namespace DelegateTest
                 return new Action(Test);
             }
 
-            private static Action _action;
+            private static Action? _action;
 
             public Action GetActionCache()
             {
