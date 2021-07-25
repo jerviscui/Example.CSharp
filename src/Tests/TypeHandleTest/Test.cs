@@ -120,8 +120,8 @@ namespace TypeHandleTest
 
         public void ReferenceGenericHandle()
         {
-            var mA = typeof(GenericTestClass<A>).GetMethod(nameof(GenericTestClass<A>.Generic));
-            var mB = typeof(GenericTestClass<B>).GetMethod(nameof(GenericTestClass<B>.Generic));
+            var mA = typeof(GenericTestClass<A>).GetMethod(nameof(GenericTestClass<A>.Generic))!;
+            var mB = typeof(GenericTestClass<B>).GetMethod(nameof(GenericTestClass<B>.Generic))!;
 
             Console.WriteLine($"AGenericMethodHandle {mA.MethodHandle.Value}");
             Console.WriteLine($"BGenericMethodHandle {mB.MethodHandle.Value}");

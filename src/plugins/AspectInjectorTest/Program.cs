@@ -8,7 +8,8 @@ namespace AspectInjectorTest
     {
         static async Task Main(string[] args)
         {
-            new PerformanceTests().GetMethod_ReflectionPerformance_Test();
+            //new PerformanceTests().GetMethod_ReflectionPerformance_Test();
+            new PerformanceTests().TestClass_GetDeclareType_Test();
 
             //new PropTest().S = "";
             //throw ArgumentException
