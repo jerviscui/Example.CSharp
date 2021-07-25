@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Diagnostics;
 using System.Reflection;
+using System.Threading.Tasks;
 using AspectInjector.Broker;
 using Common;
 
@@ -85,7 +86,7 @@ namespace AspectInjectorTest
             }
         }
 
-        [Injection(typeof(GetMethodAspect))]
+        [Injection(typeof(DeclareTypeAspect))]
         public class DeclareTypeAttribute : Attribute
         {
 
@@ -95,7 +96,7 @@ namespace AspectInjectorTest
         public class TypeofAspect
         {
             [Advice(Kind.Around, Targets = Target.Method)]
-            public object Around([Argument(Source.Target)] Func<object[], object> target, [Argument(Source.Arguments)] object[] arguments, 
+            public object Around([Argument(Source.Target)] Func<object[], object> target, [Argument(Source.Arguments)] object[] arguments,
                 [Argument(Source.Type)] Type type)
             {
                 var name = type.FullName;
@@ -148,9 +149,98 @@ namespace AspectInjectorTest
             stopwatch.Stop();
             Print.Microsecond(stopwatch, "Typeof     :");
 
-            //MethodInfo.Method.DeclaringType 会使用反射，比 typeof 性能低 50%
-            //DeclareType:    116,011 us
-            //Typeof     :     75,680 us
+            //MethodInfo.Method.DeclaringType 会使用反射，比 typeof 性能低 4.5 倍
+            //DeclareType:    283,310 us
+            //Typeof     :     62,498 us
+        }
+
+        #region Delegate Cache
+
+        [Aspect(Scope.PerInstance)]
+        public class DelegateNewAspect
+        {
+            [Advice(Kind.Around, Targets = Target.Method)]
+            public object Around([Argument(Source.Target)] Func<object[], object> target, [Argument(Source.Arguments)] object[] arguments)
+            {
+                return target.Invoke(arguments);
+            }
+        }
+
+        [Injection(typeof(DelegateNewAspect))]
+        public class DelegateNewAttribute : Attribute
+        {
+
+        }
+
+        class DelegateCacheTestClass
+        {
+            [DelegateNew]
+            public int Method(int i)
+            {
+                return i;
+            }
+
+            public int Method2(int i)
+            {
+                return i;
+            }
+
+            private object MethodWrap(object[] array)
+            {
+                return Method2((int)array[0]);
+            }
+
+            public int MethodWithInstance(int i)
+            {
+                Func<DelegateCacheTestClass, object[], object> func = (o, args) => o.MethodWrap(args);
+
+                return (int)func.Invoke(this, new object[] { i });
+            }
+
+            private static Func<DelegateCacheTestClass, object[], object>? funcCache;
+
+            public int MethodByCache(int i)
+            {
+                //和 MethodWithInstance() 方法没有区别
+                if (funcCache is null)
+                {
+                    var method = typeof(DelegateCacheTestClass).GetMethod(nameof(MethodWrap), BindingFlags.Instance | BindingFlags.NonPublic)!;
+                    funcCache = (Func<DelegateCacheTestClass, object[], object>)
+                        Delegate.CreateDelegate(typeof(Func<DelegateCacheTestClass, object[], object>), method);
+                }
+
+                return (int)funcCache.Invoke(this, new object[] { i });
+            }
+        }
+
+        #endregion
+
+        public void DelegateCacheTestClass_MethodWithInstance_Test()
+        {
+            var stopwatch = new Stopwatch();
+            var t = new DelegateCacheTestClass();
+
+            stopwatch.Start();
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                //t.Method(1);
+                t.MethodWithInstance(2);
+            }
+            stopwatch.Stop();
+            Print.Microsecond(stopwatch, "DelegateCache:");
+
+            stopwatch.Restart();
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                t.Method(1);
+                //t.MethodWithInstance(2);
+            }
+            stopwatch.Stop();
+            Print.Microsecond(stopwatch, "Delegate     :");
+
+            //将 Func<> 缓存之后，性能提升 30%
+            //DelegateCache:     24,905 us
+            //Delegate     :     31,339 us
         }
     }
 }
