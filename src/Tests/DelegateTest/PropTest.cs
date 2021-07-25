@@ -1,9 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
+using Common;
 
 namespace DelegateTest
 {
@@ -30,7 +32,7 @@ namespace DelegateTest
 
         private A a = new();
 
-        public string PropSetTest()
+        string PropSetTest()
         {
             var propS = GetProp();
 
@@ -39,7 +41,7 @@ namespace DelegateTest
             return a.S;
         }
 
-        public string PropProtectedSetTest()
+        string PropProtectedSetTest()
         {
             var propSp = GetProtectedProp();
 
@@ -48,7 +50,7 @@ namespace DelegateTest
             return a.Sp;
         }
 
-        public string PropCacheSetTest()
+        string PropCacheSetTest()
         {
             var propS = GetPropCache();
 
@@ -57,13 +59,48 @@ namespace DelegateTest
             return a.S;
         }
 
-        public string PropDelegateSetTest()
+        string PropDelegateSetTest()
         {
             var method = GetPropDelegate();
 
             method(a, "s");
 
             return a.S;
+        }
+
+        public void PropAndDelegate_Exec_Test()
+        {
+            var watch = new Stopwatch();
+            var p = new PropTest();
+
+            Console.WriteLine(p.PropProtectedSetTest());
+
+            watch.Restart();
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                p.PropSetTest();
+            }
+            watch.Stop();
+            Print.Microsecond(watch);
+
+            watch.Restart();
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                p.PropCacheSetTest();
+            }
+            watch.Stop();
+            Print.Microsecond(watch);
+
+            watch.Restart();
+            for (int i = 0; i < 1_000_000; i++)
+            {
+                p.PropDelegateSetTest();
+            }
+            watch.Stop();
+            Print.Microsecond(watch);
+            //242,679 us
+            //160,200 us
+            // 15,583 us
         }
     }
 }
