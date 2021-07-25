@@ -8,6 +8,8 @@ namespace AspectInjectorTest
     {
         static async Task Main(string[] args)
         {
+            new PerformanceTests().GetMethod_ReflectionPerformance_Test();
+
             //new PropTest().S = "";
             //throw ArgumentException
 
@@ -16,18 +18,18 @@ namespace AspectInjectorTest
             //Console.WriteLine();
             //await boundary.ContinueTask();
 
-            var around = new AroundAsyncTest();
-            around.AsyncMethod();
+            //var around = new AroundAsyncTest();
+            //around.AsyncMethod();
 
-            Console.WriteLine();
-            await around.TaskMehtod();
+            //Console.WriteLine();
+            //await around.TaskMehtod();
 
-            Console.WriteLine();
-            await around.AwaitTask();
+            //Console.WriteLine();
+            //await around.AwaitTask();
 
-            Console.WriteLine();
-            var i = await around.ContinueTask();
-            Console.WriteLine($"result {i.ToString()} {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            //Console.WriteLine();
+            //var i = await around.ContinueTask();
+            //Console.WriteLine($"result {i.ToString()} {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
     }
 }
