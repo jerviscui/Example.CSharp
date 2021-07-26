@@ -1,5 +1,4 @@
 using Autofac;
-using Autofac.Extras.Moq;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
 using MoqTest.Domain;
@@ -32,8 +31,17 @@ namespace MoqAutofacTest
         {
             var mock = new Mock<IIdGenerator>();
             mock.Setup(o => o.Create()).Returns(1);
-            //bug: how to replac registered service
-            using var autoMock = AutoMock.GetLoose(builder => builder.RegisterMock(mock).Named<IIdGenerator>(""));
+
+            //todo: how replace ServiceProvider.CreateScope() registered service
+            //using var serviceScope = ServiceProvider.CreateScope();
+            //IServiceScopeFactory f;
+            //f.CreateScope();
+
+
+            //IContainer a;
+            //using var serviceScope = a.BeginLifetimeScope(builder => builder.RegisterInstance(mock.Object));
+
+            //serviceScope.
 
             var service = ServiceProvider.GetRequiredService<IGoodsDomainService>();
 

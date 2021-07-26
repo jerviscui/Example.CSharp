@@ -21,7 +21,7 @@ namespace MoqAutofacTest
             var builder = new ContainerBuilder();
 
             //register default
-            builder.RegisterType<DefaultIdGenerator>().As<IIdGenerator>().SingleInstance();
+            builder.RegisterType<DefaultIdGenerator>().As<IIdGenerator>().SingleInstance().PreserveExistingDefaults();
 
             var services = new ServiceCollection();
             PreInit(services);
@@ -34,7 +34,6 @@ namespace MoqAutofacTest
 
         protected virtual void PreInit(IServiceCollection services)
         {
-
         }
     }
 }
