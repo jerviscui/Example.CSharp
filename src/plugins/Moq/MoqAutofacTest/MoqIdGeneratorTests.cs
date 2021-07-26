@@ -7,6 +7,9 @@ using Xunit;
 
 namespace MoqAutofacTest
 {
+    /// <summary>
+    /// 使用 Moq 替换默认注册服务，根容器级别
+    /// </summary>
     public class MoqIdGeneratorTests : TestBase
     {
         protected override void PreInit(IServiceCollection services)

@@ -9,7 +9,9 @@ namespace MoqAutofacTest
 {
     public abstract class TestBase
     {
-        public IServiceProvider ServiceProvider { get; }
+        protected IServiceProvider ServiceProvider { get; }
+
+        private IContainer Container { get; set; } = null!;
 
         protected TestBase()
         {
@@ -21,19 +23,27 @@ namespace MoqAutofacTest
             var builder = new ContainerBuilder();
 
             //register default
-            builder.RegisterType<DefaultIdGenerator>().As<IIdGenerator>().SingleInstance().PreserveExistingDefaults();
+            builder.RegisterType<DefaultIdGenerator>().As<IIdGenerator>().SingleInstance();
 
             var services = new ServiceCollection();
             PreInit(services);
-
+            
             builder.Populate(services);
-            var container = builder.Build();
+            Container = builder.Build();
 
-            return new AutofacServiceProvider(container);
+            return new AutofacServiceProvider(Container);
         }
 
         protected virtual void PreInit(IServiceCollection services)
         {
+
+        }
+
+        public ILifetimeScope CreateScope(Action<ContainerBuilder>? configurationAction = null)
+        {
+            return configurationAction is null
+                ? Container.BeginLifetimeScope()
+                : Container.BeginLifetimeScope(configurationAction);
         }
     }
 }

@@ -7,6 +7,9 @@ using Xunit;
 
 namespace MoqAutofacTest
 {
+    /// <summary>
+    /// 使用 Moq 替换默认注册服务，Scope 容器级别
+    /// </summary>
     public class DefaultIdGeneratorTests : TestBase
     {
         protected override void PreInit(IServiceCollection services)
@@ -32,18 +35,11 @@ namespace MoqAutofacTest
             var mock = new Mock<IIdGenerator>();
             mock.Setup(o => o.Create()).Returns(1);
 
-            //todo: how replace ServiceProvider.CreateScope() registered service
+            //todo: how to replace ServiceProvider.CreateScope() registered service
             //using var serviceScope = ServiceProvider.CreateScope();
-            //IServiceScopeFactory f;
-            //f.CreateScope();
-
-
-            //IContainer a;
-            //using var serviceScope = a.BeginLifetimeScope(builder => builder.RegisterInstance(mock.Object));
-
-            //serviceScope.
-
-            var service = ServiceProvider.GetRequiredService<IGoodsDomainService>();
+            //基于 Autofac 容器
+            using var serviceScope = CreateScope(builder => builder.RegisterInstance(mock.Object));
+            var service = serviceScope.Resolve<IGoodsDomainService>();
 
             var goods1 = service.CreateGoods("t");
             var goods2 = service.CreateGoods("t");
