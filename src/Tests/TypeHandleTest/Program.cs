@@ -9,9 +9,14 @@ namespace TypeHandleTest
     {
         static void Main(string[] args)
         {
-            BenchmarkRunner.Run<BenchmarkTests>();
+            new TypeInfoTests().Type_GetProperties_Test();
+            Console.WriteLine();
+            new TypeInfoTests().Type_GetRuntimeProperties_Test();
+            Console.WriteLine();
+            new TypeInfoTests().TypeInfo_DeclaredProperties_Test();
+            Console.WriteLine();
 
-            //Console.WriteLine("Hello World!");
+            //BenchmarkRunner.Run<BenchmarkTests>();
 
             //new Test().GetAttributes();
             //Console.WriteLine();
@@ -23,8 +28,6 @@ namespace TypeHandleTest
 
             //Console.WriteLine();
             //new HandleSizeTest().RuntimeHandleAndType();
-
-            //Console.ReadKey();
         }
     }
 }

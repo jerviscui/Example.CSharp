@@ -53,7 +53,7 @@ namespace CtorTest
 
     public class B
     {
-        //赋值为 null 不会有性能影响，string.Empty 会额外生成赋值 IL
+        //赋值为 null 不会有性能影响，string.Empty 会额外生成初始化器赋值 IL
         public string P1 { get; set; } = null!;
 
         public string P2 { get; set; } = null!;
