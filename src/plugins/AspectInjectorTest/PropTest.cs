@@ -9,14 +9,14 @@ namespace AspectInjectorTest
     public class PropAspect
     {
         [Advice(Kind.Before, Targets = Target.Setter | Target.Instance)]
-        public void OnSet([Argument(Source.Triggers)] Attribute[] attributes, 
-            [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)]string name)
+        public void OnSet([Argument(Source.Triggers)] Attribute[] attributes,
+            [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)] string name)
         {
             var checkLength = attributes.OfType<CheckLengthAttribute>().FirstOrDefault();
 
             if (checkLength != null)
             {
-                if (((string)arguments[0]).Length > checkLength.MaximumLength || 
+                if (((string)arguments[0]).Length > checkLength.MaximumLength ||
                     ((string)arguments[0]).Length < checkLength.MinimumLength)
                 {
                     throw new ArgumentException($"{name} length must >= {checkLength.MinimumLength} and <= {checkLength.MaximumLength}");
@@ -39,7 +39,7 @@ namespace AspectInjectorTest
             MinimumLength = minimumLength;
         }
     }
-    
+
     public class PropTest
     {
         [CheckLength(10, 1)]

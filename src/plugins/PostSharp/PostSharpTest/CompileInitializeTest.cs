@@ -12,7 +12,7 @@ using PostSharp.Serialization;
 namespace PostSharpTest
 {
     [Serializable]
-    public class CompileInitializeAttribute: OnMethodBoundaryAspect
+    public class CompileInitializeAttribute : OnMethodBoundaryAspect
     {
         public DateTime DateTime { get; set; }
 
@@ -35,7 +35,7 @@ namespace PostSharpTest
         /// <param name="aspectInfo">Reserved for future usage.</param>
         public override void CompileTimeInitialize(MethodBase method, AspectInfo aspectInfo)
         {
-            DateTime = DateTime.Now;  
+            DateTime = DateTime.Now;
         }
     }
 

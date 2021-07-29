@@ -123,7 +123,7 @@ namespace MemoryCacheTest
 
                 cache.Set(inner, DateTime.Now.AddMinutes(1), new CancellationChangeToken(cts.Token));
             }
-            
+
             Console.WriteLine(cache.Get<DateTime?>(outer));
             Console.WriteLine(cache.Get<DateTime?>(inner));
 

@@ -8,25 +8,25 @@ namespace AutoPropertiesTest
     {
         static void Main(string[] args)
         {
-//            Console.WriteLine("Hello World!");
+            //            Console.WriteLine("Hello World!");
 
-//            var t = new Test("str", null, 1, null, "untouched");
-//            Console.WriteLine(@$"{nameof(Test.StrProp)}:{t.StrProp}, 
-//{nameof(Test.StrNullProp)}:{t.StrNullProp}, 
-//{nameof(Test.IntProp)}:{t.IntProp}, 
-//{nameof(Test.IntNullProp)}:{t.IntNullProp}, 
-//{nameof(Test.UntouchedProperty)}:{t.UntouchedProperty}");
-//            Console.WriteLine();
+            //            var t = new Test("str", null, 1, null, "untouched");
+            //            Console.WriteLine(@$"{nameof(Test.StrProp)}:{t.StrProp}, 
+            //{nameof(Test.StrNullProp)}:{t.StrNullProp}, 
+            //{nameof(Test.IntProp)}:{t.IntProp}, 
+            //{nameof(Test.IntNullProp)}:{t.IntNullProp}, 
+            //{nameof(Test.UntouchedProperty)}:{t.UntouchedProperty}");
+            //            Console.WriteLine();
 
-//            try
-//            {
-//                new Child("p", "t", "");
-//            }
-//            catch (ArgumentException e)
-//            {
-//                Console.WriteLine(e);
-//            }
-            
+            //            try
+            //            {
+            //                new Child("p", "t", "");
+            //            }
+            //            catch (ArgumentException e)
+            //            {
+            //                Console.WriteLine(e);
+            //            }
+
             var watch = new Stopwatch();
 
             watch.Start();

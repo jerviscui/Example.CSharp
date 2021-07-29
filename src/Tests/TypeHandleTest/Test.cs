@@ -54,7 +54,7 @@ namespace TypeHandleTest
 
         class A
         {
-            
+
         }
 
         class B

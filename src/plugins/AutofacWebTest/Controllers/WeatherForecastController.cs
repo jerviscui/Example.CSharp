@@ -17,7 +17,7 @@ namespace AutofacWebTest.Controllers
         private readonly ILogger<WeatherForecastController> _logger;
 
         private readonly IWeatherForecastService _weatherForecastService;
-        
+
         public WeatherForecastController(ILogger<WeatherForecastController> logger,
             IWeatherForecastService weatherForecastService)
         {
@@ -26,7 +26,7 @@ namespace AutofacWebTest.Controllers
 
             _logger.LogInformation($"create controller {Stopwatch.GetTimestamp()}");
         }
-        
+
         /// <inheritdoc cref="IWeatherForecastService.Get"/>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()

@@ -11,13 +11,13 @@ namespace Volo.Abp.Auditing
     {
         private readonly AuditingHelper _auditingHelper;
         private readonly AuditingManager _auditingManager;
-        
+
         public AuditingInterceptor()
         {
             _auditingHelper = new AuditingHelper();
             _auditingManager = new AuditingManager();
         }
-        
+
         /// <summary>
         ///   Method invoked <i>instead</i> of the method to which the aspect has been applied.
         /// </summary>
@@ -65,7 +65,7 @@ namespace Volo.Abp.Auditing
             auditLogAction = _auditingHelper.CreateAuditLogAction(
                 auditLog,
                 args.Method.DeclaringType?.GetType(),
-                args.Method as MethodInfo, 
+                args.Method as MethodInfo,
                 args.Arguments.ToArray()
             );
 

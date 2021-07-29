@@ -24,7 +24,7 @@ namespace MoqTest.Domain.Prop
             }
 
             propName.PropValues.AddRange(values.Select(o => new PropValue(_idGenerator.Create(), o, propName)).ToArray());
-            
+
             return propName;
         }
 

@@ -11,9 +11,9 @@ namespace Volo.Abp.Threading
     [Serializable]
     public class AmbientDataContextAmbientScopeProvider<T>
     {
-        public static AmbientDataContextAmbientScopeProvider<T> Instance { get; set; } = 
+        public static AmbientDataContextAmbientScopeProvider<T> Instance { get; set; } =
             new(new AsyncLocalAmbientDataContext());
-        
+
         private static readonly ConcurrentDictionary<string, ScopeItem> ScopeDictionary = new();
 
         private readonly AsyncLocalAmbientDataContext _dataContext;

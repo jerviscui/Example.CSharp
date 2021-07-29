@@ -40,7 +40,7 @@ namespace MoqTest
             var mock = new Mock<IPropNameRepository>();
             mock.CallBase = true;//
             mock.Protected().Setup<bool>("PrivateMethodForTest", ItExpr.IsAny<long>()).Returns(true);
-            
+
             var result = mock.Object.Test();
 
             result.ShouldBe(true);
@@ -54,7 +54,7 @@ namespace MoqTest
             mock.Protected().Setup<bool>("PrivateMethodForTest", 1L).Returns(true);
             mock.Protected().Setup<bool>("PrivateMethodForTest", ItExpr.Is<long>(l => l != 1))
                 .Throws<ArgumentException>();
-            
+
             var result = mock.Object.Test();
 
             mock.Protected().Verify<bool>("PrivateMethodForTest", Times.Once(), ItExpr.IsAny<long>());

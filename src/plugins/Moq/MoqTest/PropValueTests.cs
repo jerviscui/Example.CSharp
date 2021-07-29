@@ -109,7 +109,7 @@ namespace MoqTest
             //mock.Protected().SetupSet<string>("PrivatePropForTest", ItExpr.IsAny<string>()).Throws<ArgumentException>();
             mock.Protected().SetupSet<string>("PrivatePropForTest", "aaa").Callback(s => saved = "");//.Throws<ArgumentException>();
             mock.Protected().SetupSet<string>("PrivatePropForTest", "aa").Callback(s => saved = s);//.Throws<ArgumentException>();
-            
+
             mock.Object.SetTest("aa");
             mock.Object.SetTest("aaa");
 

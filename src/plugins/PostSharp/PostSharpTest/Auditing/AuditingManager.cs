@@ -47,7 +47,7 @@ namespace Volo.Abp.Auditing
             //ExecutePostContributors(saveHandle.AuditLog);
             //MergeEntityChanges(saveHandle.AuditLog);
         }
-        
+
         protected virtual async Task SaveAsync(DisposableSaveHandle saveHandle)
         {
             BeforeSave(saveHandle);

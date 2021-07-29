@@ -7,8 +7,8 @@ using Volo.Abp.Auditing;
 
 namespace Volo.Abp.AspNetCore.Auditing
 {
-    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct | 
-                    AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event | 
+    [AttributeUsage(AttributeTargets.Assembly | AttributeTargets.Class | AttributeTargets.Struct |
+                    AttributeTargets.Method | AttributeTargets.Property | AttributeTargets.Event |
                     AttributeTargets.Interface, AllowMultiple = false)]
     [Serializable]
     public class AbpAuditingMiddleware : MethodInterceptionAspect
@@ -23,7 +23,7 @@ namespace Volo.Abp.AspNetCore.Auditing
         /// </summary>
         /// <param name="args">Advice arguments.</param>
         public override void OnInvoke(MethodInterceptionArgs args)
-        { 
+        {
             //AmbientDataContextAmbientScopeProvider.Begin()
             //Auditing
             //Save

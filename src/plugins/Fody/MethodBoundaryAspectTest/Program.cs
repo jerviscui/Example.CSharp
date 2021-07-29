@@ -31,7 +31,7 @@ namespace MethodBoundaryAspectTest
 
             //var t = new AsyncTest();
             //await t.ContinueTask();
-            
+
             Console.WriteLine("\r\nused by specify method");
             await new AsyncTest2().ContinueTaskAndReturn();
 

@@ -15,7 +15,7 @@ namespace TaskGuidanceTest
             //awaiter.GetResult();//阻塞主线程
 
             //SynchronizationContextTest.Test();
-            
+
             //CultureTest.Test();
 
             ChildTaskTest.Test();

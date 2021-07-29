@@ -54,7 +54,7 @@ namespace NullableEnableTest
             protected B()
 #pragma warning restore 8618
             {
-                
+
             }
 
             public B(string s1, string s2, string s3)

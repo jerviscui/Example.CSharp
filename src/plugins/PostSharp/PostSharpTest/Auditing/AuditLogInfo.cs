@@ -45,7 +45,7 @@ namespace Volo.Abp.Auditing
         public List<AuditLogActionInfo> Actions { get; set; }
 
         public List<Exception> Exceptions { get; }
-        
+
         public List<string> Comments { get; set; }
 
         public AuditLogInfo()
@@ -83,7 +83,7 @@ namespace Volo.Abp.Auditing
                     sb.AppendLine($"    {exception}");
                 }
             }
-            
+
             return sb.ToString();
         }
     }

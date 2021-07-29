@@ -145,7 +145,7 @@ namespace PostSharpTest
         }
     }
 
-    
+
     [Serializable]
     public class UowBoundaryAspect2 : OnMethodBoundaryAspect, IUow
     {
@@ -153,12 +153,12 @@ namespace PostSharpTest
         {
             ((IUow)this).Create();
         }
-        
+
         public override void OnSuccess(MethodExecutionArgs args)
         {
             ((IUow)this).Commit();
         }
-        
+
         public override void OnException(MethodExecutionArgs args)
         {
             ((IUow)this).Rollback();

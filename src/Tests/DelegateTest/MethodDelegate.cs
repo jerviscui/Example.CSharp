@@ -57,7 +57,7 @@ namespace DelegateTest
 
             var method2 = typeof(B).GetMethod(nameof(B.STest))!;
             method2.Invoke(null, null);
-            
+
             var d4 = (Action)method2.CreateDelegate(typeof(Action));
             d4();
         }

@@ -15,7 +15,7 @@ namespace TaskGuidanceTest
                 var awaiter = t.GetAwaiter();
                 awaiter.GetResult();//阻塞主线程
             }
-            
+
             public static async Task AttachedChildTask()
             {
                 //1

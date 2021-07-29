@@ -67,7 +67,7 @@ namespace System.Collections.Generic
         {
             return dictionary.TryGetValue(key, out var obj) ? obj : default;
         }
-        
+
         /// <summary>
         /// Gets a value from the dictionary with given key. Returns default value if can not find.
         /// </summary>
@@ -100,7 +100,7 @@ namespace System.Collections.Generic
 
             return dictionary[key] = factory(key);
         }
-        
+
         /// <summary>
         /// Gets a value from the dictionary with given key. Returns default value if can not find.
         /// </summary>

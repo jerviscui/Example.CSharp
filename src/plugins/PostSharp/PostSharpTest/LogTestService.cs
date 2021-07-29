@@ -10,7 +10,7 @@ namespace PostSharpTest
     [AuditingInterceptor(AttributeTargetElements = MulticastTargets.Method)]
     public class LogTestService
     {
-        public Task DoAsync() 
+        public Task DoAsync()
         {
             Console.WriteLine("LogTestService.Do");
 

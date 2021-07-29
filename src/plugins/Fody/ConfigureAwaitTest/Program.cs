@@ -10,7 +10,7 @@ namespace ConfigureAwaitTest
             Console.WriteLine("Hello World!");
 
             var xmlTest = new XmlTest();
-            
+
             await xmlTest.Test1();
             //编译后
             //await xmlTest.Test1().ConfigureAwait(continueOnCapturedContext: false);

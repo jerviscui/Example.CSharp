@@ -11,7 +11,7 @@ using PostSharp.Extensibility;
 namespace PostSharpTest
 {
     [Serializable]
-    public class InstanceSingletonAttribute: OnMethodBoundaryAspect
+    public class InstanceSingletonAttribute : OnMethodBoundaryAspect
     {
         public DateTime DateTime { get; set; }
 
@@ -30,7 +30,7 @@ namespace PostSharpTest
         /// <param name="method">Method to which the current aspect is applied.</param>
         public override void RuntimeInitialize(MethodBase method)
         {
-            DateTime = DateTime.Now;   
+            DateTime = DateTime.Now;
         }
     }
 

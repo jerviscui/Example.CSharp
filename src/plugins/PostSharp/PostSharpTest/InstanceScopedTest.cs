@@ -10,7 +10,7 @@ using PostSharp.Extensibility;
 namespace PostSharpTest
 {
     [Serializable]
-    public class InstanceScopedAttribute: OnMethodBoundaryAspect, IInstanceScopedAspect
+    public class InstanceScopedAttribute : OnMethodBoundaryAspect, IInstanceScopedAspect
     {
         public DateTime DateTime { get; set; }
 

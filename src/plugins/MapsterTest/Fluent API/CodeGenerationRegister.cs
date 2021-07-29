@@ -27,7 +27,7 @@ namespace MapsterTest
                 .ExcludeTypes(o => o.IsEnum || Nullable.GetUnderlyingType(o)?.IsEnum == true)
                 .MaxDepth(3)//嵌套深度
                 .PreserveReference(true)//缓存 dto 对象
-                //.ForType<Student>(builder => builder.IsNullableReference(o => o.FirstMidName))
+                                        //.ForType<Student>(builder => builder.IsNullableReference(o => o.FirstMidName))
                 ;
 
             config.GenerateMapper("[name]Mapper")

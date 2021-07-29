@@ -47,7 +47,7 @@ namespace PostSharpTest
     public class OnMethodBoundaryAspectTest
     {
         //[OnMethodBoundaryAspectDemo(Enabled = true)]
-        
+
         public void Test1()
         {
             Thread.Sleep(500);

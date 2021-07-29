@@ -15,7 +15,7 @@ namespace ForeachTest
 
             //array 最快，IEnumerable IList 有装箱，
             BenchmarkRunner.Run<ForeachTest>();
-            
+
             //Test();
         }
 

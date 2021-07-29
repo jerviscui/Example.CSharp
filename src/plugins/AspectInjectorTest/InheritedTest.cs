@@ -28,7 +28,7 @@ namespace AspectInjectorTest
     {
 
     }
-    
+
     public class InheritAttribute : InheritParentAttribute
     {
 

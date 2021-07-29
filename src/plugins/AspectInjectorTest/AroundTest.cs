@@ -199,7 +199,7 @@ namespace AspectInjectorTest
 
     [Around]
     public class AroundSyncTest
-    {        
+    {
         public void Method()
         {
             Console.WriteLine($"Method {Thread.CurrentThread.ManagedThreadId.ToString()}");

@@ -14,7 +14,7 @@ namespace InfoOfTest
             var f = Info.OfField<Test>("_f");
             var pg = Info.OfPropertyGet<Test>("Name");
             var m = Info.OfMethod<Test>("TestMethod");
-            
+
             var watch = new Stopwatch();
             watch.Start();
             for (int i = 0; i < 100; i++)

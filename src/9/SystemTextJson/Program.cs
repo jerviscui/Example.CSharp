@@ -49,7 +49,7 @@ namespace SystemTextJsonTest
                 IgnoreNullValues = false,//忽略空值
                 DefaultIgnoreCondition = JsonIgnoreCondition.WhenWritingDefault,//空值处理策略，
                                                                                 //WhenWritingDefault 序列化时忽略默认值
-                NumberHandling = JsonNumberHandling.AllowReadingFromString | 
+                NumberHandling = JsonNumberHandling.AllowReadingFromString |
                                  JsonNumberHandling.WriteAsString,//数字处理策略，将数字处理为字符串
                 ReferenceHandler = ReferenceHandler.Preserve,//循环引用处理
             };

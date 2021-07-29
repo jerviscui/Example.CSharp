@@ -11,7 +11,7 @@ namespace MapsterTest.DomainsDto
         public string? FirstMidName { get; }
         public DateTime? EnrollmentDate { get; }
         public ICollection<EnrollmentDto2> Enrollments { get; }
-        
+
         public StudentDto2(int? id, string lastName, string firstMidName, DateTime? enrollmentDate, ICollection<EnrollmentDto2> enrollments)
         {
             this.Id = id;
@@ -30,7 +30,7 @@ namespace MapsterTest.DomainsDto
         public Grade? Grade { get; }
         public CourseDto2 Course { get; }
         public StudentDto2 Student { get; }
-        
+
         public EnrollmentDto2(int enrollmentId, int courseId, int studentId, Grade? grade, CourseDto2 course, StudentDto2 student)
         {
             this.EnrollmentId = enrollmentId;
@@ -48,7 +48,7 @@ namespace MapsterTest.DomainsDto
         public string Title { get; }
         public int Credits { get; }
         public ICollection<EnrollmentDto2> Enrollments { get; }
-        
+
         public CourseDto2(int courseId, string title, int credits, ICollection<EnrollmentDto2> enrollments)
         {
             this.CourseId = courseId;

@@ -73,7 +73,7 @@ namespace FixedTest
             Console.WriteLine();
 
             Console.WriteLine(nameof(FixedSizeBuffers_Test));
-            FixedSizeBuffers_Test();            
+            FixedSizeBuffers_Test();
         }
 
         static unsafe void ArrayAndString_Test()
@@ -110,7 +110,7 @@ namespace FixedTest
             {
                 *p = 1;
             }
-            
+
             Console.WriteLine(string.Join(',', s.ToArray()));
         }
 

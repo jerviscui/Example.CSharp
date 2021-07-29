@@ -71,7 +71,7 @@ namespace MemoryTest
             {
                 results[i] = Compute(thread, obj, bisect);
             }
-            
+
             return (results.Average(tuple => tuple.sum), results.Average(tuple => tuple.time));
         }
 
@@ -97,7 +97,7 @@ namespace MemoryTest
 
                     if (type1)
                     {
-                        var s1 = (S) obj;
+                        var s1 = (S)obj;
                         for (long j = 0; j < times; j++)
                         {
                             v += s1.A;
@@ -106,7 +106,7 @@ namespace MemoryTest
                     }
                     else if (type2)
                     {
-                        var s2 = (SS) obj;
+                        var s2 = (SS)obj;
                         for (long j = 0; j < times; j++)
                         {
                             v += s2.A;
@@ -114,7 +114,7 @@ namespace MemoryTest
                     }
                     else if (type3)
                     {
-                        var s3 = (ST) obj;
+                        var s3 = (ST)obj;
                         for (long j = 0; j < times; j++)
                         {
                             v += s3.A;
@@ -138,7 +138,7 @@ namespace MemoryTest
 
             return (values.Sum(), watch.Elapsed.TotalMilliseconds);
         }
-        
+
         class S
         {
             public long A = 1;

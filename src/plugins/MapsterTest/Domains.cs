@@ -26,7 +26,7 @@ namespace MapsterTest.Domains
         public Course? Course { get; set; }
         public Student? Student { get; set; }
     }
-    
+
     public class Student
     {
         public int? Id { get; set; }

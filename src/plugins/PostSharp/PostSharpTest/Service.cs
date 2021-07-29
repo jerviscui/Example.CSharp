@@ -6,7 +6,7 @@ namespace PostSharpTest
     {
         public void Do();
     }
-    
+
     public class ServiceA : IService
     {
         [UowMethodAspect]

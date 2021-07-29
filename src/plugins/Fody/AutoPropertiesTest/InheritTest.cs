@@ -44,7 +44,7 @@ namespace AutoPropertiesTest
         }
 
         private static readonly StringLengthAttribute? LengthAttribute = typeof(InheritTest).GetProperty("Name")!.GetCustomAttribute<StringLengthAttribute>();
-        
+
         [StringLength(5)]
         public string Name { get; set; }
 

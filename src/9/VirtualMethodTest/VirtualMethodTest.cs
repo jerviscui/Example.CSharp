@@ -129,7 +129,7 @@ namespace VirtualMethodTest
         {
             Console.WriteLine("CovariantExecMethodTest");
             Stopwatch stopwatch = new();
-            
+
             //child excute override
             MyClass myClass = new();
             myClass.MyFunc();
@@ -157,7 +157,7 @@ namespace VirtualMethodTest
         {
             Console.WriteLine("ChangeRuntimeTypeAndCovariantExecMethodTest");
             Stopwatch stopwatch = new();
-            
+
             //child excute override
             MyClass myClass = new();
             myClass.MyFunc();
@@ -191,7 +191,7 @@ namespace VirtualMethodTest
         {
             Console.WriteLine("NoInlineTest");
             Stopwatch stopwatch = new();
-            
+
             //child excute override
             MyClass myClass = new();
             myClass.EmptyFunc();
@@ -202,7 +202,7 @@ namespace VirtualMethodTest
             }
             stopwatch.Stop();
             Console.WriteLine($"child excute inline(default): {stopwatch.ElapsedMilliseconds}");
-            
+
             myClass.NoInlineEmptyFunc();
             stopwatch.Restart();
             for (int i = 0; i < 1_000_000_000; i++)
@@ -221,7 +221,7 @@ namespace VirtualMethodTest
         {
             Console.WriteLine("InterfaceExecTest");
             Stopwatch stopwatch = new();
-            
+
             IMyInterface iMyClass = new MyClass();
             iMyClass.MyFunc();
             stopwatch.Restart();

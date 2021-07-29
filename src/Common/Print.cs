@@ -25,7 +25,7 @@ namespace Common
         /// </summary>
         public static void Microsecond(Stopwatch stopwatch, string title = "")
         {
-            Console.WriteLine($"{title} {(stopwatch.ElapsedTicks /10).ToString("##,###"),10} us");
+            Console.WriteLine($"{title} {(stopwatch.ElapsedTicks / 10).ToString("##,###"),10} us");
         }
 
         /// <summary>

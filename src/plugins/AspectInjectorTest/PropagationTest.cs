@@ -23,13 +23,13 @@ namespace AspectInjectorTest
         }
     }
 
-    [Injection(typeof(PropagationAspect), Propagation = PropagateTo.Methods | PropagateTo.Types, 
+    [Injection(typeof(PropagationAspect), Propagation = PropagateTo.Methods | PropagateTo.Types,
         PropagationFilter = "Method2")]
     public class PropagationAttribute : Attribute
     {
 
     }
-    
+
     [Propagation]
     public class PropagationTest
     {

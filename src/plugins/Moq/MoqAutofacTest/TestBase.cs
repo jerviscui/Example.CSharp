@@ -27,7 +27,7 @@ namespace MoqAutofacTest
 
             var services = new ServiceCollection();
             PreInit(services);
-            
+
             builder.Populate(services);
             Container = builder.Build();
 

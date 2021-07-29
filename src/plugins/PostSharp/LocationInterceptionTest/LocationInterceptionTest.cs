@@ -76,7 +76,7 @@ namespace LocationInterceptionTest
     public class PropTest2
     {
         private string _s;
-        
+
         private int Max = 5;
         private int Min = 1;
 

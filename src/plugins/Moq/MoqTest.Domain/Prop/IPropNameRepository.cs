@@ -6,7 +6,7 @@
         {
             throw new System.NotImplementedException();
         }
-        
+
         protected virtual bool PrivateMethodForTest(long id)
         {
             throw new System.NotImplementedException();
