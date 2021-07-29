@@ -19,5 +19,5 @@ The CSharp language syntax and features examples.
 
 [![Anurag's GitHub stats](https://github-readme-stats.vercel.app/api?username=jerviscui&count_private=true&show_icons=true)](https://github.com/anuraghazra/github-readme-stats)
 
-[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jerviscui&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
+[![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jerviscui&count_private=true&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
