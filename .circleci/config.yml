@@ -23,8 +23,7 @@ jobs:
           name: Run tests
           command: |
             dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
-      - codecov/upload:
-          file: ./src
+      - codecov/upload
 
 workflows:
   # Below is the definition of your workflow.
