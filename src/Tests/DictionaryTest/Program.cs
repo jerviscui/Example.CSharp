@@ -1,12 +1,10 @@
-﻿using System.Diagnostics;
-using BenchmarkDotNet.Running;
-using Common;
+﻿using BenchmarkDotNet.Running;
 
 namespace DictionaryTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //new AddTests().OneThread_Test();
             //new AddTests().MultiThreads_Test();

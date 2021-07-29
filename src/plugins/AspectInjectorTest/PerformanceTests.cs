@@ -1,9 +1,8 @@
-﻿using System;
+﻿using AspectInjector.Broker;
+using Common;
+using System;
 using System.Diagnostics;
 using System.Reflection;
-using System.Threading.Tasks;
-using AspectInjector.Broker;
-using Common;
 
 namespace AspectInjectorTest
 {
@@ -20,17 +19,15 @@ namespace AspectInjectorTest
             [Advice(Kind.Before, Targets = Target.Method)]
             public void Before([Argument(Source.Metadata)] MethodBase methodInfo)
             {
-
             }
         }
 
         [Injection(typeof(GetMethodAspect))]
         public class GetMethodAttribute : Attribute
         {
-
         }
 
-        class Foo
+        private class Foo
         {
             [GetMethod]
             public int ReturnInt()
@@ -89,7 +86,6 @@ namespace AspectInjectorTest
         [Injection(typeof(DeclareTypeAspect))]
         public class DeclareTypeAttribute : Attribute
         {
-
         }
 
         [Aspect(Scope.PerInstance)]
@@ -108,10 +104,9 @@ namespace AspectInjectorTest
         [Injection(typeof(TypeofAspect))]
         public class TypeofAttribute : Attribute
         {
-
         }
 
-        class TypeofTestClass
+        private class TypeofTestClass
         {
             [DeclareType]
             public int DeclareTypeMehtod(int i)
@@ -169,10 +164,9 @@ namespace AspectInjectorTest
         [Injection(typeof(DelegateNewAspect))]
         public class DelegateNewAttribute : Attribute
         {
-
         }
 
-        class DelegateCacheTestClass
+        private class DelegateCacheTestClass
         {
             [DelegateNew]
             public int Method(int i)

@@ -3,21 +3,21 @@ using System;
 
 namespace GenericStructTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             StructAlloc_Test();
         }
 
-        struct A<T> where T : unmanaged
+        private struct A<T> where T : unmanaged
         {
             public int X;
 
             public int Y;
         }
 
-        static unsafe void StructAlloc_Test()
+        private static unsafe void StructAlloc_Test()
         {
             var n = sizeof(A<int>);
             Console.WriteLine(n);
@@ -40,19 +40,19 @@ namespace GenericStructTest
             }
         }
 
-        class T
+        private class T
         {
             public string Name { get; set; }
         }
 
-        struct B<T>
+        private struct B<T>
         {
             public T X;
 
             public T Y;
         }
 
-        static unsafe void ReferenceStruct_Test()
+        private static unsafe void ReferenceStruct_Test()
         {
             //todo: complete
             //var n = sizeof(B<T>);

@@ -1,15 +1,11 @@
 ﻿using Common;
 using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DelegateTest
 {
-    class MethodDelegate
+    internal class MethodDelegate
     {
         public static void DelegatePerformanceTest()
         {
@@ -115,13 +111,13 @@ namespace DelegateTest
         }
 
         [C]
-        class A
+        private class A
         {
 
         }
 
         [C]
-        class B : A
+        private class B : A
         {
             [C]
             public void Test()
@@ -140,7 +136,7 @@ namespace DelegateTest
             }
         }
 
-        class CAttribute : Attribute
+        private class CAttribute : Attribute
         {
 
         }

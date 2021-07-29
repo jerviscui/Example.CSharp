@@ -1,10 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using AspectInjector.Broker;
+using System;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {
@@ -18,7 +14,6 @@ namespace AspectInjectorTest
             [Argument(Source.ReturnType)] Type returnType,
             [Argument(Source.Triggers)] Attribute[] triggers)
         {
-
         }
 
         [Advice(Kind.After, Targets = Target.Method)]
@@ -28,7 +23,6 @@ namespace AspectInjectorTest
             [Argument(Source.ReturnValue)] object returnValue, [Argument(Source.ReturnType)] Type returnType,
             [Argument(Source.Triggers)] Attribute[] triggers)
         {
-
         }
 
         [Advice(Kind.Around, Targets = Target.Method)]
@@ -45,7 +39,6 @@ namespace AspectInjectorTest
     [Injection(typeof(AdviceArgumentAspect))]
     public class AdviceArgumentAttribute : Attribute
     {
-
     }
 
     [AdviceArgument]

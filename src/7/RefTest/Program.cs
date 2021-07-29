@@ -1,18 +1,17 @@
 ﻿using Common;
 using System;
-using System.Threading.Tasks;
 
 namespace RefTest
 {
-    class Program
+    internal class Program
     {
-        struct A
+        private struct A
         {
             public int x;
             public int y;
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var arr = new A() { x = 1, y = 2 };
             var arr2 = arr;
@@ -59,7 +58,7 @@ namespace RefTest
             InValueParameter_Test(a, aa);
         }
 
-        class B
+        private class B
         {
             public int x;
             public string n;
@@ -71,7 +70,7 @@ namespace RefTest
 
         }
 
-        static void ClassRefVariable_Test()
+        private static void ClassRefVariable_Test()
         {
             var b = new B();
 
@@ -84,7 +83,7 @@ namespace RefTest
             Console.WriteLine(b.x);
         }
 
-        static void RefParameter_Test(ref B refb, B b)//B** refb, B* b
+        private static void RefParameter_Test(ref B refb, B b)//B** refb, B* b
         {
             Console.WriteLine(refb == b);
 
@@ -95,7 +94,7 @@ namespace RefTest
             refb.n = "20";
         }
 
-        static unsafe void ValueParameter_Test(int a, ref int refa)
+        private static unsafe void ValueParameter_Test(int a, ref int refa)
         {
             int* p = &a;
             Print.Address((long)p);
@@ -106,7 +105,7 @@ namespace RefTest
             }
         }
 
-        static unsafe void InValueParameter_Test(int a, in int refa)
+        private static unsafe void InValueParameter_Test(int a, in int refa)
         {
             //refa = 10;//refa 是只读变量
 

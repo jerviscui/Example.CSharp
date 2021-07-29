@@ -1,7 +1,7 @@
-﻿using System;
+﻿using AspectInjector.Broker;
+using System;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
-using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {

@@ -1,14 +1,14 @@
-﻿using System;
+﻿using Microsoft.Extensions.Caching.Memory;
+using Microsoft.Extensions.Primitives;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using Microsoft.Extensions.Caching.Memory;
-using Microsoft.Extensions.Primitives;
 
 namespace MemoryCacheTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //DependencyTest();
 
@@ -17,7 +17,7 @@ namespace MemoryCacheTest
             ChangeTokenTest();
         }
 
-        static void DependencyTest()
+        private static void DependencyTest()
         {
             IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
             string inner = "inner";
@@ -52,7 +52,7 @@ namespace MemoryCacheTest
             //如果 using 不用括号会执行到这里才释放
         }
 
-        static void UsingScopeTest()
+        private static void UsingScopeTest()
         {
             IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
             string key = "inner";
@@ -108,7 +108,7 @@ namespace MemoryCacheTest
             });
         }
 
-        static void ChangeTokenTest()
+        private static void ChangeTokenTest()
         {
             string inner = "inner";
             string outer = "outer";

@@ -1,7 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -21,19 +18,23 @@ namespace LocalFunctionTest
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId.ToString()} The returned value is {result:N0}");
         }
 
-        static async Task<int> NoLocalFunc(int delayInSeconds)
+        private static async Task<int> NoLocalFunc(int delayInSeconds)
         {
             if (delayInSeconds < 0 || delayInSeconds > 5)
+            {
                 throw new ArgumentOutOfRangeException(nameof(delayInSeconds), "Delay cannot exceed 5 seconds.");
+            }
 
             await Task.Delay(delayInSeconds * 1000);
             return delayInSeconds * new Random().Next(2, 10);
         }
 
-        static Task<int> LocalFunc(int delayInSeconds)
+        private static Task<int> LocalFunc(int delayInSeconds)
         {
             if (delayInSeconds < 0 || delayInSeconds > 5)
+            {
                 throw new ArgumentOutOfRangeException(nameof(delayInSeconds), "Delay cannot exceed 5 seconds.");
+            }
 
             return GetValueAsync();
 

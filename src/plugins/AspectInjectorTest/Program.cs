@@ -1,12 +1,10 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 
 namespace AspectInjectorTest
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             //new PerformanceTests().GetMethod_ReflectionPerformance_Test();
             //new PerformanceTests().TestClass_GetDeclareType_Test();

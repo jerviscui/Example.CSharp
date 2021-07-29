@@ -1,13 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using MethodBoundaryAspect.Fody.Attributes;
+using System;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using System.Transactions;
-using MethodBoundaryAspect.Fody.Attributes;
 
 namespace MethodBoundaryAspectTest
 {

@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace ValueTupleTest
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             //赋值给一个元组对象
             var result = ReturnValueTuple_Test();
@@ -29,7 +29,7 @@ namespace ValueTupleTest
             ClassDeconstruction_Test();
         }
 
-        static (string First, string Last) ReturnValueTuple_Test()
+        private static (string First, string Last) ReturnValueTuple_Test()
         {
             var names = ("first", "last");
             var names2 = (First: "first", Last: "last");
@@ -38,12 +38,12 @@ namespace ValueTupleTest
             return names;
         }
 
-        static Task<(string First, int Last)> Async_Test()
+        private static Task<(string First, int Last)> Async_Test()
         {
             return Task.FromResult(("a", 1));
         }
 
-        static void Assignment_Test()
+        private static void Assignment_Test()
         {
             var unnamed = (42, "The meaning of life");
             var anonymous = (16, "a perfect square");
@@ -66,14 +66,14 @@ namespace ValueTupleTest
             (long, string) conversion = named;
         }
 
-        static void Deconstruction_Test()
+        private static void Deconstruction_Test()
         {
             (string first1, string last1) = ReturnValueTuple_Test();
             var (first2, last2) = ReturnValueTuple_Test();
             (var first3, string last3) = ReturnValueTuple_Test();
         }
 
-        class P
+        private class P
         {
             public int x;
             public string name;
@@ -91,7 +91,7 @@ namespace ValueTupleTest
             }
         }
 
-        static void ClassDeconstruction_Test()
+        private static void ClassDeconstruction_Test()
         {
             var p = new P(1, "lala");
 

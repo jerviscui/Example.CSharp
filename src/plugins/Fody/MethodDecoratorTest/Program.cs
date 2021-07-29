@@ -3,9 +3,9 @@ using System.Threading.Tasks;
 
 namespace MethodDecoratorTest
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             Console.WriteLine("Hello World!");
 

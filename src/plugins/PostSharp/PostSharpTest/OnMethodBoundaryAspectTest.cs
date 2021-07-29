@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using PostSharp.Aspects;
+using System;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
-using PostSharp.Aspects;
-using PostSharp.Extensibility;
 
 namespace PostSharpTest
 {

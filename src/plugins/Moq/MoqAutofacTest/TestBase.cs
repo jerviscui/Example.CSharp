@@ -1,9 +1,8 @@
-using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using MoqTest.Domain;
-using MoqTest.Domain.Goods;
+using System;
 
 namespace MoqAutofacTest
 {

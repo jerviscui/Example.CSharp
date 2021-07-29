@@ -1,14 +1,14 @@
-﻿using System;
+﻿using BenchmarkDotNet.Running;
+using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
-using BenchmarkDotNet.Running;
 
 namespace ForeachTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //ToArray 快
             BenchmarkRunner.Run<ToArrayAndListTests>();

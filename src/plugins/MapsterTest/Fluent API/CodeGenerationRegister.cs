@@ -1,6 +1,6 @@
-﻿using System;
+﻿using Mapster;
+using System;
 using System.Reflection;
-using Mapster;
 
 namespace MapsterTest
 {

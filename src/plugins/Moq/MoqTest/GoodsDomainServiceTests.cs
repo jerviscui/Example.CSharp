@@ -1,9 +1,9 @@
-using System;
 using Moq;
 using Moq.Protected;
 using MoqTest.Domain;
 using MoqTest.Domain.Goods;
 using Shouldly;
+using System;
 using Xunit;
 
 namespace MoqTest

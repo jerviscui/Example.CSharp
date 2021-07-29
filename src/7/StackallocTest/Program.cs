@@ -1,13 +1,11 @@
 ﻿using Common;
 using System;
-using System.Runtime.CompilerServices;
-using System.Threading;
 
 namespace StackallocTest
 {
-    class Program
+    internal class Program
     {
-        static unsafe void Main(string[] args)
+        private static unsafe void Main(string[] args)
         {
             //Console.WriteLine(nameof(StackOverflow_Test));
             //StackOverflow_Test();
@@ -37,7 +35,7 @@ namespace StackallocTest
             StructAlloc_Test();
         }
 
-        static unsafe void Span_Test()
+        private static unsafe void Span_Test()
         {
             var a = stackalloc byte[8];
             Print.Address((long)a);
@@ -57,9 +55,9 @@ namespace StackallocTest
             }
         }
 
-        static int i = 0;
+        private static int i = 0;
 
-        static unsafe void StackOverflow_Test()
+        private static unsafe void StackOverflow_Test()
         {
             const int len = 1024;//1k
             //run on my computer, the max stack size 1494k, more than will throw StackOverflowException
@@ -81,7 +79,7 @@ namespace StackallocTest
         //    public int Y;
         //}
 
-        static unsafe void StructAlloc_Test()
+        private static unsafe void StructAlloc_Test()
         {
             //C# 8.0 才支持非托管构造类型
             //var n = sizeof(A<int>);

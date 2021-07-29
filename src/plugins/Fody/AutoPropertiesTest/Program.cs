@@ -1,12 +1,11 @@
-﻿using System;
+﻿using Common;
 using System.Diagnostics;
-using Common;
 
 namespace AutoPropertiesTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //            Console.WriteLine("Hello World!");
 

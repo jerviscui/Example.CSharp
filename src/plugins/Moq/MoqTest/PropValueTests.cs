@@ -1,4 +1,3 @@
-using System;
 using Moq;
 using Moq.Protected;
 using MoqTest.Domain.Prop;
@@ -64,10 +63,10 @@ namespace MoqTest
             mock.Setup(value => value.Value).Returns("aaa");
             //mock.SetupGet(value => value.Value).Returns("value");
 
-            mock.Object.Value.ShouldBe("aaa");// use Setup() returns
+            mock.Object.Value.ShouldBe("aaa"); // use Setup() returns
 
-            mock.Object.Value = "aa";// set a value
-            mock.Object.Value.ShouldBe("aa");// get saved value
+            mock.Object.Value = "aa"; // set a value
+            mock.Object.Value.ShouldBe("aa"); // get saved value
 
             //override other Setup()
             mock.SetupAllProperties();
@@ -107,21 +106,21 @@ namespace MoqTest
 
             var saved = "";
             //mock.Protected().SetupSet<string>("PrivatePropForTest", ItExpr.IsAny<string>()).Throws<ArgumentException>();
-            mock.Protected().SetupSet<string>("PrivatePropForTest", "aaa").Callback(s => saved = "");//.Throws<ArgumentException>();
-            mock.Protected().SetupSet<string>("PrivatePropForTest", "aa").Callback(s => saved = s);//.Throws<ArgumentException>();
+            mock.Protected().SetupSet<string>("PrivatePropForTest", "aaa").Callback(s => saved = ""); //.Throws<ArgumentException>();
+            mock.Protected().SetupSet<string>("PrivatePropForTest", "aa").Callback(s => saved = s); //.Throws<ArgumentException>();
 
             mock.Object.SetTest("aa");
             mock.Object.SetTest("aaa");
 
             //todo: protected setter is wrong!!!
             //todo: https://github.com/moq/moq4/issues/1184
-            saved.ShouldBe("");// saved is "aaa"
+            saved.ShouldBe(""); // saved is "aaa"
 
             //assert
             mock.Protected().VerifySet<string>("PrivatePropForTest", Times.Exactly(2), ItExpr.IsAny<string>());
-            mock.Protected().VerifySet<string>("PrivatePropForTest", Times.Once(), "aa");// throw Moq.MockException
+            mock.Protected().VerifySet<string>("PrivatePropForTest", Times.Once(), "aa"); // throw Moq.MockException
             mock.Protected().VerifySet<string>("PrivatePropForTest", Times.Once(),
-                ItExpr.Is<string>(s => s == "aa"));// throw Moq.MockException
+                ItExpr.Is<string>(s => s == "aa")); // throw Moq.MockException
         }
 
         [Fact]

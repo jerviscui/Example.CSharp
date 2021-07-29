@@ -1,15 +1,11 @@
 ﻿using Common;
 using System;
-using System.Collections.Generic;
-using System.Runtime.CompilerServices;
-using System.Runtime.InteropServices;
-using System.Threading.Tasks;
 
 namespace FixedTest
 {
-    class Program
+    internal class Program
     {
-        class P
+        private class P
         {
             public int x;
             public int y;
@@ -17,13 +13,13 @@ namespace FixedTest
             public PP pp;
         }
 
-        struct PP
+        private struct PP
         {
             public int x;
             public int y;
         }
 
-        static unsafe void Main(string[] args)
+        private static unsafe void Main(string[] args)
         {
             var obj = new P();
 
@@ -76,7 +72,7 @@ namespace FixedTest
             FixedSizeBuffers_Test();
         }
 
-        static unsafe void ArrayAndString_Test()
+        private static unsafe void ArrayAndString_Test()
         {
             int[] arr = { 1, 2, 3, 4, 5 };
             string s = "test";
@@ -102,7 +98,7 @@ namespace FixedTest
             }
         }
 
-        static unsafe void Span_Test()
+        private static unsafe void Span_Test()
         {
             var s = new Span<int>(new int[] { 0, 2, 3 });
 
@@ -114,21 +110,21 @@ namespace FixedTest
             Console.WriteLine(string.Join(',', s.ToArray()));
         }
 
-        struct SB
+        private struct SB
         {
             public int[] arr;
 
             public int x;
         }
 
-        unsafe struct FSB
+        private unsafe struct FSB
         {
             public fixed int arr[5];
 
             public int x;
         }
 
-        static unsafe void FixedSizeBuffers_Test()
+        private static unsafe void FixedSizeBuffers_Test()
         {
             var a1 = new SB() { arr = new int[5] };
             var a2 = new FSB();

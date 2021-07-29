@@ -23,7 +23,7 @@ namespace TypeHandleTest
     public class Test
     {
         [My(10)]
-        class TestClass : Base
+        private class TestClass : Base
         {
             [My(20)] public string Prop { get; set; } = null!;
 
@@ -35,7 +35,7 @@ namespace TypeHandleTest
             }
         }
 
-        class Base
+        private class Base
         {
             [My(50)]
             public virtual void Method()
@@ -43,23 +43,20 @@ namespace TypeHandleTest
             }
         }
 
-        class GenericTestClass<T>
+        private class GenericTestClass<T>
         {
             [My(100)]
             public void Generic<TIn>()
             {
-
             }
         }
 
-        class A
+        private class A
         {
-
         }
 
-        class B
+        private class B
         {
-
         }
 
         public void GetAttributes()

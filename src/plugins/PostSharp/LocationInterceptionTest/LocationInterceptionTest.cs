@@ -1,8 +1,4 @@
-﻿using System;
-using System.Diagnostics;
-using System.Threading;
-using PostSharp.Aspects;
-using PostSharp.Aspects.Internals;
+﻿using PostSharp.Aspects;
 using PostSharp.Reflection;
 using PostSharp.Serialization;
 

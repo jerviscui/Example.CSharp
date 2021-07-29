@@ -1,10 +1,8 @@
-﻿using System;
-
-namespace NullableEnableTest
+﻿namespace NullableEnableTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //在全局开启了 <Nullable>enable</Nullable>
 

@@ -1,6 +1,5 @@
-﻿using System;
-using BenchmarkDotNet.Attributes;
-using Common;
+﻿using BenchmarkDotNet.Attributes;
+using System;
 
 namespace DelegateTest
 {

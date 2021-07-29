@@ -25,7 +25,7 @@ namespace CtorTest
         }
     }
 
-    class AssignmentOrder
+    internal class AssignmentOrder
     {
         public string S { get; set; } = "first";
 
@@ -35,7 +35,7 @@ namespace CtorTest
         }
     }
 
-    class Foo
+    internal class Foo
     {
         public Foo(string s)
         {
@@ -45,9 +45,9 @@ namespace CtorTest
         public void Bar() { }
     }
 
-    class Base
+    internal class Base
     {
-        readonly Foo baseFoo = new Foo("Base initializer");
+        private readonly Foo baseFoo = new Foo("Base initializer");
 
         public virtual string S { get; set; } = "Base's S";
 
@@ -60,9 +60,9 @@ namespace CtorTest
         }
     }
 
-    class Derived : Base
+    internal class Derived : Base
     {
-        readonly Foo derivedFoo = new Foo("Derived initializer");
+        private readonly Foo derivedFoo = new Foo("Derived initializer");
 
         /// <inheritdoc />
         public override string S { get; set; } = "Derived's S";

@@ -1,13 +1,10 @@
 ﻿using System;
-using System.Diagnostics;
-using System.Runtime.CompilerServices;
-using BenchmarkDotNet.Running;
 
 namespace TypeHandleTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             new TypeInfoTests().Type_GetProperties_Test();
             Console.WriteLine();

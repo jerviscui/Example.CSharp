@@ -1,14 +1,13 @@
 ﻿using System;
 using System.Diagnostics;
-using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
 namespace TaskGuidanceTest
 {
-    partial class Program
+    internal partial class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //var t = TaskTest.SimpleTask2();
             //var awaiter = t.GetAwaiter();
@@ -120,7 +119,7 @@ namespace TaskGuidanceTest
             }
         }
 
-        class SyncTaskTest
+        private class SyncTaskTest
         {
             public static Task SyncTask()
             {

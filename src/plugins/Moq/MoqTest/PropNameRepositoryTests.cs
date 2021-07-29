@@ -1,8 +1,8 @@
-﻿using System;
-using Moq;
+﻿using Moq;
 using Moq.Protected;
 using MoqTest.Domain.Prop;
 using Shouldly;
+using System;
 using Xunit;
 
 namespace MoqTest

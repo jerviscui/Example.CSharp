@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AspectInjector.Broker;
+﻿using AspectInjector.Broker;
+using System;
 
 namespace AspectInjectorTest
 {
@@ -27,7 +23,6 @@ namespace AspectInjectorTest
         PropagationFilter = "Method2")]
     public class PropagationAttribute : Attribute
     {
-
     }
 
     [Propagation]
@@ -37,16 +32,14 @@ namespace AspectInjectorTest
 
         public void Method2()
         {
-
         }
 
-        class InnerClass
+        private class InnerClass
         {
             public string S { get; set; } = string.Empty;
 
             public void Method()
             {
-
             }
         }
     }

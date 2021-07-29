@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using Common;
+using System;
 using System.Diagnostics;
-using System.Linq;
 using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using Common;
 
 namespace DelegateTest
 {
     public class PropTest
     {
-        class A
+        private class A
         {
             public string S { get; set; } = null!;
 
@@ -32,7 +28,7 @@ namespace DelegateTest
 
         private A a = new();
 
-        string PropSetTest()
+        private string PropSetTest()
         {
             var propS = GetProp();
 
@@ -41,7 +37,7 @@ namespace DelegateTest
             return a.S;
         }
 
-        string PropProtectedSetTest()
+        private string PropProtectedSetTest()
         {
             var propSp = GetProtectedProp();
 
@@ -50,7 +46,7 @@ namespace DelegateTest
             return a.Sp;
         }
 
-        string PropCacheSetTest()
+        private string PropCacheSetTest()
         {
             var propS = GetPropCache();
 
@@ -59,7 +55,7 @@ namespace DelegateTest
             return a.S;
         }
 
-        string PropDelegateSetTest()
+        private string PropDelegateSetTest()
         {
             var method = GetPropDelegate();
 

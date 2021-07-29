@@ -1,6 +1,6 @@
-﻿using System;
+﻿using MoqTest.Domain.Prop;
+using System;
 using System.Linq;
-using MoqTest.Domain.Prop;
 
 namespace MoqTest.Domain.Goods
 {

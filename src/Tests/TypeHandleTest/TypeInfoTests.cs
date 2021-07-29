@@ -5,16 +5,16 @@ namespace TypeHandleTest
 {
     public class TypeInfoTests
     {
-        class A
+        private class A
         {
             public int Prop1 { get; set; }
-            int PrivateProp1 { get; set; }
+            private int PrivateProp1 { get; set; }
         }
 
-        class B : A
+        private class B : A
         {
             public int Prop2 { get; set; }
-            int PrivateProp2 { get; set; }
+            private int PrivateProp2 { get; set; }
         }
 
         public void Type_GetProperties_Test()

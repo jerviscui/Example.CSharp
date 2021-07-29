@@ -2,7 +2,7 @@
 
 namespace SwitchExpressionTest
 {
-    class Program
+    internal class Program
     {
         public enum Rainbow
         {
@@ -15,7 +15,7 @@ namespace SwitchExpressionTest
             Violet
         }
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var c = Rainbow.Blue;
 
@@ -50,14 +50,14 @@ namespace SwitchExpressionTest
             Nested_Test();
         }
 
-        class A
+        private class A
         {
             public string Name { get; set; }
 
             public int X { get; set; }
         }
 
-        static void PropertyPattern_Test(A a)
+        private static void PropertyPattern_Test(A a)
         {
             var result = a switch
             {
@@ -80,7 +80,7 @@ namespace SwitchExpressionTest
             }
         }
 
-        static string Tuple_Test(string first, string second) => (first, second) switch
+        private static string Tuple_Test(string first, string second) => (first, second) switch
         {
             ("1", "2") => "first < second",
             ("2", "2") => "first = second",
@@ -88,12 +88,12 @@ namespace SwitchExpressionTest
             _ => "none"
         };
 
-        class AA : A
+        private class AA : A
         {
             public int Y { get; set; }
         }
 
-        static void Nested_Test()
+        private static void Nested_Test()
         {
             var a = new A() { X = 1 };
             var aa = new AA() { X = 2, Y = 3 };

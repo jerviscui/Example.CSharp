@@ -1,13 +1,11 @@
 ﻿using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using Common;
 
 namespace MethodBoundaryAspectTest
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             //var w = new Stopwatch();
 

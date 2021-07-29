@@ -1,9 +1,8 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutofacWebTest.Services;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Threading.Tasks;
-using AutofacWebTest.Services;
 
 namespace AutofacWebTest.Controllers
 {

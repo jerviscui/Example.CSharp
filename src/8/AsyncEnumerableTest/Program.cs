@@ -4,9 +4,9 @@ using System.Threading.Tasks;
 
 namespace AsyncEnumerableTest
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             await foreach (var i in GenerateSequence())
             {
@@ -14,7 +14,7 @@ namespace AsyncEnumerableTest
             }
         }
 
-        static async IAsyncEnumerable<int> GenerateSequence()
+        private static async IAsyncEnumerable<int> GenerateSequence()
         {
             for (int i = 0; i < 20; i++)
             {

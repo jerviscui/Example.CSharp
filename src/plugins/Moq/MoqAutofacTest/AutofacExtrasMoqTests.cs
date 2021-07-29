@@ -52,7 +52,7 @@ namespace MoqAutofacTest
             test.Do().ShouldBe(10);
         }
 
-        class Dependency : IDependency
+        private class Dependency : IDependency
         {
             public int Do()
             {

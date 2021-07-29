@@ -1,11 +1,11 @@
-﻿using System;
-using Common;
+﻿using Common;
+using System;
 
 namespace RangeIndexTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Index_Test();
 
@@ -13,7 +13,7 @@ namespace RangeIndexTest
             Range_Test();
         }
 
-        static unsafe void Index_Test()
+        private static unsafe void Index_Test()
         {
             Index i1 = 0;  // number 3 from beginning
             Index i2 = ^4; // number 4 from end
@@ -28,7 +28,7 @@ namespace RangeIndexTest
             Console.WriteLine($"{a[i1]}, {a[i2]}"); // "3, 6"
         }
 
-        static unsafe void Range_Test()
+        private static unsafe void Range_Test()
         {
             Range r = new Range(Index.Start, Index.End);//等价于 0..^0
 
@@ -52,7 +52,7 @@ namespace RangeIndexTest
             }
         }
 
-        string[] words = new string[]
+        private string[] words = new string[]
         {
             // index from start    index from end
             "The",      // 0                   ^9
@@ -66,7 +66,7 @@ namespace RangeIndexTest
             "dog"       // 8                   ^1
         };              // 9 (or words.Length) ^0
 
-        void Methods_Test()
+        private void Methods_Test()
         {
             var allWords = words[..]; // contains "The" through "dog".
             var firstPhrase = words[..4]; // contains "The" through "fox"

@@ -1,12 +1,12 @@
-﻿using System;
+﻿using Common;
+using System;
 using System.Diagnostics;
-using Common;
 
 namespace LocationInterceptionTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             var watch = new Stopwatch();
 

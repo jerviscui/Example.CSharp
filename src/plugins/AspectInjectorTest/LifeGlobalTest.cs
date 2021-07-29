@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AspectInjector.Broker;
+﻿using AspectInjector.Broker;
+using System;
 
 namespace AspectInjectorTest
 {
@@ -55,12 +51,10 @@ namespace AspectInjectorTest
         [Log]
         public void PublicMethod()
         {
-
         }
 
         private void PrivateMethod()
         {
-
         }
 
         public string Prop { get; set; } = string.Empty;
@@ -72,12 +66,10 @@ namespace AspectInjectorTest
         [Together(Num = 10)]
         public void PublicMethod()
         {
-
         }
 
         private void PrivateMethod()
         {
-
         }
     }
 }

@@ -6,7 +6,7 @@ namespace VirtualMethodTest
 {
     public class VirtualMethodTest
     {
-        class MyBaseClass : IMyInterface
+        private class MyBaseClass : IMyInterface
         {
             //[MethodImpl(MethodImplOptions.AggressiveInlining)]
             public virtual void MyFunc()
@@ -18,17 +18,15 @@ namespace VirtualMethodTest
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public virtual void EmptyFunc()
             {
-
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public virtual void NoInlineEmptyFunc()
             {
-
             }
         }
 
-        interface IMyInterface
+        private interface IMyInterface
         {
             void MyFunc();
 
@@ -37,7 +35,7 @@ namespace VirtualMethodTest
             void NoInlineEmptyFunc();
         }
 
-        class MyClass : MyBaseClass
+        private class MyClass : MyBaseClass
         {
             //[MethodImpl(MethodImplOptions.AggressiveInlining)]
             public override void MyFunc()
@@ -49,13 +47,11 @@ namespace VirtualMethodTest
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
             public override void EmptyFunc()
             {
-
             }
 
             [MethodImpl(MethodImplOptions.NoInlining)]
             public override void NoInlineEmptyFunc()
             {
-
             }
         }
 
@@ -171,7 +167,7 @@ namespace VirtualMethodTest
 
             //covariant excute override
             MyBaseClass contravariant = new();
-            contravariant = new MyClass();//多次赋值以使JIT编译器无法确认该变量的运行时类型
+            contravariant = new MyClass(); //多次赋值以使JIT编译器无法确认该变量的运行时类型
             contravariant.MyFunc();
             stopwatch.Restart();
             for (int i = 0; i < 1_000_000_000; i++)

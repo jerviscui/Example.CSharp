@@ -1,25 +1,18 @@
-﻿using System;
-using System.Linq;
-using System.Text.Json;
-using CacheManager.Core;
-using CacheManager.Core.Internal;
-using CacheManager.Core.Logging;
+﻿using CacheManager.Core;
 using CacheManager.MicrosoftCachingMemory;
 using CacheManager.Redis;
 using Microsoft.Extensions.Logging;
-using Microsoft.Extensions.Logging.Console;
-using Newtonsoft.Json;
-using StackExchange.Redis;
-using JsonSerializer = Newtonsoft.Json.JsonSerializer;
+using System;
+using System.Linq;
 using LogLevel = Microsoft.Extensions.Logging.LogLevel;
 
 namespace CacheManagerTest
 {
-    class Program
+    internal class Program
     {
-        const string ConfigKey = "redis";
+        private const string ConfigKey = "redis";
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             if (args.Length > 0)
             {
@@ -49,7 +42,7 @@ namespace CacheManagerTest
 
         #region MultiClientTest
 
-        static void MultiClientTest(string client)
+        private static void MultiClientTest(string client)
         {
             Action<ICacheManager<Student>>? fun = client switch
             {
@@ -75,7 +68,7 @@ namespace CacheManagerTest
             }
         }
 
-        static void WriteClient(ICacheManager<Student> manager)
+        private static void WriteClient(ICacheManager<Student> manager)
         {
             var s = manager.GetOrAdd("test", "students",
                 new Student() { Id = 1, FirstMidName = "F", LastName = "X", EnrollmentDate = DateTime.Now });
@@ -92,7 +85,7 @@ namespace CacheManagerTest
             }
         }
 
-        static void ReadClient(ICacheManager<Student> manager)
+        private static void ReadClient(ICacheManager<Student> manager)
         {
             while (true)
             {
@@ -103,7 +96,7 @@ namespace CacheManagerTest
             }
         }
 
-        static void RemoveClient(ICacheManager<Student> manager)
+        private static void RemoveClient(ICacheManager<Student> manager)
         {
             int i = 0;
 
@@ -145,7 +138,7 @@ namespace CacheManagerTest
 
         #endregion
 
-        static void SerializeTest()
+        private static void SerializeTest()
         {
             using var manager2 = GetCacheManager<Student>();
 
@@ -156,7 +149,7 @@ namespace CacheManagerTest
             //Console.WriteLine(manager2.Get<string>("test", "students"));//todo cuizj: 如何直接取 string，不反序列化
         }
 
-        static void EventTest()
+        private static void EventTest()
         {
             using var manager2 = GetCacheManager<Student>();
 
@@ -174,7 +167,7 @@ namespace CacheManagerTest
                 ExpirationMode.Sliding, TimeSpan.FromSeconds(10)));//OnRemoveByHandle
         }
 
-        static ICacheManager<TValue> GetCacheManager<TValue>()
+        private static ICacheManager<TValue> GetCacheManager<TValue>()
         {
             var configuration = new ConfigurationBuilder()
                 .WithJsonSerializer()//todo cuizj: 使用 System.Text.Json.JsonSerializer
@@ -197,7 +190,7 @@ namespace CacheManagerTest
             return cacheManager;
         }
 
-        class Student
+        private class Student
         {
             public int Id { get; set; }
             public string? LastName { get; set; } = string.Empty;

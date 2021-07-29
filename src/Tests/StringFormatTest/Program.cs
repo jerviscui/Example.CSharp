@@ -1,15 +1,10 @@
-﻿using System;
-using System.Diagnostics;
-using System.Runtime.InteropServices;
-using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Running;
-using Common;
+﻿using BenchmarkDotNet.Attributes;
 
 namespace StringFormatTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //BenchmarkRunner.Run<BenchmarkTest>();
 

@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace TaskGuidanceTest
 {
-    partial class Program
+    internal partial class Program
     {
         public class SynchronizationContextTest
         {

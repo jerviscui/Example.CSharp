@@ -1,19 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations;
 using System.Diagnostics;
-using System.Globalization;
 using System.Linq;
-using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
-using System.Threading;
 using System.Threading.Tasks;
 
 namespace MemoryTest
 {
-    class Program
+    internal class Program
     {
-        static async Task Main(string[] args)
+        private static async Task Main(string[] args)
         {
             var list = new A[]
             {
@@ -139,12 +134,12 @@ namespace MemoryTest
             return (values.Sum(), watch.Elapsed.TotalMilliseconds);
         }
 
-        class S
+        private class S
         {
             public long A = 1;
         }
 
-        class SS
+        private class SS
         {
             private long p1, p2, p3, p4, p5, p6, p7;
             public long A = 1;
@@ -152,7 +147,7 @@ namespace MemoryTest
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 120)]
-        class ST
+        private class ST
         {
             [FieldOffset(56)]
             public long A = 1;
@@ -160,7 +155,7 @@ namespace MemoryTest
 
         #endregion
 
-        class A
+        private class A
         {
             public string Name { get; set; }
 
@@ -168,7 +163,7 @@ namespace MemoryTest
         }
 
 #pragma warning disable 1998
-        static async Task Print(A[] arr, int start, int len)
+        private static async Task Print(A[] arr, int start, int len)
 #pragma warning restore 1998
         {
             for (int i = start; i < arr.Length && i < start + len; i++)
@@ -179,7 +174,7 @@ namespace MemoryTest
             }
         }
 
-        static async Task Print(Memory<A> mem)
+        private static async Task Print(Memory<A> mem)
         {
             for (int i = 0; i < mem.Length; i++)
             {
@@ -193,7 +188,7 @@ namespace MemoryTest
             }
         }
 
-        void Test()
+        private void Test()
         {
             var s = "aaa";
             ref string a = ref s;

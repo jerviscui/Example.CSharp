@@ -1,7 +1,7 @@
-﻿using System;
+﻿using AspectInjector.Broker;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
-using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {

@@ -3,9 +3,9 @@ using BenchmarkDotNet.Running;
 
 namespace CtorTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //new InitializerTest().Initializer_Ctor_ExecutionOrder();
 

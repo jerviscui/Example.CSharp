@@ -4,9 +4,9 @@ using System.Runtime.InteropServices;
 
 namespace SpanTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             Console.WriteLine(nameof(ManagedHeap_Test));
             ManagedHeap_Test();
@@ -21,7 +21,7 @@ namespace SpanTest
             Console.WriteLine();
         }
 
-        static void ManagedHeap_Test()
+        private static void ManagedHeap_Test()
         {
             var arr = new int[10] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 0 };
 
@@ -42,7 +42,7 @@ namespace SpanTest
             }
         }
 
-        static void UnmanagedHeap_Test()
+        private static void UnmanagedHeap_Test()
         {
             //in 16bit machine, alloc 4 byte memory
             var size = sizeof(int);
@@ -64,7 +64,7 @@ namespace SpanTest
             Marshal.FreeHGlobal(ptr);
         }
 
-        static void Stack_Test()
+        private static void Stack_Test()
         {
             Span<int> span = stackalloc int[5];
             //span[5] = 10;//throw System.IndexOutOfRangeException

@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Text;
-using System.Threading.Tasks;
-using BenchmarkDotNet.Attributes;
+﻿using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Configs;
+using System;
+using System.Collections.Generic;
+using System.Reflection;
 
 namespace TypeHandleTest
 {
@@ -14,7 +11,7 @@ namespace TypeHandleTest
     [MemoryDiagnoser]
     public class BenchmarkTests
     {
-        class Test
+        private class Test
         {
             public int Method()
             {

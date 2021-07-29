@@ -18,7 +18,11 @@ namespace TypeHandleTest
             List<MethodBase>? methodInfos = new List<MethodBase>();
             foreach (Type t in typeof(object).Assembly.GetExportedTypes())
             {
-                if (t.IsGenericType) continue;
+                if (t.IsGenericType)
+                {
+                    continue;
+                }
+
                 MethodInfo[] mbs = t.GetMethods(BindingFlags.Instance | BindingFlags.Static |
                                                 BindingFlags.Public | BindingFlags.NonPublic |
                                                 BindingFlags.FlattenHierarchy)

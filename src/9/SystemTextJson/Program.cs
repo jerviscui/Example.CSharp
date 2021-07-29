@@ -1,13 +1,12 @@
 ﻿using System;
-using System.Globalization;
 using System.Text.Json;
 using System.Text.Json.Serialization;
 
 namespace SystemTextJsonTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //SerializerTimeTest();
             SerializeStructTest();

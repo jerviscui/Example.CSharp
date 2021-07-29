@@ -1,19 +1,17 @@
-﻿using System;
+﻿using MapsterTest.Domains;
+using MapsterTest.Models;
+using System;
 using System.Collections.Generic;
-using System.Runtime.CompilerServices;
 using System.Text.Json;
 using System.Text.Json.Serialization;
-using MapsterTest.Domains;
-using MapsterTest.Mappers;
-using MapsterTest.Models;
 
 namespace MapsterTest
 {
-    class Program
+    internal class Program
     {
         private static Student? _student;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             static void Setup()
             {
@@ -82,14 +80,14 @@ namespace MapsterTest
             InterfaceTest();
         }
 
-        static void FluentApiTest()
+        private static void FluentApiTest()
         {
             var dto = _student.AdaptToDto();
 
             Console.WriteLine(JsonSerializer.Serialize(dto));
         }
 
-        static void InterfaceTest()
+        private static void InterfaceTest()
         {
             var mapper = new Mappers.StudentMapper();
 
