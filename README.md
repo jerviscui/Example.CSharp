@@ -3,6 +3,7 @@
 [![Join the chat at https://gitter.im/dotnet/csharplang](https://badges.gitter.im/dotnet/csharplang.svg)](https://gitter.im/dotnet/csharplang?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jerviscui/example.csharp/badge/master)](https://www.codefactor.io/repository/github/jerviscui/example.csharp/overview/master)
+[![Build Status](https://travis-ci.com/jerviscui/Example.CSharp.svg?branch=master)](https://travis-ci.com/jerviscui/Example.CSharp)
 [![CircleCI](https://circleci.com/gh/jerviscui/Example.CSharp/tree/master.svg?style=svg)](https://circleci.com/gh/jerviscui/Example.CSharp/tree/master)
 [![codecov](https://codecov.io/gh/jerviscui/Example.CSharp/branch/master/graph/badge.svg?token=OK7Y61G0YL)](https://codecov.io/gh/jerviscui/Example.CSharp)
 [![GitHub Super-Linter](https://github.com/jerviscui/Example.CSharp/workflows/Lint%20Code%20Base/badge.svg)](https://github.com/marketplace/actions/super-linter)

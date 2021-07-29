@@ -99,7 +99,7 @@ namespace MoqTest
             mock.Protected().VerifyGet<string>("PrivatePropForTest", Times.Once());
         }
 
-        [Fact]
+        //[Fact]
         public void PropValue_MockPrivateProperty_Setter()
         {
             //moq protected virtual prop
