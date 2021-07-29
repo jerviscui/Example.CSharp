@@ -22,12 +22,10 @@ namespace AspectInjectorTest
     [Injection(typeof(PropagationAspect), Inherited = true)]
     public class InheritParentAttribute : Attribute
     {
-
     }
 
     public class InheritAttribute : InheritParentAttribute
     {
-
     }
 
     [Inherit]
@@ -35,7 +33,6 @@ namespace AspectInjectorTest
     {
         public void Method()
         {
-
         }
     }
 }
