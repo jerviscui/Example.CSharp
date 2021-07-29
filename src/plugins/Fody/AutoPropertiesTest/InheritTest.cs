@@ -39,7 +39,8 @@ namespace AutoPropertiesTest
             refToBackingField = genricNewValue;
         }
 
-        private static readonly StringLengthAttribute? LengthAttribute = typeof(InheritTest).GetProperty("Name")!.GetCustomAttribute<StringLengthAttribute>();
+        private static readonly StringLengthAttribute? LengthAttribute = 
+            typeof(InheritTest).GetProperty("Name")!.GetCustomAttribute<StringLengthAttribute>();
 
         [StringLength(5)]
         public string Name { get; set; }
