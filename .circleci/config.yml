@@ -2,6 +2,9 @@
 # See: https://circleci.com/docs/2.0/configuration-reference
 version: 2.1
 
+orbs:
+  codecov: codecov/codecov@1.2.5
+
 jobs:
   # Below is the definition of your job to build and test your app, you can rename and customize it as you want.
   build-and-test:  
@@ -9,7 +12,7 @@ jobs:
     # You can specify an image from Dockerhub or use one of our Convenience Images from CircleCI's Developer Hub.
     # Be sure to update the tag on this image to a more stable version, using latest can result in unstable builds.
     docker:
-      - image: mcr.microsoft.com/dotnet/sdk:5.0-alpine
+      - image: mcr.microsoft.com/dotnet/sdk:5.0
     steps:
       # Checkout the code as the first step.
       - checkout
@@ -19,8 +22,9 @@ jobs:
           working_directory: ~/project/src
           name: Run tests
           command: |
-            dotnet test
-            
+            dotnet test --collect:"XPlat Code Coverage" -- DataCollectionRunSettings.DataCollectors.DataCollector.Configuration.Format=opencover
+      - codecov/upload:
+          file: ./src
 
 workflows:
   # Below is the definition of your workflow.
@@ -28,12 +32,12 @@ workflows:
   # CircleCI will run this workflow on every commit.
   # For more details on extending your workflow, see the configuration docs: https://circleci.com/docs/2.0/configuration-reference/#workflows
   nightly-test:
-    triggers:
-      - schedule:
-          cron: "0 0 * * *"
-          filters:
-            branches:
-              only:
-                - master
+#    triggers:
+#      - schedule:
+#          cron: "0 0 * * *"
+#          filters:
+#            branches:
+#              only:
+#                - master
     jobs:
       - build-and-test
