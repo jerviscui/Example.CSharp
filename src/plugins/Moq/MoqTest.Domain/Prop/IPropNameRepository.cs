@@ -1,15 +1,17 @@
-﻿namespace MoqTest.Domain.Prop
+﻿using System;
+
+namespace MoqTest.Domain.Prop
 {
     public class PropNameRepository
     {
         public virtual bool DeletePropName(long id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         protected virtual bool PrivateMethodForTest(long id)
         {
-            throw new System.NotImplementedException();
+            throw new NotImplementedException();
         }
 
         public bool Test()

@@ -6,6 +6,7 @@ namespace MoqTest.Domain.Prop
     public class PropDomainService : IPropDomainService
     {
         private readonly IIdGenerator _idGenerator;
+
         private readonly IPropNameRepository _propNameRepository;
 
         public PropDomainService(IIdGenerator idGenerator, IPropNameRepository propNameRepository)

@@ -1,6 +1,6 @@
-﻿using MoqTest.Domain.Prop;
 using System;
 using System.Linq;
+using MoqTest.Domain.Prop;
 
 namespace MoqTest.Domain.Goods
 {
@@ -11,11 +11,6 @@ namespace MoqTest.Domain.Goods
         public GoodsDomainService(IIdGenerator idGenerator)
         {
             _idGenerator = idGenerator;
-        }
-
-        protected virtual string CodeGenerator()
-        {
-            return $"{DateTime.Now.ToString("s")}";
         }
 
         public Goods CreateGoods(string name)
@@ -37,6 +32,11 @@ namespace MoqTest.Domain.Goods
             var goodsProp = goods.GoodsProps.First(o => o.PropNameId == name.Id && o.PropValueId == value.Id);
 
             goods.GoodsProps.Remove(goodsProp);
+        }
+
+        protected virtual string CodeGenerator()
+        {
+            return $"{DateTime.Now.ToString("s")}";
         }
     }
 }

@@ -1,8 +1,8 @@
-﻿using Moq;
+﻿using System;
+using Moq;
 using Moq.Protected;
 using MoqTest.Domain.Prop;
 using Shouldly;
-using System;
 using Xunit;
 
 namespace MoqTest
@@ -38,7 +38,7 @@ namespace MoqTest
         {
             //moq interface protected virtual method
             var mock = new Mock<IPropNameRepository>();
-            mock.CallBase = true;//
+            mock.CallBase = true; //
             mock.Protected().Setup<bool>("PrivateMethodForTest", ItExpr.IsAny<long>()).Returns(true);
 
             var result = mock.Object.Test();

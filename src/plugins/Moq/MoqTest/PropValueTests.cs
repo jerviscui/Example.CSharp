@@ -132,7 +132,7 @@ namespace MoqTest
 
             //moq protected property
             var propValue = Mock.Of<PropValue>(value => value.PropNameId == 1 &&
-                                                        value.PropName == Mock.Of<PropName>(name => name.Name == "prop name"));
+                value.PropName == Mock.Of<PropName>(name => name.Name == "prop name"));
 
             //assert
             propValue.PropNameId.ShouldBe(1);

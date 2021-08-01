@@ -7,32 +7,10 @@ using Xunit;
 namespace MoqAutofacTest
 {
     /// <summary>
-    /// 使用 Autofac.Extras.Moq 
+    ///     使用 Autofac.Extras.Moq
     /// </summary>
     public class AutofacExtrasMoqTests
     {
-        //todo: implement
-
-        public class ServiceClass
-        {
-            private readonly IDependency _dependency;
-
-            public ServiceClass(IDependency dependency)
-            {
-                _dependency = dependency;
-            }
-
-            public virtual int Do()
-            {
-                return _dependency.Do();
-            }
-        }
-
-        public interface IDependency
-        {
-            public int Do();
-        }
-
         [Fact]
         public void AutoMock_DefaultBehavior_Test()
         {
@@ -50,14 +28,6 @@ namespace MoqAutofacTest
             var test = autoMock.Create<ServiceClass>();
 
             test.Do().ShouldBe(10);
-        }
-
-        private class Dependency : IDependency
-        {
-            public int Do()
-            {
-                return 2;
-            }
         }
 
         [Fact]
@@ -81,6 +51,35 @@ namespace MoqAutofacTest
             var test = autoMock.Create<ServiceClass>();
 
             test.Do().ShouldBe(10);
+        }
+        //todo: implement
+
+        public class ServiceClass
+        {
+            private readonly IDependency _dependency;
+
+            public ServiceClass(IDependency dependency)
+            {
+                _dependency = dependency;
+            }
+
+            public virtual int Do()
+            {
+                return _dependency.Do();
+            }
+        }
+
+        public interface IDependency
+        {
+            public int Do();
+        }
+
+        private class Dependency : IDependency
+        {
+            public int Do()
+            {
+                return 2;
+            }
         }
     }
 }

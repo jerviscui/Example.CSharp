@@ -8,7 +8,7 @@ using Xunit;
 namespace MoqAutofacTest
 {
     /// <summary>
-    /// 使用 Moq 替换默认注册服务，Scope 容器级别
+    ///     使用 Moq 替换默认注册服务，Scope 容器级别
     /// </summary>
     public class DefaultIdGeneratorTests : TestBase
     {

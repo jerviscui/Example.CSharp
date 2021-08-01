@@ -1,21 +1,21 @@
+using System;
 using Autofac;
 using Autofac.Extensions.DependencyInjection;
 using Microsoft.Extensions.DependencyInjection;
 using MoqTest.Domain;
-using System;
 
 namespace MoqAutofacTest
 {
     public abstract class TestBase
     {
-        protected IServiceProvider ServiceProvider { get; }
-
-        private IContainer Container { get; set; } = null!;
-
         protected TestBase()
         {
             ServiceProvider = Init();
         }
+
+        protected IServiceProvider ServiceProvider { get; }
+
+        private IContainer Container { get; set; } = null!;
 
         private IServiceProvider Init()
         {
@@ -35,7 +35,6 @@ namespace MoqAutofacTest
 
         protected virtual void PreInit(IServiceCollection services)
         {
-
         }
 
         public ILifetimeScope CreateScope(Action<ContainerBuilder>? configurationAction = null)
