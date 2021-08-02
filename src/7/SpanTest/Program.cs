@@ -1,6 +1,6 @@
-﻿using Common;
 using System;
 using System.Runtime.InteropServices;
+using Common;
 
 namespace SpanTest
 {
@@ -75,7 +75,7 @@ namespace SpanTest
                 var i = stackalloc int[1];
                 var arr = stackalloc int[4];
 
-                var span2 = new Span<int>((void*)arr, sizeof(int) * 5);
+                var span2 = new Span<int>(arr, sizeof(int) * 5);
 
                 fixed (int* p = span2, p5 = &span2[4])
                 {

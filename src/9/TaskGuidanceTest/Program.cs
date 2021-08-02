@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Threading;
 using System.Threading.Tasks;
@@ -11,7 +11,7 @@ namespace TaskGuidanceTest
         {
             //var t = TaskTest.SimpleTask2();
             //var awaiter = t.GetAwaiter();
-            //awaiter.GetResult();//阻塞主线程
+            //awaiter.GetResult(); //阻塞主线程
 
             //SynchronizationContextTest.Test();
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -12,7 +12,7 @@ namespace TaskGuidanceTest
             {
                 var t = AttachedChildTaskAndContinueTest();
                 var awaiter = t.GetAwaiter();
-                awaiter.GetResult();//阻塞主线程
+                awaiter.GetResult(); //阻塞主线程
             }
 
             public static async Task AttachedChildTask()
@@ -27,10 +27,11 @@ namespace TaskGuidanceTest
                     for (int ctr = 0; ctr < 10; ctr++)
                     {
                         int taskNo = ctr;
-                        Task.Factory.StartNew((x) =>
+                        Task.Factory.StartNew(x =>
                         {
                             Thread.Sleep(1000);
-                            Console.WriteLine($"Attached child #{x} completed. {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                            Console.WriteLine(
+                                $"Attached child #{x} completed. {Thread.CurrentThread.ManagedThreadId.ToString()}");
                         }, taskNo, TaskCreationOptions.AttachedToParent);
                     }
                 });
@@ -51,10 +52,11 @@ namespace TaskGuidanceTest
                     for (int ctr = 0; ctr < 10; ctr++)
                     {
                         int taskNo = ctr;
-                        Task.Factory.StartNew((x) =>
+                        Task.Factory.StartNew(x =>
                         {
                             Thread.Sleep(1000);
-                            Console.WriteLine($"Detached child #{x} completed. {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                            Console.WriteLine(
+                                $"Detached child #{x} completed. {Thread.CurrentThread.ManagedThreadId.ToString()}");
                         }, taskNo);
                     }
                 });
@@ -68,7 +70,8 @@ namespace TaskGuidanceTest
             public static async Task AttachedChildTaskAndContinueTest()
             {
                 //1
-                Console.WriteLine($"DirectReturnAndContinue_GetContextTest {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine(
+                    $"DirectReturnAndContinue_GetContextTest {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
                 await Task.Factory.StartNew(() =>
                 {

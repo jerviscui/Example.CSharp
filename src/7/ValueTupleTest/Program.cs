@@ -80,10 +80,22 @@ namespace ValueTupleTest
             (var first3, string last3) = ReturnValueTuple_Test();
         }
 
+        private static void ClassDeconstruction_Test()
+        {
+            var p = new P(1, "lala");
+
+            var (x, name) = p;
+
+            var (x2, _) = p; //析构变量的数量必须和调用的析构方法保持一致
+
+            Console.WriteLine($"{x},{name}");
+        }
+
         private class P
         {
-            public int x;
-            public string name;
+            public readonly string name;
+
+            public readonly int x;
 
             public P(int x, string name)
             {
@@ -96,17 +108,6 @@ namespace ValueTupleTest
                 x = this.x;
                 name = this.name;
             }
-        }
-
-        private static void ClassDeconstruction_Test()
-        {
-            var p = new P(1, "lala");
-
-            var (x, name) = p;
-
-            var (x2, _) = p;//析构变量的数量必须和调用的析构方法保持一致
-
-            Console.WriteLine($"{x},{name}");
         }
     }
 }

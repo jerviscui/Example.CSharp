@@ -1,40 +1,44 @@
-﻿using System;
+using System;
 
 namespace SwitchExpressionTest
 {
     internal class Program
     {
-        public enum Rainbow
+        private enum Rainbow
         {
             Red = 0,
+
             Orange,
+
             Yellow,
+
             Green,
+
             Blue,
+
             Indigo,
+
             Violet
         }
 
         private static void Main(string[] args)
         {
-            var c = Rainbow.Blue;
-
-            Func<Rainbow, int> lambda = (o) => o switch
+            static int Lambda(Rainbow o) => o switch
             {
                 Rainbow.Red => 0,
                 Rainbow.Orange => 1,
                 Rainbow.Yellow => 2,
-                Rainbow n when n > Rainbow.Green => 3, //greater than Green
-                _ => -1 //Green
+                { } n when n > Rainbow.Green => 3, //greater than Green
+                _ => -1                            //Green
             };
 
             foreach (var enumValue in typeof(Rainbow).GetEnumValues())
             {
-                Console.WriteLine($"{(int)enumValue},{lambda((Rainbow)enumValue)}");
+                Console.WriteLine($"{(int)enumValue},{Lambda((Rainbow)enumValue)}");
             }
 
             Console.WriteLine();
-            var a1 = new A() { X = 1 };
+            var a1 = new A { X = 1 };
             PropertyPattern_Test(a1);
             Console.WriteLine(a1.X);
             a1.Name = "a";
@@ -62,21 +66,21 @@ namespace SwitchExpressionTest
             var result = a switch
             {
                 { X: 1 } => Exp1(a),
-                { Name: "a" } => Exp2(a),
+                { Name: "ina" } => Exp2(a),
 
                 _ => null
             };
 
-            A Exp1(A a)
+            A Exp1(A ina)
             {
-                a.X++;
-                return a;
+                ina.X++;
+                return ina;
             }
 
-            A Exp2(A a)
+            A Exp2(A ina)
             {
-                a.Name = "aa";
-                return a;
+                ina.Name = "aa";
+                return ina;
             }
         }
 
@@ -88,7 +92,7 @@ namespace SwitchExpressionTest
             _ => "none"
         };
 
-        private class AA : A
+        private class Aa : A
         {
             public int Y { get; set; }
         }
@@ -96,21 +100,21 @@ namespace SwitchExpressionTest
         private static void Nested_Test()
         {
             var a = new A() { X = 1 };
-            var aa = new AA() { X = 2, Y = 3 };
+            var aa = new Aa { X = 2, Y = 3 };
 
             Console.WriteLine($"{Switch(a)}");
             Console.WriteLine($"{Switch(aa)}");
 
-            int Switch(A a) => a switch
+            int Switch(A ins) => ins switch
             {
-                AA x => x.Y switch
+                Aa inaa => inaa.Y switch
                 {
-                    3 => 3 * x.X,
-                    4 => 1 + 2 + 3 + 4 + x.X,
+                    3 => 3 * inaa.X,
+                    4 => 1 + 2 + 3 + 4 + inaa.X,
                     _ => 0
                 },
 
-                A __ => __.X * 2,
+                A ina => a.X * 2,
 
                 _ => -1
             };

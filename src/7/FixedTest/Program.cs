@@ -1,24 +1,10 @@
-﻿using Common;
 using System;
+using Common;
 
 namespace FixedTest
 {
     internal class Program
     {
-        private class P
-        {
-            public int x;
-            public int y;
-
-            public PP pp;
-        }
-
-        private struct PP
-        {
-            public int x;
-            public int y;
-        }
-
         private static unsafe void Main(string[] args)
         {
             var obj = new P();
@@ -28,36 +14,36 @@ namespace FixedTest
             //{
             //}
 
-            fixed (int* p = &obj.x)
+            fixed (int* p = &obj.X)
             {
                 *p = 1;
                 //p++; //p是只读的，不能修改
                 int* p2 = p;
                 p2++;
-                *p2 = 10;//y=10
+                *p2 = 10; //y=10
 
                 Print.Address((long)p);
             }
 
-            fixed (PP* p = &obj.pp)
+            fixed (Pp* p = &obj.Pp)
             {
-                p->x = 1;
-                p->y = 2;
+                p->X = 1;
+                p->Y = 2;
 
-                (*p).x = 1;
-                (*p).y = 2;
+                (*p).X = 1;
+                (*p).Y = 2;
 
                 Print.Address((long)p);
             }
 
-            fixed (int* xp = &obj.pp.x, yp = &obj.pp.y)
+            fixed (int* xp = &obj.Pp.X, yp = &obj.Pp.Y)
             {
                 Print.Address((long)xp);
                 Print.Address((long)yp);
             }
 
-            Console.WriteLine(obj.x);
-            Console.WriteLine(obj.y);
+            Console.WriteLine(obj.X);
+            Console.WriteLine(obj.Y);
             Console.WriteLine();
 
             Console.WriteLine(nameof(ArrayAndString_Test));
@@ -100,9 +86,9 @@ namespace FixedTest
 
         private static unsafe void Span_Test()
         {
-            var s = new Span<int>(new int[] { 0, 2, 3 });
+            var s = new Span<int>(new[] { 0, 2, 3 });
 
-            fixed (int* p = s)//等价于(int* p = &s.GetPinnableReference())
+            fixed (int* p = s) //等价于(int* p = &s.GetPinnableReference())
             {
                 *p = 1;
             }
@@ -110,32 +96,48 @@ namespace FixedTest
             Console.WriteLine(string.Join(',', s.ToArray()));
         }
 
-        private struct SB
-        {
-            public int[] arr;
-
-            public int x;
-        }
-
-        private unsafe struct FSB
-        {
-            public fixed int arr[5];
-
-            public int x;
-        }
-
         private static unsafe void FixedSizeBuffers_Test()
         {
-            var a1 = new SB() { arr = new int[5] };
-            var a2 = new FSB();
+            var a1 = new Sb { Arr = new int[5] };
+            var a2 = new Fsb();
 
             Print.Address((long)&a2);
-            Print.Address((long)a2.arr);
-            Print.Address((long)&a2.arr);//数组指针变量的地址
-            Print.Address((long)&a2.x);
+            Print.Address((long)a2.Arr);
+            Print.Address((long)&a2.Arr); //数组指针变量的地址
+            Print.Address((long)&a2.X);
 
             //Console.WriteLine(sizeof(SB));//SB作为托管类型不能计算大小
-            Console.WriteLine(sizeof(FSB));
+            Console.WriteLine(sizeof(Fsb));
+        }
+
+        private class P
+        {
+            public Pp Pp;
+
+            public int X;
+
+            public int Y;
+        }
+
+        private struct Pp
+        {
+            public int X;
+
+            public int Y;
+        }
+
+        private struct Sb
+        {
+            public int[] Arr;
+
+            public int X;
+        }
+
+        private unsafe struct Fsb
+        {
+            public fixed int Arr[5];
+
+            public int X;
         }
     }
 }

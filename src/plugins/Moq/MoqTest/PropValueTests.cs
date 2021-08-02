@@ -65,7 +65,7 @@ namespace MoqTest
 
             mock.Object.Value.ShouldBe("aaa"); // use Setup() returns
 
-            mock.Object.Value = "aa"; // set a value
+            mock.Object.Value = "aa";         // set a value
             mock.Object.Value.ShouldBe("aa"); // get saved value
 
             //override other Setup()
@@ -106,8 +106,10 @@ namespace MoqTest
 
             var saved = "";
             //mock.Protected().SetupSet<string>("PrivatePropForTest", ItExpr.IsAny<string>()).Throws<ArgumentException>();
-            mock.Protected().SetupSet<string>("PrivatePropForTest", "aaa").Callback(s => saved = ""); //.Throws<ArgumentException>();
-            mock.Protected().SetupSet<string>("PrivatePropForTest", "aa").Callback(s => saved = s); //.Throws<ArgumentException>();
+            mock.Protected().SetupSet<string>("PrivatePropForTest", "aaa")
+                .Callback(s => saved = ""); //.Throws<ArgumentException>();
+            mock.Protected().SetupSet<string>("PrivatePropForTest", "aa")
+                .Callback(s => saved = s); //.Throws<ArgumentException>();
 
             mock.Object.SetTest("aa");
             mock.Object.SetTest("aaa");

@@ -1,9 +1,10 @@
-﻿using MapsterTest.Domains;
-using MapsterTest.Models;
 using System;
 using System.Collections.Generic;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using MapsterTest.Domains;
+using MapsterTest.Models;
+using StudentMapper = MapsterTest.Mappers.StudentMapper;
 
 namespace MapsterTest
 {
@@ -15,31 +16,15 @@ namespace MapsterTest
         {
             static void Setup()
             {
-                _student = new Student()
-                {
-                    Id = 1,
-                    FirstMidName = "A",
-                    LastName = null,
-                    EnrollmentDate = DateTime.Now
-                };
+                _student = new Student { Id = 1, FirstMidName = "A", LastName = null, EnrollmentDate = DateTime.Now };
 
-                var course1 = new Course()
-                {
-                    CourseId = 2,
-                    Credits = 10,
-                    Title = "Title1"
-                };
+                var course1 = new Course { CourseId = 2, Credits = 10, Title = "Title1" };
 
-                var course2 = new Course()
-                {
-                    CourseId = 3,
-                    Credits = 11,
-                    Title = "Title2"
-                };
+                var course2 = new Course { CourseId = 3, Credits = 11, Title = "Title2" };
 
-                var enrollments = new List<Enrollment>()
+                var enrollments = new List<Enrollment>
                 {
-                    new Enrollment()
+                    new()
                     {
                         EnrollmentId = 4,
                         Course = course1,
@@ -48,7 +33,7 @@ namespace MapsterTest
                         StudentId = _student.Id.Value,
                         Grade = Grade.A
                     },
-                    new Enrollment()
+                    new()
                     {
                         EnrollmentId = 5,
                         Course = course2,
@@ -64,12 +49,14 @@ namespace MapsterTest
 
                 course1.Enrollments.Add(enrollments[0]);
                 course2.Enrollments.Add(enrollments[1]);
-            };
+            }
+
+            ;
 
             Setup();
 
             Console.WriteLine(JsonSerializer.Serialize(_student,
-                new JsonSerializerOptions() { ReferenceHandler = ReferenceHandler.Preserve }));
+                new JsonSerializerOptions { ReferenceHandler = ReferenceHandler.Preserve }));
 
             Console.WriteLine();
 
@@ -89,7 +76,7 @@ namespace MapsterTest
 
         private static void InterfaceTest()
         {
-            var mapper = new Mappers.StudentMapper();
+            var mapper = new StudentMapper();
 
             var dto2 = mapper.Map(_student);
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 
 namespace LocalFunctionTest
@@ -8,10 +8,10 @@ namespace LocalFunctionTest
         public static void Test()
         {
             //IEnumerable<int> xs = NoLocalFunc(50, 110);
-            IEnumerable<int> xs = LocalFunc(50, 110);//LocalFunc throw here
+            IEnumerable<int> xs = LocalFunc(50, 110); //LocalFunc throw here
             Console.WriteLine("Retrieved enumerator...");
 
-            foreach (var x in xs)//NoLocalFunc throw here
+            foreach (var x in xs) //NoLocalFunc throw here
             {
                 Console.Write($"{x} ");
             }

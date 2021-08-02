@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -24,8 +24,8 @@ namespace TypeHandleTest
                 }
 
                 MethodInfo[] mbs = t.GetMethods(BindingFlags.Instance | BindingFlags.Static |
-                                                BindingFlags.Public | BindingFlags.NonPublic |
-                                                BindingFlags.FlattenHierarchy)
+                        BindingFlags.Public | BindingFlags.NonPublic |
+                        BindingFlags.FlattenHierarchy)
                     .Where(o => o.DeclaringType is not null && !o.DeclaringType.IsGenericType).ToArray();
                 methodInfos.AddRange(mbs);
             }
@@ -39,20 +39,20 @@ namespace TypeHandleTest
             methodHandles = methodInfos.ConvertAll(m => m.MethodHandle);
             Show("Holding MethodInfo and RuntimeMethodHandle");
 
-            GC.KeepAlive(methodHandles);//阻止缓存被过早垃圾回收
+            GC.KeepAlive(methodHandles); //阻止缓存被过早垃圾回收
             methodInfos.Clear();
-            methodInfos = null;//现在允许缓存垃圾回收
+            methodInfos = null; //现在允许缓存垃圾回收
             Show("After freeing MethodInfo objects");
 
             methodInfos = methodHandles.ConvertAll(r => MethodBase.GetMethodFromHandle(r)!);
             Show("Size of heap after re-creating methodinfo objects");
-            GC.KeepAlive(methodHandles);//阻止缓存被过早垃圾回收
-            GC.KeepAlive(methodInfos);//阻止缓存被过早垃圾回收
+            GC.KeepAlive(methodHandles); //阻止缓存被过早垃圾回收
+            GC.KeepAlive(methodInfos);   //阻止缓存被过早垃圾回收
 
             methodInfos.Clear();
-            methodInfos = null;//现在允许缓存垃圾回收
+            methodInfos = null; //现在允许缓存垃圾回收
             methodHandles.Clear();
-            methodHandles = null;//现在允许缓存垃圾回收
+            methodHandles = null; //现在允许缓存垃圾回收
             Show("after freeing MethodInfo and MethodHandle objects");
 
             void Show(string s)

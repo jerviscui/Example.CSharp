@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -10,11 +10,11 @@ namespace LocalFunctionTest
         {
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId.ToString()} Test");
             var t = NoLocalFunc(6);
-            //var t = LocalFunc(6);//LocalFunc() 在这里抛出异常
+            //var t = LocalFunc(6); //LocalFunc() 在这里抛出异常
             Console.WriteLine("Got the task");
 
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId.ToString()} Test");
-            var result = await t;//NoLocalFunc() 在这里抛出异常
+            var result = await t; //NoLocalFunc() 在这里抛出异常
             Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId.ToString()} The returned value is {result:N0}");
         }
 

@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Diagnostics;
 using System.Linq;
 using System.Runtime.InteropServices;
@@ -10,14 +10,11 @@ namespace MemoryTest
     {
         private static async Task Main(string[] args)
         {
-            var list = new A[]
+            var list = new[]
             {
-                new A(){Name = "aaa", Age = 10},
-                new A(){Name = "bbb", Age = 11},
-                new A(){Name = "ccc", Age = 12},
-                new A(){Name = "ddd", Age = 13},
-                new A(){Name = "eee", Age = 14},
-                new A(){Name = "fff", Age = 15}
+                new A { Name = "aaa", Age = 10 }, new A { Name = "bbb", Age = 11 },
+                new A { Name = "ccc", Age = 12 }, new A { Name = "ddd", Age = 13 },
+                new A { Name = "eee", Age = 14 }, new A { Name = "fff", Age = 15 }
             };
 
             await Print(list, 2, 2);
@@ -56,7 +53,49 @@ namespace MemoryTest
             Console.WriteLine(rrr4);
         }
 
+#pragma warning disable 1998
+        private static async Task Print(A[] arr, int start, int len)
+#pragma warning restore 1998
+        {
+            for (int i = start; i < arr.Length && i < start + len; i++)
+            {
+                arr[i].Name += i;
+
+                Console.WriteLine($"{arr[i].Name},{arr[i].Age}");
+            }
+        }
+
+        private static async Task Print(Memory<A> mem)
+        {
+            for (int i = 0; i < mem.Length; i++)
+            {
+                //Span<A> a = mem.Span;//Span 不能用于异步
+
+                mem.Span[i].Name += i;
+
+                await Task.Delay(10);
+
+                Console.WriteLine($"{mem.Span[i].Name},{mem.Span[i].Age}");
+            }
+        }
+
+        private void Test()
+        {
+            var s = "aaa";
+            ref string a = ref s;
+
+            //new Span<char>(ref a, 3);
+        }
+
+        private class A
+        {
+            public string Name { get; set; }
+
+            public int Age { get; set; }
+        }
+
         #region StructLayout
+
         //todo: 管理类的内存分配大小，测试没有体现出预期的效果
         public static (double sum, double time) ComputeAvg(int thread, object obj, bool bisect = true)
         {
@@ -136,64 +175,25 @@ namespace MemoryTest
 
         private class S
         {
-            public long A = 1;
+            public readonly long A = 1;
         }
 
         private class SS
         {
+            public readonly long A = 1;
+
             private long p1, p2, p3, p4, p5, p6, p7;
-            public long A = 1;
-            private long p9, p10, p11, p12, p13, p14, p15/*, p16*/;
+
+            private long p9, p10, p11, p12, p13, p14, p15 /*, p16*/;
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 120)]
         private class ST
         {
             [FieldOffset(56)]
-            public long A = 1;
+            public readonly long A = 1;
         }
 
         #endregion
-
-        private class A
-        {
-            public string Name { get; set; }
-
-            public int Age { get; set; }
-        }
-
-#pragma warning disable 1998
-        private static async Task Print(A[] arr, int start, int len)
-#pragma warning restore 1998
-        {
-            for (int i = start; i < arr.Length && i < start + len; i++)
-            {
-                arr[i].Name += i;
-
-                Console.WriteLine($"{arr[i].Name},{arr[i].Age}");
-            }
-        }
-
-        private static async Task Print(Memory<A> mem)
-        {
-            for (int i = 0; i < mem.Length; i++)
-            {
-                //Span<A> a = mem.Span;//Span 不能用于异步
-
-                mem.Span[i].Name += i;
-
-                await Task.Delay(10);
-
-                Console.WriteLine($"{mem.Span[i].Name},{mem.Span[i].Age}");
-            }
-        }
-
-        private void Test()
-        {
-            var s = "aaa";
-            ref string a = ref s;
-
-            //new Span<char>(ref a, 3);
-        }
     }
 }
