@@ -1,7 +1,7 @@
-﻿using AspectInjector.Broker;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
+using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {
@@ -26,7 +26,6 @@ namespace AspectInjectorTest
     [Injection(typeof(BoundaryAspect), Propagation = PropagateTo.Methods)]
     public class BoundaryAttribute : Attribute
     {
-
     }
 
     [Boundary]

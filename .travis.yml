@@ -5,4 +5,3 @@ dotnet: 5.0
 #solution: ./src/Example.CSharp.sln
 script:
   - dotnet test ./src/Example.CSharp.sln
-  

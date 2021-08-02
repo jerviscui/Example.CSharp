@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Globalization;
 using System.Threading;
 using System.Threading.Tasks;
@@ -14,7 +14,6 @@ namespace TaskGuidanceTest
             Console.WriteLine(CultureInfo.CurrentCulture.Name);
             Thread.CurrentThread.CurrentCulture = CultureInfo.GetCultureInfo("en");
             Console.WriteLine(CultureInfo.CurrentCulture.Name);
-
 
             var t = TaskCultureTest();
             var awaiter = t.GetAwaiter();

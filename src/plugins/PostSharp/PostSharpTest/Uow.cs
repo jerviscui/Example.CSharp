@@ -1,7 +1,7 @@
-﻿using PostSharp.Aspects;
 using System;
 using System.Reflection;
 using System.Threading.Tasks;
+using PostSharp.Aspects;
 
 namespace PostSharpTest
 {
@@ -74,7 +74,7 @@ namespace PostSharpTest
 
                 ((IUow)this).Commit();
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 ((IUow)this).Rollback();
 
@@ -142,10 +142,24 @@ namespace PostSharpTest
         }
     }
 
-
     [Serializable]
     public class UowBoundaryAspect2 : OnMethodBoundaryAspect, IUow
     {
+        public void Create()
+        {
+            Console.WriteLine("UowBoundaryAspect2 Create");
+        }
+
+        public void Commit()
+        {
+            Console.WriteLine("UowBoundaryAspect2 Commit");
+        }
+
+        public void Rollback()
+        {
+            Console.WriteLine("UowBoundaryAspect2 Rollback");
+        }
+
         public override void OnEntry(MethodExecutionArgs args)
         {
             ((IUow)this).Create();
@@ -165,44 +179,11 @@ namespace PostSharpTest
         {
             Console.WriteLine("UowBoundaryAspect2 OnExit");
         }
-
-        public void Create()
-        {
-            Console.WriteLine("UowBoundaryAspect2 Create");
-        }
-
-        public void Commit()
-        {
-            Console.WriteLine("UowBoundaryAspect2 Commit");
-        }
-
-        public void Rollback()
-        {
-            Console.WriteLine("UowBoundaryAspect2 Rollback");
-        }
     }
 
     [Serializable]
     public class UowMethodAspect2 : MethodInterceptionAspect, IUow
     {
-        public override void OnInvoke(MethodInterceptionArgs args)
-        {
-            ((IUow)this).Create();
-
-            try
-            {
-                args.Invoke(args.Arguments);
-
-                ((IUow)this).Commit();
-            }
-            catch (Exception e)
-            {
-                ((IUow)this).Rollback();
-
-                throw;
-            }
-        }
-
         public void Create()
         {
             Console.WriteLine("UowMethodAspect2 Create");
@@ -216,6 +197,24 @@ namespace PostSharpTest
         public void Rollback()
         {
             Console.WriteLine("UowMethodAspect2 Rollback");
+        }
+
+        public override void OnInvoke(MethodInterceptionArgs args)
+        {
+            ((IUow)this).Create();
+
+            try
+            {
+                args.Invoke(args.Arguments);
+
+                ((IUow)this).Commit();
+            }
+            catch (Exception)
+            {
+                ((IUow)this).Rollback();
+
+                throw;
+            }
         }
     }
 }

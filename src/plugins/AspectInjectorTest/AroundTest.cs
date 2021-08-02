@@ -1,45 +1,48 @@
-﻿using AspectInjector.Broker;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {
     [Aspect(Scope.Global)]
     [Injection(typeof(UniversalWrapper))]
+    [AttributeUsage(AttributeTargets.All)]
     public class UniversalWrapper : Attribute
     {
-        private static readonly MethodInfo _asyncHandler = typeof(UniversalWrapper).GetMethod(nameof(UniversalWrapper.WrapAsync), BindingFlags.NonPublic | BindingFlags.Static)!;
-        private static readonly MethodInfo _syncHandler = typeof(UniversalWrapper).GetMethod(nameof(UniversalWrapper.WrapSync), BindingFlags.NonPublic | BindingFlags.Static)!;
-        private static readonly Type _voidTaskResult = Type.GetType("System.Threading.Tasks.VoidTaskResult")!;
+        private static readonly MethodInfo AsyncHandler =
+            typeof(UniversalWrapper).GetMethod(nameof(WrapAsync), BindingFlags.NonPublic | BindingFlags.Static)!;
 
+        private static readonly MethodInfo SyncHandler =
+            typeof(UniversalWrapper).GetMethod(nameof(WrapSync), BindingFlags.NonPublic | BindingFlags.Static)!;
+
+        private static readonly Type VoidTaskResult = Type.GetType("System.Threading.Tasks.VoidTaskResult")!;
 
         [Advice(Kind.Around, Targets = Target.Method)]
-        public object? Handle(
-            [Argument(Source.Metadata)] MethodBase methodInfo,
+        public object? Handle([Argument(Source.Metadata)] MethodBase methodInfo,
             [Argument(Source.Target)] Func<object[], object> target,
             [Argument(Source.Arguments)] object[] args,
             [Argument(Source.Name)] string name,
-            [Argument(Source.ReturnType)] Type retType
-            )
+            [Argument(Source.ReturnType)] Type retType)
         {
             Console.WriteLine($"Before {name} {Thread.CurrentThread.ManagedThreadId.ToString()}");
 
-            if (typeof(Task).IsAssignableFrom(retType) && methodInfo.GetCustomAttributes<AsyncStateMachineAttribute>().Any()) //check if method is async, you can also check by statemachine attribute
+            if (typeof(Task).IsAssignableFrom(retType) &&
+                methodInfo.GetCustomAttributes<AsyncStateMachineAttribute>().Any()
+            ) //check if method is async, you can also check by statemachine attribute
             {
-                var syncResultType = retType.IsConstructedGenericType ? retType.GenericTypeArguments[0] : _voidTaskResult;
+                var syncResultType =
+                    retType.IsConstructedGenericType ? retType.GenericTypeArguments[0] : VoidTaskResult;
                 var tgt = target;
-                return _asyncHandler.MakeGenericMethod(syncResultType).Invoke(this, new object[] { tgt, args, name });
+                return AsyncHandler.MakeGenericMethod(syncResultType).Invoke(this, new object[] { tgt, args, name });
             }
-            else
-            {
-                retType = retType == typeof(void) ? typeof(object) : retType;
-                return _syncHandler.MakeGenericMethod(retType).Invoke(this, new object[] { target, args, name });
-            }
+            retType = retType == typeof(void) ? typeof(object) : retType;
+            return SyncHandler.MakeGenericMethod(retType).Invoke(this, new object[] { target, args, name });
         }
 
         private static T? WrapSync<T>(Func<object[], object> target, object[] args, string name)
@@ -76,46 +79,47 @@ namespace AspectInjectorTest
     //todo: 实现异步方法 around，参考：https://github.com/pamidur/aspect-injector/blob/master/samples/UniversalWrapper/UniversalWrapper.cs
     public class AsyncAroundAspect
     {
-        protected static readonly Dictionary<string, Delegate> Handlers = new Dictionary<string, Delegate>();
+        private static readonly Dictionary<string, Delegate> Handlers = new();
 
-        protected static readonly MethodInfo AsyncHandler = typeof(AsyncAroundAspect)
+        private static readonly MethodInfo AsyncHandler = typeof(AsyncAroundAspect)
             .GetMethod(nameof(WrapAsync), BindingFlags.NonPublic | BindingFlags.Static)!;
+
         protected static readonly MethodInfo SyncHandler = typeof(AsyncAroundAspect)
             .GetMethod(nameof(WrapSync), BindingFlags.NonPublic | BindingFlags.Static)!;
 
-        public bool IsAsync(MethodBase methodInfo) => methodInfo.GetCustomAttributes<AsyncStateMachineAttribute>().Any();
+        public static bool IsAsync(MethodBase methodInfo) =>
+            methodInfo.GetCustomAttributes<AsyncStateMachineAttribute>().Any();
 
-        private string GetKey(Type type, string name, object[] args) =>
+        private static string GetKey(Type type, string name, object[] args) =>
             $"{type.FullName}+{name}+{string.Join(",", args.Select(o => o.GetType().Name))}";
 
+        [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
         public Delegate GetHandler(Type type, string name, object[] args, Type returnType)
         {
             var key = GetKey(type, name, args);
-            if (Handlers.TryGetValue(key, out Delegate value))
+            if (Handlers.TryGetValue(key, out var value))
             {
                 return value;
             }
-            else
+            //make generic method
+            var method = AsyncHandler.MakeGenericMethod(returnType);
+
+            //create delegate
+            //<Func<Func<object[], object>, object[], string, Task<T>>>
+            //delegateType = typeof(Func<>).MakeGenericType(Func<object[], object>, object[], string, Task<T>)
+            //get CreateDelegate method
+            //value = method.CreateDelegate(type);
+            //make generic CreateDelegate method
+            //invoke CreateDelegate method
+
+            //add
+            value = null!;
+            if (!Handlers.ContainsKey(key))
             {
-                //make generic method
-                var method = AsyncHandler.MakeGenericMethod(returnType);
-
-                //create delegate
-                //<Func<Func<object[], object>, object[], string, Task<T>>>
-                //delegateType = typeof(Func<>).MakeGenericType(Func<object[], object>, object[], string, Task<T>)
-                //get CreateDelegate method
-                //value = method.CreateDelegate(type);
-                //make generic CreateDelegate method
-                //invoke CreateDelegate method
-
-                //add
-                if (!Handlers.ContainsKey(key))
-                {
-                    Handlers.TryAdd(key, value);
-                }
-
-                return value;
+                Handlers.TryAdd(key, value);
             }
+
+            return value;
         }
 
         private static T WrapSync<T>(Func<object[], object> target, object[] args, string name)
@@ -136,6 +140,7 @@ namespace AspectInjectorTest
     [Aspect(Scope.Global)]
     public class AroundAspect
     {
+        [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
         [Advice(Kind.Around, Targets = Target.Method)]
         public object Handle([Argument(Source.Instance)] object instance, [Argument(Source.Type)] Type type,
             [Argument(Source.Metadata)] MethodBase methodInfo, [Argument(Source.Target)] Func<object[], object> func,
@@ -169,13 +174,14 @@ namespace AspectInjectorTest
 
         //todo: 1. how about a separate async method
         //2. use out parameter for return result 
+        [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
         public async Task Handle(
             //[Argument(Source.Instance)] object instance, [Argument(Source.Type)] Type type,
             //[Argument(Source.Metadata)] MethodBase methodInfo, [Argument(Source.Target)] Func<object[], object> func,
             //[Argument(Source.Name)] string targetName, [Argument(Source.Arguments)] object[] arguments,
             //[Argument(Source.ReturnType)] Type returnType,
             //[Argument(Source.Triggers)] Attribute[] triggers
-            )
+        )
         {
             try
             {
@@ -191,10 +197,12 @@ namespace AspectInjectorTest
     }
 
     [Injection(typeof(AroundAspect))]
+    [AttributeUsage(AttributeTargets.All)]
     public class AroundAttribute : Attribute
     {
     }
 
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     [Around]
     public class AroundSyncTest
     {
@@ -212,10 +220,12 @@ namespace AspectInjectorTest
 
     //[Around]
     [UniversalWrapper]
-
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class AroundAsyncTest
     {
+#pragma warning disable CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         public async void AsyncMethod()
+#pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         {
             Console.WriteLine($"AsyncMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }

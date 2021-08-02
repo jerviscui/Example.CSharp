@@ -1,6 +1,7 @@
-﻿using MethodBoundaryAspect.Fody.Attributes;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Transactions;
+using MethodBoundaryAspect.Fody.Attributes;
 
 namespace MethodBoundaryAspectTest
 {
@@ -28,12 +29,14 @@ namespace MethodBoundaryAspectTest
         }
     }
 
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>", Scope = "member")]
+    [SuppressMessage("CodeQuality", "IDE0051:删除未使用的私有成员", Justification = "<挂起>")]
     [TransactionScope(AttributeTargetMemberAttributes = MulticastAttributes.Public)]
     public class SyncTest
     {
-        private string PrivateProp { get; set; }
+        private string PrivateProp { get; set; } = null!;
 
-        public string Prop { get; set; }
+        public string Prop { get; set; } = null!;
 
         private void PrivateMethod()
         {

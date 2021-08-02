@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Threading.Tasks;
 
 namespace ValueTupleTest
@@ -32,10 +32,15 @@ namespace ValueTupleTest
         private static (string First, string Last) ReturnValueTuple_Test()
         {
             var names = ("first", "last");
-            var names2 = (First: "first", Last: "last");
-            (string First, string Last) names3 = ("first", "last");
-
             return names;
+
+#pragma warning disable CS0162 // 检测到无法访问的代码
+            var names2 = (First: "first", Last: "last");
+            return names2;
+
+            (string First, string Last) names3 = ("first", "last");
+            return names3;
+#pragma warning restore CS0162 // 检测到无法访问的代码
         }
 
         private static Task<(string First, int Last)> Async_Test()
@@ -66,7 +71,9 @@ namespace ValueTupleTest
             (long, string) conversion = named;
         }
 
+#pragma warning disable IDE0051 // 删除未使用的私有成员
         private static void Deconstruction_Test()
+#pragma warning restore IDE0051 // 删除未使用的私有成员
         {
             (string first1, string last1) = ReturnValueTuple_Test();
             var (first2, last2) = ReturnValueTuple_Test();

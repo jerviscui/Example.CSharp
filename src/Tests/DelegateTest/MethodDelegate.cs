@@ -1,7 +1,7 @@
-﻿using Common;
 using System;
 using System.Diagnostics;
 using System.Linq.Expressions;
+using Common;
 
 namespace DelegateTest
 {
@@ -107,13 +107,13 @@ namespace DelegateTest
                 d2.DynamicInvoke();
             }
             watch.Stop();
-            Print.Microsecond(watch); watch.Restart();
+            Print.Microsecond(watch);
+            watch.Restart();
         }
 
         [C]
         private class A
         {
-
         }
 
         [C]
@@ -136,9 +136,9 @@ namespace DelegateTest
             }
         }
 
+        [AttributeUsage(AttributeTargets.All)]
         private class CAttribute : Attribute
         {
-
         }
     }
 }

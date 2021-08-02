@@ -1,10 +1,24 @@
-﻿using Common;
 using System;
+using Common;
 
 namespace RangeIndexTest
 {
     internal class Program
     {
+        private readonly string[] _words =
+        {
+            // index from start    index from end
+            "The",    // 0                   ^9
+            "quick",  // 1                   ^8
+            "brown",  // 2                   ^7
+            "fox",    // 3                   ^6
+            "jumped", // 4                   ^5
+            "over",   // 5                   ^4
+            "the",    // 6                   ^3
+            "lazy",   // 7                   ^2
+            "dog"     // 8                   ^1
+        };            // 9 (or words.Length) ^0
+
         private static void Main(string[] args)
         {
             Index_Test();
@@ -30,7 +44,7 @@ namespace RangeIndexTest
 
         private static unsafe void Range_Test()
         {
-            Range r = new Range(Index.Start, Index.End);//等价于 0..^0
+            Range r = new Range(Index.Start, Index.End); //等价于 0..^0
 
             int[] a = { 0, 1, 2, 3 };
 
@@ -52,26 +66,12 @@ namespace RangeIndexTest
             }
         }
 
-        private string[] words = new string[]
-        {
-            // index from start    index from end
-            "The",      // 0                   ^9
-            "quick",    // 1                   ^8
-            "brown",    // 2                   ^7
-            "fox",      // 3                   ^6
-            "jumped",   // 4                   ^5
-            "over",     // 5                   ^4
-            "the",      // 6                   ^3
-            "lazy",     // 7                   ^2
-            "dog"       // 8                   ^1
-        };              // 9 (or words.Length) ^0
-
         private void Methods_Test()
         {
-            var allWords = words[..]; // contains "The" through "dog".
-            var firstPhrase = words[..4]; // contains "The" through "fox"
+            var allWords = _words[..];     // contains "The" through "dog".
+            var firstPhrase = _words[..4]; // contains "The" through "fox"
             var firstPhrase2 = Range.EndAt(4);
-            var lastPhrase = words[6..]; // contains "the", "lazy" and "dog"
+            var lastPhrase = _words[6..]; // contains "the", "lazy" and "dog"
             var lastPhrase2 = Range.StartAt(6);
         }
     }

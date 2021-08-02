@@ -1,4 +1,5 @@
-﻿using System.Collections.Concurrent;
+using System;
+using System.Collections.Concurrent;
 using System.Collections.Generic;
 
 namespace NullableEnableTest
@@ -16,7 +17,7 @@ namespace NullableEnableTest
         {
             //dependency by .Net 5 or standard 2.1
             var nullarray = _caches.GetValueOrDefault("test");
-            var emptyarray = _caches.GetValueOrDefault("test2", new Item[0]);
+            var emptyarray = _caches.GetValueOrDefault("test2", Array.Empty<Item>());
         }
     }
 }

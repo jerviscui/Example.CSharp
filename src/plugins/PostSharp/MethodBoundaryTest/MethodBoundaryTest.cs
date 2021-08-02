@@ -1,8 +1,9 @@
-﻿using PostSharp.Aspects;
-using PostSharp.Extensibility;
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
+using PostSharp.Aspects;
+using PostSharp.Extensibility;
 
 namespace MethodBoundaryTest
 {
@@ -46,6 +47,7 @@ namespace MethodBoundaryTest
         }
     }
 
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>", Scope = "member")]
     [MyBoundaryAspect(AttributeTargetElements = MulticastTargets.Method,
         AttributeTargetMemberAttributes = MulticastAttributes.Public)]
     public class SyncMethodBoundaryTest
@@ -56,16 +58,21 @@ namespace MethodBoundaryTest
             return 1;
         }
 
+#pragma warning disable IDE0051 // 删除未使用的私有成员
         private Task PrivateTask()
+#pragma warning restore IDE0051 // 删除未使用的私有成员
         {
             return Task.CompletedTask;
         }
     }
 
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>", Scope = "member")]
     [MyBoundaryAspect(AttributeTargetElements = MulticastTargets.Method)]
     public class AsyncMethodBoundaryTest
     {
+#pragma warning disable CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         public async void AsyncTest()
+#pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         {
             Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId.ToString()}");
         }
@@ -89,6 +96,7 @@ namespace MethodBoundaryTest
         }
     }
 
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>", Scope = "member")]
     [MyBoundaryAspect(AttributeTargetElements = MulticastTargets.Method)]
     public class TaskMethodBoundaryTest
     {

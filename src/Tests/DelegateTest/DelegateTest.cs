@@ -1,6 +1,6 @@
-﻿using Common;
 using System;
 using System.Diagnostics;
+using Common;
 
 namespace DelegateTest
 {
@@ -79,21 +79,20 @@ namespace DelegateTest
 
         public class A
         {
+            private static Action? _action;
+
             public void Test()
             {
-
             }
 
             public Action GetAction()
             {
-                return new Action(Test);
+                return Test;
             }
-
-            private static Action? _action;
 
             public Action GetActionCache()
             {
-                return _action ??= new Action(Test);
+                return _action ??= Test;
             }
         }
     }

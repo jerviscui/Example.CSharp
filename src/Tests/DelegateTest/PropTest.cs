@@ -1,67 +1,61 @@
-﻿using Common;
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using Common;
 
 namespace DelegateTest
 {
     public class PropTest
     {
-        private class A
-        {
-            public string S { get; set; } = null!;
+        private readonly A _a = new();
 
-            public string Sp { get; protected set; } = null!;
-        }
+        private PropertyInfo? _c;
+
+        private Action<A, string>? _d;
 
         private PropertyInfo GetProp() => typeof(A).GetProperty("S")!;
 
         private PropertyInfo GetProtectedProp() => typeof(A).GetProperty("Sp")!;
 
-        private PropertyInfo GetPropCache() => c ??= typeof(A).GetProperty("S")!;
+        private PropertyInfo GetPropCache() => _c ??= typeof(A).GetProperty("S")!;
 
-        private PropertyInfo? c;
-
-        private Action<A, string> GetPropDelegate() => d ??= typeof(A).GetProperty("S")!.SetMethod!.CreateDelegate<Action<A, string>>();
-
-        private Action<A, string>? d;
-
-        private A a = new();
+        private Action<A, string> GetPropDelegate() =>
+            _d ??= typeof(A).GetProperty("S")!.SetMethod!.CreateDelegate<Action<A, string>>();
 
         private string PropSetTest()
         {
             var propS = GetProp();
 
-            propS.SetValue(a, "s");
+            propS.SetValue(_a, "s");
 
-            return a.S;
+            return _a.S;
         }
 
         private string PropProtectedSetTest()
         {
             var propSp = GetProtectedProp();
 
-            propSp.SetValue(a, "sp");
+            propSp.SetValue(_a, "sp");
 
-            return a.Sp;
+            return _a.Sp;
         }
 
         private string PropCacheSetTest()
         {
             var propS = GetPropCache();
 
-            propS.SetValue(a, "s");
+            propS.SetValue(_a, "s");
 
-            return a.S;
+            return _a.S;
         }
 
         private string PropDelegateSetTest()
         {
             var method = GetPropDelegate();
 
-            method(a, "s");
+            method(_a, "s");
 
-            return a.S;
+            return _a.S;
         }
 
         public void PropAndDelegate_Exec_Test()
@@ -97,6 +91,13 @@ namespace DelegateTest
             //242,679 us
             //160,200 us
             // 15,583 us
+        }
+
+        private class A
+        {
+            public string S { get; } = null!;
+
+            public string Sp { get; } = null!;
         }
     }
 }
