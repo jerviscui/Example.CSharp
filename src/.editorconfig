@@ -13,7 +13,7 @@ indent_size = 4
 end_of_line = native
 trim_trailing_whitespace = true
 insert_final_newline = true
-max_line_length = 140
+max_line_length = 120
 
 ##########################################
 # File Extension Settings
@@ -60,6 +60,10 @@ end_of_line = lf
 indent_style = tab
 
 #### .NET 编码约定 ####
+[*.{cs,vb}]
+
+# Default severity for analyzer diagnostics with category 'Performance'
+dotnet_analyzer_diagnostic.category-Performance.severity = warning
 
 # 组织 Using
 dotnet_separate_import_directive_groups = false
@@ -107,7 +111,8 @@ dotnet_style_prefer_simplified_interpolation = true:none
 dotnet_style_readonly_field = true
 
 # 参数首选项
-dotnet_code_quality_unused_parameters = all
+dotnet_code_quality_unused_parameters = all:silent
+dotnet_code_quality.CAXXXX.api_surface = all:silent
 
 # 禁止显示首选项
 dotnet_remove_unnecessary_suppression_exclusions = none
@@ -160,8 +165,8 @@ csharp_style_pattern_local_over_anonymous_function = true
 csharp_style_prefer_index_operator = true
 csharp_style_prefer_range_operator = true
 csharp_style_throw_expression = true
-csharp_style_unused_value_assignment_preference = discard_variable
-csharp_style_unused_value_expression_statement_preference = discard_variable:suggestion
+csharp_style_unused_value_assignment_preference = discard_variable:none
+csharp_style_unused_value_expression_statement_preference = discard_variable:none
 
 # "using" 指令首选项
 csharp_using_directive_placement = outside_namespace
