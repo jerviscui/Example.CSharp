@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Runtime.InteropServices;
 using System.Threading.Tasks;
@@ -35,7 +36,7 @@ namespace MemoryTest
             Console.WriteLine(r4);
 
             Console.WriteLine();
-            var ss = new SS();
+            var ss = new Ss();
             var rr1 = ComputeAvg(1, ss, isBisect);
             Console.WriteLine(rr1);
             var rr2 = ComputeAvg(2, ss, isBisect);
@@ -44,7 +45,7 @@ namespace MemoryTest
             Console.WriteLine(rr4);
 
             Console.WriteLine();
-            var st = new ST();
+            var st = new St();
             var rrr1 = ComputeAvg(1, st, isBisect);
             Console.WriteLine(rrr1);
             var rrr2 = ComputeAvg(2, st, isBisect);
@@ -79,14 +80,6 @@ namespace MemoryTest
             }
         }
 
-        private void Test()
-        {
-            var s = "aaa";
-            ref string a = ref s;
-
-            //new Span<char>(ref a, 3);
-        }
-
         private class A
         {
             public string Name { get; set; }
@@ -119,8 +112,8 @@ namespace MemoryTest
             var tasks = new Task[thread];
 
             var type1 = obj is S;
-            var type2 = obj is SS;
-            var type3 = obj is ST;
+            var type2 = obj is Ss;
+            var type3 = obj is St;
 
             for (int i = 0; i < thread; i++)
             {
@@ -140,7 +133,7 @@ namespace MemoryTest
                     }
                     else if (type2)
                     {
-                        var s2 = (SS)obj;
+                        var s2 = (Ss)obj;
                         for (long j = 0; j < times; j++)
                         {
                             v += s2.A;
@@ -148,7 +141,7 @@ namespace MemoryTest
                     }
                     else if (type3)
                     {
-                        var s3 = (ST)obj;
+                        var s3 = (St)obj;
                         for (long j = 0; j < times; j++)
                         {
                             v += s3.A;
@@ -178,17 +171,18 @@ namespace MemoryTest
             public readonly long A = 1;
         }
 
-        private class SS
+        [SuppressMessage("CodeQuality", "IDE0051:删除未使用的私有成员", Justification = "<挂起>")]
+        private class Ss
         {
             public readonly long A = 1;
 
-            private long p1, p2, p3, p4, p5, p6, p7;
+            private readonly long _p1, _p2, _p3, _p4, _p5, _p6, _p7;
 
-            private long p9, p10, p11, p12, p13, p14, p15 /*, p16*/;
+            private readonly long _p9, _p10, _p11, _p12, _p13, _p14, _p15 /*, p16*/;
         }
 
         [StructLayout(LayoutKind.Explicit, Size = 120)]
-        private class ST
+        private class St
         {
             [FieldOffset(56)]
             public readonly long A = 1;

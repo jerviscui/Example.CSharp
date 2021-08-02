@@ -5,7 +5,7 @@ namespace StackallocTest
 {
     internal class Program
     {
-        private static int i;
+        private static int _i;
 
         private static unsafe void Main(string[] args)
         {
@@ -57,11 +57,11 @@ namespace StackallocTest
             //run on my computer, the max stack size 1494k, more than will throw StackOverflowException
             const int max = 1494;
 
-            while (i < max)
+            while (_i < max)
             {
-                i++;
+                _i++;
                 var a = stackalloc byte[len];
-                Console.WriteLine(i);
+                Console.WriteLine(_i);
                 Print.Address((long)a);
             }
         }

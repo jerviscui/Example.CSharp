@@ -8,7 +8,7 @@ namespace TypeHandleTest
 {
     public class HandleSizeTest
     {
-        public void RuntimeHandleAndType()
+        public static void RuntimeHandleAndType()
         {
             //todo cuizj: 没有发现 MethodInfo 和 RuntimeMethodHandle 使用空间上的明显差距
 
@@ -55,7 +55,7 @@ namespace TypeHandleTest
             methodHandles = null; //现在允许缓存垃圾回收
             Show("after freeing MethodInfo and MethodHandle objects");
 
-            void Show(string s)
+            static void Show(string s)
             {
                 Thread.Sleep(100);
                 GC.Collect();

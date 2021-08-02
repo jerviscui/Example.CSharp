@@ -1,4 +1,5 @@
-﻿using BenchmarkDotNet.Attributes;
+using System.Diagnostics.CodeAnalysis;
+using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Running;
 
 namespace CtorTest
@@ -45,7 +46,9 @@ namespace CtorTest
 
         public string P4 { get; set; }
 
+#pragma warning disable CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         public A(string p1)
+#pragma warning restore CS8618 // 在退出构造函数时，不可为 null 的字段必须包含非 null 值。请考虑声明为可以为 null。
         {
             P1 = p1;
         }
@@ -68,6 +71,7 @@ namespace CtorTest
         }
     }
 
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     [MemoryDiagnoser]
     public class BenchmarkTest
     {

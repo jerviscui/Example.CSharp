@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 
 namespace CtorTest
 {
@@ -8,15 +8,14 @@ namespace CtorTest
     /// </summary>
     public class InitializerTest
     {
-        public void Assignment_ExecutionOrder()
+        public static void Assignment_ExecutionOrder()
         {
-            new AssignmentOrder() { S = "third" };
+            _ = new AssignmentOrder { S = "third" };
         }
 
-
-        public void Initializer_Ctor_ExecutionOrder()
+        public static void Initializer_Ctor_ExecutionOrder()
         {
-            new Derived() { S = "1" };
+            _ = new Derived { S = "1" };
 
             //Foo 构造函数：Derived initializer
             //Foo 构造函数：Base initializer
@@ -27,12 +26,12 @@ namespace CtorTest
 
     internal class AssignmentOrder
     {
-        public string S { get; set; } = "first";
-
         public AssignmentOrder()
         {
             S = "second";
         }
+
+        public string S { get; set; } = "first";
     }
 
     internal class Foo
@@ -41,15 +40,13 @@ namespace CtorTest
         {
             Console.WriteLine("Foo 构造函数：{0}", s);
         }
-
-        public void Bar() { }
     }
 
     internal class Base
     {
-        private readonly Foo baseFoo = new Foo("Base initializer");
-
-        public virtual string S { get; set; } = "Base's S";
+#pragma warning disable IDE0052 // 删除未读的私有成员
+        private readonly Foo _baseFoo = new("Base initializer");
+#pragma warning restore IDE0052 // 删除未读的私有成员
 
         public Base()
         {
@@ -58,14 +55,15 @@ namespace CtorTest
             //virtual member call in constructor
             Console.WriteLine(S);
         }
+
+        public virtual string S { get; set; } = "Base's S";
     }
 
     internal class Derived : Base
     {
-        private readonly Foo derivedFoo = new Foo("Derived initializer");
-
-        /// <inheritdoc />
-        public override string S { get; set; } = "Derived's S";
+#pragma warning disable IDE0052 // 删除未读的私有成员
+        private readonly Foo _derivedFoo = new("Derived initializer");
+#pragma warning restore IDE0052 // 删除未读的私有成员
 
         public Derived()
         {
@@ -74,5 +72,8 @@ namespace CtorTest
             //virtual member call in constructor
             Console.WriteLine(S);
         }
+
+        /// <inheritdoc />
+        public override string S { get; set; } = "Derived's S";
     }
 }

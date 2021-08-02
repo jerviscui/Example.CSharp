@@ -22,12 +22,16 @@ namespace TaskGuidanceTest
 
         public class TaskTest
         {
+#pragma warning disable CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
             public static async void Void()
+#pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
             {
                 Console.WriteLine("");
             }
 
+#pragma warning disable CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
             public static async Task SimpleTask()
+#pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
             {
                 Console.WriteLine("SimpleTask");
             }

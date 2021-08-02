@@ -51,8 +51,6 @@ namespace MapsterTest
                 course2.Enrollments.Add(enrollments[1]);
             }
 
-            ;
-
             Setup();
 
             Console.WriteLine(JsonSerializer.Serialize(_student,

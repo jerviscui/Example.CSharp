@@ -1,12 +1,12 @@
-﻿namespace MemoryModelTest
+namespace MemoryModelTest
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             while (true)
             {
-                new MemoryReorderingTests().NonVolatile_Test();
+                MemoryReorderingTests.NonVolatile_Test();
             }
 
             //new MemoryReorderingTests().NonVolatile__Test();

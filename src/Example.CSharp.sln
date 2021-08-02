@@ -128,6 +128,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "PostSharpTest", "plugins\Po
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MoqAutofacTest", "plugins\Moq\MoqAutofacTest\MoqAutofacTest.csproj", "{333A8639-C9E2-4552-9ACD-D4B88DCCD716}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemoryModelTest", "Tests\MemoryModelTest\MemoryModelTest.csproj", "{C95FC016-DC92-45B3-A851-9E80EE15F809}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -294,6 +296,10 @@ Global
 		{333A8639-C9E2-4552-9ACD-D4B88DCCD716}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{333A8639-C9E2-4552-9ACD-D4B88DCCD716}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{333A8639-C9E2-4552-9ACD-D4B88DCCD716}.Release|Any CPU.Build.0 = Release|Any CPU
+		{C95FC016-DC92-45B3-A851-9E80EE15F809}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{C95FC016-DC92-45B3-A851-9E80EE15F809}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{C95FC016-DC92-45B3-A851-9E80EE15F809}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{C95FC016-DC92-45B3-A851-9E80EE15F809}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -341,6 +347,7 @@ Global
 		{016E8F09-969A-4CDA-917D-3791985400C2} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 		{19D6887A-F7E2-4DD6-829F-0879A0731732} = {0A7655FA-A22D-4B68-AC27-EC6BD24C4209}
 		{333A8639-C9E2-4552-9ACD-D4B88DCCD716} = {91E7DD22-5728-449C-A541-865C01BF1FAC}
+		{C95FC016-DC92-45B3-A851-9E80EE15F809} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}

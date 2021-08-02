@@ -93,20 +93,20 @@ namespace ValueTupleTest
 
         private class P
         {
-            public readonly string name;
+            public readonly string Name;
 
-            public readonly int x;
+            public readonly int X;
 
             public P(int x, string name)
             {
-                this.x = x;
-                this.name = name;
+                X = x;
+                Name = name;
             }
 
             public void Deconstruct(out int x, out string name)
             {
-                x = this.x;
-                name = this.name;
+                x = X;
+                name = Name;
             }
         }
     }

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using Moq;
 using Moq.Protected;
 using MoqTest.Domain.Prop;
@@ -99,6 +100,7 @@ namespace MoqTest
         }
 
         //[Fact]
+        [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
         public void PropValue_MockPrivateProperty_Setter()
         {
             //moq protected virtual prop
