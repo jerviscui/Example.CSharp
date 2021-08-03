@@ -3,7 +3,7 @@ using Common;
 
 namespace RangeIndexTest
 {
-    internal class Program
+    public class Program
     {
         private readonly string[] _words =
         {
@@ -19,8 +19,10 @@ namespace RangeIndexTest
             "dog"     // 8                   ^1
         };            // 9 (or words.Length) ^0
 
-        private static void Main(string[] args)
+        public static void Main(string[] args)
         {
+            StringRangeTests.RunTest();
+
             Index_Test();
 
             Console.WriteLine();

@@ -10,7 +10,7 @@ namespace AspectInjectorTest
         {
             //new PerformanceTests().GetMethod_ReflectionPerformance_Test();
             //new PerformanceTests().TestClass_GetDeclareType_Test();
-            new PerformanceTests().DelegateCacheTestClass_MethodWithInstance_Test();
+            PerformanceTests.DelegateCacheTestClass_MethodWithInstance_Test();
 
             //new PropTest().S = "";
             //throw ArgumentException

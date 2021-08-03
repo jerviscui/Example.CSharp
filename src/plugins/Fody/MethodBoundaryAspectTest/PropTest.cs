@@ -25,7 +25,6 @@ namespace MethodBoundaryAspectTest
                     //throw new ArgumentException();
                     //"set_" 
                     Console.WriteLine($"{args.Method.Name[4..]} must less than {Max.ToString()}");
-                    //todo: args.Method.Name[4..] and .Substring(4)
                 }
             }
 

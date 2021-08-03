@@ -105,7 +105,7 @@ dotnet_style_prefer_inferred_anonymous_type_member_names = true
 dotnet_style_prefer_inferred_tuple_names = true
 dotnet_style_prefer_is_null_check_over_reference_equality_method = true
 dotnet_style_prefer_simplified_boolean_expressions = true
-dotnet_style_prefer_simplified_interpolation = true:none
+dotnet_style_prefer_simplified_interpolation = true
 
 # 字段首选项
 dotnet_style_readonly_field = true
@@ -528,3 +528,9 @@ dotnet_naming_symbols.type_parameters_symbols.applicable_kinds = type_parameter
 # indent_style = space
 # indent_size = 2
 # tab_width = 2
+
+# 提高了可读性，但是降低了性能
+# 使用范围运算符(IDE0057) 可能产生更多的计算操作
+csharp_style_prefer_range_operator = true:none
+# 简化内插(IDE0071) 可能产生额外装箱操作
+dotnet_style_prefer_simplified_interpolation = true:none
