@@ -1,6 +1,6 @@
-﻿using AutoProperties;
 using System;
 using System.Reflection;
+using AutoProperties;
 
 namespace AutoPropertiesTest
 {

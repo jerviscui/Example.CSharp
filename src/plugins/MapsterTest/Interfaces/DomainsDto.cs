@@ -1,6 +1,6 @@
-﻿using MapsterTest.Domains;
 using System;
 using System.Collections.Generic;
+using MapsterTest.Domains;
 
 namespace MapsterTest.DomainsDto
 {

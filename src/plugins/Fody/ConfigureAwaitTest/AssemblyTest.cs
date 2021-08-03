@@ -1,4 +1,4 @@
-﻿using System.Threading.Tasks;
+using System.Threading.Tasks;
 
 //[assembly: Fody.ConfigureAwait(true)]
 namespace ConfigureAwaitTest

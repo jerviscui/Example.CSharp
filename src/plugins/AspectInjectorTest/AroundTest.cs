@@ -176,11 +176,11 @@ namespace AspectInjectorTest
         //2. use out parameter for return result 
         [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
         public async Task Handle(
-            //[Argument(Source.Instance)] object instance, [Argument(Source.Type)] Type type,
-            //[Argument(Source.Metadata)] MethodBase methodInfo, [Argument(Source.Target)] Func<object[], object> func,
-            //[Argument(Source.Name)] string targetName, [Argument(Source.Arguments)] object[] arguments,
-            //[Argument(Source.ReturnType)] Type returnType,
-            //[Argument(Source.Triggers)] Attribute[] triggers
+        //[Argument(Source.Instance)] object instance, [Argument(Source.Type)] Type type,
+        //[Argument(Source.Metadata)] MethodBase methodInfo, [Argument(Source.Target)] Func<object[], object> func,
+        //[Argument(Source.Name)] string targetName, [Argument(Source.Arguments)] object[] arguments,
+        //[Argument(Source.ReturnType)] Type returnType,
+        //[Argument(Source.Triggers)] Attribute[] triggers
         )
         {
             try

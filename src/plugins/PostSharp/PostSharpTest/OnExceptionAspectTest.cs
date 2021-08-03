@@ -1,5 +1,5 @@
-﻿using PostSharp.Aspects;
 using System;
+using PostSharp.Aspects;
 
 namespace PostSharpTest
 {

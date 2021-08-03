@@ -1,9 +1,9 @@
-﻿using Common;
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading;
+using Common;
 
 namespace DictionaryTest
 {

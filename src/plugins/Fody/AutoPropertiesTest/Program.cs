@@ -1,5 +1,5 @@
-﻿using Common;
 using System.Diagnostics;
+using Common;
 
 namespace AutoPropertiesTest
 {

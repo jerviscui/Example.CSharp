@@ -1,4 +1,4 @@
-﻿namespace MoqTest.Domain.Prop
+namespace MoqTest.Domain.Prop
 {
     public class PropValue : Entity
     {

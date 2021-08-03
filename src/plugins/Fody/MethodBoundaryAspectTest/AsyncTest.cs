@@ -1,8 +1,8 @@
-﻿using MethodBoundaryAspect.Fody.Attributes;
 using System;
 using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
+using MethodBoundaryAspect.Fody.Attributes;
 
 namespace MethodBoundaryAspectTest
 {

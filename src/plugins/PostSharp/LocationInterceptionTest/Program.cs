@@ -1,6 +1,6 @@
-﻿using Common;
 using System;
 using System.Diagnostics;
+using Common;
 
 namespace LocationInterceptionTest
 {

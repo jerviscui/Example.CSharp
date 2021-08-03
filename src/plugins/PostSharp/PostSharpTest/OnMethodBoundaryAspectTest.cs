@@ -1,7 +1,7 @@
-﻿using PostSharp.Aspects;
 using System;
 using System.Diagnostics;
 using System.Threading;
+using PostSharp.Aspects;
 
 namespace PostSharpTest
 {

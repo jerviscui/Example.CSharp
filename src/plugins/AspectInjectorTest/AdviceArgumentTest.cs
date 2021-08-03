@@ -1,6 +1,6 @@
-﻿using AspectInjector.Broker;
 using System;
 using System.Reflection;
+using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {

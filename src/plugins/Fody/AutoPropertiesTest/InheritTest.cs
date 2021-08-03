@@ -1,7 +1,7 @@
-﻿using AutoProperties;
 using System;
 using System.ComponentModel.DataAnnotations;
 using System.Reflection;
+using AutoProperties;
 
 namespace AutoPropertiesTest
 {
@@ -39,7 +39,7 @@ namespace AutoPropertiesTest
             refToBackingField = genricNewValue;
         }
 
-        private static readonly StringLengthAttribute? LengthAttribute = 
+        private static readonly StringLengthAttribute? LengthAttribute =
             typeof(InheritTest).GetProperty("Name")!.GetCustomAttribute<StringLengthAttribute>();
 
         [StringLength(5)]

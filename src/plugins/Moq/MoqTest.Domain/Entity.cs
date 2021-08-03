@@ -1,4 +1,4 @@
-﻿namespace MoqTest.Domain
+namespace MoqTest.Domain
 {
     public abstract class Entity
     {

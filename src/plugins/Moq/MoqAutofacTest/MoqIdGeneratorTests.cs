@@ -8,7 +8,7 @@ using Xunit;
 namespace MoqAutofacTest
 {
     /// <summary>
-    /// 使用 Moq 替换默认注册服务，根容器级别
+    /// 浣跨敤 Moq 鏇挎崲榛樿娉ㄥ唽鏈嶅姟锛屾牴瀹瑰櫒绾у埆
     /// </summary>
     public class MoqIdGeneratorTests : TestBase
     {

@@ -64,15 +64,15 @@ namespace AutofacWebTest
                 endpoints.MapControllers();
             });
 
-            //Ô¤ÈÈ¶ÔÄ¬ÈÏÈİÆ÷ ServiceCollection ÎŞÓ°Ïì
-            //Ô¤ÈÈ¶Ô Autofac ÈİÆ÷ÎŞÓ°Ïì
+            //é¢„çƒ­å¯¹é»˜è®¤å®¹å™¨ ServiceCollection æ— å½±å“
+            //é¢„çƒ­å¯¹ Autofac å®¹å™¨æ— å½±å“
             //_ = app.ApplicationServices.GetService<WeatherForecastController>();
             //_ = app.ApplicationServices.GetService<IWeatherForecastService>();
 
             AutofacContainer = app.ApplicationServices.GetAutofacRoot();
-            ////Ô¤ÈÈ Container ÎŞÓÃ
+            ////é¢„çƒ­ Container æ— ç”¨
             //AutofacContainer.Resolve<IWeatherForecastService>();
-            ////AddControllersAsServices()²ÅÄÜÍ¨¹ı Container ´´½¨ Controller
+            ////AddControllersAsServices()æ‰èƒ½é€šè¿‡ Container åˆ›å»º Controller
             //AutofacContainer.Resolve<WeatherForecastController>();
         }
     }

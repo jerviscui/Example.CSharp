@@ -1,4 +1,4 @@
-﻿using MoqTest.Domain.Prop;
+using MoqTest.Domain.Prop;
 
 namespace MoqTest.Domain.Goods
 {

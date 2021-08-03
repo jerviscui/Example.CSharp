@@ -1,7 +1,7 @@
-﻿using PostSharp.Aspects;
-using PostSharp.Extensibility;
 using System;
 using System.Reflection;
+using PostSharp.Aspects;
+using PostSharp.Extensibility;
 
 namespace PostSharpTest
 {

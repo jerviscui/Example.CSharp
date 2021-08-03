@@ -8,7 +8,7 @@ using Xunit;
 namespace MoqAutofacTest
 {
     /// <summary>
-    ///     使用 Moq 替换默认注册服务，Scope 容器级别
+    ///     浣跨敤 Moq 鏇挎崲榛樿娉ㄥ唽鏈嶅姟锛孲cope 瀹瑰櫒绾у埆
     /// </summary>
     public class DefaultIdGeneratorTests : TestBase
     {
@@ -37,7 +37,7 @@ namespace MoqAutofacTest
 
             //todo: how to replace ServiceProvider.CreateScope() registered service
             //using var serviceScope = ServiceProvider.CreateScope();
-            //基于 Autofac 容器
+            //鍩轰簬 Autofac 瀹瑰櫒
             using var serviceScope = CreateScope(builder => builder.RegisterInstance(mock.Object));
             var service = serviceScope.Resolve<IGoodsDomainService>();
 

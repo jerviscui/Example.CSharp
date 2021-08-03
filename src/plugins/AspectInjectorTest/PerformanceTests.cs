@@ -1,8 +1,8 @@
-﻿using AspectInjector.Broker;
-using Common;
 using System;
 using System.Diagnostics;
 using System.Reflection;
+using AspectInjector.Broker;
+using Common;
 
 namespace AspectInjectorTest
 {

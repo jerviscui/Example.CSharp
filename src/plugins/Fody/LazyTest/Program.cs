@@ -1,6 +1,6 @@
-﻿using Lazy;
 using System;
 using System.Threading;
+using Lazy;
 
 namespace LazyTest
 {

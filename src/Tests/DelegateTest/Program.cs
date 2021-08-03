@@ -1,4 +1,4 @@
-﻿namespace DelegateTest
+namespace DelegateTest
 {
     internal class Program
     {

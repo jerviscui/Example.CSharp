@@ -1,6 +1,6 @@
-﻿using MethodDecorator.Fody.Interfaces;
 using System;
 using System.Reflection;
+using MethodDecorator.Fody.Interfaces;
 
 namespace MethodDecoratorTest
 {

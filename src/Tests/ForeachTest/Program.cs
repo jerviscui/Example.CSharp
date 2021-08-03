@@ -1,8 +1,8 @@
-﻿using BenchmarkDotNet.Running;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
+using BenchmarkDotNet.Running;
 
 namespace ForeachTest
 {

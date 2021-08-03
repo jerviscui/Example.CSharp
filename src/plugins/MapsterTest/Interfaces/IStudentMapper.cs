@@ -1,8 +1,8 @@
-﻿using Mapster;
-using MapsterTest.Domains;
-using MapsterTest.DomainsDto;
 using System;
 using System.Linq.Expressions;
+using Mapster;
+using MapsterTest.Domains;
+using MapsterTest.DomainsDto;
 
 namespace MapsterTest
 {

@@ -1,8 +1,8 @@
-﻿using BenchmarkDotNet.Attributes;
-using BenchmarkDotNet.Configs;
 using System;
 using System.Collections.Generic;
 using System.Reflection;
+using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Configs;
 
 namespace TypeHandleTest
 {
