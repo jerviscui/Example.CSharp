@@ -1,9 +1,11 @@
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
 
 namespace VirtualMethodTest
 {
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class VirtualMethodTest
     {
         private class MyBaseClass : IMyInterface
