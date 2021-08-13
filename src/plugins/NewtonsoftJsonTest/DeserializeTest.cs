@@ -49,6 +49,17 @@ namespace NewtonsoftJsonTest
         }
     }
 
+    internal class PrivateSetterClass
+    {
+        [JsonProperty]
+        public string S3 { get; private set; } = null!;
+
+        public void SetS3()
+        {
+            S3 = "s3";
+        }
+    }
+
     public class DeserializeTest
     {
         public static void ProtectedProp_WithCtor_IsAssigned()
@@ -99,6 +110,19 @@ namespace NewtonsoftJsonTest
             //"{\"S3\":\"s3\"}"
 
             var obj = (ProtectedSetterClass4)JsonConvert.DeserializeObject(str, typeof(ProtectedSetterClass4))!;
+
+            //obj.S3 == "s3"
+        }
+
+        public static void PrivateProp_DeserializeWithJsonProperty_IsAssigned()
+        {
+            var c = new PrivateSetterClass();
+            c.SetS3();
+
+            var str = JsonConvert.SerializeObject(c);
+            //"{\"S3\":\"s3\"}"
+
+            var obj = (PrivateSetterClass)JsonConvert.DeserializeObject(str, typeof(PrivateSetterClass))!;
 
             //obj.S3 == "s3"
         }
