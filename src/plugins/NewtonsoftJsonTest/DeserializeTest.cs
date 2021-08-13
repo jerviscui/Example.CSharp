@@ -60,6 +60,38 @@ namespace NewtonsoftJsonTest
         }
     }
 
+    internal class GetonlyPropClass
+    {
+        [JsonProperty]
+        public string S3 { get; }
+
+        public GetonlyPropClass(string s)
+        {
+            S3 = s;
+        }
+
+        [JsonConstructor]
+        public GetonlyPropClass()
+        {
+        }
+    }
+
+    [JsonObject(MemberSerialization.Fields)]
+    internal class GetonlyPropClass2
+    {
+        public string S3 { get; }
+
+        public GetonlyPropClass2(string s)
+        {
+            S3 = s;
+        }
+
+        [JsonConstructor]
+        public GetonlyPropClass2()
+        {
+        }
+    }
+
     public class DeserializeTest
     {
         public static void ProtectedProp_WithCtor_IsAssigned()
@@ -125,6 +157,30 @@ namespace NewtonsoftJsonTest
             var obj = (PrivateSetterClass)JsonConvert.DeserializeObject(str, typeof(PrivateSetterClass))!;
 
             //obj.S3 == "s3"
+        }
+
+        public static void GetonlyProp_DeserializeWithJsonProperty_IsNotAssigned()
+        {
+            var c = new GetonlyPropClass("s3");
+
+            var str = JsonConvert.SerializeObject(c);
+            //"{\"S3\":\"s3\"}"
+
+            var obj = (GetonlyPropClass)JsonConvert.DeserializeObject(str, typeof(GetonlyPropClass))!;
+
+            //obj.S3 is null
+        }
+
+        public static void GetonlyProp_DeserializeWithField_IsAssigned()
+        {
+            var c = new GetonlyPropClass2("s3");
+
+            var str = JsonConvert.SerializeObject(c);
+            //"{\"<S3>k__BackingField\":\"s3\"}"
+
+            var obj = (GetonlyPropClass2)JsonConvert.DeserializeObject(str, typeof(GetonlyPropClass2))!;
+
+            //obj.S3 is null
         }
     }
 }
