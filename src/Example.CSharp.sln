@@ -132,7 +132,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MemoryModelTest", "Tests\Me
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EmptyConstructorTest", "plugins\Fody\EmptyConstructorTest\EmptyConstructorTest.csproj", "{395DED48-4732-46B1-B5D0-AD4B116BEEB6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NewtonsoftJsonTest", "plugins\NewtonsoftJsonTest\NewtonsoftJsonTest.csproj", "{520B47D4-313E-440C-B650-C2624C6B95B7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NewtonsoftJsonTest", "plugins\NewtonsoftJsonTest\NewtonsoftJsonTest.csproj", "{520B47D4-313E-440C-B650-C2624C6B95B7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EfCoreTest", "plugins\EfCoreTest\EfCoreTest.csproj", "{1A276CCD-5019-43BA-926E-BCE6212D3F0D}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -312,6 +314,10 @@ Global
 		{520B47D4-313E-440C-B650-C2624C6B95B7}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{520B47D4-313E-440C-B650-C2624C6B95B7}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{520B47D4-313E-440C-B650-C2624C6B95B7}.Release|Any CPU.Build.0 = Release|Any CPU
+		{1A276CCD-5019-43BA-926E-BCE6212D3F0D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1A276CCD-5019-43BA-926E-BCE6212D3F0D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1A276CCD-5019-43BA-926E-BCE6212D3F0D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1A276CCD-5019-43BA-926E-BCE6212D3F0D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -362,6 +368,7 @@ Global
 		{C95FC016-DC92-45B3-A851-9E80EE15F809} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 		{395DED48-4732-46B1-B5D0-AD4B116BEEB6} = {803D011F-EC6A-43AF-8FEE-D0A98E62A72C}
 		{520B47D4-313E-440C-B650-C2624C6B95B7} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
+		{1A276CCD-5019-43BA-926E-BCE6212D3F0D} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
