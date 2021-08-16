@@ -40,7 +40,7 @@ namespace AutofacWebTest
             //builder.RegisterModule(new MyApplicationModule());
         }
 
-        public ILifetimeScope AutofacContainer { get; private set; }
+        public ILifetimeScope AutofacContainer { get; private set; } = null!;
 
         // This is called after ConfigureContainer. You can use IApplicationBuilder.ApplicationServices
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

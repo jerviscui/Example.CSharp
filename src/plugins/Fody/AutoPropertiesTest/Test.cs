@@ -1,9 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using AutoProperties;
 
 namespace AutoPropertiesTest
 {
+    [SuppressMessage("CodeQuality", "IDE0051:删除未使用的私有成员", Justification = "<挂起>")]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class Test
     {
         [GetInterceptor]

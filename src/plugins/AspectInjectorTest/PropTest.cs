@@ -1,11 +1,13 @@
 using System;
 using System.ComponentModel.DataAnnotations;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {
     [Aspect(Scope.PerInstance)]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class PropAspect
     {
         [Advice(Kind.Before, Targets = Target.Setter | Target.Instance)]
@@ -40,12 +42,13 @@ namespace AspectInjectorTest
         }
     }
 
+    [SuppressMessage("CodeQuality", "IDE0051:删除未使用的私有成员", Justification = "<挂起>")]
     public class PropTest
     {
         [CheckLength(10, 1)]
         [StringLength(10, MinimumLength = 1)]
-        public string S { get; set; }
+        public string S { get; set; } = null!;
 
-        private string S1 { get; set; }
+        private string S1 { get; set; } = null!;
     }
 }

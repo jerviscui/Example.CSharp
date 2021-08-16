@@ -9,7 +9,7 @@ namespace DictionaryTest
 {
     public class AddTests
     {
-        public void OneThread_Test()
+        public static void OneThread_Test()
         {
             Stopwatch sw = new Stopwatch();
             sw.Start();
@@ -67,7 +67,7 @@ namespace DictionaryTest
             //dic   :    128,337 us
         }
 
-        public void MultiThreads_Test()
+        public static void MultiThreads_Test()
         {
             Run(1, 10000, 10);
             Run(10, 10000, 10);
@@ -89,7 +89,7 @@ namespace DictionaryTest
             //dic   :  5,701,567 us
         }
 
-        private void Run(int threads, int count, int cycles)
+        private static void Run(int threads, int count, int cycles)
         {
             Console.WriteLine("");
             Console.WriteLine($"Threads: {threads}, items: {count}, cycles:{cycles}");
@@ -136,7 +136,8 @@ namespace DictionaryTest
             semaphore.Dispose();
         }
 
-        private void Run(ConcurrentDictionary<int, string> dic, int elements, int cycles, SemaphoreSlim semaphore)
+        private static void Run(ConcurrentDictionary<int, string> dic, int elements, int cycles,
+            SemaphoreSlim semaphore)
         {
             semaphore.Wait();
             try
@@ -158,7 +159,7 @@ namespace DictionaryTest
             }
         }
 
-        private void Run(Dictionary<int, string> dic, int elements, int cycles, SemaphoreSlim semaphore)
+        private static void Run(Dictionary<int, string> dic, int elements, int cycles, SemaphoreSlim semaphore)
         {
             semaphore.Wait();
             try

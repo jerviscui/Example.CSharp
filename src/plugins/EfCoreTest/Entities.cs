@@ -32,7 +32,7 @@ namespace EfCoreTest
 
         public long Id { get; protected set; }
 
-        public string Name { get; protected set; }
+        public string Name { get; protected set; } = null!;
 
         public long? TeacherId { get; protected set; }
 

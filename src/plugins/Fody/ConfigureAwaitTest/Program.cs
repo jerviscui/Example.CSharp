@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
 
 namespace ConfigureAwaitTest
@@ -17,6 +18,7 @@ namespace ConfigureAwaitTest
         }
     }
 
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class XmlTest
     {
         public Task Test1()

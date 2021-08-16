@@ -1,9 +1,11 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {
     [Aspect(Scope.PerInstance)]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class Log2Aspect
     {
         [Advice(Kind.Before)]
@@ -20,12 +22,15 @@ namespace AspectInjectorTest
     }
 
     [Injection(typeof(Log2Aspect))]
+    [AttributeUsage(AttributeTargets.All)]
     public class Log2Attribute : Attribute
     {
     }
 
     [Aspect(Scope.PerInstance)]
     [Injection(typeof(Together2Attribute))]
+    [AttributeUsage(AttributeTargets.All)]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class Together2Attribute : Attribute
     {
         public int Num { get; set; }
@@ -45,6 +50,8 @@ namespace AspectInjectorTest
     }
 
     [Log2]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
+    [SuppressMessage("CodeQuality", "IDE0051:删除未使用的私有成员", Justification = "<挂起>")]
     public class LifeInstanceClassTest
     {
         [Log2]
@@ -60,6 +67,8 @@ namespace AspectInjectorTest
     }
 
     [Together2(Num = 1)]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
+    [SuppressMessage("CodeQuality", "IDE0051:删除未使用的私有成员", Justification = "<挂起>")]
     public class LifeInstanceTogetherTest
     {
         [Together2(Num = 2)]

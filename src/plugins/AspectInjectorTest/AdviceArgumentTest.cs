@@ -1,10 +1,12 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using AspectInjector.Broker;
 
 namespace AspectInjectorTest
 {
     [Aspect(Scope.Global)]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class AdviceArgumentAspect
     {
         [Advice(Kind.Before, Targets = Target.Method)]
@@ -37,11 +39,13 @@ namespace AspectInjectorTest
     }
 
     [Injection(typeof(AdviceArgumentAspect))]
+    [AttributeUsage(AttributeTargets.All)]
     public class AdviceArgumentAttribute : Attribute
     {
     }
 
     [AdviceArgument]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class AdviceArgumentTest
     {
         public int Mehtod(int i)

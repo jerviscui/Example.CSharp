@@ -1,4 +1,5 @@
 using System;
+using System.Diagnostics.CodeAnalysis;
 using System.Threading;
 using System.Threading.Tasks;
 using AspectInjector.Broker;
@@ -6,6 +7,7 @@ using AspectInjector.Broker;
 namespace AspectInjectorTest
 {
     [Aspect(Scope.Global)]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class BoundaryAspect
     {
         [Advice(Kind.Before, Targets = Target.Method)]
@@ -24,11 +26,13 @@ namespace AspectInjectorTest
     }
 
     [Injection(typeof(BoundaryAspect), Propagation = PropagateTo.Methods)]
+    [AttributeUsage(AttributeTargets.All)]
     public class BoundaryAttribute : Attribute
     {
     }
 
     [Boundary]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class BoundarySyncTest
     {
         public void Method()
@@ -38,9 +42,12 @@ namespace AspectInjectorTest
     }
 
     [Boundary]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class BoundaryAsyncTest
     {
+#pragma warning disable CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         public async void AsyncMethod()
+#pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         {
             Console.WriteLine($"AsyncMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
         }

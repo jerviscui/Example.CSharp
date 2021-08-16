@@ -1,5 +1,6 @@
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq.Expressions;
 using Common;
 
@@ -117,6 +118,7 @@ namespace DelegateTest
         }
 
         [C]
+        [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
         private class B : A
         {
             [C]

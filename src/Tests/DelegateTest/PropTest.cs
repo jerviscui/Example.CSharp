@@ -1,10 +1,12 @@
 using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
 using Common;
 
 namespace DelegateTest
 {
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
     public class PropTest
     {
         private readonly A _a = new();

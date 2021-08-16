@@ -1,8 +1,11 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Threading.Tasks;
+using Fody;
 
 namespace ConfigureAwaitTest
 {
-    [Fody.ConfigureAwait(true)]
+    [SuppressMessage("Performance", "CA1822:将成员标记为 static", Justification = "<挂起>")]
+    [ConfigureAwait(true)]
     public class AttributeTest
     {
         public async Task Test2()
@@ -12,7 +15,7 @@ namespace ConfigureAwaitTest
             //await Task.Delay(10).ConfigureAwait(continueOnCapturedContext: true);
         }
 
-        [Fody.ConfigureAwait(false)]
+        [ConfigureAwait(false)]
         public async Task Test3()
         {
             await Task.Delay(10);
