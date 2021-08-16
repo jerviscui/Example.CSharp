@@ -62,9 +62,6 @@ namespace NewtonsoftJsonTest
 
     internal class GetonlyPropClass
     {
-        [JsonProperty]
-        public string S3 { get; }
-
         public GetonlyPropClass(string s)
         {
             S3 = s;
@@ -74,13 +71,14 @@ namespace NewtonsoftJsonTest
         public GetonlyPropClass()
         {
         }
+
+        [JsonProperty]
+        public string S3 { get; }
     }
 
     [JsonObject(MemberSerialization.Fields)]
     internal class GetonlyPropClass2
     {
-        public string S3 { get; }
-
         public GetonlyPropClass2(string s)
         {
             S3 = s;
@@ -90,6 +88,8 @@ namespace NewtonsoftJsonTest
         public GetonlyPropClass2()
         {
         }
+
+        public string S3 { get; }
     }
 
     public class DeserializeTest
