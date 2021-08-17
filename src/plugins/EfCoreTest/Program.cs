@@ -9,7 +9,11 @@ namespace EfCoreTest
             //EntityMappingTest.OnDelete_MsSql_Test();
             //OnDeleteTest.PostgreSql_Test();
 
-            await SearchTest.ProtectedProp_Test();
+            //await SearchTest.ProtectedProp_Test();
+
+            //await LinqTranslationTest.ListContains_Predicate_Test();
+            await LinqTranslationTest.ListAny_Predicate_ThrowInvalidOperationException_Test();
+            await LinqTranslationTest.ListAny_Predicate_Test();
         }
     }
 }

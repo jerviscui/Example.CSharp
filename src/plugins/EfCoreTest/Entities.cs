@@ -2,7 +2,12 @@ using System.ComponentModel.DataAnnotations;
 
 namespace EfCoreTest
 {
-    public class Person
+    public class Entity
+    {
+        public long Id { get; protected set; }
+    }
+
+    public class Person : Entity
     {
         protected Person()
         {
@@ -30,8 +35,6 @@ namespace EfCoreTest
             Decimal = d;
         }
 
-        public long Id { get; protected set; }
-
         public string Name { get; protected set; } = null!;
 
         public long? TeacherId { get; protected set; }
@@ -49,7 +52,7 @@ namespace EfCoreTest
         }
     }
 
-    public class Family
+    public class Family : Entity
     {
         public Family(long id, string? address = null)
         {
@@ -57,21 +60,17 @@ namespace EfCoreTest
             Address = address;
         }
 
-        public long Id { get; protected set; }
-
         [StringLength(200)]
         public string? Address { get; protected set; }
     }
 
-    public class Teacher
+    public class Teacher : Entity
     {
         public Teacher(long id, string name)
         {
             Id = id;
             Name = name;
         }
-
-        public long Id { get; protected set; }
 
         [StringLength(100)]
         public string Name { get; protected set; }
