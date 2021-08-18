@@ -96,16 +96,38 @@ namespace EfCoreTest
         {
             await using var dbContext = CreateMsSqlDbContext();
 
-            //todo: left join
-            //var dic = await dbContext.Families.Where(o => o.Id == 1)
-            //    .GroupJoin(dbContext.Families, outer => outer.OldFamilyId, inner => inner.Id, (l, r) => new { l.Id, l.Address, l.OldFamilyId, OldFamilyAddress = r.DefaultIfEmpty().Address })
-            //    .ToDictionaryAsync(o => o.Id);
+            var dic = await dbContext.Families.Where(o => o.Id == 1)
+                .GroupJoin(dbContext.Families, outer => outer.OldFamilyId, inner => inner.Id,
+                    (l, r) => new { l.Id, l.Address, r })
+                .SelectMany(arg => arg.r.DefaultIfEmpty(),
+                    (arg, oldFamily) => new
+                    {
+                        arg.Id,
+                        arg.Address,
+                        OldFamilyId = oldFamily == null ? (long?)null : oldFamily.Id,
+                        OldFamilyAddress = oldFamily == null ? (string?)null : oldFamily.Address
+                    })
+                .ToDictionaryAsync(o => o.Id);
 
-            ////Executed DbCommand (32ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-            ////SELECT [f].[Id], [f].[Address], [f].[OldFamilyId], [f0].[Address] AS [OldFamilyAddress]
-            ////FROM [Families] AS [f]
-            ////INNER JOIN [Families] AS [f0] ON [f].[OldFamilyId] = [f0].[Id]
-            ////WHERE [f].[Id] = CAST(1 AS bigint)
+            var queryable =
+                from left in dbContext.Families.Where(o => o.Id == 1)
+                join right in dbContext.Families on left.OldFamilyId equals right.Id
+                    into j
+                from r in j.DefaultIfEmpty()
+                select new
+                {
+                    left.Id,
+                    left.Address,
+                    OldFamilyId = r == null ? (long?)null : r.Id,
+                    OldFamilyAddress = r == null ? (string?)null : r.Address
+                };
+            var dictionary = queryable.ToDictionary(o => o.Id);
+
+            //Executed DbCommand (21ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+            //SELECT [f].[Id], [f].[Address], [f0].[Id] AS [OldFamilyId], [f0].[Address] AS [OldFamilyAddress]
+            //FROM [Families] AS [f]
+            //LEFT JOIN [Families] AS [f0] ON [f].[OldFamilyId] = [f0].[Id]
+            //WHERE [f].[Id] = CAST(1 AS bigint)
         }
     }
 }
