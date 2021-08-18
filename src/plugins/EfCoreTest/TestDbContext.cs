@@ -34,17 +34,30 @@ namespace EfCoreTest
             var family = modelBuilder.Entity<Family>();
             family.HasKey(o => o.Id);
             family.Property(o => o.Id).ValueGeneratedNever();
+            family.HasOne<Family>().WithMany().HasForeignKey(o => o.OldFamilyId).IsRequired(false);
 
             CreateSeed(modelBuilder);
         }
 
         private static void CreateSeed(ModelBuilder modelBuilder)
         {
-            //var family = new Family(1, "address");
-            //var person = new Person(1, "name", family.Id, null);
+            var family = new Family(1, "address");
+            var family2 = new Family(2, "address", family.Id);
+            var family3 = new Family(3, "address", family2.Id);
+            modelBuilder.Entity<Family>().HasData(family, family2, family3);
 
-            //modelBuilder.Entity<Family>().HasData(family);
-            //modelBuilder.Entity<Person>().HasData(person);
+            var teacher = new Teacher(2, "teacher");
+            modelBuilder.Entity<Teacher>().HasData(teacher);
+
+            var person = new Person(1, "name", family.Id, null);
+            var person2 = new Person(2, "name", family2.Id, teacher.Id);
+            var person3 = new Person(3, "name", family3.Id, teacher.Id);
+            modelBuilder.Entity<Person>().HasData(person, person2, person3);
+
+            for (int i = 0; i < 10000; i++)
+            {
+                modelBuilder.Entity<Person>().HasData(new Person(100 + i, $"name{i}", family2.Id, null));
+            }
         }
     }
 }
