@@ -1,3 +1,4 @@
+using System.Linq;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -18,8 +19,8 @@ namespace EfCoreTest
         protected static TestDbContext CreateMsSqlDbContext()
         {
             var builder = CreateBuilder();
-            //builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
-            builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
+            builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
+            //builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
 
             var dbContext = new TestDbContext(builder.Options);
 
@@ -34,6 +35,15 @@ namespace EfCoreTest
             var dbContext = new TestDbContext(builder.Options);
 
             return dbContext;
+        }
+
+        protected static void AddIfNotExists<T>(TestDbContext dbContext, T entity) where T : Entity
+        {
+            var dbSet = dbContext.Set<T>();
+            if (!dbSet.Any(arg => EF.Property<long>(arg, "Id") == entity.Id))
+            {
+                dbSet.Add(entity);
+            }
         }
     }
 }

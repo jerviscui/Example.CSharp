@@ -14,6 +14,8 @@ namespace EfCoreTest
 
         public DbSet<Family> Families { get; set; } = null!;
 
+        public DbSet<Order> Orders { get; set; } = null!;
+
         /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -35,6 +37,15 @@ namespace EfCoreTest
             family.HasKey(o => o.Id);
             family.Property(o => o.Id).ValueGeneratedNever();
             family.HasOne<Family>().WithMany().HasForeignKey(o => o.OldFamilyId).IsRequired(false);
+
+            var order = modelBuilder.Entity<Order>();
+            order.HasKey(o => o.Id);
+            order.Property(o => o.Id).ValueGeneratedNever();
+            order.OwnsOne(o => o.StreetAddress, builder =>
+            {
+                builder.HasIndex(o => o.City);
+                builder.HasIndex(o => o.Street);
+            });
 
             CreateSeed(modelBuilder);
         }
@@ -58,6 +69,10 @@ namespace EfCoreTest
             {
                 modelBuilder.Entity<Person>().HasData(new Person(100 + i, $"name{i}", family2.Id, null));
             }
+
+            //todo: https://github.com/dotnet/efcore/issues/25586
+            //var order = new Order(1, "buyer", "street", "city");
+            //modelBuilder.Entity<Order>().HasData(order);
         }
     }
 }

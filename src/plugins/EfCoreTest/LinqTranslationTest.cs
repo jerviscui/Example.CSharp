@@ -24,15 +24,6 @@ namespace EfCoreTest
             await dbContext.SaveChangesAsync();
         }
 
-        private static void AddIfNotExists<T>(TestDbContext dbContext, T entity) where T : Entity
-        {
-            var dbSet = dbContext.Set<T>();
-            if (!dbSet.Any(arg => EF.Property<long>(arg, "Id") == entity.Id))
-            {
-                dbSet.Add(entity);
-            }
-        }
-
         public static async Task ListContains_Predicate_Test()
         {
             await using var dbContext = CreateMsSqlDbContext();

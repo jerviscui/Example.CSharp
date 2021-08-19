@@ -1,12 +1,5 @@
-using System.ComponentModel.DataAnnotations;
-
 namespace EfCoreTest
 {
-    public class Entity
-    {
-        public long Id { get; protected set; }
-    }
-
     public class Person : Entity
     {
         protected Person()
@@ -50,32 +43,5 @@ namespace EfCoreTest
             Long = 0;
             Decimal = 0;
         }
-    }
-
-    public class Family : Entity
-    {
-        public Family(long id, string? address = null, long? oldFamilyId = null)
-        {
-            Id = id;
-            Address = address;
-            OldFamilyId = oldFamilyId;
-        }
-
-        [StringLength(200)]
-        public string? Address { get; protected set; }
-
-        public long? OldFamilyId { get; protected set; }
-    }
-
-    public class Teacher : Entity
-    {
-        public Teacher(long id, string name)
-        {
-            Id = id;
-            Name = name;
-        }
-
-        [StringLength(100)]
-        public string Name { get; protected set; }
     }
 }

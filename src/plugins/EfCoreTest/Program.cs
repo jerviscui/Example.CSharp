@@ -15,7 +15,9 @@ namespace EfCoreTest
             //await LinqTranslationTest.ListAny_Predicate_ThrowInvalidOperationException_Test();
             //await LinqTranslationTest.ListAny_Predicate_Test();
 
-            await JoinTest.SelfJoin_LeftJoin_Test();
+            //await JoinTest.SelfJoin_LeftJoin_Test();
+
+            await OwnedTypeTest.Search_QueryByOwnedType_Test();
         }
     }
 }
