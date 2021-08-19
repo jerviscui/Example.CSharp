@@ -80,7 +80,8 @@ namespace EfCoreTest
         {
             await using var dbContext = CreateMsSqlDbContext();
 
-            var dic = await dbContext.Families.Where(o => o.Id == 1)
+            var id = 1;
+            var dic = await dbContext.Families.Where(o => o.Id == id)
                 .Join(dbContext.Families, outer => outer.OldFamilyId, inner => inner.Id,
                     (l, r) => new { l.Id, l.Address, l.OldFamilyId, OldFamilyAddress = r.Address })
                 .ToDictionaryAsync(o => o.Id);
@@ -96,7 +97,8 @@ namespace EfCoreTest
         {
             await using var dbContext = CreateMsSqlDbContext();
 
-            var dic = await dbContext.Families.Where(o => o.Id == 1)
+            var id = 1;
+            var dic = await dbContext.Families.Where(o => o.Id == id)
                 .GroupJoin(dbContext.Families, outer => outer.OldFamilyId, inner => inner.Id,
                     (l, r) => new { l.Id, l.Address, r })
                 .SelectMany(arg => arg.r.DefaultIfEmpty(),
@@ -110,7 +112,7 @@ namespace EfCoreTest
                 .ToDictionaryAsync(o => o.Id);
 
             var queryable =
-                from left in dbContext.Families.Where(o => o.Id == 1)
+                from left in dbContext.Families.Where(o => o.Id == id)
                 join right in dbContext.Families on left.OldFamilyId equals right.Id
                     into j
                 from r in j.DefaultIfEmpty()
