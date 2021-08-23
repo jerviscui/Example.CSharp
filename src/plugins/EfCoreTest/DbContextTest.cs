@@ -1,4 +1,6 @@
+using System.Data;
 using System.Linq;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -6,6 +8,8 @@ namespace EfCoreTest
 {
     internal abstract class DbContextTest
     {
+        public static SqliteConnection? SqliteConnection;
+
         protected static DbContextOptionsBuilder<TestDbContext> CreateBuilder()
         {
             var builder = new DbContextOptionsBuilder<TestDbContext>();
@@ -18,10 +22,26 @@ namespace EfCoreTest
 
         protected static TestDbContext CreateSqliteMemoryDbContext()
         {
-            var builder = CreateBuilder();
-            builder.UseSqlite("Data Source=:memory:");
+            bool createDb = false;
+            if (SqliteConnection is null)
+            {
+                SqliteConnection ??= new SqliteConnection("Filename=:memory:");
+                createDb = true;
+            }
 
+            var builder = CreateBuilder();
+            builder.UseSqlite(SqliteConnection);
+
+            if (SqliteConnection.State != ConnectionState.Open)
+            {
+                SqliteConnection.Open();
+            }
             var dbContext = new TestDbContext(builder.Options);
+
+            if (createDb)
+            {
+                dbContext.Database.EnsureCreated();
+            }
 
             return dbContext;
         }

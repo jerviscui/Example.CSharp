@@ -8,7 +8,7 @@ namespace EfCoreTest
         {
             //EntityMappingTest.OnDelete_MsSql_Test();
             //EntityMappingTest.OnDelete_PostgreSql_Test();
-            EntityMappingTest.OnDelete_SqliteMemory_Test();
+            //EntityMappingTest.OnDelete_SqliteMemory_Test();
 
             //await SearchTest.ProtectedProp_Test();
 
@@ -19,6 +19,17 @@ namespace EfCoreTest
             //await JoinTest.SelfJoin_LeftJoin_Test();
 
             //await OwnedTypeTest.Search_QueryByOwnedType_Test();
+
+            //ExpressionTest.Query_ParameterSql_Test();
+            //ExpressionTest.Query_Sql_Test();
+            ExpressionTest.Query_ParameterSql_UseAnonymousClass();
+
+            OnExit();
+        }
+
+        private static void OnExit()
+        {
+            DbContextTest.SqliteConnection?.Dispose();
         }
     }
 }

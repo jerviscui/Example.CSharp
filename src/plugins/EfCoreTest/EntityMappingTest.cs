@@ -5,9 +5,6 @@ namespace EfCoreTest
         public static void OnDelete_SqliteMemory_Test()
         {
             using var dbContext = CreateSqliteMemoryDbContext();
-
-            dbContext.Database.EnsureDeleted();
-            dbContext.Database.EnsureCreated();
         }
 
         public static void OnDelete_MsSql_Test()
