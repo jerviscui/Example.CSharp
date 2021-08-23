@@ -16,6 +16,16 @@ namespace EfCoreTest
             return builder;
         }
 
+        protected static TestDbContext CreateSqliteMemoryDbContext()
+        {
+            var builder = CreateBuilder();
+            builder.UseSqlite("Data Source=:memory:");
+
+            var dbContext = new TestDbContext(builder.Options);
+
+            return dbContext;
+        }
+
         protected static TestDbContext CreateMsSqlDbContext()
         {
             var builder = CreateBuilder();
