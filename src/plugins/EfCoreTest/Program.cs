@@ -22,7 +22,10 @@ namespace EfCoreTest
 
             //ExpressionTest.Query_ParameterSql_Test();
             //ExpressionTest.Query_Sql_Test();
-            ExpressionTest.Query_ParameterSql_UseAnonymousClass();
+            //ExpressionTest.Query_ParameterSql_UseAnonymousClass();
+
+            //DynamicLinqTest.Query_NoArg_GenerateParameterSql();
+            DynamicLinqTest.Query_WithArg_GenerateParameterSql();
 
             OnExit();
         }

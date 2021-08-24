@@ -47,7 +47,7 @@ namespace EfCoreTest
                 builder.HasIndex(o => o.Street);
             });
 
-            CreateSeed(modelBuilder);
+            //CreateSeed(modelBuilder);
         }
 
         private static void CreateSeed(ModelBuilder modelBuilder)

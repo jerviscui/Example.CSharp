@@ -37,16 +37,16 @@ namespace EfCoreTest
             //LIMIT 1
         }
 
-        private sealed class AnonymousClass
+        private sealed class ParameterClass
         {
             public long Id;
         }
 
-        public static void Query_ParameterSql_UseAnonymousClass()
+        public static void Query_ParameterSql_UseClass()
         {
             using var dbContext = CreateSqliteMemoryDbContext();
 
-            var anonymousClass = new AnonymousClass { Id = 1 };
+            var anonymousClass = new ParameterClass { Id = 1 };
 
             Expression<Func<Person, bool>> CreateExpression()
             {
@@ -55,31 +55,79 @@ namespace EfCoreTest
                 var propInfo = para.Type.GetProperty("Id")!;
                 var memberExpression = Expression.Property(para, propInfo); // o.Id
 
-                var anonymous = Expression.Constant(anonymousClass, typeof(AnonymousClass)); //Constant(AnonymousClass)
-                var fieldInfo = anonymous.Type.GetField("Id")!;
-                var field = Expression.Field(anonymous, fieldInfo);            //Constant(AnonymousClass).Id
-                var unaryExpression = Expression.Convert(field, typeof(long)); // (long)Constant(AnonymousClass).Id
+                var constant = Expression.Constant(anonymousClass, typeof(ParameterClass)); // Constant(AnonymousClass)
+                var fieldInfo = constant.Type.GetField("Id")!;
+                var field = Expression.Field(constant, fieldInfo); // Constant(AnonymousClass).Id
+                var unaryExpression =
+                    Expression.Convert(field, typeof(long)); // Convert(Constant(AnonymousClass).Id, Int64)
 
                 var binaryExpression =
-                    Expression.Equal(memberExpression, unaryExpression); // o.Id == (long)Constant(AnonymousClass).Id
+                    Expression.Equal(memberExpression,
+                        unaryExpression); // o.Id == Convert(Constant(AnonymousClass).Id, Int64)
 
                 var lambdaExpression =
                     Expression.Lambda<Func<Person, bool>>(binaryExpression,
-                        para); // o => o.Id == (long)Constant(AnonymousClass).Id
+                        para); // o => o.Id == Convert(Constant(AnonymousClass).Id, Int64)
 
                 return lambdaExpression;
             }
 
-            var expression = CreateExpression();
+            var expression =
+                CreateExpression(); //{o => (o.Id == Convert(value(EfCoreTest.ExpressionTest+AnonymousClass).Id, Int64))}
 
             var query = dbContext.Persons.Where(expression);
             var person = query.FirstOrDefault();
 
-            //参考参数化 IL 执行过程，可以生成参数化 Sql
+            //参考 Query_ParameterSql_Test IL 执行过程，可以生成参数化 Sql
+            //必须将参数包装到一个类中，或者使用匿名类，才能生成参数化 Sql
             //Executed DbCommand (2ms) [Parameters=[@__Id_0='1' (DbType = String)], CommandType='Text', CommandTimeout='30']
             //SELECT "p"."Id", "p"."Decimal", "p"."FamilyId", "p"."Long", "p"."Name", "p"."TeacherId"
             //FROM "Persons" AS "p"
             //WHERE "p"."Id" = @__Id_0
+            //LIMIT 1
+        }
+
+        public static void Query_ParameterSql_UseAnonymousClass()
+        {
+            using var dbContext = CreateSqliteMemoryDbContext();
+
+            var anonymousClass = new { Id = 1 };
+
+            Expression<Func<Person, bool>> CreateExpression()
+            {
+                var para = Expression.Parameter(typeof(Person), "o");
+
+                var propInfo = para.Type.GetProperty("Id")!;
+                var memberExpression = Expression.Property(para, propInfo); // o.Id
+
+                var type = anonymousClass.GetType();
+                var constant = Expression.Constant(anonymousClass, type); // { Id = 1 }
+                var paraInfo = constant.Type.GetProperty("Id")!;
+                var property = Expression.Property(constant, paraInfo); // { Id = 1 }.Id
+                var unaryExpression =
+                    Expression.Convert(property, typeof(long)); // Convert({ Id = 1 }.Id, Int64)
+
+                var binaryExpression =
+                    Expression.Equal(memberExpression,
+                        unaryExpression); // o.Id == Convert({ Id = 1 }.Id, Int64)
+
+                var lambdaExpression =
+                    Expression.Lambda<Func<Person, bool>>(binaryExpression,
+                        para); // o => o.Id == Convert({ Id = 1 }.Id, Int64)
+
+                return lambdaExpression;
+            }
+
+            var expression = CreateExpression(); //{o => (o.Id == Convert({ Id = 1 }.Id, Int64))}
+
+            var query = dbContext.Persons.Where(expression);
+            var person = query.FirstOrDefault();
+
+            //使用匿名类作为参数也可以生成参数化 Sql
+            //Executed DbCommand (2ms) [Parameters=[@__p_0='1' (DbType = String)], CommandType='Text', CommandTimeout='30']
+            //SELECT "p"."Id", "p"."Decimal", "p"."FamilyId", "p"."Long", "p"."Name", "p"."TeacherId"
+            //FROM "Persons" AS "p"
+            //WHERE "p"."Id" = @__p_0
             //LIMIT 1
         }
     }
