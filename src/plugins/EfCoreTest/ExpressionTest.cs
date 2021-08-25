@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 
@@ -128,6 +129,24 @@ namespace EfCoreTest
             //SELECT "p"."Id", "p"."Decimal", "p"."FamilyId", "p"."Long", "p"."Name", "p"."TeacherId"
             //FROM "Persons" AS "p"
             //WHERE "p"."Id" = @__p_0
+            //LIMIT 1
+        }
+
+        public static void Query_Contains_NoParameterSql()
+        {
+            using var dbContext = CreateSqliteMemoryDbContext();
+
+            var list = new List<long> { 1, 2, 3 };
+
+            var query1 = dbContext.Persons.Where(o => list.Contains(o.Id));
+
+            var person1 = query1.FirstOrDefault();
+
+            //不会生成参数化 Sql
+            //Executed DbCommand (0ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+            //SELECT "p"."Id", "p"."Decimal", "p"."FamilyId", "p"."Long", "p"."Name", "p"."TeacherId"
+            //FROM "Persons" AS "p"
+            //WHERE "p"."Id" IN (1, 2, 3)
             //LIMIT 1
         }
     }
