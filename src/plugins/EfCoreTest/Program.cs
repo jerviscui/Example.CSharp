@@ -20,14 +20,15 @@ namespace EfCoreTest
 
             //await OwnedTypeTest.Search_QueryByOwnedType_Test();
 
-            //ExpressionTest.Query_ParameterSql_Test();
             //ExpressionTest.Query_Sql_Test();
-            //ExpressionTest.Query_ParameterSql_UseAnonymousClass();
-            ExpressionTest.Query_Contains_NoParameterSql();
+            ExpressionTest.Query_ParameterSql_Test();
+            //ExpressionTest.Query_ParameterSql_UseClass();
+            ExpressionTest.Query_ParameterSql_UseAnonymousClass();
+            //ExpressionTest.Query_Contains_NoParameterSql();
 
             //DynamicLinqTest.Query_NoArg_GenerateParameterSql();
             //DynamicLinqTest.Query_WithArg_GenerateParameterSql();
-            DynamicLinqTest.Query_Contains_WithArg_NoParameterSql();
+            //DynamicLinqTest.Query_Contains_WithArg_NoParameterSql();
 
             OnExit();
         }
