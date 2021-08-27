@@ -1,3 +1,4 @@
+using System.Reflection;
 using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest
@@ -19,34 +20,8 @@ namespace EfCoreTest
         /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            var person = modelBuilder.Entity<Person>();
-            person.HasKey(o => o.Id);
-            person.Property(o => o.Id).ValueGeneratedNever();
-            person.Property(o => o.Long).HasDefaultValue(0);
-            person.Property(o => o.Decimal).HasColumnType("decimal(18,2)").HasDefaultValue(0);
-            person.HasOne<Teacher>().WithMany().HasForeignKey(o => o.TeacherId).IsRequired(false)
-                .OnDelete(DeleteBehavior.ClientSetNull);
-            person.HasOne<Family>().WithMany().HasForeignKey(o => o.FamilyId).IsRequired()
-                .OnDelete(DeleteBehavior.Cascade);
-
-            var teacher = modelBuilder.Entity<Teacher>();
-            teacher.HasKey(o => o.Id);
-            teacher.Property(o => o.Id).ValueGeneratedNever();
-
-            var family = modelBuilder.Entity<Family>();
-            family.HasKey(o => o.Id);
-            family.Property(o => o.Id).ValueGeneratedNever();
-            family.HasOne<Family>().WithMany().HasForeignKey(o => o.OldFamilyId).IsRequired(false);
-
-            var order = modelBuilder.Entity<Order>();
-            order.HasKey(o => o.Id);
-            order.Property(o => o.Id).ValueGeneratedNever();
-            order.OwnsOne(o => o.StreetAddress, builder =>
-            {
-                builder.HasIndex(o => o.City);
-                builder.HasIndex(o => o.Street);
-            });
-
+            modelBuilder.ApplyConfigurationsFromAssembly(typeof(TestDbContext).GetTypeInfo().Assembly);
+            modelBuilder.Entity<Person>().Navigation()
             //CreateSeed(modelBuilder);
         }
 

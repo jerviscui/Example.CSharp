@@ -8,7 +8,7 @@ namespace EfCoreTest
         {
             //EntityMappingTest.OnDelete_MsSql_Test();
             //EntityMappingTest.OnDelete_PostgreSql_Test();
-            //EntityMappingTest.OnDelete_SqliteMemory_Test();
+            EntityMappingTest.OnDelete_SqliteMemory_Test();
 
             //await SearchTest.ProtectedProp_Test();
 
