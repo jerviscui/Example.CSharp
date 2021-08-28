@@ -26,7 +26,7 @@ namespace EfCoreTest
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TestDbContext).GetTypeInfo().Assembly);
-            //modelBuilder.Entity<Person>().Navigation()
+
             CreateSeed(modelBuilder);
         }
 

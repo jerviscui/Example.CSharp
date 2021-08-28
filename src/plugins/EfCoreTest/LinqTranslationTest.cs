@@ -39,7 +39,7 @@ namespace EfCoreTest
         {
             await using var dbContext = CreateMsSqlDbContext();
 
-            await CreateSeedAsync(dbContext);
+            //await CreateSeedAsync(dbContext);
 
             var persons = await dbContext.Persons.AsNoTracking().Take(50).ToListAsync();
 
@@ -49,6 +49,10 @@ namespace EfCoreTest
             }
             catch (InvalidOperationException e)
             {
+                //{ "The LINQ expression 'DbSet<Person>().Where(p => __persons_0.Any(p => p.Name == p.Name))' could not be translated.
+                //Either rewrite the query in a form that can be translated,
+                //or switch to client evaluation explicitly by inserting a call to 'AsEnumerable', 'AsAsyncEnumerable', 'ToList',
+                //or 'ToListAsync'. See https://go.microsoft.com/fwlink/?linkid=2101038 for more information."}
                 Console.WriteLine(e);
             }
         }

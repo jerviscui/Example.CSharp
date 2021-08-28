@@ -12,9 +12,10 @@ namespace EfCoreTest
 
             //await EntityMappingTest.ManyToMany_Query_Test();
             //await EntityMappingTest.ManyToMany_Query_AsSplitQuery_Test();
-            await EntityMappingTest.ManyToMany_Insert_Test();
+            //await EntityMappingTest.ManyToMany_Insert_Test();
 
             //await SearchTest.ProtectedProp_Test();
+            SearchTest.CompileQuery_PersonById_Test();
 
             //await LinqTranslationTest.ListContains_Predicate_Test();
             //await LinqTranslationTest.ListAny_Predicate_ThrowInvalidOperationException_Test();
