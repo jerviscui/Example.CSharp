@@ -8,7 +8,11 @@ namespace EfCoreTest
         {
             //EntityMappingTest.OnDelete_MsSql_Test();
             //EntityMappingTest.OnDelete_PostgreSql_Test();
-            EntityMappingTest.OnDelete_SqliteMemory_Test();
+            //EntityMappingTest.OnDelete_SqliteMemory_Test();
+
+            //await EntityMappingTest.ManyToMany_Query_Test();
+            //await EntityMappingTest.ManyToMany_Query_AsSplitQuery_Test();
+            await EntityMappingTest.ManyToMany_Insert_Test();
 
             //await SearchTest.ProtectedProp_Test();
 
@@ -21,9 +25,9 @@ namespace EfCoreTest
             //await OwnedTypeTest.Search_QueryByOwnedType_Test();
 
             //ExpressionTest.Query_Sql_Test();
-            ExpressionTest.Query_ParameterSql_Test();
+            //ExpressionTest.Query_ParameterSql_Test();
             //ExpressionTest.Query_ParameterSql_UseClass();
-            ExpressionTest.Query_ParameterSql_UseAnonymousClass();
+            //ExpressionTest.Query_ParameterSql_UseAnonymousClass();
             //ExpressionTest.Query_Contains_NoParameterSql();
 
             //DynamicLinqTest.Query_NoArg_GenerateParameterSql();

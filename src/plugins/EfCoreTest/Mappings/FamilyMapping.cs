@@ -10,7 +10,7 @@ namespace EfCoreTest
         {
             builder.HasKey(o => o.Id);
             builder.Property(o => o.Id).ValueGeneratedNever();
-            builder.HasOne<Family>().WithMany().HasForeignKey(o => o.OldFamilyId).IsRequired(false);
+            builder.HasOne<Family>().WithMany().HasForeignKey(o => o.OldFamilyId); //.IsRequired(false); 可以省略，使用属性类型定义
         }
     }
 }
