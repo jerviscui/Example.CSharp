@@ -22,6 +22,27 @@ namespace EfCoreTest
 
         public DbSet<Tag> Tags { get; set; } = null!;
 
+        public DbSet<Blog> Blogs { get; set; } = null!;
+
+        public DbSet<BlogTag> BlogTags { get; set; } = null!;
+
+        public int SaveChanges(bool softDelete, bool acceptAllChangesOnSuccess = true)
+        {
+            if (softDelete)
+            {
+                foreach (var entry in ChangeTracker.Entries<ISoftDelete>())
+                {
+                    if (entry.State == EntityState.Deleted)
+                    {
+                        entry.State = EntityState.Modified;
+                        entry.Entity.IsDelete = true;
+                    }
+                }
+            }
+
+            return base.SaveChanges(acceptAllChangesOnSuccess);
+        }
+
         /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

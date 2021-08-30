@@ -15,7 +15,7 @@ namespace EfCoreTest
             //await EntityMappingTest.ManyToMany_Insert_Test();
 
             //await SearchTest.ProtectedProp_Test();
-            await SearchTest.CompileQuery_PersonById_Test();
+            //await SearchTest.CompileQuery_PersonById_Test();
 
             //await LinqTranslationTest.ListContains_Predicate_Test();
             //await LinqTranslationTest.ListAny_Predicate_ThrowInvalidOperationException_Test();
@@ -34,6 +34,8 @@ namespace EfCoreTest
             //DynamicLinqTest.Query_NoArg_GenerateParameterSql();
             //DynamicLinqTest.Query_WithArg_GenerateParameterSql();
             //DynamicLinqTest.Query_Contains_WithArg_NoParameterSql();
+
+            await DeleteTest.DeleteItems_FromPrimaryTable_OneToMany();
 
             OnExit();
         }
