@@ -15,7 +15,9 @@ namespace EfCoreTest
             //await EntityMappingTest.ManyToMany_Insert_Test();
 
             //await SearchTest.ProtectedProp_Test();
-            //await SearchTest.CompileQuery_PersonById_Test();
+            await SearchTest.CompileQuery_Test();
+            await SearchTest.CompileQuery_Include_Test();
+            await SearchTest.CompileQuery_WithSelect_Test();
 
             //await LinqTranslationTest.ListContains_Predicate_Test();
             //await LinqTranslationTest.ListAny_Predicate_ThrowInvalidOperationException_Test();
