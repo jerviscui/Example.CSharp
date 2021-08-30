@@ -1,8 +1,10 @@
+using System.Threading.Tasks;
+
 namespace DelegateTest
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             //BenchmarkRunner.Run<BenchmarkTest>();
 
@@ -15,7 +17,10 @@ namespace DelegateTest
             //MethodDelegate.ExpressionTest();
             //MethodDelegate.GenericMethod();
 
-            new PropTest().PropAndDelegate_Exec_Test();
+            //new PropTest().PropAndDelegate_Exec_Test();
+
+            await FuncDelegateTest.Exec_WithFuncDelegate();
+            await FuncDelegateTest.Exec_WithFuncResult();
         }
     }
 }
