@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 
@@ -61,6 +62,36 @@ namespace EfCoreTest
                 context.Blogs.Include(o => o.BlogTags));
 
             var blogs = query(dbContext, "name");
+        }
+
+        public static async Task StreamingQuery_Test()
+        {
+            await using var dbContext = CreateSqliteMemoryDbContext();
+            await CreateSeedAsync(dbContext);
+
+            var stringBuilder = new StringBuilder();
+            foreach (var person in dbContext.Persons.Where(o => o.Id > 100).Take(1000))
+            {
+                stringBuilder.Append(person.Name);
+            }
+            //todo: 检查内存使用情况
+        }
+
+        private static async Task CreateSeedAsync(TestDbContext dbContext)
+        {
+            var family = new Family(2);
+            AddIfNotExists(dbContext, family);
+
+            var teacher = new Teacher(2, "teacher");
+            AddIfNotExists(dbContext, teacher);
+
+            for (int i = 0; i < 10000; i++)
+            {
+                var person = new Person(i + 100, $"name{i}", family.Id, teacher.Id);
+                AddIfNotExists(dbContext, person);
+            }
+
+            await dbContext.SaveChangesAsync();
         }
     }
 
