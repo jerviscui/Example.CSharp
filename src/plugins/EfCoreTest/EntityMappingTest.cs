@@ -71,7 +71,7 @@ namespace EfCoreTest
 
             var post = await dbContext.Posts.FirstAsync();
 
-            post.Tags.Add(new Tag { TagId = "new tag" });
+            post.AddTag(new Tag { TagId = "new tag" });
 
             await dbContext.SaveChangesAsync();
 

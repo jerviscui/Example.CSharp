@@ -10,15 +10,15 @@ namespace EfCoreTest
             //EntityMappingTest.OnDelete_PostgreSql_Test();
             //EntityMappingTest.OnDelete_SqliteMemory_Test();
 
-            //await EntityMappingTest.ManyToMany_Query_Test();
-            //await EntityMappingTest.ManyToMany_Query_AsSplitQuery_Test();
-            //await EntityMappingTest.ManyToMany_Insert_Test();
+            await EntityMappingTest.ManyToMany_Query_Test();
+            await EntityMappingTest.ManyToMany_Query_AsSplitQuery_Test();
+            await EntityMappingTest.ManyToMany_Insert_Test();
 
             //await SearchTest.ProtectedProp_Test();
             //await SearchTest.CompileQuery_Test();
             //await SearchTest.CompileQuery_Include_Test();
             //await SearchTest.CompileQuery_WithSelect_Test();
-            await SearchTest.StreamingQuery_Test();
+            //await SearchTest.StreamingQuery_Test();
 
             //await LinqTranslationTest.ListContains_Predicate_Test();
             //await LinqTranslationTest.ListAny_Predicate_ThrowInvalidOperationException_Test();

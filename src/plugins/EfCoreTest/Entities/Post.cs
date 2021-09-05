@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Linq;
 
 namespace EfCoreTest
 {
@@ -10,6 +11,17 @@ namespace EfCoreTest
 
         public string Content { get; set; }
 
-        public List<Tag> Tags { get; set; } = new();
+        public IReadOnlyCollection<Tag> Tags
+        {
+            get => _tags.AsReadOnly();
+            protected set => _tags.AddRange(value.AsEnumerable());
+        }
+
+        private readonly List<Tag> _tags = new();
+
+        public void AddTag(Tag tag)
+        {
+            _tags.Add(tag);
+        }
     }
 }
