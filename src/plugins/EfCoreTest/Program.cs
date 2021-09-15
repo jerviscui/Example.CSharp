@@ -10,9 +10,12 @@ namespace EfCoreTest
             //EntityMappingTest.OnDelete_PostgreSql_Test();
             //EntityMappingTest.OnDelete_SqliteMemory_Test();
 
-            await EntityMappingTest.ManyToMany_Query_Test();
-            await EntityMappingTest.ManyToMany_Query_AsSplitQuery_Test();
-            await EntityMappingTest.ManyToMany_Insert_Test();
+            //await EntityMappingTest.ManyToMany_Query_Test();
+            //await EntityMappingTest.ManyToMany_Query_AsSplitQuery_Test();
+            //await EntityMappingTest.ManyToMany_Insert_Test();
+
+            //await RowVersionTest.MssqlRowVersion_Update_Test();
+            await RowVersionTest.PgsqlRowVersion_Update_Test();
 
             //await SearchTest.ProtectedProp_Test();
             //await SearchTest.CompileQuery_Test();

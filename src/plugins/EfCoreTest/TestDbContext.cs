@@ -6,6 +6,66 @@ namespace EfCoreTest
 {
     public class TestDbContext : DbContext
     {
+        #region DatabaseProvider
+
+        public enum EfCoreDatabaseProvider
+        {
+            SqlServer,
+
+            MySql,
+
+            Oracle,
+
+            PostgreSql,
+
+            Sqlite,
+
+            InMemory,
+
+            Cosmos,
+
+            Firebird
+        }
+
+        public const string ProviderKey = "ProviderKey";
+
+        private void SetDatabaseProvider(ModelBuilder modelBuilder)
+        {
+            var provider = GetDatabaseProviderOrNull(modelBuilder);
+            if (provider != null)
+            {
+                modelBuilder.Model.SetAnnotation(ProviderKey, provider);
+            }
+        }
+
+        protected virtual EfCoreDatabaseProvider? GetDatabaseProviderOrNull(ModelBuilder modelBuilder)
+        {
+            switch (Database.ProviderName)
+            {
+                case "Microsoft.EntityFrameworkCore.SqlServer":
+                    return EfCoreDatabaseProvider.SqlServer;
+                case "Npgsql.EntityFrameworkCore.PostgreSQL":
+                    return EfCoreDatabaseProvider.PostgreSql;
+                case "Pomelo.EntityFrameworkCore.MySql":
+                    return EfCoreDatabaseProvider.MySql;
+                case "Oracle.EntityFrameworkCore":
+                case "Devart.Data.Oracle.Entity.EFCore":
+                    return EfCoreDatabaseProvider.Oracle;
+                case "Microsoft.EntityFrameworkCore.Sqlite":
+                    return EfCoreDatabaseProvider.Sqlite;
+                case "Microsoft.EntityFrameworkCore.InMemory":
+                    return EfCoreDatabaseProvider.InMemory;
+                case "FirebirdSql.EntityFrameworkCore.Firebird":
+                    return EfCoreDatabaseProvider.Firebird;
+                case "Microsoft.EntityFrameworkCore.Cosmos":
+                    return EfCoreDatabaseProvider.Cosmos;
+                default:
+                    return null;
+            }
+        }
+
+        #endregion
+
         public TestDbContext(DbContextOptions<TestDbContext> options) : base(options)
         {
         }
@@ -25,6 +85,12 @@ namespace EfCoreTest
         public DbSet<Blog> Blogs { get; set; } = null!;
 
         public DbSet<BlogTag> BlogTags { get; set; } = null!;
+
+        public DbSet<MssqlRowVersion> MssqlRowVersions { get; set; } = null!;
+
+        public DbSet<MysqlRowVersion> MysqlRowVersions { get; set; } = null!;
+
+        public DbSet<PgsqlRowVersion> PgsqlRowVersions { get; set; } = null!;
 
         public int SaveChanges(bool softDelete, bool acceptAllChangesOnSuccess = true)
         {
@@ -46,6 +112,8 @@ namespace EfCoreTest
         /// <inheritdoc />
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
+            SetDatabaseProvider(modelBuilder);
+
             modelBuilder.ApplyConfigurationsFromAssembly(typeof(TestDbContext).GetTypeInfo().Assembly);
 
             CreateSeed(modelBuilder);
