@@ -1,6 +1,7 @@
 # Example.CSharp
 
 [![Join the chat at https://gitter.im/dotnet/csharplang](https://badges.gitter.im/dotnet/csharplang.svg)](https://gitter.im/dotnet/csharplang?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjerviscui%2FExample.CSharp.svg?type=shield)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjerviscui%2FExample.CSharp?ref=badge_shield)
 
 [![CodeFactor](https://www.codefactor.io/repository/github/jerviscui/example.csharp/badge/master)](https://www.codefactor.io/repository/github/jerviscui/example.csharp/overview/master)
 [![Build Status](https://travis-ci.com/jerviscui/Example.CSharp.svg?branch=master)](https://travis-ci.com/jerviscui/Example.CSharp)
@@ -21,3 +22,7 @@ The CSharp language syntax and features examples.
 
 [![Top Langs](https://github-readme-stats.vercel.app/api/top-langs/?username=jerviscui&count_private=true&layout=compact)](https://github.com/anuraghazra/github-readme-stats)
 
+
+
+## License
+[![FOSSA Status](https://app.fossa.com/api/projects/git%2Bgithub.com%2Fjerviscui%2FExample.CSharp.svg?type=large)](https://app.fossa.com/projects/git%2Bgithub.com%2Fjerviscui%2FExample.CSharp?ref=badge_large)
