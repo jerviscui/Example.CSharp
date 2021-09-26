@@ -7,8 +7,8 @@ namespace StackExchangeRedisTest
     {
         static DatabaseProvider()
         {
-            Connection = ConnectionMultiplexer.Connect("10.99.59.47:7000,DefaultDatabase=5", Logger);
             Logger = new StringWriter();
+            Connection = ConnectionMultiplexer.Connect("10.99.59.47:7000,DefaultDatabase=5", Logger);
         }
 
         /// <summary>
@@ -31,11 +31,14 @@ namespace StackExchangeRedisTest
 
         public static void Start()
         {
+            //clear
+            GetDatabase().Execute("flushdb");
         }
 
         public static void Dispose()
         {
             Connection.Dispose();
+            Logger.Dispose();
         }
     }
 }
