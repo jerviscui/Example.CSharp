@@ -49,8 +49,8 @@ namespace EfCoreTest
         protected static TestDbContext CreateMsSqlDbContext()
         {
             var builder = CreateBuilder();
-            //builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
-            builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
+            builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
+            //builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
 
             var dbContext = new TestDbContext(builder.Options);
 

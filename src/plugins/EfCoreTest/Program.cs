@@ -43,6 +43,8 @@ namespace EfCoreTest
 
             await DeleteTest.DeleteItems_FromPrimaryTable_OneToMany();
 
+            await ExceptionTest.DbUpdateException_Retry_Test();
+
             OnExit();
         }
 
