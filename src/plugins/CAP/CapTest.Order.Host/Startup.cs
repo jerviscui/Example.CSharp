@@ -1,4 +1,5 @@
 using CapTest.Order.Service;
+using DotNetCore.CAP.Dashboard.NodeDiscovery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -28,7 +29,17 @@ namespace CapTest.Order.Host
             });
 
             services.AddDbContextPool<OrderDbContext>(builder =>
-                builder.UseNpgsql(Configuration.GetConnectionString("Order")));
+                builder.UseNpgsql(Configuration.GetConnectionString(OrderConsts.DbContextConnName)));
+
+            services.AddCap(options =>
+            {
+                options.UseEntityFramework<OrderDbContext>(efOptions => efOptions.Schema = "cap");
+
+                options.UseRabbitMQ("localhost");
+
+                options.UseDashboard(dashboardOptions => dashboardOptions.PathBase = "/cap");
+                options.UseDiscovery(discoveryOptions => { });
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
