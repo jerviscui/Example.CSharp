@@ -1,5 +1,4 @@
 using CapTest.Order.Service;
-using DotNetCore.CAP.Dashboard.NodeDiscovery;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -22,6 +21,9 @@ namespace CapTest.Order.Host
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<OrderService>();
+            services.AddTransient<OrderCreatedEventHandler>();
+
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
@@ -33,12 +35,15 @@ namespace CapTest.Order.Host
 
             services.AddCap(options =>
             {
+                options.TopicNamePrefix = "test";
+
                 options.UseEntityFramework<OrderDbContext>(efOptions => efOptions.Schema = "cap");
 
                 options.UseRabbitMQ("localhost");
+                options.DefaultGroupName = OrderConsts.MessageGroupName;
 
                 options.UseDashboard(dashboardOptions => dashboardOptions.PathBase = "/cap");
-                options.UseDiscovery(discoveryOptions => { });
+                //options.UseDiscovery(discoveryOptions => { });
             });
         }
 

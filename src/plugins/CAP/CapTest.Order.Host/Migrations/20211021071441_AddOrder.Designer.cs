@@ -2,15 +2,17 @@
 using CapTest.Order.Host;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace CapTest.Order.Host.Migrations
 {
     [DbContext(typeof(OrderDesignDbContext))]
-    partial class OrderDesignDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211021071441_AddOrder")]
+    partial class AddOrder
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
