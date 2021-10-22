@@ -1,5 +1,6 @@
 using System;
 using CapTest.Order.Service;
+using CapTest.Shared;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Design;
 using Microsoft.Extensions.Configuration;

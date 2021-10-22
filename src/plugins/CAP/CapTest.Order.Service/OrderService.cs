@@ -1,5 +1,6 @@
 using System;
 using System.Threading.Tasks;
+using CapTest.Shared;
 using DotNetCore.CAP;
 using Microsoft.Extensions.DependencyInjection;
 

@@ -4,4 +4,13 @@
     <TargetFramework>net5.0</TargetFramework>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="DotNetCore.CAP" Version="5.1.4" />
+    <PackageReference Include="DotNetCore.CAP.PostgreSql" Version="5.1.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CapTest.Shared\CapTest.Shared.csproj" />
+  </ItemGroup>
+
 </Project>

@@ -1,15 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
+using CapTest.Depot.Service;
+using CapTest.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.HttpsPolicy;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Microsoft.Extensions.Logging;
 using Microsoft.OpenApi.Models;
 
 namespace CapTest.Depot.Host
@@ -26,11 +22,27 @@ namespace CapTest.Depot.Host
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            services.AddTransient<OrderCreatedEventHandler>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
             {
                 c.SwaggerDoc("v1", new OpenApiInfo { Title = "CapTest.Depot.Host", Version = "v1" });
+            });
+
+            services.AddDbContextPool<DepotDbContext>(builder =>
+                builder.UseNpgsql(Configuration.GetConnectionString(DepotConsts.DbContextConnName)));
+
+            services.AddCap(options =>
+            {
+                options.TopicNamePrefix = "test";
+
+                options.UseEntityFramework<DepotDbContext>(efOptions => efOptions.Schema = "cap");
+
+                options.UseRabbitMQ("localhost");
+
+                options.UseDashboard(dashboardOptions => dashboardOptions.PathBase = "/cap");
+                //options.UseDiscovery(discoveryOptions => { });
             });
         }
 

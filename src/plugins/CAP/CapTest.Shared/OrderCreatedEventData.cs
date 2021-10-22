@@ -1,4 +1,4 @@
-namespace CapTest.Order.Service
+namespace CapTest.Shared
 {
     public class OrderCreatedEventData
     {

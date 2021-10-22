@@ -1,4 +1,5 @@
 using CapTest.Order.Service;
+using CapTest.Shared;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
