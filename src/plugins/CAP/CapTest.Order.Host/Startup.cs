@@ -1,5 +1,6 @@
 using CapTest.Order.Service;
 using CapTest.Shared;
+using DotNetCore.CAP;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
@@ -34,6 +35,7 @@ namespace CapTest.Order.Host
             services.AddDbContextPool<OrderDbContext>(builder =>
                 builder.UseNpgsql(Configuration.GetConnectionString(OrderConsts.DbContextConnName)));
 
+            services.AddTransient<ICapTransaction, PostgreSqlCapTransaction>();
             services.AddCap(options =>
             {
                 options.TopicNamePrefix = "test";
@@ -43,8 +45,16 @@ namespace CapTest.Order.Host
                 options.UseRabbitMQ("localhost");
                 options.DefaultGroupName = OrderConsts.MessageGroupName;
 
-                options.UseDashboard(dashboardOptions => dashboardOptions.PathBase = "/cap");
-                //options.UseDiscovery(discoveryOptions => { });
+                options.UseDashboard(dashboardOptions => dashboardOptions.PathMatch = "/cap");
+                //options.UseDiscovery(discoveryOptions =>
+                //{
+                //    discoveryOptions.DiscoveryServerHostName = "localhost";
+                //    discoveryOptions.DiscoveryServerPort = 8500;
+                //    discoveryOptions.CurrentNodeHostName = Configuration.GetValue<string>("ASPNETCORE_HOSTNAME");
+                //    discoveryOptions.CurrentNodePort = Configuration.GetValue<int>("ASPNETCORE_PORT");
+                //    discoveryOptions.NodeId = "node1";
+                //    discoveryOptions.NodeName = "node1 name";
+                //});
             });
         }
 

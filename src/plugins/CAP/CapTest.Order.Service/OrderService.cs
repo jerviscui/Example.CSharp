@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using CapTest.Shared;
 using DotNetCore.CAP;
@@ -27,19 +28,52 @@ namespace CapTest.Order.Service
 
             var order = new Order(id, DateTime.Now.ToString("s"));
             await dbContext.Orders.AddAsync(order);
-            await _capPublisher.PublishAsync(OrderCreatedEventData.Name, new OrderCreatedEventData(order.Number), "");
+            await _capPublisher.PublishAsync(OrderCreatedEventData.Name, new OrderCreatedEventData(order.Number));
 
             await dbContext.SaveChangesAsync();
 
             await transaction.CommitAsync();
 
             return order.Number;
+        }
 
-            //var trans = database.BeginTransaction();
-            //publisher.Transaction.Value =
-            //    ActivatorUtilities.CreateInstance<PostgreSqlCapTransaction>(publisher.ServiceProvider);
-            //var capTrans = publisher.Transaction.Value.Begin(trans, autoCommit);
-            //return new CapEFDbTransaction(capTrans);
+        public async Task<string> CreateWithoutCapPgsql(int id)
+        {
+            using var scope = _serviceProvider.CreateScope();
+            var dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
+
+            await using var transaction = await dbContext.Database.BeginTransactionAsync();
+
+            var order = new Order(id, DateTime.Now.ToString("s"));
+            await dbContext.Orders.AddAsync(order);
+
+            var outter = _capPublisher.Transaction.Value;
+
+            try
+            {
+                var capTransaction = scope.ServiceProvider.GetRequiredService<ICapTransaction>();
+                capTransaction.DbTransaction = transaction;
+                capTransaction.AutoCommit = false;
+                _capPublisher.Transaction.Value = capTransaction;
+
+                await _capPublisher.PublishAsync(OrderCreatedEventData.Name, new OrderCreatedEventData(order.Number));
+
+                await dbContext.SaveChangesAsync();
+                await transaction.CommitAsync();
+            }
+            finally
+            {
+                _capPublisher.Transaction.Value = outter;
+            }
+
+            return order.Number;
+        }
+
+        // ReSharper disable once InconsistentNaming
+        public async Task CreateMessageWithHeaders()
+        {
+            var headers = new Dictionary<string, string> { { "msg-by-header", "0" } };
+            await _capPublisher.PublishAsync("test.header", DateTime.Now.ToString("s"), headers);
         }
     }
 }

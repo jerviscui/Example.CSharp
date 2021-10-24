@@ -25,5 +25,11 @@ namespace CapTest.Order.Service
 
             _logger.LogInformation($"event received: node1 {data.Number}");
         }
+
+        [CapSubscribe("test.header")]
+        public void MessageWithHeaders(string data, [FromCap] CapHeader header)
+        {
+            var value = header["msg-by-header"];
+        }
     }
 }

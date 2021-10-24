@@ -41,7 +41,7 @@ namespace CapTest.Depot.Host
 
                 options.UseRabbitMQ("localhost");
 
-                options.UseDashboard(dashboardOptions => dashboardOptions.PathBase = "/cap");
+                options.UseDashboard(dashboardOptions => dashboardOptions.PathMatch = "/cap");
                 //options.UseDiscovery(discoveryOptions => { });
             });
         }

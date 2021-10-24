@@ -21,5 +21,22 @@ namespace CapTest.Order.Host.Controllers
         {
             return await _orderService.Create(id);
         }
+
+        [HttpPost]
+        [Route("CreateWithTransaction/{id}")]
+        public async Task<string> CreateWithTransactionAsync(int id)
+        {
+            return await _orderService.CreateWithoutCapPgsql(id);
+        }
+
+        [HttpPost]
+        [Route("CreateMessageWithHeaders")]
+        // ReSharper disable once InconsistentNaming
+        public async Task<IActionResult> CreateTTLMessage()
+        {
+            await _orderService.CreateMessageWithHeaders();
+
+            return Ok();
+        }
     }
 }
