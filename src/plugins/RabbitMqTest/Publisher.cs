@@ -8,6 +8,8 @@ namespace RabbitMqTest
 {
     public class Publisher : IDisposable
     {
+        public readonly ConcurrentDictionary<ulong, ReadOnlyMemory<byte>> Failed = new();
+
         //Model
         private IModel? _channel;
 
@@ -44,16 +46,6 @@ namespace RabbitMqTest
                 _channel = _connection.CreateModel();
                 _channel.ConfirmSelect();
             }
-        }
-
-        private static void AutoCreate(IModel channel, string exchange, string routingKey)
-        {
-            channel.ExchangeDeclare(exchange, ExchangeType.Topic, true);
-
-            var queue = RabbitMq.AutoQueueName(exchange, routingKey);
-            var queueDeclare = channel.QueueDeclare(queue, true, false, false, RabbitMq.AutoQueueArguments);
-
-            channel.QueueBind(queue, exchange, routingKey);
         }
 
         public void Publish(string exchange, string routingKey, Dictionary<string, string>? headers,
@@ -106,7 +98,7 @@ namespace RabbitMqTest
         {
             Connect();
 
-            AutoCreate(_channel, exchange, routingKey);
+            RabbitMq.AutoCreate(_channel!, exchange, routingKey);
         }
 
         private void InternalPublish(string exchange, string routingKey, Dictionary<string, string>? headers,
@@ -129,8 +121,6 @@ namespace RabbitMqTest
                 _channel.BasicPublish(exchange, routingKey, props, bodies[i]);
             }
         }
-
-        public readonly ConcurrentDictionary<ulong, ReadOnlyMemory<byte>> Failed = new();
 
         private void Dispose(bool disposing)
         {

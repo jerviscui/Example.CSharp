@@ -37,6 +37,16 @@ namespace RabbitMqTest
 
         public static string AutoQueueName(string exchange, string routingKey) => $"{exchange}-{routingKey}-queue";
 
+        public static void AutoCreate(IModel channel, string exchange, string routingKey)
+        {
+            channel.ExchangeDeclare(exchange, ExchangeType.Topic, true);
+
+            var queue = AutoQueueName(exchange, routingKey);
+            var queueDeclare = channel.QueueDeclare(queue, true, false, false, AutoQueueArguments);
+
+            channel.QueueBind(queue, exchange, routingKey);
+        }
+
         public static int Day = 1000 * 60 * 60 * 24;
 
         public static Dictionary<string, object> AutoQueueArguments = new() { { "x-message-ttl", 3 * Day } };

@@ -1,4 +1,5 @@
 using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace RabbitMqTest
@@ -7,14 +8,14 @@ namespace RabbitMqTest
     {
         private static void Main(string[] args)
         {
+            var cts = new CancellationTokenSource();
+            Task.Factory.StartNew(() => ConsumerTest.ReceiveQueueMessage_Test(cts.Token), cts.Token);
+
             //PublishTest.PublishOneMessage_Test();
-            Task.Factory.StartNew(PublishTest.PublishNoWait_Test);
+            PublishTest.PublishNoWait_Test();
 
             Console.ReadLine();
+            cts.Cancel();
         }
-    }
-
-    public class Consumer
-    {
     }
 }
