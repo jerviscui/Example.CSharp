@@ -14,7 +14,10 @@ namespace StackExchangeRedisTest
             //await SerializeTest.SystemTextJson_Test();
             //await SerializeTest.NewtownJson_Test();
 
-            await ScriptTest.ScriptEvaluate_ReturnBytes_Test();
+            //await ScriptTest.ScriptEvaluate_ReturnBytes_Test();
+
+            //await TransactionTest.Transaction_Test();
+            await TransactionTest.ChangeWatchValue_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();
