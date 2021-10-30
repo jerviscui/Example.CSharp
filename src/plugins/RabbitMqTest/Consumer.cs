@@ -1,4 +1,7 @@
 using System;
+using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 using RabbitMQ.Client;
 using RabbitMQ.Client.Events;
 
@@ -37,7 +40,7 @@ namespace RabbitMqTest
             }
         }
 
-        public void Connect()
+        public void Connect(bool useAsyncConsumer)
         {
             if (_connection is not null && !_connection.IsOpen)
             {
@@ -45,7 +48,7 @@ namespace RabbitMqTest
                 _connection = null;
             }
 
-            _connection ??= RabbitMq.CreateConnection("Consumer");
+            _connection ??= RabbitMq.CreateConnection("Consumer", useAsyncConsumer);
 
             if (_channel is not null && !_channel.IsOpen)
             {
@@ -62,13 +65,16 @@ namespace RabbitMqTest
 
         public void Subscribe(string exchange, string routingKey)
         {
-            Connect();
+            Connect(false);
 
-            RabbitMq.AutoCreate(_channel!, exchange, routingKey);
+            Debug.Assert(_channel is not null);
+
+            RabbitMq.AutoCreate(_channel, exchange, routingKey);
 
             var consumer = new EventingBasicConsumer(_channel);
             consumer.Received += (sender, args) =>
             {
+                Console.WriteLine($"receive: {args.Exchange} {args.RoutingKey} {args.DeliveryTag} {args.Redelivered}");
                 OnReceived?.Invoke(sender, args);
 
                 _channel.BasicAck(args.DeliveryTag, false);
@@ -78,14 +84,43 @@ namespace RabbitMqTest
             consumer.Unregistered += (sender, args) => { };
             consumer.ConsumerCancelled += (sender, args) => { };
 
-            //var consumer = new AsyncEventingBasicConsumer(_channel);
-            //consumer.Received += (sender, args) => Task.CompletedTask;
-            //consumer.Registered += (sender, args) => Task.CompletedTask;
-            //consumer.Shutdown += (sender, args) => Task.CompletedTask;
-            //consumer.Unregistered += (sender, args) => Task.CompletedTask;
-            //consumer.ConsumerCancelled += (sender, args) => Task.CompletedTask;
+            var consumerTag = IModelExensions.BasicConsume(_channel, RabbitMq.AutoQueueName(exchange, routingKey), false, consumer);
+        }
 
-            var consumerTag = _channel.BasicConsume(RabbitMq.AutoQueueName(exchange, routingKey), false, consumer);
+        public void SubscribeAsyncConsumer(string exchange, string routingKey)
+        {
+            Connect(true);
+
+            Debug.Assert(_channel is not null);
+
+            RabbitMq.AutoCreate(_channel, exchange, routingKey);
+
+            var consumer = new AsyncEventingBasicConsumer(_channel);
+            consumer.Received += (sender, args) =>
+            {
+                Console.WriteLine($"receive: {args.Exchange} {args.RoutingKey} {args.DeliveryTag} {args.Redelivered}");
+
+                if (OnReceivedAsync is null)
+                {
+                    _channel.BasicAck(args.DeliveryTag, false);
+                    return Task.CompletedTask;
+                }
+
+                var task = OnReceivedAsync.Invoke(sender, args);
+                task = task.ContinueWith(_ => _channel.BasicAck(args.DeliveryTag, false));
+
+                return task;
+            };
+            consumer.Registered += (sender, args) => Task.CompletedTask;
+            consumer.Shutdown += (sender, args) => Task.CompletedTask;
+            consumer.Unregistered += (sender, args) => Task.CompletedTask;
+            consumer.ConsumerCancelled += (sender, args) => Task.CompletedTask;
+
+            _channel.BasicQos(0, 2, false);
+
+            var arguments = new Dictionary<string, object> { { "x-priority", 10 } };
+            var consumerTag =
+                _channel.BasicConsume(RabbitMq.AutoQueueName(exchange, routingKey), false, "", arguments, consumer);
         }
 
         public event EventHandler<BasicDeliverEventArgs>? OnReceived;

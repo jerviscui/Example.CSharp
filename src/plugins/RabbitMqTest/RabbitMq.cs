@@ -16,7 +16,7 @@ namespace RabbitMqTest
         //5672 for regular ("plain TCP") connections, 5671 for connections with TLS enabled
         public static int Port { get; set; } = -1;
 
-        public static IConnection CreateConnection(string? provider = null)
+        public static IConnection CreateConnection(string? provider = null, bool useAsyncConsumer = false)
         {
             var factory = new ConnectionFactory
             {
@@ -24,7 +24,8 @@ namespace RabbitMqTest
                 Password = Password,
                 VirtualHost = VirtualHost,
                 HostName = HostName,
-                Port = Port
+                Port = Port,
+                DispatchConsumersAsync = useAsyncConsumer
             };
 
             if (provider is not null)

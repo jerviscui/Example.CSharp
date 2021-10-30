@@ -14,7 +14,7 @@ namespace RabbitMqTest
             publisher.Publish("test.exchange", "test.route", null, null, data);
         }
 
-        public static Publisher PublishNoWait_Test()
+        public static void PublishNoWait_Test()
         {
             using var publisher = new Publisher();
 
@@ -25,8 +25,6 @@ namespace RabbitMqTest
 
             Thread.Sleep(1000 * 30);
             var failed = publisher.Failed;
-
-            return publisher;
         }
     }
 }

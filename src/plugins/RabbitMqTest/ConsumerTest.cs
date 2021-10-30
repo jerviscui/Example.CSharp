@@ -1,6 +1,7 @@
 using System;
 using System.Text.Json;
 using System.Threading;
+using System.Threading.Tasks;
 
 namespace RabbitMqTest
 {
@@ -19,7 +20,26 @@ namespace RabbitMqTest
 
             while (!token.IsCancellationRequested)
             {
-                Thread.Sleep(1000 * 10);
+                Thread.Sleep(1000);
+            }
+        }
+
+        public static void ReceiveQueueMessage_AsyncConsumer_Test(CancellationToken token)
+        {
+            using var consumer = new Consumer();
+            consumer.OnReceivedAsync += async (sender, args) =>
+            {
+                await Task.Delay(1000, token);
+
+                var properties = args.BasicProperties;
+                var body = args.Body;
+                var date = JsonSerializer.Deserialize<DateTime>(body.Span);
+            };
+            consumer.SubscribeAsyncConsumer("test.exchange", "test.route.multi");
+
+            while (!token.IsCancellationRequested)
+            {
+                Thread.Sleep(1000);
             }
         }
     }

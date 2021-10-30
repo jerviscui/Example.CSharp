@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Concurrent;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using RabbitMQ.Client;
 
@@ -53,7 +54,9 @@ namespace RabbitMqTest
         {
             Verify(exchange, routingKey);
 
-            InternalPublish(exchange, routingKey, headers, expiration, bodies);
+            Debug.Assert(_channel is not null);
+
+            InternalPublish(_channel, exchange, routingKey, headers, expiration, bodies);
 
             try
             {
@@ -71,6 +74,8 @@ namespace RabbitMqTest
             string? expiration, params ReadOnlyMemory<byte>[] bodies)
         {
             Verify(exchange, routingKey);
+
+            Debug.Assert(_channel is not null);
 
             _channel.BasicAcks += (sender, args) =>
             {
@@ -91,20 +96,22 @@ namespace RabbitMqTest
                 Console.WriteLine($"{args.Multiple} {args.DeliveryTag}");
             };
 
-            InternalPublish(exchange, routingKey, headers, expiration, bodies);
+            InternalPublish(_channel, exchange, routingKey, headers, expiration, bodies);
         }
 
         private void Verify(string exchange, string routingKey)
         {
             Connect();
 
-            RabbitMq.AutoCreate(_channel!, exchange, routingKey);
+            Debug.Assert(_channel is not null);
+
+            RabbitMq.AutoCreate(_channel, exchange, routingKey);
         }
 
-        private void InternalPublish(string exchange, string routingKey, Dictionary<string, string>? headers,
-            string? expiration, params ReadOnlyMemory<byte>[] bodies)
+        private void InternalPublish(IModel channel, string exchange, string routingKey,
+            Dictionary<string, string>? headers, string? expiration, params ReadOnlyMemory<byte>[] bodies)
         {
-            var props = _channel.CreateBasicProperties();
+            var props = channel.CreateBasicProperties();
             props.DeliveryMode = 2;
             if (expiration is not null)
             {
@@ -117,8 +124,10 @@ namespace RabbitMqTest
 
             for (int i = 0; i < bodies.Length; i++)
             {
-                Failed.TryAdd(_channel.NextPublishSeqNo, bodies[i]);
-                _channel.BasicPublish(exchange, routingKey, props, bodies[i]);
+                var seqNo = channel.NextPublishSeqNo;
+                Failed.TryAdd(seqNo, bodies[i]);
+                channel.BasicPublish(exchange, routingKey, props, bodies[i]);
+                Console.WriteLine($"published: {exchange} {routingKey} {seqNo}");
             }
         }
 
