@@ -5,6 +5,10 @@ namespace RabbitMqTest
 {
     public static class RabbitMq
     {
+        public static int Day = 1000 * 60 * 60 * 24;
+
+        public static Dictionary<string, object> AutoQueueArguments = new() { { "x-message-ttl", 3 * Day } };
+
         public static string UserName { get; set; } = "guest";
 
         public static string Password { get; set; } = "guest";
@@ -47,9 +51,5 @@ namespace RabbitMqTest
 
             channel.QueueBind(queue, exchange, routingKey);
         }
-
-        public static int Day = 1000 * 60 * 60 * 24;
-
-        public static Dictionary<string, object> AutoQueueArguments = new() { { "x-message-ttl", 3 * Day } };
     }
 }

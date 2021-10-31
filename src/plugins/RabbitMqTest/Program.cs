@@ -1,6 +1,5 @@
 using System;
 using System.Threading;
-using System.Threading.Tasks;
 
 namespace RabbitMqTest
 {
@@ -10,10 +9,12 @@ namespace RabbitMqTest
         {
             var cts = new CancellationTokenSource();
             //Task.Factory.StartNew(() => ConsumerTest.ReceiveQueueMessage_Test(cts.Token), cts.Token);
-            Task.Factory.StartNew(() => ConsumerTest.ReceiveQueueMessage_AsyncConsumer_Test(cts.Token), cts.Token);
+            //Task.Factory.StartNew(() => ConsumerTest.ReceiveQueueMessage_AsyncConsumer_Test(cts.Token), cts.Token);
 
             //PublishTest.PublishOneMessage_Test();
-            PublishTest.PublishNoWait_Test();
+            //PublishTest.PublishNoWait_Test();
+
+            DelayQueueTest.Test();
 
             Console.ReadLine();
             cts.Cancel();
