@@ -52,8 +52,6 @@ namespace AsyncExConsoleTest
             await tasks.WhenAll();
 
             Console.WriteLine($"result is {count}, must equals {tasks.Length}");
-
-            //new AsyncReaderWriterLock()
         }
     }
 }
