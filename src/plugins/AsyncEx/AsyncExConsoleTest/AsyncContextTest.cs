@@ -1,0 +1,20 @@
+using System;
+using System.Threading.Tasks;
+using Nito.AsyncEx;
+
+namespace AsyncExConsoleTest
+{
+    internal class AsyncContextTest
+    {
+        public static void Run_Task_Test()
+        {
+            var r = AsyncContext.Run(async () =>
+            {
+                await Task.Delay(1000);
+                return 100;
+            });
+
+            Console.WriteLine(r);
+        }
+    }
+}

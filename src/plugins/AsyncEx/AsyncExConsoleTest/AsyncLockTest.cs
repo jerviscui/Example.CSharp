@@ -18,7 +18,7 @@ namespace AsyncExConsoleTest
                 {
                     using (asyncLock.Lock())
                     {
-                        return count = count + 1;
+                        return count += 1;
                     }
                 });
                 tasks[i] = task;
@@ -27,8 +27,6 @@ namespace AsyncExConsoleTest
             Task.WaitAll(tasks);
 
             Console.WriteLine($"result is {count}, must equals {tasks.Length}");
-
-            //new AsyncReaderWriterLock()
         }
 
         public static async Task AsyncLock_UsedAsync_Test()
@@ -43,7 +41,7 @@ namespace AsyncExConsoleTest
                 {
                     using (await asyncLock.LockAsync())
                     {
-                        return count = count + 1;
+                        return count += 1;
                     }
                 }).Unwrap();
                 tasks[i] = task;
@@ -74,18 +72,9 @@ namespace AsyncExConsoleTest
             {
                 using (await asyncLock.LockAsync())
                 {
-                    return count = count + 1;
+                    return count += 1;
                 }
             }
-        }
-
-        public void Test()
-        {
-            var asyncReaderWriterLock = new AsyncReaderWriterLock();
-
-            asyncReaderWriterLock.ReaderLock();
-
-            asyncReaderWriterLock.WriterLock();
         }
     }
 }
