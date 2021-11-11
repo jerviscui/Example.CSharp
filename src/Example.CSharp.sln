@@ -156,7 +156,9 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AsyncEx", "AsyncEx", "{9D9E
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncExConsoleTest", "plugins\AsyncEx\AsyncExConsoleTest\AsyncExConsoleTest.csproj", "{8317F5AA-8A20-446E-B025-578D392D7032}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "StatelessTest", "plugins\StatelessTest\StatelessTest.csproj", "{5A901063-0E10-4B9A-8375-DF8A4325AECE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatelessTest", "plugins\StatelessTest\StatelessTest.csproj", "{5A901063-0E10-4B9A-8375-DF8A4325AECE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadingTest", "Tests\ThreadingTest\ThreadingTest.csproj", "{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -376,6 +378,10 @@ Global
 		{5A901063-0E10-4B9A-8375-DF8A4325AECE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5A901063-0E10-4B9A-8375-DF8A4325AECE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5A901063-0E10-4B9A-8375-DF8A4325AECE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -438,6 +444,7 @@ Global
 		{9D9E0272-A819-4522-82E0-B3F0017E6CED} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{8317F5AA-8A20-446E-B025-578D392D7032} = {9D9E0272-A819-4522-82E0-B3F0017E6CED}
 		{5A901063-0E10-4B9A-8375-DF8A4325AECE} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
+		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
