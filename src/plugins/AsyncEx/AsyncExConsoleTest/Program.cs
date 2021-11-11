@@ -10,9 +10,10 @@ namespace AsyncExConsoleTest
             //await AsyncLockTest.AsyncLock_UsedAsync_Test();
             //await AsyncLockTest.AsyncLock_UsedAsync_WithMethod_Test();
 
-            //AsyncContextTest.Run_Task_Test();
+            AsyncContextTest.Run_Task_Test();
+            //AsyncContextTest.Run_Test();
 
-            AsyncReaderWriterLockTest.ReaderWriterLock_Test();
+            //AsyncReaderWriterLockTest.ReaderWriterLock_Test();
         }
     }
 }
