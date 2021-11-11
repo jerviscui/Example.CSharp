@@ -4,7 +4,11 @@ namespace ThreadingTest
     {
         static void Main(string[] args)
         {
-            TaskDelayTest.Test();
+            //TaskDelayTest.Test();
+
+            //ReaderWriterLockTest.ReaderWriterLock_Test();
+            //ReaderWriterLockTest.UpgradeToWriterLock_Test();
+            ReaderWriterLockTest.ReleaseLock_Test();
         }
     }
 }
