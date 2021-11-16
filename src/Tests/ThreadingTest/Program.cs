@@ -2,7 +2,7 @@ namespace ThreadingTest
 {
     internal class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
             //TaskDelayTest.Test();
 
@@ -15,7 +15,9 @@ namespace ThreadingTest
             //ReaderWriterLockSlimTest.EnterUpgradeableReadLock_WhenHasWrite_Test();
             //ReaderWriterLockSlimTest.ExitUpgradeableReadLock_Test();
             //ReaderWriterLockSlimTest.EnterUpgradeableReadLock_OnlyOne_Test();
-            ReaderWriterLockSlimTest.Upgradeable_ToRead_Test();
+            //ReaderWriterLockSlimTest.Upgradeable_ToRead_Test();
+
+            ChannelTest.Reader_Test();
         }
     }
 }
