@@ -98,7 +98,7 @@ namespace StackExchangeRedisTest
                     {
                         while (expr > DateTime.Now && token.CanBeCanceled)
                         {
-                            Thread.Sleep(5000);
+                            Thread.Sleep(3000);
 
                             if (token.IsCancellationRequested)
                             {
