@@ -17,7 +17,10 @@ namespace StackExchangeRedisTest
             //await ScriptTest.ScriptEvaluate_ReturnBytes_Test();
 
             //await TransactionTest.Transaction_Test();
-            await TransactionTest.ChangeWatchValue_Test();
+            //await TransactionTest.ChangeWatchValue_Test();
+
+            //LockTest.LockTakeAsync_Test();
+            LockTest.LockExtend_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();
