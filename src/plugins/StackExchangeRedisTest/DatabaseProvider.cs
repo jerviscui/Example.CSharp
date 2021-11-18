@@ -8,8 +8,8 @@ namespace StackExchangeRedisTest
         static DatabaseProvider()
         {
             Logger = new StringWriter();
-            //Connection = ConnectionMultiplexer.Connect("10.99.59.47:7000,DefaultDatabase=5", Logger);
-            Connection = ConnectionMultiplexer.Connect("localhost:6379,DefaultDatabase=5", Logger);
+            Connection = ConnectionMultiplexer.Connect("10.99.59.47:7000,DefaultDatabase=5", Logger);
+            //Connection = ConnectionMultiplexer.Connect("localhost:6379,DefaultDatabase=5", Logger);
         }
 
         /// <summary>

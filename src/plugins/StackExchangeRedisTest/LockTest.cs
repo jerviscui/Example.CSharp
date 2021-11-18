@@ -74,7 +74,7 @@ namespace StackExchangeRedisTest
             var database = DatabaseProvider.GetDatabase();
             var subscriber = database.Multiplexer.GetSubscriber();
 
-            var key = "lock:key1";
+            var key = "lock:key2";
 
             var t1 = Task.Run(async () =>
             {
@@ -135,9 +135,6 @@ namespace StackExchangeRedisTest
                 }
             });
 
-            //var timer = new Timer();
-            //timer.Change(TimeSpan.MaxValue, )
-
             Thread.Sleep(5000);
 
             var t2 = Task.Run(async () =>
@@ -168,6 +165,82 @@ namespace StackExchangeRedisTest
             });
 
             Task.WaitAll(t1, t2);
+        }
+
+        public static void LockTakeAsync_FailedWithBlock_Test()
+        {
+            var t1 = Task.Run(DoSth);
+            var t2 = Task.Run(DoSth);
+            var t3 = Task.Run(DoSth);
+            var t4 = Task.Run(DoSth);
+
+            Task.WaitAll(t1, t2, t3, t4);
+        }
+
+        private static int _value;
+
+        private static ManualResetEventSlim? _resetEvent;
+
+        private static async Task DoSth()
+        {
+            var database = DatabaseProvider.GetDatabase();
+            var key = "lock:key3";
+            var value = Interlocked.Increment(ref _value);
+
+            if (Interlocked.CompareExchange(ref _resetEvent, new ManualResetEventSlim(false, 100), null) is null)
+            {
+                var subscriber = database.Multiplexer.GetSubscriber();
+                await subscriber.SubscribeAsync($"__keyspace@{database.Database}__:{key}",
+                    (channel, redisValue) =>
+                    {
+                        Console.WriteLine($"{channel.ToString()} {redisValue}");
+                        if (redisValue == "del")
+                        {
+                            Console.WriteLine($"{channel.ToString()} has deleted");
+                            _resetEvent.Set();
+                        }
+                    });
+            }
+
+            bool taken;
+            do
+            {
+                taken = await database.LockTakeAsync(key, value, TimeSpan.FromSeconds(10));
+                if (!taken)
+                {
+                    Console.WriteLine($"{value} don't get lock.");
+
+                    //wait untill rlease lock
+                    if (!_resetEvent.Wait(TimeSpan.FromSeconds(20)))
+                    {
+                        Console.WriteLine($"{value} timeout.");
+                        break;
+                    }
+                }
+            } while (!taken);
+
+            if (taken)
+            {
+                _resetEvent.Reset();
+                var timer = new Timer(state =>
+                {
+                    Console.WriteLine($"{value} renewal lock.");
+                    database.LockExtend(key, value, TimeSpan.FromSeconds(10));
+                }, null, TimeSpan.FromSeconds(3), TimeSpan.FromSeconds(3));
+
+                try
+                {
+                    Console.WriteLine($"{value} get lock.");
+                    Thread.Sleep(10_000);
+                }
+                finally
+                {
+                    await database.LockReleaseAsync(key, value);
+                    Console.WriteLine($"{value} release lock.");
+                    //remove task
+                    await timer.DisposeAsync();
+                }
+            }
         }
     }
 }

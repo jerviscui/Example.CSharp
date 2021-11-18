@@ -20,7 +20,8 @@ namespace StackExchangeRedisTest
             //await TransactionTest.ChangeWatchValue_Test();
 
             //LockTest.LockTakeAsync_Test();
-            LockTest.LockExtend_Test();
+            //LockTest.LockExtend_Test();
+            LockTest.LockTakeAsync_FailedWithBlock_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();
