@@ -21,7 +21,13 @@ namespace StackExchangeRedisTest
 
             //LockTest.LockTakeAsync_Test();
             //LockTest.LockExtend_Test();
-            LockTest.LockTakeAsync_FailedWithBlock_Test();
+            //LockTest.LockTakeAsync_FailedWithBlock_Test();
+
+            //HashTest.HashSet_Test();
+            //HashTest.HashSet_WithHashEntry_Test();
+            HashTest.HashGet_Test();
+            HashTest.HashGetAll_Test();
+            HashTest.HashGetLease_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();
