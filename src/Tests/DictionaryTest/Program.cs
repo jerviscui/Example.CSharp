@@ -23,7 +23,9 @@ namespace DictionaryTest
             //stopwatch.Stop();
             //Print.Microsecond(stopwatch, "conDic:");
 
-            BenchmarkRunner.Run<GetOrAddTests>();
+            //BenchmarkRunner.Run<GetOrAddTests>();
+
+            BenchmarkRunner.Run<SortedDictionaryTest>();
         }
     }
 }
