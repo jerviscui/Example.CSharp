@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.29326.143
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "7", "7", "{8E8B45A5-D559-480F-B27D-0308B6D61E06}"
 	ProjectSection(SolutionItems) = preProject
@@ -158,7 +158,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AsyncExConsoleTest", "plugi
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StatelessTest", "plugins\StatelessTest\StatelessTest.csproj", "{5A901063-0E10-4B9A-8375-DF8A4325AECE}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ThreadingTest", "Tests\ThreadingTest\ThreadingTest.csproj", "{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ThreadingTest", "Tests\ThreadingTest\ThreadingTest.csproj", "{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Hangfire", "Hangfire", "{3D07426B-CBAA-4BB3-99F8-3D2D7544A1CA}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangfireTest.Web", "plugins\Hangfire\HangfireTest.Web\HangfireTest.Web.csproj", "{A0B88133-B87E-45B2-BE99-66BDDDED58AF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -382,6 +386,10 @@ Global
 		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A0B88133-B87E-45B2-BE99-66BDDDED58AF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A0B88133-B87E-45B2-BE99-66BDDDED58AF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A0B88133-B87E-45B2-BE99-66BDDDED58AF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A0B88133-B87E-45B2-BE99-66BDDDED58AF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -445,6 +453,8 @@ Global
 		{8317F5AA-8A20-446E-B025-578D392D7032} = {9D9E0272-A819-4522-82E0-B3F0017E6CED}
 		{5A901063-0E10-4B9A-8375-DF8A4325AECE} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{4D9F3F9D-71EB-4C94-BDB2-112C78FB7278} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
+		{3D07426B-CBAA-4BB3-99F8-3D2D7544A1CA} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
+		{A0B88133-B87E-45B2-BE99-66BDDDED58AF} = {3D07426B-CBAA-4BB3-99F8-3D2D7544A1CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
