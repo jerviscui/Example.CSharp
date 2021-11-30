@@ -9,21 +9,21 @@ namespace RecordTest
             Equal_Test();
         }
 
-        public void CreateRecord_Test()
+        public static void CreateRecord_Test()
         {
             var person = new Person("is a");
             //CS8852
             //person.Name = "";
         }
 
-        public void CreateRecord_WithInit_Test()
+        public static void CreateRecord_WithInit_Test()
         {
             var person = new Person2 { Name = "is b" };
             //CS8852
             //person.Name = "";
         }
 
-        public void CanSetProperty_Test()
+        public static void CanSetProperty_Test()
         {
             var person = new Person3 { Name = "is c" };
             person.Name = "";
@@ -31,7 +31,7 @@ namespace RecordTest
             Console.WriteLine(person.Name);
         }
 
-        public void CreateRecord_With_Test()
+        public static void CreateRecord_With_Test()
         {
             var person = new Person("is a");
 
@@ -49,7 +49,7 @@ namespace RecordTest
 
         private record Person2Para(string FirstName, string LastName);
 
-        public void Deconstruct_Test()
+        public static void Deconstruct_Test()
         {
             var p1 = new Person("is a");
             p1.Deconstruct(out var abc);
