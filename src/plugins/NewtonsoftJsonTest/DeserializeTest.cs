@@ -1,5 +1,3 @@
-// unset
-
 using Newtonsoft.Json;
 
 namespace NewtonsoftJsonTest
