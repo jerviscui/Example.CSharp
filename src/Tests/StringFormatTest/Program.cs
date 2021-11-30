@@ -1,4 +1,6 @@
 using BenchmarkDotNet.Attributes;
+using BenchmarkDotNet.Jobs;
+using BenchmarkDotNet.Running;
 
 namespace StringFormatTest
 {
@@ -6,7 +8,7 @@ namespace StringFormatTest
     {
         private static void Main(string[] args)
         {
-            //BenchmarkRunner.Run<BenchmarkTest>();
+            BenchmarkRunner.Run<BenchmarkTest>();
 
             //var watch = new Stopwatch();
             //watch.Restart();
@@ -78,18 +80,20 @@ namespace StringFormatTest
         public static string BoxFormatTest()
         {
             int a = 1;
-            return $"{a,10:##,###}";
+            return $"{a,10:##,###} xxx";
 
             //IL_0002: ldstr        "{0,10:##,###}"
             //IL_0007: ldloc.0      // a
             //IL_0008: box          [System.Runtime]System.Int32
             //IL_000d: call         string [System.Runtime]System.String::Format(string, object)
+
+            //.Net 6 中使用 DefaultInterpolatedStringHandler 格式化字符串
         }
 
         public static string UnBoxFormatTest()
         {
             int a = 1;
-            return $"{a.ToString("##,###")}";
+            return $"{a.ToString("##,###")} xxx";
 
             //IL_0003: ldstr        "{0,10}"
             //IL_0008: ldloca.s     a
@@ -99,6 +103,8 @@ namespace StringFormatTest
         }
     }
 
+    [SimpleJob(RuntimeMoniker.Net50)]
+    [SimpleJob(RuntimeMoniker.Net60)]
     [MemoryDiagnoser]
     public class BenchmarkTest
     {
