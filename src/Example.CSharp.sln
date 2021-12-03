@@ -175,7 +175,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TopLevelTest", "10\TopLevel
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CallerArgumentExpressionTest", "10\CallerArgumentExpressionTest\CallerArgumentExpressionTest.csproj", "{40E23C1C-6507-4A62-A67A-6D08F5D60337}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MinimalApiTest.WebApi", "10\MinimalApiTest.WebApi\MinimalApiTest.WebApi.csproj", "{F6266DF0-4F2E-49A5-BF89-6C80C37BBB6C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalApiTest.WebApi", "10\MinimalApiTest.WebApi\MinimalApiTest.WebApi.csproj", "{F6266DF0-4F2E-49A5-BF89-6C80C37BBB6C}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
