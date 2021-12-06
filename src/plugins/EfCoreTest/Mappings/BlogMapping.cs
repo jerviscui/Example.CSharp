@@ -9,6 +9,7 @@ namespace EfCoreTest
         public void Configure(EntityTypeBuilder<Blog> builder)
         {
             builder.HasKey(o => o.Id);
+            //*..1
             builder.HasMany(p => p.BlogTags).WithOne().HasForeignKey(o => o.BlogId).OnDelete(DeleteBehavior.Cascade);
         }
     }

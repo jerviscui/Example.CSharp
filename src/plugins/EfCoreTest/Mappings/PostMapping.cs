@@ -9,6 +9,7 @@ namespace EfCoreTest
         /// <inheritdoc />
         public void Configure(EntityTypeBuilder<Post> builder)
         {
+            //*..*
             builder
                 .HasMany(p => p.Tags)
                 .WithMany(p => p.Posts)

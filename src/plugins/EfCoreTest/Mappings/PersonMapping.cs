@@ -12,6 +12,7 @@ namespace EfCoreTest
             builder.Property(o => o.Id).ValueGeneratedNever();
             builder.Property(o => o.Long).HasDefaultValue(0);
             builder.Property(o => o.Decimal).HasColumnType("decimal(18,2)").HasDefaultValue(0);
+            //1..*
             builder.HasOne<Teacher>().WithMany().HasForeignKey(o => o.TeacherId)
                 .OnDelete(DeleteBehavior.ClientSetNull);
             builder.HasOne<Family>().WithMany().HasForeignKey(o => o.FamilyId)

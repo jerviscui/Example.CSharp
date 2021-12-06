@@ -9,7 +9,7 @@ namespace EfCoreTest
         public void Configure(EntityTypeBuilder<MssqlRowVersion> builder)
         {
             builder.HasKey(o => o.Id);
-            if ((TestDbContext.EfCoreDatabaseProvider)builder.Metadata.Model[TestDbContext.ProviderKey] ==
+            if ((TestDbContext.EfCoreDatabaseProvider)builder.Metadata.Model[TestDbContext.ProviderKey]! ==
                 TestDbContext.EfCoreDatabaseProvider.SqlServer)
             {
                 builder.Property(o => o.RowVersion).IsRowVersion();
@@ -23,7 +23,7 @@ namespace EfCoreTest
         public void Configure(EntityTypeBuilder<MysqlRowVersion> builder)
         {
             builder.HasKey(o => o.Id);
-            if ((TestDbContext.EfCoreDatabaseProvider)builder.Metadata.Model[TestDbContext.ProviderKey] ==
+            if ((TestDbContext.EfCoreDatabaseProvider)builder.Metadata.Model[TestDbContext.ProviderKey]! ==
                 TestDbContext.EfCoreDatabaseProvider.MySql)
             {
                 builder.Property(o => o.RowVersion).IsConcurrencyToken();
@@ -38,7 +38,7 @@ namespace EfCoreTest
         {
             builder.HasKey(o => o.Id);
 
-            if ((TestDbContext.EfCoreDatabaseProvider)builder.Metadata.Model[TestDbContext.ProviderKey] ==
+            if ((TestDbContext.EfCoreDatabaseProvider)builder.Metadata.Model[TestDbContext.ProviderKey]! ==
                 TestDbContext.EfCoreDatabaseProvider.PostgreSql)
             {
                 builder.UseXminAsConcurrencyToken();
