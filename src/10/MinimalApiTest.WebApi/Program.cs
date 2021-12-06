@@ -1,8 +1,22 @@
+using Microsoft.AspNetCore.HttpLogging;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 var services = builder.Services;
 services.AddControllers();
+
+services.AddHttpLogging(options =>
+{
+    // Customize HTTP logging.
+    options.LoggingFields = HttpLoggingFields.All;
+    options.RequestHeaders.Add("My-Request-Header");
+    options.ResponseHeaders.Add("My-Response-Header");
+    options.MediaTypeOptions.AddText("application/javascript");
+    options.RequestBodyLogLimit = 4096;
+    options.ResponseBodyLogLimit = 4096;
+});
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 services.AddEndpointsApiExplorer();
 services.AddSwaggerGen(options =>
@@ -18,6 +32,8 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+
+app.UseHttpLogging();
 
 app.UseHttpsRedirection();
 app.UseAuthorization();
