@@ -179,9 +179,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MinimalApiTest.WebApi", "10
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Miniprofiler", "Miniprofiler", "{08BDA0C2-43EE-4A03-8FA9-F92CED0BFC88}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniprofilerTest.MVC", "plugins\Miniprofiler\MiniprofilerTest.MVC\MiniprofilerTest.MVC.csproj", "{700211B1-49E6-4B7A-9356-E5CB7C39CE66}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniprofilerTest.MVC", "plugins\Miniprofiler\MiniprofilerTest.MVC\MiniprofilerTest.MVC.csproj", "{700211B1-49E6-4B7A-9356-E5CB7C39CE66}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiniprofilerTest.Console", "plugins\Miniprofiler\MiniprofilerTest.Console\MiniprofilerTest.Console.csproj", "{B99D0922-6F2D-4B77-A6A6-EDDF7AD1C703}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiniprofilerTest.Console", "plugins\Miniprofiler\MiniprofilerTest.Console\MiniprofilerTest.Console.csproj", "{B99D0922-6F2D-4B77-A6A6-EDDF7AD1C703}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "DiagnosticTest", "Tests\DiagnosticTest\DiagnosticTest.csproj", "{4F104CBE-103A-4ABE-BF9B-2BCDCDBB38E1}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -433,6 +435,10 @@ Global
 		{B99D0922-6F2D-4B77-A6A6-EDDF7AD1C703}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B99D0922-6F2D-4B77-A6A6-EDDF7AD1C703}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B99D0922-6F2D-4B77-A6A6-EDDF7AD1C703}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4F104CBE-103A-4ABE-BF9B-2BCDCDBB38E1}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4F104CBE-103A-4ABE-BF9B-2BCDCDBB38E1}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4F104CBE-103A-4ABE-BF9B-2BCDCDBB38E1}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4F104CBE-103A-4ABE-BF9B-2BCDCDBB38E1}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -505,6 +511,7 @@ Global
 		{08BDA0C2-43EE-4A03-8FA9-F92CED0BFC88} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{700211B1-49E6-4B7A-9356-E5CB7C39CE66} = {08BDA0C2-43EE-4A03-8FA9-F92CED0BFC88}
 		{B99D0922-6F2D-4B77-A6A6-EDDF7AD1C703} = {08BDA0C2-43EE-4A03-8FA9-F92CED0BFC88}
+		{4F104CBE-103A-4ABE-BF9B-2BCDCDBB38E1} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
