@@ -1,7 +1,9 @@
-// See https://aka.ms/new-console-template for more information
-
 using DiagnosticTest;
 
-Console.WriteLine("Hello, World!");
+//ObserverTest.SimpleTest();
 
-ObserverTest.SimpleTest();
+//DiagnosticSourceTest.DiagnosticListener_Subscribe_Test();
+
+//DiagnosticSourceTest.AllListeners_Subscribe_Test();
+
+DiagnosticSourceTest.DiagnosticAdapter_Test();
