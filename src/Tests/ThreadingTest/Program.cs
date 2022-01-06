@@ -17,7 +17,9 @@ namespace ThreadingTest
             //ReaderWriterLockSlimTest.EnterUpgradeableReadLock_OnlyOne_Test();
             //ReaderWriterLockSlimTest.Upgradeable_ToRead_Test();
 
-            ChannelTest.Reader_Test();
+            //ChannelTest.Reader_Test();
+
+            CancellationTokenTest.Cancel_Test();
         }
     }
 }
