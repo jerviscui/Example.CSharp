@@ -1,15 +1,46 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
-	<PropertyGroup>
-		<OutputType>Exe</OutputType>
-		<TargetFramework>net5.0</TargetFramework>
-	</PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net5.0</TargetFramework>
 
-	<ItemGroup>
-	  <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
-	</ItemGroup>
+    <AllowedOutputExtensionsInPackageBuildOutputFolder>$(AllowedOutputExtensionsInPackageBuildOutputFolder);.pdb</AllowedOutputExtensionsInPackageBuildOutputFolder>
+    <GeneratePackageOnBuild>True</GeneratePackageOnBuild>
+    <IsPackable>true</IsPackable>
 
-	<ItemGroup>
-		<ProjectReference Include="..\..\Common\Common.csproj" />
-	</ItemGroup>
+    <PackageId>$(AssemblyName)</PackageId>
+    <Description>This is a ctor test.</Description>
+    <Authors>J</Authors>
+    <Company>$(Authors)</Company>
+    <Product>$(AssemblyName)</Product>
+    <Copyright>J@2022</Copyright>
+    <PackageIcon></PackageIcon>
+    <PackageProjectUrl>https://github.com/jerviscui/Example.CSharp</PackageProjectUrl>
+    <PackageReadmeFile>README.md</PackageReadmeFile>
+    <RepositoryType>git</RepositoryType>
+    <RepositoryUrl>https://github.com/jerviscui/Example.CSharp</RepositoryUrl>
+    <PackageReleaseNotes>update</PackageReleaseNotes>
+    
+    <Version>0.1.0</Version>
+    <VersionPrefix>2</VersionPrefix>
+    <VersionSuffix>beat.1</VersionSuffix>
+
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="..\..\..\README.md">
+      <Pack>True</Pack>
+      <PackagePath>\</PackagePath>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.13.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Common\Common.csproj" />
+  </ItemGroup>
 </Project>
