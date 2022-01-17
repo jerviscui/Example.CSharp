@@ -22,11 +22,11 @@
     <PackageReleaseNotes>update</PackageReleaseNotes>
     
     <Version>0.1.0</Version>
-    <VersionPrefix>2</VersionPrefix>
-    <VersionSuffix>beat.1</VersionSuffix>
 
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageRequireLicenseAcceptance>True</PackageRequireLicenseAcceptance>
+
+    <TargetsForTfmSpecificBuildOutput>$(TargetsForTfmSpecificBuildOutput);IncludeP2PAssets</TargetsForTfmSpecificBuildOutput>
   </PropertyGroup>
 
   <ItemGroup>
@@ -41,6 +41,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\..\Common\Common.csproj" />
+    <ProjectReference Include="..\..\Common\Common.csproj" PrivateAssets="All"/>
   </ItemGroup>
+
+  <Target Name="IncludeP2PAssets">
+    <ItemGroup>
+      <BuildOutputInPackage Include="$(OutputPath)Common.dll" />
+    </ItemGroup>
+  </Target>
 </Project>
