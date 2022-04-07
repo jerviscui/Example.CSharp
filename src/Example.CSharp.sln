@@ -191,9 +191,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "DependencyInjectionTest", "
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NuGetTest", "Tests\NuGetTest\NuGetTest.csproj", "{18FA0512-7A7E-49E0-A549-9ADD40F94657}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WpfAppTest", "Tests\WpfAppTest\WpfAppTest.csproj", "{CAD5533B-F8BD-4EA5-9E14-D156F670A1E7}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppTest", "Tests\WpfAppTest\WpfAppTest.csproj", "{CAD5533B-F8BD-4EA5-9E14-D156F670A1E7}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WinFormsAppTest", "Tests\WinFormsAppTest\WinFormsAppTest.csproj", "{EEA13683-1EEE-4B2C-A8EB-E0400E640318}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsAppTest", "Tests\WinFormsAppTest\WinFormsAppTest.csproj", "{EEA13683-1EEE-4B2C-A8EB-E0400E640318}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangfireTest.Service", "plugins\Hangfire\HangfireTest.Service\HangfireTest.Service.csproj", "{23E20F43-306B-4F75-B989-64ED7A39EFFF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -469,6 +471,10 @@ Global
 		{EEA13683-1EEE-4B2C-A8EB-E0400E640318}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EEA13683-1EEE-4B2C-A8EB-E0400E640318}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EEA13683-1EEE-4B2C-A8EB-E0400E640318}.Release|Any CPU.Build.0 = Release|Any CPU
+		{23E20F43-306B-4F75-B989-64ED7A39EFFF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{23E20F43-306B-4F75-B989-64ED7A39EFFF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{23E20F43-306B-4F75-B989-64ED7A39EFFF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{23E20F43-306B-4F75-B989-64ED7A39EFFF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -547,6 +553,7 @@ Global
 		{18FA0512-7A7E-49E0-A549-9ADD40F94657} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 		{CAD5533B-F8BD-4EA5-9E14-D156F670A1E7} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 		{EEA13683-1EEE-4B2C-A8EB-E0400E640318} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
+		{23E20F43-306B-4F75-B989-64ED7A39EFFF} = {3D07426B-CBAA-4BB3-99F8-3D2D7544A1CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}

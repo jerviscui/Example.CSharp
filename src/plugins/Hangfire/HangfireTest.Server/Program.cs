@@ -1,25 +1,26 @@
-var builder = WebApplication.CreateBuilder(args);
+using Hangfire;
+using Hangfire.Dashboard;
+using Hangfire.Redis;
 
-// Add services to the container.
-
-builder.Services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddSwaggerGen();
-
-var app = builder.Build();
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
+var configuration = GlobalConfiguration.Configuration;
+configuration.UseRedisStorage("10.99.59.47:7000,DefaultDatabase=7,allowAdmin=true");
+configuration.UseColouredConsoleLogProvider();
+//todo: add a mini web dashboard?
+foreach (var metric in DashboardMetrics.GetMetrics())
 {
-    app.UseSwagger();
-    app.UseSwaggerUI();
+    configuration.UseDashboardMetric(metric);
 }
+configuration.UseDashboardMetric(
+    RedisStorage.GetDashboardMetricFromRedisInfo("使用内存", RedisInfoKeys.used_memory_human));
+configuration.UseDashboardMetric(
+    RedisStorage.GetDashboardMetricFromRedisInfo("高峰内存", RedisInfoKeys.used_memory_peak_human));
 
-app.UseHttpsRedirection();
+BackgroundJob.Enqueue(() => Console.WriteLine("Hello, world!"));
 
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
+var jobServerOptions =
+    new BackgroundJobServerOptions { ServerName = "HangfireTest.Web", Queues = new[] { "default", "console" } };
+using (var server = new BackgroundJobServer(jobServerOptions))
+{
+    Console.WriteLine("Hangfire Server started. Press any key to exit...");
+    Console.ReadKey();
+}
