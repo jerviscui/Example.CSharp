@@ -56,8 +56,6 @@ public class Program
                     }
                 }
 
-                var contextConfiguration = context.Configuration;
-
                 var options = builder.Build().GetSection("apollo").Get<ApolloOptions>();
                 options.DataCenter = idc;
 

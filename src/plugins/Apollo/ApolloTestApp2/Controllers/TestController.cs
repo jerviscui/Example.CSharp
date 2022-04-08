@@ -17,14 +17,14 @@ public class TestController : ControllerBase
         _serviceProvider = serviceProvider;
     }
 
-    [HttpGet(Name = "Test")]
-    public IActionResult Test()
+    [HttpGet(Name = "GetMyOption")]
+    public IActionResult GetMyOption()
     {
         var configuration = _serviceProvider.GetRequiredService<IConfiguration>();
         var options = _serviceProvider.GetRequiredService<IOptions<MyOption>>();
 
         _logger.LogInformation($"IConfiguration type: {configuration.GetType().FullName}");
 
-        return Ok(options);
+        return Ok(options.Value);
     }
 }
