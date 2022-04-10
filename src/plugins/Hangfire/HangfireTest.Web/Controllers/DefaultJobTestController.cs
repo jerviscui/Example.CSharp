@@ -73,4 +73,14 @@ public class DefaultJobTestController : ControllerBase
 
         return Ok();
     }
+
+    [HttpGet("TriggerRecurringJobTest")]
+    public IActionResult TriggerRecurringJobTest()
+    {
+        RecurringJob.AddOrUpdate<DefaultJobs>("RecurringJob2", jobs => jobs.Job4(), Cron.Minutely);
+        //Trigger 执行 JobFilterAttribute 也会生效
+        RecurringJob.Trigger("RecurringJob2");
+
+        return Ok();
+    }
 }
