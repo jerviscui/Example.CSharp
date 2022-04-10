@@ -195,13 +195,15 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WpfAppTest", "Tests\WpfAppT
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WinFormsAppTest", "Tests\WinFormsAppTest\WinFormsAppTest.csproj", "{EEA13683-1EEE-4B2C-A8EB-E0400E640318}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangfireTest.Service", "plugins\Hangfire\HangfireTest.Service\HangfireTest.Service.csproj", "{23E20F43-306B-4F75-B989-64ED7A39EFFF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangfireTest.Service", "plugins\Hangfire\HangfireTest.Service\HangfireTest.Service.csproj", "{23E20F43-306B-4F75-B989-64ED7A39EFFF}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Apollo", "Apollo", "{10524F6A-24F0-413F-9A7B-37C985C5D560}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApolloTestApp1", "plugins\Apollo\ApolloTestApp1\ApolloTestApp1.csproj", "{4B113951-DED4-4673-A19E-C34599455112}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ApolloTestApp2", "plugins\Apollo\ApolloTestApp2\ApolloTestApp2.csproj", "{672F92F8-7D45-4DE2-9DA1-6C92657B21DC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HangfireTest.WebServer", "plugins\Hangfire\HangfireTest.WebServer\HangfireTest.WebServer.csproj", "{BCE3A93C-B42C-4DD9-8E18-3DA95B8775DF}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -489,6 +491,10 @@ Global
 		{672F92F8-7D45-4DE2-9DA1-6C92657B21DC}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{672F92F8-7D45-4DE2-9DA1-6C92657B21DC}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{672F92F8-7D45-4DE2-9DA1-6C92657B21DC}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BCE3A93C-B42C-4DD9-8E18-3DA95B8775DF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BCE3A93C-B42C-4DD9-8E18-3DA95B8775DF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BCE3A93C-B42C-4DD9-8E18-3DA95B8775DF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BCE3A93C-B42C-4DD9-8E18-3DA95B8775DF}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -571,6 +577,7 @@ Global
 		{10524F6A-24F0-413F-9A7B-37C985C5D560} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{4B113951-DED4-4673-A19E-C34599455112} = {10524F6A-24F0-413F-9A7B-37C985C5D560}
 		{672F92F8-7D45-4DE2-9DA1-6C92657B21DC} = {10524F6A-24F0-413F-9A7B-37C985C5D560}
+		{BCE3A93C-B42C-4DD9-8E18-3DA95B8775DF} = {3D07426B-CBAA-4BB3-99F8-3D2D7544A1CA}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
