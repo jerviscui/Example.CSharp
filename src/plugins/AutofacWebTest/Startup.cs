@@ -64,7 +64,7 @@ namespace AutofacWebTest
                 endpoints.MapControllers();
             });
 
-            //预热对默认容器 ServiceCollection 无影响
+            //预热对默认容器 ServiceCollection 无影响，需要测试注册更多组件之后的效果
             //预热对 Autofac 容器无影响
             //_ = app.ApplicationServices.GetService<WeatherForecastController>();
             //_ = app.ApplicationServices.GetService<IWeatherForecastService>();
