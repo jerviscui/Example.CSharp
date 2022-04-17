@@ -19,7 +19,7 @@ builder.Host.ConfigureMetricsWithDefaults(metricsBuilder =>
         options.FlushInterval =
             TimeSpan.FromSeconds(config.GetValue<int>(nameof(MetricsReportingInfluxDbOptions.FlushInterval)));
         options.InfluxDb.BaseUri =
-            config.GetValue<Uri>(dbConfig.GetValue<string>(nameof(InfluxDbOptions.BaseUri)));
+            new Uri(dbConfig.GetValue<string>(nameof(InfluxDbOptions.BaseUri)));
         options.InfluxDb.Database = dbConfig.GetValue<string>(nameof(InfluxDbOptions.Database));
         options.InfluxDb.Password = dbConfig.GetValue<string>(nameof(InfluxDbOptions.Password));
         options.InfluxDb.UserName = dbConfig.GetValue<string>(nameof(InfluxDbOptions.UserName));
@@ -38,8 +38,9 @@ builder.Host.ConfigureMetricsWithDefaults(metricsBuilder =>
 builder.Host.UseMetrics();
 
 // Add services to the container.
-
+builder.Services.AddAppMetricsCollectors();
 builder.Services.AddControllers().AddMetrics();
+
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
