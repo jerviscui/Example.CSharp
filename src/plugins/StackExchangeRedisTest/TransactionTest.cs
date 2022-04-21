@@ -70,5 +70,24 @@ namespace StackExchangeRedisTest
             //"INCR" "version"
             //"EXEC"
         }
+
+        public static async Task MultiCondition_Test()
+        {
+            var database = DatabaseProvider.GetDatabase();
+
+            //database.StringSet("version", 1);
+            var tran = database.CreateTransaction();
+
+            //条件需要同时满足才执行，
+            tran.AddCondition(Condition.KeyNotExists("key"));
+            tran.AddCondition(Condition.HashEqual("key", "version", 1));
+
+            var nameTask = tran.StringSetAsync("data.name", "this is name");
+            var typeTask = tran.StringSetAsync("data.type", "test");
+
+            var commited = await tran.ExecuteAsync();
+
+            //commited is false
+        }
     }
 }
