@@ -18,7 +18,7 @@ namespace StackExchangeRedisTest
 
             //await TransactionTest.Transaction_Test();
             //await TransactionTest.ChangeWatchValue_Test();
-            await TransactionTest.MultiCondition_Test();
+            //await TransactionTest.MultiCondition_Test();
 
             //LockTest.LockTakeAsync_Test();
             //LockTest.LockExtend_Test();
@@ -29,6 +29,9 @@ namespace StackExchangeRedisTest
             //HashTest.HashGet_Test();
             //HashTest.HashGetAll_Test();
             //HashTest.HashGetLease_Test();
+
+            //await ProfilingTest.ProfilingSession_Test();
+            await ProfilingTest.ProfilingSession_MultiThread_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();
