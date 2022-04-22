@@ -75,7 +75,6 @@ namespace StackExchangeRedisTest
         {
             var database = DatabaseProvider.GetDatabase();
 
-            //database.StringSet("version", 1);
             var tran = database.CreateTransaction();
 
             //条件需要同时满足才执行，
@@ -86,8 +85,13 @@ namespace StackExchangeRedisTest
             var typeTask = tran.StringSetAsync("data.type", "test");
 
             var commited = await tran.ExecuteAsync();
-
             //commited is false
+
+            //"WATCH" "key"
+            //"EXISTS" "key"
+            //"WATCH" "key"
+            //"HGET" "key" "version"
+            //"UNWATCH"
         }
     }
 }
