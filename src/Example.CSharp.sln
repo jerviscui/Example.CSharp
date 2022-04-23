@@ -207,9 +207,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "HangfireTest.WebServer", "p
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "AppMetrics", "AppMetrics", "{4D229708-D9B0-4BDA-B18A-BB7D8191E972}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppMetricsTest.Web", "plugins\AppMetrics\AppMetricsTest.Web\AppMetricsTest.Web.csproj", "{B5A2557E-F83D-4432-B089-6BF83D96CEEF}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppMetricsTest.Web", "plugins\AppMetrics\AppMetricsTest.Web\AppMetricsTest.Web.csproj", "{B5A2557E-F83D-4432-B089-6BF83D96CEEF}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AppMetricsTest.Console", "plugins\AppMetrics\AppMetricsTest.Console\AppMetricsTest.Console.csproj", "{0C46DE59-988F-40BE-BD90-DC8876C6F5CE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AppMetricsTest.Console", "plugins\AppMetrics\AppMetricsTest.Console\AppMetricsTest.Console.csproj", "{0C46DE59-988F-40BE-BD90-DC8876C6F5CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HttpClientTest", "Tests\HttpClientTest\HttpClientTest.csproj", "{A9029CC7-EC67-4B5E-B72A-93856CF1EC1F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -509,6 +511,10 @@ Global
 		{0C46DE59-988F-40BE-BD90-DC8876C6F5CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{0C46DE59-988F-40BE-BD90-DC8876C6F5CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{0C46DE59-988F-40BE-BD90-DC8876C6F5CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A9029CC7-EC67-4B5E-B72A-93856CF1EC1F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A9029CC7-EC67-4B5E-B72A-93856CF1EC1F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A9029CC7-EC67-4B5E-B72A-93856CF1EC1F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A9029CC7-EC67-4B5E-B72A-93856CF1EC1F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -595,6 +601,7 @@ Global
 		{4D229708-D9B0-4BDA-B18A-BB7D8191E972} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{B5A2557E-F83D-4432-B089-6BF83D96CEEF} = {4D229708-D9B0-4BDA-B18A-BB7D8191E972}
 		{0C46DE59-988F-40BE-BD90-DC8876C6F5CE} = {4D229708-D9B0-4BDA-B18A-BB7D8191E972}
+		{A9029CC7-EC67-4B5E-B72A-93856CF1EC1F} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
