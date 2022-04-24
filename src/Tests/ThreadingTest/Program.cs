@@ -1,10 +1,15 @@
+using System.Threading.Tasks;
+
 namespace ThreadingTest
 {
     internal class Program
     {
-        private static void Main(string[] args)
+        private static async Task Main(string[] args)
         {
             //TaskDelayTest.Test();
+
+            //TaskDelayTest.Exception_Test();
+            TaskDelayTest.Exception_Cath_Test();
 
             //ReaderWriterLockTest.ReaderWriterLock_Test();
             //ReaderWriterLockTest.UpgradeToWriterLock_Test();
@@ -19,7 +24,12 @@ namespace ThreadingTest
 
             //ChannelTest.Reader_Test();
 
-            CancellationTokenTest.Cancel_Test();
+            //CancellationTokenTest.Cancel_Test();
+
+            while (true)
+            {
+                await Task.Delay(100);
+            }
         }
     }
 }
