@@ -7,6 +7,5 @@ using HttpClientTest;
 //await new Http2Tests().Http2_Test();
 //await new Http2Tests().Http2_Get_Test();
 
-await new HttpEncodingTests().Encoding_Test();
-
-
+//await new HttpEncodingTests().Encoding_Test();
+await new HttpEncodingTests().Decompressg_Test();
