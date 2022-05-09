@@ -27,5 +27,27 @@ namespace AppMetricsTest.Web.Controllers
 
             return Ok();
         }
+
+        [HttpGet]
+        [Route("Counter1")]
+        public async Task<IActionResult> Counter1()
+        {
+            //使用了不同的 tag，counter1 和 counter2 是两个计数器
+            _metricsRoot.Measure.Counter.Increment(new CounterOptions { Name = "test" },
+                new MetricTags("key1", "counter1"));
+
+            return Ok();
+        }
+
+        [HttpGet]
+        [Route("Counter2")]
+        public async Task<IActionResult> Counter2()
+        {
+            //使用了不同的 tag，counter1 和 counter2 是两个计数器
+            _metricsRoot.Measure.Counter.Increment(new CounterOptions { Name = "test" },
+                new MetricTags("key1", "counter2"));
+
+            return Ok();
+        }
     }
 }
