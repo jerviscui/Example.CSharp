@@ -12,6 +12,7 @@ builder.WebHost.ConfigureLogging(logging =>
 });
 
 // Add services to the container.
+builder.Services.AddControllers().AddControllersAsServices();
 builder.Services.AddRazorPages().AddControllersAsServices();
 
 var app = builder.Build();
