@@ -1,40 +1,39 @@
-using MinimalApiTest.WebApi;
+//var builder = Host.CreateDefaultBuilder(args)
+//    .ConfigureServices(services =>
+//    {
+//    })
+//    .ConfigureWebHostDefaults(webBuilder =>
+//        {
+//            webBuilder.ConfigureServices((context, services) =>
+//            {
+//                services.AddControllers().AddControllersAsServices();
 
-var builder = Host.CreateDefaultBuilder(args)
-    .ConfigureServices(services =>
-    {
-        //services.AddMvcCore().AddApiExplorer();
+//                services.AddSwaggerGen(options =>
+//                {
+//                    options.IncludeXmlComments(
+//                        Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MinimalApiTest.WebApi.xml"),
+//                        true);
+//                });
+//            });
 
-        //todo: 这里调用不能被 Swagger 识别
-        //services.AddControllers();
+//            webBuilder.Configure((_, app) =>
+//            {
+//                // Configure the HTTP request pipeline.
+//                app.UseSwagger();
+//                app.UseSwaggerUI();
 
-        //// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-        ////services.AddEndpointsApiExplorer();
-        //services.AddSwaggerGen(options =>
-        //{
-        //    //options.SwaggerDoc("Api",
-        //    //    new OpenApiInfo { Title = "Ft.Parking.LocalService.Api", Version = "v1" });
+//                app.UseRouting();
 
-        //    options.IncludeXmlComments(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "MinimalApiTest.WebApi.xml"),
-        //        true);
-        //});
-        int a = 1;
-    })
-    .ConfigureWebHostDefaults(webBuilder =>
-        {
-            //webBuilder.Configure((_, app) =>
-            //{
-            //    // Configure the HTTP request pipeline.
-            //    app.UseSwagger();
-            //    app.UseSwaggerUI();
-            //    app.UseRouting();
+//                app.UseEndpoints(routeBuilder => routeBuilder.MapControllers());
+//            });
 
-            //    app.UseEndpoints(routeBuilder => routeBuilder.MapControllers());
-            //});
+//            webBuilder.UseUrls("http://*:10000", "https://*:10001");
 
-            webBuilder.UseStartup<Startup>();
-        }
-    );
+//            //代替 Startup
+//            //webBuilder.UseStartup<Startup>();
+//        }
+//    );
 
-var app = builder.Build();
-app.Run();
+//var app = builder.Build();
+
+//app.Run();

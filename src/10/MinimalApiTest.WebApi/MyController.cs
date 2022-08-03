@@ -17,8 +17,8 @@ public class MyController : ControllerBase
     /// <response code="200">Returns the specified item</response>
     [HttpGet]
     [ProducesResponseType(typeof(WeatherForecast), StatusCodes.Status200OK)]
-    public async Task<IActionResult> GetTest()
+    public IActionResult GetTest()
     {
-        return Ok(await Task.FromResult(new WeatherForecast(DateTime.Now, 10, "get test")));
+        return Ok(new WeatherForecast(DateTime.Now, 10, "get test"));
     }
 }
