@@ -221,7 +221,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CollectionTest", "Tests\Col
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "WebApplicationTest", "Tests\WebApplicationTest\WebApplicationTest.csproj", "{83BEBF41-A4D5-4E5F-9B54-F27556F0EC06}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MiddlewareTest", "Tests\MiddlewareTest\MiddlewareTest.csproj", "{99B6421E-41C8-4D59-BF6D-E12D9077F03F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MiddlewareTest", "Tests\MiddlewareTest\MiddlewareTest.csproj", "{99B6421E-41C8-4D59-BF6D-E12D9077F03F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

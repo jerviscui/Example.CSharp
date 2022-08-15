@@ -21,6 +21,8 @@ var adapter = ActivatorUtilities.CreateInstance<AnalysisDiagnosticAdapter>(app.S
 var listener = app.Services.GetRequiredService<DiagnosticListener>();
 _ = listener.SubscribeWithAdapter(adapter);
 
+app.UseMiddleware<TestMiddleware>();
+
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
