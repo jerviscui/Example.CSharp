@@ -1,5 +1,10 @@
 using Microsoft.AspNetCore.HttpLogging;
 
+//ThreadPool.SetMinThreads(256, 256);
+//ThreadPool.GetMaxThreads(out var c, out var c2);
+//ThreadPool.GetMinThreads(out var m, out var m2);
+//ThreadPool.GetAvailableThreads(out var a, out var a2);
+
 var builder = WebApplication.CreateBuilder(args);
 
 builder.WebHost.UseUrls("http://*:10000", "https://*:10001");
@@ -58,4 +63,3 @@ app.MapGet("/weatherforecast", () =>
 app.MapDefaultControllerRoute();
 
 app.Run();
-
