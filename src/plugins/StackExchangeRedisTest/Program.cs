@@ -1,4 +1,5 @@
 using System.Threading.Tasks;
+using StackExchangeRedisTest.Lock;
 
 namespace StackExchangeRedisTest
 {
@@ -31,7 +32,10 @@ namespace StackExchangeRedisTest
             //HashTest.HashGetLease_Test();
 
             //await ProfilingTest.ProfilingSession_Test();
-            await ProfilingTest.ProfilingSession_MultiThread_Test();
+            //await ProfilingTest.ProfilingSession_MultiThread_Test();
+
+            //await RedisLockTest.LockAsync_Test();
+            await RedisLockTest.LockAsync_Wait_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();

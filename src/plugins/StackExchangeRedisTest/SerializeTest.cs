@@ -14,7 +14,7 @@ namespace StackExchangeRedisTest
             database.StringSet("Serialize1", JsonSerializer.SerializeToUtf8Bytes(new MyClass { Name = "ser1" }));
 
             var value = await database.StringGetAsync("Serialize1");
-            var type = value.GetStorageType();
+            var type = value.GetStorageType(); //is byte array
             var data = JsonSerializer.Deserialize<MyClass>((byte[])value);
         }
 
@@ -26,7 +26,7 @@ namespace StackExchangeRedisTest
 
             var value = await database.StringGetAsync("Serialize2");
             var type = value.GetStorageType();
-            var data = JsonConvert.DeserializeObject<MyClass>(value);
+            var data = JsonConvert.DeserializeObject<MyClass>(value); //value to string
         }
 
         private class MyClass
