@@ -23,7 +23,7 @@ public interface IRedisLock : IDisposable, IAsyncDisposable
     /// 获取锁
     /// </summary>
     /// <param name="timeout">The timeout.</param>
-    public ValueTask<bool> LockAsync(TimeSpan timeout);
+    public bool Lock(TimeSpan timeout);
 }
 
 public sealed class RedisLock : IRedisLock
@@ -34,7 +34,7 @@ public sealed class RedisLock : IRedisLock
 
     private static readonly Dictionary<string, int> Counts = new();
 
-    private static readonly Dictionary<string, ManualResetEventSlim> ResetEvents = new();
+    private static readonly Dictionary<string, SemaphoreSlim> ResetEvents = new();
 
     private static readonly object LockObj = new();
 
@@ -48,7 +48,9 @@ public sealed class RedisLock : IRedisLock
 
     private Timer? _renewalTimer;
 
-    private string? _value;
+    private string _value;
+
+    private readonly SemaphoreSlim _dispose;
 
     public RedisLock(IDatabase database, string key)
     {
@@ -57,6 +59,8 @@ public sealed class RedisLock : IRedisLock
 
         _cancellationTokenSource = new CancellationTokenSource();
         _host = Environment.GetEnvironmentVariable("HOSTNAME") ?? string.Empty;
+        _dispose = new SemaphoreSlim(1);
+        _value = string.Empty;
 
         Init(_key, _database);
     }
@@ -76,7 +80,7 @@ public sealed class RedisLock : IRedisLock
             {
                 if (!ResetEvents.ContainsKey(key))
                 {
-                    var resetEvent = new ManualResetEventSlim(true);
+                    var resetEvent = new SemaphoreSlim(1);
                     ResetEvents.Add(key, resetEvent);
                     Counts.Add(key, 0);
 
@@ -86,7 +90,7 @@ public sealed class RedisLock : IRedisLock
                     {
                         if (value == "del")
                         {
-                            resetEvent.Set();
+                            resetEvent.Release();
                         }
                     });
                 }
@@ -96,8 +100,9 @@ public sealed class RedisLock : IRedisLock
 
     public bool HasTaken { get; private set; }
 
-    public async ValueTask<bool> LockAsync(TimeSpan timeout)
+    public bool Lock(TimeSpan timeout)
     {
+        //todo: just once
         do
         {
             var timestamp = Stopwatch.GetTimestamp();
@@ -105,8 +110,6 @@ public sealed class RedisLock : IRedisLock
 
             try
             {
-                //todo: don't use async lock?
-                //有歧义 使用错误容易死锁
                 if (!resetEvent.Wait(timeout, Token))
                 {
                     //timeout
@@ -121,28 +124,104 @@ public sealed class RedisLock : IRedisLock
                 break;
             }
 
-            resetEvent.Reset();
             _value = GetValue();
 
-            HasTaken = await _database.LockTakeAsync(_key, _value, Expiry);
-            if (HasTaken)
-            {
-                var timer = new Timer();
-                timer.Interval = Period;
-                timer.AutoReset = true;
-                timer.Elapsed += ExtendLock;
-                timer.Start();
-                _renewalTimer = timer;
+            // ReSharper disable once MethodSupportsCancellation
+            _dispose.Wait();
 
-                break;
+            try
+            {
+                if (Token.IsCancellationRequested)
+                {
+                    HasTaken = false;
+                    break;
+                }
+
+                HasTaken = _database.LockTake(_key, _value, Expiry);
+                if (HasTaken)
+                {
+                    var timer = new Timer();
+                    timer.Interval = Period;
+                    timer.AutoReset = true;
+                    timer.Elapsed += ExtendLock;
+                    timer.Start();
+                    _renewalTimer = timer;
+
+                    break;
+                }
+            }
+            finally
+            {
+                _dispose.Release();
             }
 
-            timeout -= TimeSpan.FromMilliseconds(Math.Min(GetMillionsec(Stopwatch.GetTimestamp() - timestamp),
-                timeout.TotalMilliseconds));
-        } while (!HasTaken);
+            if ((long)timeout.TotalMilliseconds != Timeout.Infinite)
+            {
+                timeout -= TimeSpan.FromMilliseconds(GetMillionsec(Stopwatch.GetTimestamp() - timestamp));
+
+                if (timeout.TotalMilliseconds <= 0)
+                {
+                    HasTaken = false;
+                    break;
+                }
+            }
+        } while (!Token.IsCancellationRequested);
 
         return HasTaken;
     }
+
+    //public async Task<bool> LockAsync(TimeSpan timeout)
+    //{
+    //    do
+    //    {
+    //        var timestamp = Stopwatch.GetTimestamp();
+    //        var resetEvent = GetResetEvent();
+
+    //        try
+    //        {
+    //            //有歧义 使用错误容易死锁
+    //            if (!resetEvent.Wait(timeout, Token))
+    //            {
+    //                //timeout
+    //                HasTaken = false;
+    //                break;
+    //            }
+    //        }
+    //        catch (OperationCanceledException)
+    //        {
+    //            //token canceled
+    //            HasTaken = false;
+    //            break;
+    //        }
+
+    //        resetEvent.Reset();
+    //        _value = GetValue();
+
+    //        if (Token.IsCancellationRequested)
+    //        {
+    //            HasTaken = false;
+    //            break;
+    //        }
+
+    //        HasTaken = await _database.LockTakeAsync(_key, _value, Expiry);
+    //        if (HasTaken)
+    //        {
+    //            var timer = new Timer();
+    //            timer.Interval = Period;
+    //            timer.AutoReset = true;
+    //            timer.Elapsed += ExtendLock;
+    //            timer.Start();
+    //            _renewalTimer = timer;
+
+    //            break;
+    //        }
+
+    //        timeout -= TimeSpan.FromMilliseconds(Math.Min(GetMillionsec(Stopwatch.GetTimestamp() - timestamp),
+    //            timeout.TotalMilliseconds));
+    //    } while (!HasTaken);
+
+    //    return HasTaken;
+    //}
 
     private string GetValue()
     {
@@ -153,7 +232,7 @@ public sealed class RedisLock : IRedisLock
         return $"{_host}:{_key}:{value.ToString()}";
     }
 
-    private ManualResetEventSlim GetResetEvent()
+    private SemaphoreSlim GetResetEvent()
     {
         var value = ResetEvents.GetValueOrDefault(_key);
 
@@ -166,38 +245,70 @@ public sealed class RedisLock : IRedisLock
         _database.LockExtend(_key, _value, Expiry);
     }
 
-    //todo:
-    //public void GetReentryLock(string key, string transactionId, TimeSpan timeout)
-    //{
-    //}
-
     #region Dispose
 
-    private async ValueTask<bool> ReleaseLock()
+    private async Task<bool> ReleaseLockAsync()
     {
         try
         {
             return await _database.LockReleaseAsync(_key, _value);
         }
-        catch
+        catch (Exception e)
         {
-            //todo: which exception
+            Console.WriteLine($"{e.Message}");
         }
 
         return false;
+    }
+
+    private void ReleaseLock()
+    {
+        try
+        {
+            if (!HasTaken)
+            {
+                return;
+            }
+
+            var release = _database.LockRelease(_key, _value);
+            if (!release)
+            {
+                Console.WriteLine($"LockRelease Failed. {_key} {_value}");
+            }
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine($"{e.Message} {_key} {_value}");
+        }
+    }
+
+    private void Cleanup()
+    {
+        _cancellationTokenSource.Cancel();
+        _cancellationTokenSource.Dispose();
+
+        _renewalTimer?.Stop();
+        _renewalTimer?.Dispose();
+        _renewalTimer = null;
     }
 
     private void Dispose(bool disposing)
     {
         if (disposing)
         {
-            _cancellationTokenSource.Cancel();
-            _cancellationTokenSource.Dispose();
+            // ReSharper disable once MethodSupportsCancellation
+            _dispose.Wait();
 
-            _renewalTimer?.Stop();
-            _renewalTimer?.Dispose();
-
-            ReleaseLock().AsTask().ConfigureAwait(false).GetAwaiter().GetResult();
+            try
+            {
+                Cleanup();
+                ReleaseLock();
+            }
+            finally
+            {
+                //_dispose.Release();//todo: perhaps?
+                _dispose.Dispose();
+            }
         }
     }
 
@@ -211,7 +322,7 @@ public sealed class RedisLock : IRedisLock
             _renewalTimer?.Stop();
             _renewalTimer?.Dispose();
 
-            await ReleaseLock();
+            await ReleaseLockAsync();
         }
     }
 

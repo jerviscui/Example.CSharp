@@ -34,8 +34,9 @@ namespace StackExchangeRedisTest
             //await ProfilingTest.ProfilingSession_Test();
             //await ProfilingTest.ProfilingSession_MultiThread_Test();
 
-            //await RedisLockTest.LockAsync_Test();
-            await RedisLockTest.LockAsync_Wait_Test();
+            //RedisLockTest.Lock_Test();
+            //RedisLockTest.Lock_DeadLock_Test();
+            await RedisLockTest.Lock_Concurrency_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();
