@@ -13,7 +13,7 @@ internal class RedisLockTest
         var key = "lockkey";
 
         var redisLock = database.Lock(key, TimeSpan.FromSeconds(10));
-        Console.WriteLine(redisLock.HasTaken);
+        Console.WriteLine(redisLock.IsLocked);
         redisLock.Dispose();
         //True
         //"SUBSCRIBE" "__keyspace@5__:lockkey"
@@ -26,7 +26,7 @@ internal class RedisLockTest
         //"EXEC"
 
         var redisLock2 = database.Lock(key, TimeSpan.FromSeconds(10));
-        Console.WriteLine(redisLock2.HasTaken);
+        Console.WriteLine(redisLock2.IsLocked);
         redisLock2.Dispose();
         //True
         //"SELECT" "5"
@@ -45,7 +45,7 @@ internal class RedisLockTest
         var key = "lockkey1";
 
         using var redisLock = database.Lock(key, TimeSpan.FromSeconds(5));
-        Console.WriteLine(redisLock.HasTaken);
+        Console.WriteLine(redisLock.IsLocked);
         //True
         //"SUBSCRIBE" "__keyspace@5__:lockkey1"
         //"SELECT" "5"
@@ -58,8 +58,25 @@ internal class RedisLockTest
 
         //using redisLock 还未释放，死锁
         using var redisLock2 = database.Lock(key, TimeSpan.FromSeconds(5));
-        Console.WriteLine(redisLock2.HasTaken);
+        Console.WriteLine(redisLock2.IsLocked);
         //False
+    }
+
+    public static void Lock_OnlyOnce_Test()
+    {
+        var database = DatabaseProvider.GetDatabase();
+
+        var key = "lockkey3";
+
+        using var redisLock = (IRedisLock)database.Lock(key, TimeSpan.FromSeconds(5));
+        try
+        {
+            redisLock.Lock(TimeSpan.FromSeconds(5));
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
     public static async Task Lock_Concurrency_Test()
@@ -86,67 +103,45 @@ internal class RedisLockTest
         await Task.WhenAll(tasks);
     }
 
-    //public static async Task LockAsync_Test()
-    //{
-    //    var database = DatabaseProvider.GetDatabase();
+    public static async Task LockAsync_DeadLock_Test()
+    {
+        var database = DatabaseProvider.GetDatabase();
 
-    //    var key = "lockkey";
+        var key = "lockasynckey";
 
-    //    var redisLock = await database.LockAsync(key, TimeSpan.FromSeconds(10));
-    //    Console.WriteLine(redisLock.HasTaken);
-    //    await redisLock.DisposeAsync();
-    //    //"SUBSCRIBE" "__keyspace@5__:lockkey"
-    //    //"SELECT" "5"
-    //    //"SET" "lockkey" ":lockkey:1" "EX" "30" "NX"
-    //    //"WATCH" "lockkey"
-    //    //"GET" "lockkey"
-    //    //"MULTI"
-    //    //"DEL" "lockkey"
-    //    //"EXEC"
+        var t1 = database.LockAsync(key, TimeSpan.FromSeconds(5));
 
-    //    using var redisLock2 = await database.LockAsync(key, TimeSpan.FromSeconds(10));
-    //    Console.WriteLine(redisLock2.HasTaken);
-    //    //"SELECT" "5"
-    //    //"SET" "lockkey" ":lockkey:2" "EX" "30" "NX"
-    //    //"WATCH" "lockkey"
-    //    //"GET" "lockkey"
-    //    //"MULTI"
-    //    //"DEL" "lockkey"
-    //    //"EXEC"
-    //}
+        var t2 = database.LockAsync(key, TimeSpan.FromSeconds(5));
 
-    //public static async Task LockAsync_Wait_Test()
-    //{
-    //    var database = DatabaseProvider.GetDatabase();
+        await using var redisLock1 = await t1;
+        Console.WriteLine(redisLock1.IsLocked);
 
-    //    var key = "lockkey1";
+        await using var redisLock2 = await t2;
+        Console.WriteLine(redisLock2.IsLocked);
+    }
 
-    //    var t1 = database.LockAsync(key, TimeSpan.FromSeconds(15));
+    public static async Task LockAsync_Concurrency_Test()
+    {
+        var database = DatabaseProvider.GetDatabase();
+        var key = "lockasynckey1";
 
-    //    //wait until timeout
-    //    var t2 = database.LockAsync(key, TimeSpan.FromSeconds(15));
+        var tasks = new Task[10];
+        for (int i = 0; i < tasks.Length; i++)
+        {
+            tasks[i] = new Task(() =>
+            {
+                var redisLock = database.LockAsync(key, Timeout.InfiniteTimeSpan).ConfigureAwait(false)
+                    .GetAwaiter().GetResult();
+                Thread.Sleep(1000);
+                redisLock.Dispose();
+            });
+        }
 
-    //    var lock1 = await t1;
-    //    var lock2 = await t2;
+        foreach (var task in tasks)
+        {
+            task.Start();
+        }
 
-    //    lock1.Dispose(); //release lock
-    //    Console.WriteLine(lock1.HasTaken);
-    //    //True
-    //    //"SET" "lockkey1" ":lockkey1:1" "EX" "30" "NX"
-    //    //"WATCH" "lockkey1"
-    //    //"GET" "lockkey1"
-    //    //"MULTI"
-    //    //"EXPIRE" "lockkey1" "30"
-    //    //"EXEC"
-    //    //"SELECT" "5"
-    //    //"WATCH" "lockkey1"
-    //    //"GET" "lockkey1"
-    //    //"MULTI"
-    //    //"DEL" "lockkey1"
-    //    //"EXEC"
-
-    //    lock2.Dispose();
-    //    Console.WriteLine(lock2.HasTaken);
-    //    //False
-    //}
+        await Task.WhenAll(tasks);
+    }
 }
