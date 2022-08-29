@@ -10,7 +10,7 @@ namespace TypeHandleTest
     {
         public static void RuntimeHandleAndType()
         {
-            //todo cuizj: 没有发现 MethodInfo 和 RuntimeMethodHandle 使用空间上的明显差距
+            //没有发现 MethodInfo 和 RuntimeMethodHandle 使用空间上的明显差距
 
             Show("Before doing anything");
 
