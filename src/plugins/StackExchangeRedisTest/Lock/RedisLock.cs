@@ -23,11 +23,14 @@ public sealed class RedisLock : IRedisLock
 
     private static readonly object LockObj = new();
 
+    //docker windows Linux
+    private static readonly string Host = Environment.GetEnvironmentVariable("HOSTNAME") ??
+        Environment.GetEnvironmentVariable("COMPUTERNAME") ??
+        Environment.GetEnvironmentVariable("NAME") ?? Stopwatch.GetTimestamp().ToString();
+
     private readonly CancellationTokenSource _cancellationTokenSource;
 
     private readonly IDatabase _database;
-
-    private readonly string _host;
 
     private readonly string _key;
 
@@ -45,9 +48,6 @@ public sealed class RedisLock : IRedisLock
         _key = key;
 
         _cancellationTokenSource = new CancellationTokenSource();
-        //docker windows Linux
-        _host = Environment.GetEnvironmentVariable("HOSTNAME") ?? Environment.GetEnvironmentVariable("COMPUTERNAME") ??
-            Environment.GetEnvironmentVariable("NAME") ?? Stopwatch.GetTimestamp().ToString();
         _dispose = new SemaphoreSlim(1);
         _value = string.Empty;
 
@@ -249,7 +249,7 @@ public sealed class RedisLock : IRedisLock
         value += 1;
         Counts[_key] = value;
 
-        return $"{_host}:{_key}:{value.ToString()}";
+        return $"{Host}:{_key}:{value.ToString()}";
     }
 
     private SemaphoreSlim GetResetEvent()
