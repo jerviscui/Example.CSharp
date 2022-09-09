@@ -45,7 +45,9 @@ public sealed class RedisLock : IRedisLock
         _key = key;
 
         _cancellationTokenSource = new CancellationTokenSource();
-        _host = Environment.GetEnvironmentVariable("HOSTNAME") ?? string.Empty;
+        //docker windows Linux
+        _host = Environment.GetEnvironmentVariable("HOSTNAME") ?? Environment.GetEnvironmentVariable("COMPUTERNAME") ??
+            Environment.GetEnvironmentVariable("NAME") ?? Stopwatch.GetTimestamp().ToString();
         _dispose = new SemaphoreSlim(1);
         _value = string.Empty;
 
@@ -182,7 +184,7 @@ public sealed class RedisLock : IRedisLock
 
             try
             {
-                if (!await resetEvent.WaitAsync(timeout, Token))
+                if (!await resetEvent.WaitAsync(timeout, Token).ConfigureAwait(false))
                 {
                     //timeout
                     IsLocked = false;
