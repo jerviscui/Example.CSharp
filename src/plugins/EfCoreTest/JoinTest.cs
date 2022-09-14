@@ -38,7 +38,7 @@ namespace EfCoreTest
             //  FROM [Families] AS [f]
             //  WHERE [f].[Address] IS NULL AND ([f].[Id] = [p].[FamilyId]))
 
-            //todo: 上面两个查询计划没有区别。  INNER JOIN 和 WHERE EXISTS 的区别？
+            //todo: 和 Search_InnerJoinPredicate_Test 查询计划没有区别。  INNER JOIN 和 WHERE EXISTS 的区别？
         }
 
         public static async Task Search_InnerJoinPredicate_AsSplitQuery_NotSplit()
