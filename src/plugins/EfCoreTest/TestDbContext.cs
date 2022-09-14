@@ -92,6 +92,10 @@ namespace EfCoreTest
 
         public DbSet<PgsqlRowVersion> PgsqlRowVersions { get; set; } = null!;
 
+        public DbSet<SplitOrder> SplitOrders { get; set; } = null!;
+
+        public DbSet<DetailedSplitOrder> DetailedSplitOrders { get; set; } = null!;
+
         public int SaveChanges(bool softDelete, bool acceptAllChangesOnSuccess = true)
         {
             if (softDelete)
