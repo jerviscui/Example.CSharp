@@ -43,6 +43,8 @@ namespace EfCoreTest
 
         public static async Task Search_InnerJoinPredicate_AsSplitQuery_NotSplit()
         {
+            //AsSplitQuery() 只用于 Include 语句
+
             await using var dbContext = CreateMsSqlDbContext();
 
             var count = await dbContext.Persons.Join(dbContext.Families.Where(o => o.Address == null),
