@@ -13,19 +13,13 @@ namespace EfCoreTest
             TeacherId = teacherId;
             FamilyId = familyId;
 
-            Long = 0;
-            Decimal = 0;
+            SetProp(0, 0);
         }
 
-        public Person(long id, string name, long familyId, long l = 0, decimal d = 0, long? teacherId = null)
+        public Person(long id, string name, long familyId, long l = 0, decimal d = 0, long? teacherId = null) :
+            this(id, name, familyId, teacherId)
         {
-            Id = id;
-            Name = name;
-            TeacherId = teacherId;
-            FamilyId = familyId;
-
-            Long = l;
-            Decimal = d;
+            SetProp(l, d);
         }
 
         public string Name { get; protected set; } = null!;
@@ -38,10 +32,10 @@ namespace EfCoreTest
 
         public decimal Decimal { get; private set; }
 
-        public void SetProp()
+        public void SetProp(long l, decimal d)
         {
-            Long = 0;
-            Decimal = 0;
+            Long = l;
+            Decimal = d;
         }
     }
 }

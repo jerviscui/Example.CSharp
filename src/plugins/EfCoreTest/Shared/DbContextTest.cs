@@ -6,14 +6,15 @@ using Microsoft.Extensions.Logging;
 
 namespace EfCoreTest
 {
-    internal abstract class DbContextTest
+    public abstract class DbContextTest
     {
         public static SqliteConnection? SqliteConnection;
 
         protected static DbContextOptionsBuilder<TestDbContext> CreateBuilder()
         {
             var builder = new DbContextOptionsBuilder<TestDbContext>();
-            builder.UseLoggerFactory(LoggerFactory.Create(loggingBuilder => loggingBuilder.AddConsole()));
+            builder.UseLoggerFactory(LoggerFactory.Create(loggingBuilder =>
+                loggingBuilder.SetMinimumLevel(LogLevel.Information).AddConsole()));
             builder.EnableSensitiveDataLogging();
             builder.EnableDetailedErrors();
 
@@ -49,8 +50,8 @@ namespace EfCoreTest
         protected static TestDbContext CreateMsSqlDbContext()
         {
             var builder = CreateBuilder();
-            builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
-            //builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
+            //builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
+            builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
 
             var dbContext = new TestDbContext(builder.Options);
 
