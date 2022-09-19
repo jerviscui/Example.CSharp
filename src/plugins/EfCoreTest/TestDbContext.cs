@@ -1,5 +1,6 @@
 using System.Collections.Generic;
 using System.Reflection;
+using EfCoreTest.Paging;
 using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest
@@ -96,6 +97,8 @@ namespace EfCoreTest
 
         public DbSet<DetailedSplitOrder> DetailedSplitOrders { get; set; } = null!;
 
+        public DbSet<FactSale> FactSales { get; set; } = null!;
+
         public int SaveChanges(bool softDelete, bool acceptAllChangesOnSuccess = true)
         {
             if (softDelete)
@@ -143,7 +146,7 @@ namespace EfCoreTest
                 modelBuilder.Entity<Person>().HasData(new Person(100 + i, $"name{i}", family2.Id, null));
             }
 
-            //todo: https://github.com/dotnet/efcore/issues/25586
+            //todo: Data Seeding not support navigations https://github.com/dotnet/efcore/issues/25586
             //var order = new Order(1, "buyer", "street", "city");
             //modelBuilder.Entity<Order>().HasData(order);
 

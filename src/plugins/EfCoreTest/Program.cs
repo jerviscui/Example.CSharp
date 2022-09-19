@@ -48,8 +48,11 @@ namespace EfCoreTest
             //TableSplittingTests.TableSplitting_Sqlite_Test();
             //TableSplittingTests.TableSplitting_MsSql_Test();
             //await TableSplittingTests.Insert_Test();
-            await TableSplittingTests.Search_SplitOrder_Test();
-            await TableSplittingTests.Search_DetailedSplitOrder_Test();
+            //await TableSplittingTests.Search_SplitOrder_Test();
+            //await TableSplittingTests.Search_DetailedSplitOrder_Test();
+
+            PagingTest.Test();
+            //PagingTest.MsSql_Test();
 
             OnExit();
         }
