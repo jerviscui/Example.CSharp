@@ -84,6 +84,11 @@ public sealed class RedisLock : IRedisLock
                         {
                             resetEvent.Release();
                         }
+                        //todo: 一直没有收到消息时，释放逻辑 expired
+                        //1. 先取再睡眠，cancel 唤醒，cancel 同时用于dispose
+                        //2. 先睡眠（当前）, expire 续期，定时器用于没有回调，并且超时自动释放
+                        //todo: 内存使用情况，应当清理无用的 resetEvent
+                        //todo: ref class = null 数组的 item 也为 null？
                     });
                 }
             }
