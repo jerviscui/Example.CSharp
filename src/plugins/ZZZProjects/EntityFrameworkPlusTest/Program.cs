@@ -7,4 +7,10 @@ using EntityFrameworkPlusTest;
 
 //await BatchUpdateTests.UpdateAsync_MsSql_Test();
 //await BatchUpdateTests.UpdateAsync_WithParameters_MsSql_Test();
-await BatchUpdateTests.UpdateAsync_WithParameters_PostgreSql_Test();
+//await BatchUpdateTests.UpdateAsync_WithParameters_PostgreSql_Test();
+
+//LinqDynamicTests.WhereDynamic_ConstantArg_Test();
+//LinqDynamicTests.WhereDynamic_ParameterizedArg_Test();
+//await LinqDynamicTests.WhereDynamic_ToListAsync_Test();
+
+await AuditTests.Audit_Test();
