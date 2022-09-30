@@ -51,8 +51,7 @@ namespace EfCoreTest
             //await TableSplittingTests.Search_SplitOrder_Test();
             //await TableSplittingTests.Search_DetailedSplitOrder_Test();
 
-            PagingTest.Test();
-            //PagingTest.MsSql_Test();
+            await PagingTest.MsSql_Test();
 
             OnExit();
         }

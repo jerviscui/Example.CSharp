@@ -25,7 +25,7 @@ PRINT 'Loading...';
 SET NOCOUNT ON;
 DECLARE @i int;
 SET @i = 1;
-WHILE (@i<1000000)
+WHILE (@i<1000001)
 BEGIN
     INSERT INTO fact_sales VALUES(20080800 + (@i%30) + 1, @i%10000, @i%200, RAND() - 25, (@i%3) + 1, '');
     SET @i += 1;
@@ -33,7 +33,7 @@ END;
 GO
 DECLARE @i int;
 SET @i = 1;
-WHILE (@i<10000)
+WHILE (@i<1000001)
 BEGIN
     INSERT INTO fact_sales VALUES(20080900 + (@i%30) + 1, @i%10000, @i%200, RAND() - 25, (@i%3) + 1, '');
     SET @i += 1;
