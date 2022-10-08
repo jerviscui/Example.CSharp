@@ -9,6 +9,9 @@ public class FactSale
     //(date_id int, product_id int, store_id int,
     //quantity int, unit_price numeric(7,2), other_data char(1000))
 
+    [Column("id")]
+    public int Id { get; set; }
+
     [Column("date_id")]
     public int DateId { get; set; }
 

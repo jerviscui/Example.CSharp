@@ -14,9 +14,20 @@ GO
 CREATE PARTITION SCHEME [ps_fact_sales] AS PARTITION [pf_range_fact]
 ALL TO ([PRIMARY]);
 GO
-CREATE TABLE fact_sales(date_id int, product_id int, store_id int,
-    quantity int, unit_price numeric(7,2), other_data char(1000))
-ON ps_fact_sales(date_id);
+CREATE TABLE fact_sales(
+  id int NOT NULL, 
+  date_id int, 
+  product_id int, 
+  store_id int, 
+  quantity int, 
+  unit_price numeric(7, 2), 
+  other_data char(1000), 
+  CONSTRAINT [PK_fact_sales] PRIMARY KEY NONCLUSTERED ([Id] ASC) WITH (
+    PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, 
+    IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, 
+    ALLOW_PAGE_LOCKS = ON
+  ) ON [PRIMARY]
+) ON /**[PRIMARY]**/ ps_fact_sales(date_id);
 GO
 CREATE CLUSTERED INDEX ci ON fact_sales(date_id);
 GO
@@ -27,15 +38,15 @@ DECLARE @i int;
 SET @i = 1;
 WHILE (@i<1000001)
 BEGIN
-    INSERT INTO fact_sales VALUES(20080800 + (@i%30) + 1, @i%10000, @i%200, RAND() - 25, (@i%3) + 1, '');
+    INSERT INTO fact_sales VALUES(@i, 20080800 + (@i%30) + 1, @i%10000, @i%200, RAND() - 25, (@i%3) + 1, '');
     SET @i += 1;
 END;
 GO
 DECLARE @i int;
-SET @i = 1;
-WHILE (@i<1000001)
+SET @i = 1000001;
+WHILE (@i<2000001)
 BEGIN
-    INSERT INTO fact_sales VALUES(20080900 + (@i%30) + 1, @i%10000, @i%200, RAND() - 25, (@i%3) + 1, '');
+    INSERT INTO fact_sales VALUES(@i, 20080900 + (@i%30) + 1, @i%10000, @i%200, RAND() - 25, (@i%3) + 1, '');
     SET @i += 1;
 END;
 PRINT 'Done.';
