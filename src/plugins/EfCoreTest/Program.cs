@@ -51,7 +51,11 @@ namespace EfCoreTest
             //await TableSplittingTests.Search_SplitOrder_Test();
             //await TableSplittingTests.Search_DetailedSplitOrder_Test();
 
-            await PagingTest.MsSql_Test();
+            //await PagingTest.MsSql_Test();
+            //await PagingTest.PostgreSql_Test();
+            //await PagingTest.PostgreSql_NoOffset_Test();
+            //await PagingTest.MsSql_NoOffset_Test();
+            await PagingTest.PostgreSql_Opetimization_Test();
 
             OnExit();
         }

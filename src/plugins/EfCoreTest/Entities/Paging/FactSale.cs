@@ -13,21 +13,21 @@ public class FactSale
     public int Id { get; set; }
 
     [Column("date_id")]
-    public int DateId { get; set; }
+    public int? DateId { get; set; }
 
     [Column("product_id")]
-    public int ProductId { get; set; }
+    public int? ProductId { get; set; }
 
     [Column("store_id")]
-    public int StoreId { get; set; }
+    public int? StoreId { get; set; }
 
     [Column("quantity")]
-    public int Quantity { get; set; }
+    public int? Quantity { get; set; }
 
     [Column("unit_price", TypeName = "numeric(7, 2)")]
-    public decimal UnitPrice { get; set; }
+    public decimal? UnitPrice { get; set; }
 
     [Column("other_data", TypeName = "char(1000)")]
     [StringLength(1000)]
-    public string OtherData { get; set; } = null!;
+    public string? OtherData { get; set; } = null!;
 }
