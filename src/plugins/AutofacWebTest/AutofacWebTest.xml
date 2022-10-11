@@ -25,5 +25,10 @@
         <member name="M:AutofacWebTest.Services.WeatherForecastService.Get">
             <inheritdoc />
         </member>
+        <member name="M:AutofacWebTest.Services.WeatherForecastService.GetRootScope">
+            <summary>
+            获取根 Scope
+            </summary>
+        </member>
     </members>
 </doc>

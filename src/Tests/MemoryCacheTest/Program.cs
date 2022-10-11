@@ -132,6 +132,8 @@ namespace MemoryCacheTest
             Console.WriteLine("cleared");
             Console.WriteLine(cache.Get<DateTime?>(outer));
             Console.WriteLine(cache.Get<DateTime?>(inner));
+
+            //outer & inner cleared both
         }
     }
 }

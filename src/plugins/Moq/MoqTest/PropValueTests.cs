@@ -61,13 +61,13 @@ namespace MoqTest
 
             //init properties
             mock.SetupAllProperties();
-            mock.Setup(value => value.Value).Returns("aaa");
-            //mock.SetupGet(value => value.Value).Returns("value");
+            mock.Setup(value => value.Value).Returns("aaa"); //overwrite getter
 
             mock.Object.Value.ShouldBe("aaa"); // use Setup() returns
 
-            mock.Object.Value = "aa";         // set a value
-            mock.Object.Value.ShouldBe("aa"); // get saved value
+            mock.Object.Value = "aa"; // set a value
+            //mock.Object.Value.ShouldBe("aa"); // 4.18.2 now! SetupAllProperties override default get/set
+            mock.Object.Value.ShouldBe("aaa"); // use Setup() returns
 
             //override other Setup()
             mock.SetupAllProperties();
