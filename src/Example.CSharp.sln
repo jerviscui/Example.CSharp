@@ -227,6 +227,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EfCoreTest", "plugins\EfCor
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EntityFrameworkPlusTest", "plugins\EfCore\EntityFrameworkPlusTest\EntityFrameworkPlusTest.csproj", "{10BF249B-8464-49B7-B256-3D2555960985}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EFCoreBulkExtensionsTest", "plugins\EfCore\EFCoreBulkExtensionsTest\EFCoreBulkExtensionsTest.csproj", "{8C495BFD-B405-413A-A164-B2BA929D746E}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -549,6 +551,10 @@ Global
 		{10BF249B-8464-49B7-B256-3D2555960985}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{10BF249B-8464-49B7-B256-3D2555960985}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{10BF249B-8464-49B7-B256-3D2555960985}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8C495BFD-B405-413A-A164-B2BA929D746E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8C495BFD-B405-413A-A164-B2BA929D746E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8C495BFD-B405-413A-A164-B2BA929D746E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8C495BFD-B405-413A-A164-B2BA929D746E}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -643,6 +649,7 @@ Global
 		{F5B1D9A3-285F-4FF7-8457-095152163258} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{36219979-8685-4005-A01C-BB7CBFD5EC04} = {F5B1D9A3-285F-4FF7-8457-095152163258}
 		{10BF249B-8464-49B7-B256-3D2555960985} = {F5B1D9A3-285F-4FF7-8457-095152163258}
+		{8C495BFD-B405-413A-A164-B2BA929D746E} = {F5B1D9A3-285F-4FF7-8457-095152163258}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}

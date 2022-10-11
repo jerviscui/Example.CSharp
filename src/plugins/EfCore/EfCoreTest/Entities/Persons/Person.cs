@@ -9,10 +9,10 @@ namespace EfCoreTest
         public Person(long id, string name, long familyId, long? teacherId = null)
         {
             Id = id;
-            Name = name;
             TeacherId = teacherId;
             FamilyId = familyId;
 
+            ChangeName(name);
             SetProp(0, 0);
         }
 
@@ -22,7 +22,14 @@ namespace EfCoreTest
             SetProp(l, d);
         }
 
-        public string Name { get; protected set; } = null!;
+        public string Name { get; set; } = null!;
+
+        public Person ChangeName(string name)
+        {
+            Name = name;
+
+            return this;
+        }
 
         public long? TeacherId { get; protected set; }
 
