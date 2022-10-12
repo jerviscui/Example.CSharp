@@ -18,11 +18,11 @@ internal class BulkUpdateTests : DbContextTest
         await context.BulkUpdateAsync(list,
             config =>
             {
-                config.PropertiesToIncludeOnUpdate = new List<string> { nameof(Person.Name) };
-                config.UpdateByProperties = new List<string> { nameof(Person.Id) };
+                config.PropertiesToInclude = new List<string> { nameof(Person.Name) };
             });
 
-        //MERGE [dbo].[Persons] WITH (HOLDLOCK) AS T USING (SELECT TOP 10 * FROM [dbo].[PersonsTemp8d5d5a1c] ORDER BY [Id]) AS S ON T.[Id] = S.[Id] WHEN MATCHED AND EXISTS (SELECT S.[Id], S.[Decimal], S.[FamilyId], S.[Long], S.[Name], S.[TeacherId] EXCEPT SELECT T.[Id], T.[Decimal], T.[FamilyId], T.[Long], T.[Name], T.[TeacherId]) THEN UPDATE SET T.[Name] = S.[Name];
+        //insert bulk [dbo].[PersonsTempb48685f6] ([Id] BigInt, [Name] NVarChar(max) COLLATE Chinese_PRC_CI_AS)
+        //MERGE [dbo].[Persons] WITH (HOLDLOCK) AS T USING (SELECT TOP 10 * FROM [dbo].[PersonsTempb48685f6] ORDER BY [Id]) AS S ON T.[Id] = S.[Id] WHEN MATCHED AND EXISTS (SELECT S.[Id], S.[Name] EXCEPT SELECT T.[Id], T.[Name]) THEN UPDATE SET T.[Name] = S.[Name];
     }
 
     public static async Task BatchUpdate_updateExpression_Test()

@@ -9,11 +9,11 @@ using EFCoreBulkExtensionsTest;
 //await BulkInsertTests.BulkInsertOrUpdate_Test();
 //await BulkInsertTests.BulkInsertOrUpdateOrDelete_Test();
 
-//await BulkUpdateTests.BulkUpdate_Test();
+await BulkUpdateTests.BulkUpdate_Test();
 //await BulkUpdateTests.BatchUpdate_updateExpression_Test();
 //await BulkUpdateTests.BatchUpdate_updateExpression_DynamicValue_Test();
 
 //await BulkDeleteTests.BatchDelete_Test();
 //await BulkDeleteTests.BatchDelete_PostgreSql_Test();
 
-await BulkReadTests.BulkRead_Test();
+//await BulkReadTests.BulkRead_Test();
