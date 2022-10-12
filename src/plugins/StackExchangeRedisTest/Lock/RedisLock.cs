@@ -15,10 +15,6 @@ public sealed class RedisLock : IRedisLock
 
     private static readonly long Period = ((long)Expiry.TotalMilliseconds - 1) / 3;
 
-    private static readonly Dictionary<string, int> Counts = new();
-
-    private const int MaxTryLock = 1;
-
     private static readonly Dictionary<string, SemaphoreSlim> ResetEvents = new();
 
     private static readonly object LockObj = new();
@@ -36,45 +32,46 @@ public sealed class RedisLock : IRedisLock
 
     private readonly Timer _renewalTimer;
 
-    private string _value;
+    private readonly string _value;
 
     private readonly SemaphoreSlim _dispose;
 
     private int _once;
 
+    private static int _count;
+
     internal RedisLock(IDatabase database, string key)
     {
         _database = database;
         _key = key;
+        _value = GetValue();
 
         _cancellationTokenSource = new CancellationTokenSource();
         _dispose = new SemaphoreSlim(1);
-        _value = string.Empty;
 
         _renewalTimer = new Timer { Interval = Period, AutoReset = true };
         _renewalTimer.Elapsed += ExtendLock;
-
-        Init(_key, _database);
     }
 
-    private CancellationToken Token => _cancellationTokenSource.Token;
+    private CancellationToken DisposeToken => _cancellationTokenSource.Token;
 
-    private static long GetMillionsec(long duration)
+    private string GetValue()
     {
-        return duration / (Stopwatch.Frequency / 1000);
+        var value = Interlocked.Increment(ref _count);
+
+        return $"{Host}:{_key}:{value.ToString()}";
     }
 
-    private static void Init(string key, IDatabase database)
+    private static SemaphoreSlim Init(string key, IDatabase database)
     {
-        if (!ResetEvents.ContainsKey(key))
+        if (!ResetEvents.TryGetValue(key, out var resetEvent))
         {
             lock (LockObj)
             {
-                if (!ResetEvents.ContainsKey(key))
+                if (!ResetEvents.TryGetValue(key, out resetEvent))
                 {
-                    var resetEvent = new SemaphoreSlim(MaxTryLock);
+                    resetEvent = new SemaphoreSlim(0);
                     ResetEvents.Add(key, resetEvent);
-                    Counts.Add(key, 0);
 
                     //subscribe
                     var subscriber = database.Multiplexer.GetSubscriber();
@@ -84,15 +81,18 @@ public sealed class RedisLock : IRedisLock
                         {
                             resetEvent.Release();
                         }
-                        //todo: 一直没有收到消息时，释放逻辑 expired
-                        //1. 先取再睡眠，cancel 唤醒，cancel 同时用于dispose
-                        //2. 先睡眠（当前）, expire 续期，定时器用于没有回调，并且超时自动释放
+                        //1. 先取再睡眠，cancel 唤醒
+                        //todo: 一直没有收到消息时,&timeout-1 需要处理，释放逻辑 expired
+                        //todo: redis 是否开通了 pub
+
                         //todo: 内存使用情况，应当清理无用的 resetEvent
                         //todo: ref class = null 数组的 item 也为 null？
                     });
                 }
             }
         }
+
+        return resetEvent;
     }
 
     /// <inheritdoc />
@@ -108,36 +108,16 @@ public sealed class RedisLock : IRedisLock
             throw new Exception($"Can only be locked once. key:{_key}");
         }
 
+        var clocker = new Clocker(timeout);
+        var resetEvent = Init(_key, _database);
+
         do
         {
-            var timestamp = Stopwatch.GetTimestamp();
-            var resetEvent = GetResetEvent();
-
-            try
-            {
-                if (!resetEvent.Wait(timeout, Token))
-                {
-                    //timeout
-                    IsLocked = false;
-                    break;
-                }
-            }
-            catch (OperationCanceledException)
-            {
-                //token canceled
-                IsLocked = false;
-                break;
-            }
-
-            Console.WriteLine($"{Environment.CurrentManagedThreadId} {_key} {_value}");
-
-            _value = GetValue();
-
             Console.WriteLine($"{Environment.CurrentManagedThreadId} {_key} {_value}");
 
             try
             {
-                _dispose.Wait(Token);
+                _dispose.Wait(DisposeToken);
 
                 IsLocked = _database.LockTake(_key, _value, Expiry);
                 if (IsLocked)
@@ -157,19 +137,25 @@ public sealed class RedisLock : IRedisLock
                 _dispose.Release();
             }
 
-            if ((long)timeout.TotalMilliseconds != Timeout.Infinite)
-            {
-                timeout -= TimeSpan.FromMilliseconds(GetMillionsec(Stopwatch.GetTimestamp() - timestamp));
+            clocker = clocker.NextTime();
+            Console.WriteLine(timeout);
 
-                if (timeout.TotalMilliseconds <= 0)
+            try
+            {
+                if (!resetEvent.Wait(clocker.Timeout, DisposeToken))
                 {
+                    //timeout
                     IsLocked = false;
                     break;
                 }
             }
-
-            Console.WriteLine(timeout);
-        } while (!Token.IsCancellationRequested);
+            catch (OperationCanceledException)
+            {
+                //token canceled
+                IsLocked = false;
+                break;
+            }
+        } while (!DisposeToken.IsCancellationRequested);
 
         return IsLocked;
     }
@@ -182,36 +168,16 @@ public sealed class RedisLock : IRedisLock
             throw new Exception($"Can only be locked once. key:{_key}");
         }
 
+        var clocker = new Clocker(timeout);
+        var resetEvent = Init(_key, _database);
+
         do
         {
-            var timestamp = Stopwatch.GetTimestamp();
-            var resetEvent = GetResetEvent();
-
-            try
-            {
-                if (!await resetEvent.WaitAsync(timeout, Token).ConfigureAwait(false))
-                {
-                    //timeout
-                    IsLocked = false;
-                    break;
-                }
-            }
-            catch (OperationCanceledException) //contains: TaskCanceledException
-            {
-                //token canceled
-                IsLocked = false;
-                break;
-            }
-
-            Console.WriteLine($"{Environment.CurrentManagedThreadId} {_key} {_value}");
-
-            _value = GetValue();
-
             Console.WriteLine($"{Environment.CurrentManagedThreadId} {_key} {_value}");
 
             try
             {
-                await _dispose.WaitAsync(Token);
+                await _dispose.WaitAsync(DisposeToken);
 
                 IsLocked = await _database.LockTakeAsync(_key, _value, Expiry);
                 if (IsLocked)
@@ -231,38 +197,66 @@ public sealed class RedisLock : IRedisLock
                 _dispose.Release();
             }
 
-            if ((long)timeout.TotalMilliseconds != Timeout.Infinite)
-            {
-                timeout -= TimeSpan.FromMilliseconds(GetMillionsec(Stopwatch.GetTimestamp() - timestamp));
+            clocker = clocker.NextTime();
+            Console.WriteLine(timeout);
 
-                if (timeout.TotalMilliseconds <= 0)
+            try
+            {
+                if (!await resetEvent.WaitAsync(clocker.Timeout, DisposeToken).ConfigureAwait(false))
                 {
+                    //timeout
                     IsLocked = false;
                     break;
                 }
             }
-
-            Console.WriteLine(timeout);
-        } while (!Token.IsCancellationRequested);
+            catch (OperationCanceledException) //contains: TaskCanceledException
+            {
+                //token canceled
+                IsLocked = false;
+                break;
+            }
+        } while (!DisposeToken.IsCancellationRequested);
 
         return IsLocked;
     }
 
-    private string GetValue()
+    private struct Clocker
     {
-        var value = Counts[_key];
-        value += 1;
-        Counts[_key] = value;
+        private bool _forever;
 
-        return $"{Host}:{_key}:{value.ToString()}";
-    }
+        public TimeSpan Timeout;
 
-    private SemaphoreSlim GetResetEvent()
-    {
-        var value = ResetEvents.GetValueOrDefault(_key);
+        private readonly long _createtime;
 
-        Debug.Assert(value != null, nameof(value) + " != null");
-        return value;
+        public Clocker(TimeSpan timeout)
+        {
+            Timeout = timeout;
+            _forever = (long)timeout.TotalMilliseconds == System.Threading.Timeout.Infinite;
+
+            _createtime = Stopwatch.GetTimestamp();
+        }
+
+        public Clocker NextTime()
+        {
+            if (_forever)
+            {
+                return this;
+            }
+
+            var next = GetNext();
+
+            var left = Timeout - TimeSpan.FromMilliseconds(GetMillionsec(next._createtime - _createtime));
+            next.Timeout = left.TotalMilliseconds <= 0 ? TimeSpan.Zero : left;
+
+            return next;
+        }
+
+        private Clocker GetNext() => new(TimeSpan.Zero) { _forever = _forever };
+
+        private static long GetMillionsec(long duration)
+        {
+            return duration / (Stopwatch.Frequency / 1000);
+        }
     }
 
     private void ExtendLock(object? sender, ElapsedEventArgs e)

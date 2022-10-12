@@ -130,8 +130,10 @@ internal class RedisLockTest
         {
             tasks[i] = new Task(() =>
             {
-                var redisLock = database.LockAsync(key, Timeout.InfiniteTimeSpan).ConfigureAwait(false)
+                var redisLock = database.LockAsync(key, TimeSpan.FromSeconds(7) /*Timeout.InfiniteTimeSpan*/)
+                    .ConfigureAwait(false)
                     .GetAwaiter().GetResult();
+                Console.WriteLine($"{key} {redisLock.IsLocked}");
                 Thread.Sleep(1000);
                 redisLock.Dispose();
             });
