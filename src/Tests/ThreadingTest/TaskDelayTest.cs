@@ -28,7 +28,7 @@ namespace ThreadingTest
             throw new Exception("test exception");
         }
 
-        public static void Exception_Cath_Test()
+        public static void Exception_Catch_Test()
         {
             ExTask().ContinueWith(task =>
             {

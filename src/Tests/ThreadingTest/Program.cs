@@ -1,3 +1,5 @@
+using System;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace ThreadingTest
@@ -9,7 +11,7 @@ namespace ThreadingTest
             //TaskDelayTest.Test();
 
             //TaskDelayTest.Exception_Test();
-            TaskDelayTest.Exception_Cath_Test();
+            //TaskDelayTest.Exception_Catch_Test();
 
             //ReaderWriterLockTest.ReaderWriterLock_Test();
             //ReaderWriterLockTest.UpgradeToWriterLock_Test();
@@ -26,9 +28,14 @@ namespace ThreadingTest
 
             //CancellationTokenTest.Cancel_Test();
 
+            //ThreadPoolTest.Enqueue_Test();
+            //ThreadPoolTest.Starvation_WaitThread_Test();
+            ThreadPoolTest.Starvation_SetMinThreads_Test();
+
             while (true)
             {
-                await Task.Delay(100);
+                await Task.Delay(1000);
+                Console.WriteLine($"total: {ThreadPool.ThreadCount}");
             }
         }
     }
