@@ -10,9 +10,7 @@ namespace FixedTest
             var obj = new P();
 
             //无法获取托管类型(P)的地址和大小，或声明指向它的指针
-            //fixed (int* p = &obj)
-            //{
-            //}
+            //P* pp = &obj; //CS8500
 
             fixed (int* p = &obj.X)
             {
@@ -62,11 +60,6 @@ namespace FixedTest
         {
             int[] arr = { 1, 2, 3, 4, 5 };
             string s = "test";
-
-            //无法获取托管类型(P)的地址和大小，或声明指向它的指针
-            //&arr;
-            //&arr[0];
-            //&s;
 
             fixed (int* p = &arr[0])
             {
