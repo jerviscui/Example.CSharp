@@ -28,9 +28,11 @@ namespace ThreadingTest
 
             //CancellationTokenTest.Cancel_Test();
 
+            InterruptTest.Sleeping_Interrupt_Test();
+
             //ThreadPoolTest.Enqueue_Test();
             //ThreadPoolTest.Starvation_WaitThread_Test();
-            ThreadPoolTest.Starvation_SetMinThreads_Test();
+            //ThreadPoolTest.Starvation_SetMinThreads_Test();
 
             while (true)
             {
