@@ -63,4 +63,114 @@ public class ThreadPoolTest
 
         Starvation_Test();
     }
+
+    #region Use ThreadLocalQueue
+
+    /// <summary>
+    /// 线程数无限增长
+    /// </summary>
+    public static void Starvation_UseGlobalQueue_Test1()
+    {
+        ThreadPool.SetMinThreads(8, 8);
+
+        Task.Factory.StartNew(Producer1);
+    }
+
+    /// <summary>
+    /// 线程数稳定
+    /// </summary>
+    public static void Starvation_UseThreadLocalQueue_Test2()
+    {
+        ThreadPool.SetMinThreads(8, 8);
+
+        Task.Factory.StartNew(Producer2);
+    }
+
+    /// <summary>
+    /// 线程数无限增长
+    /// </summary>
+    public static void Starvation_UseGlobalQueue_Test3()
+    {
+        ThreadPool.SetMinThreads(8, 8);
+
+        Task.Factory.StartNew(Producer3);
+    }
+
+    private static volatile int _i;
+
+    private static void Producer1()
+    {
+        while (true)
+        {
+#pragma warning disable CS4014
+            Process1();
+#pragma warning restore CS4014
+
+            Thread.Sleep(200);
+        }
+    }
+
+    private static void Producer2()
+    {
+        while (true)
+        {
+            Task.Factory.StartNew(Process2); //在线程本地队列创建任务
+
+            Thread.Sleep(200);
+        }
+    }
+
+    private static void Producer3()
+    {
+        while (true)
+        {
+            Task.Factory.StartNew(Process2, TaskCreationOptions.PreferFairness); //在全局队列创建任务
+
+            Thread.Sleep(200);
+        }
+    }
+
+    private static async Task Process1()
+    {
+        await Task.Yield(); //在全局队列创建任务
+
+        var i = Interlocked.Increment(ref _i);
+
+        var tcs = new TaskCompletionSource<bool>();
+
+#pragma warning disable CS4014
+        Task.Run(() =>
+#pragma warning restore CS4014
+        {
+            Console.WriteLine($"{i} run");
+
+            Thread.Sleep(3000);
+            tcs.SetResult(true);
+        });
+
+        tcs.Task.Wait();
+
+        Console.WriteLine($"{i} complated.");
+    }
+
+    private static void Process2()
+    {
+        var i = Interlocked.Increment(ref _i);
+
+        var tcs = new TaskCompletionSource<bool>();
+
+        Task.Run(() =>
+        {
+            Console.WriteLine($"{i} run");
+
+            Thread.Sleep(3000);
+            tcs.SetResult(true);
+        });
+
+        tcs.Task.Wait();
+
+        Console.WriteLine($"{i} complated.");
+    }
+
+    #endregion
 }

@@ -28,16 +28,19 @@ namespace ThreadingTest
 
             //CancellationTokenTest.Cancel_Test();
 
-            InterruptTest.Sleeping_Interrupt_Test();
+            //InterruptTest.Sleeping_Interrupt_Test();
 
             //ThreadPoolTest.Enqueue_Test();
             //ThreadPoolTest.Starvation_WaitThread_Test();
             //ThreadPoolTest.Starvation_SetMinThreads_Test();
+            ThreadPoolTest.Starvation_UseGlobalQueue_Test1();
+            //ThreadPoolTest.Starvation_UseThreadLocalQueue_Test2();
+            //ThreadPoolTest.Starvation_UseGlobalQueue_Test3();
 
             while (true)
             {
                 await Task.Delay(1000);
-                Console.WriteLine($"total: {ThreadPool.ThreadCount}");
+                Console.WriteLine($"ThreadCount: {ThreadPool.ThreadCount}");
             }
         }
     }
