@@ -100,13 +100,14 @@ public class ThreadPoolTest
 
     private static void Producer1()
     {
+        var i = 100;
         while (true)
         {
 #pragma warning disable CS4014
             Process1();
 #pragma warning restore CS4014
 
-            Thread.Sleep(200);
+            Thread.Sleep(100);
         }
     }
 
@@ -116,7 +117,7 @@ public class ThreadPoolTest
         {
             Task.Factory.StartNew(Process2); //在线程本地队列创建任务
 
-            Thread.Sleep(200);
+            Thread.Sleep(100);
         }
     }
 
@@ -126,19 +127,20 @@ public class ThreadPoolTest
         {
             Task.Factory.StartNew(Process2, TaskCreationOptions.PreferFairness); //在全局队列创建任务
 
-            Thread.Sleep(200);
+            Thread.Sleep(100);
         }
     }
 
     private static async Task Process1()
     {
-        await Task.Yield(); //在全局队列创建任务
+        await Task.Yield(); //做一个异步切换，在全局队列创建任务
 
         var i = Interlocked.Increment(ref _i);
 
         var tcs = new TaskCompletionSource<bool>();
 
 #pragma warning disable CS4014
+        //在线程本地队列创建任务
         Task.Run(() =>
 #pragma warning restore CS4014
         {
@@ -148,9 +150,12 @@ public class ThreadPoolTest
             tcs.SetResult(true);
         });
 
+        //所以此处是当前线程等待自己队列中的任务完成，死锁！
+        //何时解除，当其他线程抢占 tcs 任务并执行完成后解除死锁
+        //但是，由于新建线程全部去执行全局队列的任务，没有线程去抢占 tcs 任务，所以死锁永远无法解除
         tcs.Task.Wait();
 
-        Console.WriteLine($"{i} complated.");
+        Console.WriteLine($"{i} completed.");
     }
 
     private static void Process2()
@@ -158,7 +163,7 @@ public class ThreadPoolTest
         var i = Interlocked.Increment(ref _i);
 
         var tcs = new TaskCompletionSource<bool>();
-
+        //在线程本地队列创建任务
         Task.Run(() =>
         {
             Console.WriteLine($"{i} run");
@@ -167,9 +172,51 @@ public class ThreadPoolTest
             tcs.SetResult(true);
         });
 
+        //任务全部在线程本地队列中排队，
+        //线程池队列长度虽然在增长，但是全局队列中没有任务
+        //所以新增线程可以抢占 tcs 任务解除死锁，最终达到动态平衡
         tcs.Task.Wait();
 
-        Console.WriteLine($"{i} complated.");
+        Console.WriteLine($"{i} completed.");
+    }
+
+    #endregion
+
+    #region ThreadsToAddWithoutDelay
+
+    public static void WithoutDelay_UseGlobalQueue_Test1()
+    {
+        //设置 ThreadsToAddWithoutDelay 依然有线程池饥饿问题
+        var data = AppContext.GetData("System.Threading.ThreadPool.Blocking.ThreadsToAddWithoutDelay_ProcCountFactor");
+        Console.WriteLine(data);
+
+        Task.Factory.StartNew(Producer1);
+    }
+
+    public static void WithoutDelay_UseThreadLocalQueue_Test2()
+    {
+        var data = AppContext.GetData("System.Threading.ThreadPool.Blocking.ThreadsToAddWithoutDelay_ProcCountFactor");
+        Console.WriteLine(data);
+
+        Task.Factory.StartNew(Producer2);
+    }
+
+    #endregion
+
+    #region SetMinThreads
+
+    public static void SetMinThreads_UseGlobalQueue_Test1()
+    {
+        ThreadPool.SetMinThreads(400, 400);
+
+        Task.Factory.StartNew(Producer1);
+    }
+
+    public static void SetMinThreads_UseThreadLocalQueue_Test2()
+    {
+        ThreadPool.SetMinThreads(400, 400);
+
+        Task.Factory.StartNew(Producer2);
     }
 
     #endregion
