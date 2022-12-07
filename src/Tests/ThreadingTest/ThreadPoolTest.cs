@@ -100,14 +100,13 @@ public class ThreadPoolTest
 
     private static void Producer1()
     {
-        var i = 100;
         while (true)
         {
 #pragma warning disable CS4014
             Process1();
 #pragma warning restore CS4014
 
-            Thread.Sleep(100);
+            Thread.Sleep(200);
         }
     }
 
@@ -117,7 +116,7 @@ public class ThreadPoolTest
         {
             Task.Factory.StartNew(Process2); //在线程本地队列创建任务
 
-            Thread.Sleep(100);
+            Thread.Sleep(200);
         }
     }
 
@@ -127,7 +126,7 @@ public class ThreadPoolTest
         {
             Task.Factory.StartNew(Process2, TaskCreationOptions.PreferFairness); //在全局队列创建任务
 
-            Thread.Sleep(100);
+            Thread.Sleep(200);
         }
     }
 
@@ -184,21 +183,24 @@ public class ThreadPoolTest
 
     #region ThreadsToAddWithoutDelay
 
+    private static void Producer4()
+    {
+        var i = 200;
+        while (i-- > 0)
+        {
+#pragma warning disable CS4014
+            Process1();
+#pragma warning restore CS4014
+        }
+    }
+
     public static void WithoutDelay_UseGlobalQueue_Test1()
     {
         //设置 ThreadsToAddWithoutDelay 依然有线程池饥饿问题
         var data = AppContext.GetData("System.Threading.ThreadPool.Blocking.ThreadsToAddWithoutDelay_ProcCountFactor");
         Console.WriteLine(data);
 
-        Task.Factory.StartNew(Producer1);
-    }
-
-    public static void WithoutDelay_UseThreadLocalQueue_Test2()
-    {
-        var data = AppContext.GetData("System.Threading.ThreadPool.Blocking.ThreadsToAddWithoutDelay_ProcCountFactor");
-        Console.WriteLine(data);
-
-        Task.Factory.StartNew(Producer2);
+        Task.Factory.StartNew(Producer4);
     }
 
     #endregion
@@ -209,14 +211,7 @@ public class ThreadPoolTest
     {
         ThreadPool.SetMinThreads(400, 400);
 
-        Task.Factory.StartNew(Producer1);
-    }
-
-    public static void SetMinThreads_UseThreadLocalQueue_Test2()
-    {
-        ThreadPool.SetMinThreads(400, 400);
-
-        Task.Factory.StartNew(Producer2);
+        Task.Factory.StartNew(Producer4);
     }
 
     #endregion

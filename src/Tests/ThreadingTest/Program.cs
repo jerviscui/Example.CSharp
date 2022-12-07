@@ -33,15 +33,14 @@ namespace ThreadingTest
             //ThreadPoolTest.Enqueue_Test();
             //ThreadPoolTest.Starvation_WaitThread_Test();
             //ThreadPoolTest.Starvation_SetMinThreads_Test();
+
             //ThreadPoolTest.Starvation_UseGlobalQueue_Test1();
             //ThreadPoolTest.Starvation_UseThreadLocalQueue_Test2();
             //ThreadPoolTest.Starvation_UseGlobalQueue_Test3();
 
-            //ThreadPoolTest.WithoutDelay_UseGlobalQueue_Test1();
-            //ThreadPoolTest.WithoutDelay_UseThreadLocalQueue_Test2();
+            ThreadPoolTest.WithoutDelay_UseGlobalQueue_Test1();
 
             //ThreadPoolTest.SetMinThreads_UseGlobalQueue_Test1();
-            ThreadPoolTest.SetMinThreads_UseThreadLocalQueue_Test2();
 
             while (true)
             {

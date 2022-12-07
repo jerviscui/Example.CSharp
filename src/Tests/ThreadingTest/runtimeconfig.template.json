@@ -1,5 +1,7 @@
 {
   "configProperties": {
-    "System.Threading.ThreadPool.Blocking.ThreadsToAddWithoutDelay_ProcCountFactor": 100
+    "System.Threading.ThreadPool.Blocking.ThreadsToAddWithoutDelay_ProcCountFactor": 200,
+    "System.Threading.ThreadPool.Blocking.DelayStepMs": 1,
+    "System.Threading.ThreadPool.Blocking.IgnoreMemoryUsage": true
   }
 }
