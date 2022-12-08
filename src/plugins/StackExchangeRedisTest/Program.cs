@@ -3,7 +3,7 @@ using StackExchangeRedisTest.Lock;
 
 namespace StackExchangeRedisTest
 {
-    class Program
+    internal class Program
     {
         private static async Task Main(string[] args)
         {
@@ -39,7 +39,7 @@ namespace StackExchangeRedisTest
             //RedisLockTest.Lock_OnlyOnce_Test();
             //await RedisLockTest.Lock_Concurrency_Test();
             //await RedisLockTest.LockAsync_DeadLock_Test();
-            await RedisLockTest.LockAsync_Concurrency_Test();
+            //await RedisLockTest.LockAsync_Concurrency_Test();
 
             var s = DatabaseProvider.Logger.ToString();
             DatabaseProvider.Dispose();

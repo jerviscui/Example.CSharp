@@ -81,9 +81,6 @@ public sealed class RedisLock : IRedisLock
                         {
                             resetEvent.Release();
                         }
-                        //1. 先取再睡眠，cancel 唤醒
-                        //todo: 一直没有收到消息时,&timeout-1 需要处理，释放逻辑 expired
-                        //todo: redis 是否开通了 pub
 
                         //todo: 内存使用情况，应当清理无用的 resetEvent
                         //todo: ref class = null 数组的 item 也为 null？

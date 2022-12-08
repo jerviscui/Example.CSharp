@@ -8,7 +8,7 @@ public static class IDatabaseExtensions
 {
     public static IRedisLockOnce Lock(this IDatabase database, string key, TimeSpan timeout)
     {
-        var redisLock = new RedisLock(database, key);
+        var redisLock = RedisLockFactory.CreateLock(database, key);
 
         _ = redisLock.Lock(timeout);
 
@@ -17,7 +17,7 @@ public static class IDatabaseExtensions
 
     public static async Task<IRedisLockOnce> LockAsync(this IDatabase database, string key, TimeSpan timeout)
     {
-        var redisLock = new RedisLock(database, key);
+        var redisLock = RedisLockFactory.CreateLock(database, key);
 
         _ = await redisLock.LockAsync(timeout);
 
