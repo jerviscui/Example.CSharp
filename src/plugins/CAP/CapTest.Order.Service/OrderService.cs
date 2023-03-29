@@ -1,8 +1,6 @@
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
 using CapTest.Shared;
 using DotNetCore.CAP;
+using DotNetCore.CAP.Transport;
 using Microsoft.Extensions.DependencyInjection;
 
 namespace CapTest.Order.Service
@@ -51,7 +49,8 @@ namespace CapTest.Order.Service
 
             try
             {
-                var capTransaction = scope.ServiceProvider.GetRequiredService<ICapTransaction>();
+                var capTransaction =
+                    new PushMessageTransaction(scope.ServiceProvider.GetRequiredService<IDispatcher>());
                 capTransaction.DbTransaction = transaction;
                 capTransaction.AutoCommit = false;
                 _capPublisher.Transaction.Value = capTransaction;
@@ -59,7 +58,9 @@ namespace CapTest.Order.Service
                 await _capPublisher.PublishAsync(OrderCreatedEventData.Name, new OrderCreatedEventData(order.Number));
 
                 await dbContext.SaveChangesAsync();
-                await transaction.CommitAsync();
+                await transaction.CommitAsync(); //此时 message 没有 EnqueueToPublish
+
+                await capTransaction.CommitAsync();
             }
             finally
             {

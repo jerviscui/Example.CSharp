@@ -1,12 +1,7 @@
 using CapTest.Order.Service;
 using CapTest.Shared;
 using DotNetCore.CAP;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace CapTest.Order.Host
@@ -42,7 +37,13 @@ namespace CapTest.Order.Host
 
                 options.UseEntityFramework<OrderDbContext>(efOptions => efOptions.Schema = "cap");
 
-                options.UseRabbitMQ("localhost");
+                options.UseRabbitMQ(mqOptions =>
+                {
+                    mqOptions.HostName = "localhost";
+                    //mqOptions.Port = ;
+                    //mqOptions.UserName = "";
+                    //mqOptions.Password = "";
+                });
                 options.DefaultGroupName = OrderConsts.MessageGroupName;
 
                 options.UseDashboard(dashboardOptions => dashboardOptions.PathMatch = "/cap");

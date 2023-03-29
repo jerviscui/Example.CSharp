@@ -1,11 +1,6 @@
 using CapTest.Depot.Service;
 using CapTest.Shared;
-using Microsoft.AspNetCore.Builder;
-using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Hosting;
 using Microsoft.OpenApi.Models;
 
 namespace CapTest.Depot.Host
@@ -39,7 +34,13 @@ namespace CapTest.Depot.Host
 
                 options.UseEntityFramework<DepotDbContext>(efOptions => efOptions.Schema = "cap");
 
-                options.UseRabbitMQ("localhost");
+                options.UseRabbitMQ(mqOptions =>
+                {
+                    mqOptions.HostName = "localhost";
+                    //mqOptions.Port = ;
+                    //mqOptions.UserName = "";
+                    //mqOptions.Password = "";
+                });
 
                 options.UseDashboard(dashboardOptions => dashboardOptions.PathMatch = "/cap");
                 //options.UseDiscovery(discoveryOptions => { });
