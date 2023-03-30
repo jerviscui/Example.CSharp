@@ -1,12 +1,15 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <OutputType>Exe</OutputType>
+    <OutputType>Library</OutputType>
     <TargetFramework>net6.0</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="EasyNetQ" Version="7.5.0" />
+    <PackageReference Include="EasyNetQ.DI.Autofac" Version="7.5.0" />
+    <PackageReference Include="EasyNetQ.Logging.Microsoft" Version="7.5.0" />
+    <PackageReference Include="EasyNetQ.Serialization.SystemTextJson" Version="7.5.0" />
   </ItemGroup>
 
 </Project>

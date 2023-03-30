@@ -233,6 +233,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EasyNetQTest", "plugins\Rab
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RabbitMqTest", "plugins\RabbitMq\RabbitMqTest\RabbitMqTest.csproj", "{5BA87271-73A2-4721-AD6C-DD436CB1F2B8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTest.Publisher", "plugins\RabbitMq\EasyNetQTest.Publisher\EasyNetQTest.Publisher.csproj", "{8759DF07-D65E-4718-8424-279096398F16}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EasyNetQTest.Subscriber", "plugins\RabbitMq\EasyNetQTest.Subscriber\EasyNetQTest.Subscriber.csproj", "{721C9938-8D17-412C-9DB3-9B02B41EE1C4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -563,6 +567,14 @@ Global
 		{5BA87271-73A2-4721-AD6C-DD436CB1F2B8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5BA87271-73A2-4721-AD6C-DD436CB1F2B8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{5BA87271-73A2-4721-AD6C-DD436CB1F2B8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8759DF07-D65E-4718-8424-279096398F16}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8759DF07-D65E-4718-8424-279096398F16}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8759DF07-D65E-4718-8424-279096398F16}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8759DF07-D65E-4718-8424-279096398F16}.Release|Any CPU.Build.0 = Release|Any CPU
+		{721C9938-8D17-412C-9DB3-9B02B41EE1C4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{721C9938-8D17-412C-9DB3-9B02B41EE1C4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{721C9938-8D17-412C-9DB3-9B02B41EE1C4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{721C9938-8D17-412C-9DB3-9B02B41EE1C4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -660,6 +672,8 @@ Global
 		{CDC38E93-A343-49F0-985D-41B41A07CDFB} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{9E0C29B7-19A2-4E63-A00B-FC69BD138111} = {CDC38E93-A343-49F0-985D-41B41A07CDFB}
 		{5BA87271-73A2-4721-AD6C-DD436CB1F2B8} = {CDC38E93-A343-49F0-985D-41B41A07CDFB}
+		{8759DF07-D65E-4718-8424-279096398F16} = {CDC38E93-A343-49F0-985D-41B41A07CDFB}
+		{721C9938-8D17-412C-9DB3-9B02B41EE1C4} = {CDC38E93-A343-49F0-985D-41B41A07CDFB}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
