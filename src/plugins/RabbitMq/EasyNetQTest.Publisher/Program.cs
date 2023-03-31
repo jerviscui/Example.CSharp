@@ -7,8 +7,8 @@ var simple = new SimplePublisher();
 //simple.CustomNameTest();
 //simple.PublishWithTopicTest();
 
-CustomConventionsPublisher.PublishTest();
+//CustomConventionsPublisher.PublishTest();
 
-//await PubConfirmPublisher.PublisherConfirmsTest();
+await PubConfirmPublisher.PublisherConfirmsTest();
 
 Console.ReadLine();

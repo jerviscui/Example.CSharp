@@ -9,6 +9,7 @@ public class CustomConventions : Conventions
     {
         ExchangeNamingConvention = type => "ExEasyNetQTest";
 
+        //Topic RoutingKey
         TopicNamingConvention = type => type.Name;
     }
 }

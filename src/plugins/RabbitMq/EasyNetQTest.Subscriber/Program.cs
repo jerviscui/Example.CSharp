@@ -1,6 +1,6 @@
 using EasyNetQTest.Subscriber;
 
-var simple = new SimpleSubscriber();
+//var simple = new SimpleSubscriber();
 //var result = simple.SubscribeTest();
 //result.Dispose();
 
@@ -12,6 +12,12 @@ var simple = new SimpleSubscriber();
 
 //CustomConventionsSubscriber.SubscribeTest();
 
-SimpleConsumerErrorStrategySubscriber.SubscribeTest();
+//SimpleConsumerErrorStrategySubscriber.SubscribeTest();
+
+//var containerSubscriber = new CustomContainerSubscriber();
+//await containerSubscriber.SubscribeTest();
+
+var auto = new AutoConsumerSubscriber();
+await auto.AutoSubscriberTest();
 
 Console.ReadLine();
