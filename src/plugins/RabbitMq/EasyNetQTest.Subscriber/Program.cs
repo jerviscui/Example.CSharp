@@ -10,6 +10,8 @@ var simple = new SimpleSubscriber();
 //_ = simple.CustomNameTest();
 //_ = simple.SubscribeWithTopicTest();
 
-CustomConventionsSubscriber.SubscribeTest();
+//CustomConventionsSubscriber.SubscribeTest();
+
+SimpleConsumerErrorStrategySubscriber.SubscribeTest();
 
 Console.ReadLine();

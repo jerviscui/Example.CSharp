@@ -2,11 +2,11 @@ using EasyNetQ;
 
 namespace EasyNetQTest.Subscriber;
 
-internal static class CustomConventionsSubscriber
+internal static class SimpleConsumerErrorStrategySubscriber
 {
-    public static SubscriptionResult SubscribeTest()
+    public static Task<SubscriptionResult> SubscribeTest()
     {
-        return BusFactory.GetConventionsBus().PubSub.Subscribe<CustomNameMessage>(HandleCustomNameMessage);
+        return BusFactory.GetErrorRequeueBus().PubSub.SubscribeAsync<CustomNameMessage>(HandleCustomNameMessage);
     }
 
     private static void HandleCustomNameMessage(CustomNameMessage message)
@@ -14,5 +14,9 @@ internal static class CustomConventionsSubscriber
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Got CustomNameMessage: {0}", message.Text);
         Console.ResetColor();
+
+        Thread.Sleep(1000);
+
+        throw new Exception("requeue test");
     }
 }

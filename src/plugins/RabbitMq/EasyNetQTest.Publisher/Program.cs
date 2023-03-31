@@ -9,4 +9,6 @@ var simple = new SimplePublisher();
 
 CustomConventionsPublisher.PublishTest();
 
+//await PubConfirmPublisher.PublisherConfirmsTest();
+
 Console.ReadLine();

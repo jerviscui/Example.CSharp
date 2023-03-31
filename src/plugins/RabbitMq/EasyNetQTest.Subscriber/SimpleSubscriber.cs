@@ -51,10 +51,10 @@ public class SimpleSubscriber
         return Task.CompletedTask;
     }
 
-    private static void HandleCustomNameMessage(CustomNameMessage textMessage)
+    private static void HandleCustomNameMessage(CustomNameMessage message)
     {
         Console.ForegroundColor = ConsoleColor.Red;
-        Console.WriteLine("subId-1 Got message: {0}", textMessage.Text);
+        Console.WriteLine("Got CustomNameMessage: {0}", message.Text);
         Console.ResetColor();
     }
 }
