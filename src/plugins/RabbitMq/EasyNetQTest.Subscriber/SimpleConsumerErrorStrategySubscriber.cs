@@ -9,6 +9,12 @@ internal static class SimpleConsumerErrorStrategySubscriber
         return BusFactory.GetErrorRequeueBus().PubSub.SubscribeAsync<CustomNameMessage>(HandleCustomNameMessage);
     }
 
+    public static SubscriptionResult SubscribeThrowExceptionTest()
+    {
+        return BusFactory.GetErrorRequeueBus().PubSub
+            .Subscribe<TextThrowMessage>("subId-3", SimpleSubscriber.HandleTextMessageThrowAsync);
+    }
+
     private static void HandleCustomNameMessage(CustomNameMessage message)
     {
         Console.ForegroundColor = ConsoleColor.Red;

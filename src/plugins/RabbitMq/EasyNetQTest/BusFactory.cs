@@ -1,5 +1,6 @@
 using Autofac;
 using EasyNetQ;
+using EasyNetQ.Consumer;
 using EasyNetQ.Logging;
 
 namespace EasyNetQTest;
@@ -14,7 +15,7 @@ public static class BusFactory
 
     private static IBus? _requeueBus;
 
-    private static readonly string Conn = "host=10.98.59.35;port=30677;username=;password=";
+    private static readonly string Conn = "host=10.98.59.35;port=30677;username=posadminuser;password=Fangte123uat";
 
     public static readonly string Confirms = "publisherConfirms=true";
 
@@ -69,7 +70,8 @@ public static class BusFactory
 
                 register.Register(typeof(IConventions), typeof(CustomConventions));
 
-                register.EnableAlwaysNackWithRequeueConsumerErrorStrategy();
+                //register.EnableAlwaysNackWithRequeueConsumerErrorStrategy();// don't write error log
+                register.Register(typeof(IConsumerErrorStrategy), typeof(RequeueConsumerErrorStrategy));
             });
     }
 
@@ -88,7 +90,8 @@ public static class BusFactory
 
                 register.Register(typeof(IConventions), typeof(CustomConventions));
 
-                register.EnableAlwaysNackWithRequeueConsumerErrorStrategy();
+                //register.EnableAlwaysNackWithRequeueConsumerErrorStrategy();// don't write error log
+                register.Register(typeof(IConsumerErrorStrategy), typeof(RequeueConsumerErrorStrategy));
             });
         containerBuilder.RegisterType(typeof(ConsoleLogger)).As(typeof(ILogger)).SingleInstance();
         containerBuilder.RegisterGeneric(typeof(ConsoleLogger<>)).As(typeof(ILogger<>)).SingleInstance();

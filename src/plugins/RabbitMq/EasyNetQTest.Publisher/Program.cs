@@ -2,6 +2,8 @@ using EasyNetQTest.Publisher;
 
 var simple = new SimplePublisher();
 //simple.PublishTest();
+simple.PublishThrowExceptionTest();
+
 //await simple.PublishAsyncTest();
 
 //simple.CustomNameTest();
@@ -9,6 +11,6 @@ var simple = new SimplePublisher();
 
 //CustomConventionsPublisher.PublishTest();
 
-await PubConfirmPublisher.PublisherConfirmsTest();
+//await PubConfirmPublisher.PublisherConfirmsTest();
 
 Console.ReadLine();

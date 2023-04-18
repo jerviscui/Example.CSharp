@@ -11,6 +11,11 @@ internal class SimplePublisher
         _bus.PubSub.Publish(new TextMessage { Text = DateTime.Now.ToShortTimeString() });
     }
 
+    public void PublishThrowExceptionTest()
+    {
+        _bus.PubSub.Publish(new TextThrowMessage(DateTime.Now.ToShortTimeString()));
+    }
+
     public async Task PublishAsyncTest()
     {
         await _bus.PubSub.PublishAsync(new TextMessage { Text = DateTime.Now.ToShortTimeString() });

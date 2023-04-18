@@ -35,6 +35,11 @@ public class SimpleSubscriber
         //Bound queue MQCustomNameMessage_subId-2 to exchange ExEasyNetQTest with routingKey = *.B and arguments =
     }
 
+    public SubscriptionResult SubscribeThrowExceptionTest()
+    {
+        return _bus.PubSub.Subscribe<TextThrowMessage>("subId-3", HandleTextMessageThrowAsync);
+    }
+
     private static void HandleTextMessage(TextMessage textMessage)
     {
         Console.ForegroundColor = ConsoleColor.Red;
@@ -56,5 +61,14 @@ public class SimpleSubscriber
         Console.ForegroundColor = ConsoleColor.Red;
         Console.WriteLine("Got CustomNameMessage: {0}", message.Text);
         Console.ResetColor();
+    }
+
+    public static Task HandleTextMessageThrowAsync(TextThrowMessage textMessage)
+    {
+        Console.ForegroundColor = ConsoleColor.Red;
+        Console.WriteLine("subId-3 Got message: {0}", textMessage.Text);
+        Console.ResetColor();
+
+        throw new Exception("Test exception");
     }
 }
