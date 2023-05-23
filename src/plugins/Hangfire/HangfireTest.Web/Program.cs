@@ -17,7 +17,7 @@ services.AddTestJobs();
 
 services.AddHangfire(configuration =>
 {
-    configuration.UseRedisStorage("10.99.59.47:7000,DefaultDatabase=7,allowAdmin=true", new RedisStorageOptions());
+    configuration.UseRedisStorage("10.99.59.47:7000,DefaultDatabase=7,allowAdmin=true");
 
     foreach (var metric in DashboardMetrics.GetMetrics())
     {

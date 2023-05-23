@@ -1,7 +1,10 @@
 using Hangfire;
+using Hangfire.Common;
 using Hangfire.Dashboard;
 using Hangfire.Redis;
+using Hangfire.Server;
 using HangfireTest.Service;
+using Microsoft.Extensions.DependencyInjection.Extensions;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,9 +18,13 @@ services.AddSwaggerGen();
 
 services.AddTestJobs();
 
+services.TryAddSingleton<IBackgroundJobPerformer>(x => new CustomBackgroundJobPerformer(
+    new BackgroundJobPerformer(x.GetRequiredService<IJobFilterProvider>(), x.GetRequiredService<JobActivator>(),
+        TaskScheduler.Default)));
+
 services.AddHangfire(configuration =>
 {
-    configuration.UseRedisStorage("10.99.59.47:7000,DefaultDatabase=7,allowAdmin=true", new RedisStorageOptions());
+    configuration.UseRedisStorage("10.99.59.47:7000,DefaultDatabase=7,allowAdmin=true");
 
     foreach (var metric in DashboardMetrics.GetMetrics())
     {
@@ -37,6 +44,7 @@ services.AddHangfireServer(options =>
 {
     options.ServerName = jobServerOptions.ServerName;
     options.Queues = jobServerOptions.Queues;
+    options.WorkerCount = 1;
 });
 
 var app = builder.Build();
@@ -65,3 +73,20 @@ app.UseAuthorization();
 app.MapControllers();
 
 app.Run();
+
+internal class CustomBackgroundJobPerformer : IBackgroundJobPerformer
+{
+    private readonly IBackgroundJobPerformer _inner;
+
+    public CustomBackgroundJobPerformer(IBackgroundJobPerformer inner)
+    {
+        _inner = inner ?? throw new ArgumentNullException(nameof(inner));
+    }
+
+    public object Perform(PerformContext context)
+    {
+        Console.WriteLine(
+            $"Perform {context.BackgroundJob.Id} ({context.BackgroundJob.Job.Type.FullName}.{context.BackgroundJob.Job.Method.Name})");
+        return _inner.Perform(context);
+    }
+}

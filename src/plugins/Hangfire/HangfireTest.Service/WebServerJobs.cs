@@ -1,4 +1,3 @@
-using System.Threading.Tasks;
 using Hangfire;
 using Microsoft.Extensions.Logging;
 
@@ -19,7 +18,7 @@ public class WebServerJobs
 
     public async Task TestJob()
     {
-        await Task.Delay(500);
+        await Task.Delay(2000);
         _logger.LogInformation($"webserver job:{nameof(TestJob)} completed.");
     }
 }
