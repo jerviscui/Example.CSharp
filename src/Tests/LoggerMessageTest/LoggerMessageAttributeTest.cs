@@ -10,7 +10,14 @@ public class LoggerMessageAttributeTest
 
     public void LogErrorTest()
     {
-        _logger.DatabaseConnectionFailed(new Exception("test test."));
+        try
+        {
+            throw new Exception("test test.");
+        }
+        catch (Exception e)
+        {
+            _logger.DatabaseConnectionFailed(e);
+        }
     }
 
     public void LogError_WithoutThis_Test()
