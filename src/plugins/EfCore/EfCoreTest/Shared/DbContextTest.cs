@@ -1,5 +1,4 @@
 using System.Data;
-using System.Linq;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
@@ -13,12 +12,17 @@ namespace EfCoreTest
         protected static DbContextOptionsBuilder<TestDbContext> CreateBuilder()
         {
             var builder = new DbContextOptionsBuilder<TestDbContext>();
+            SettingBuilder(builder);
+
+            return builder;
+        }
+
+        public static void SettingBuilder(DbContextOptionsBuilder builder)
+        {
             builder.UseLoggerFactory(LoggerFactory.Create(loggingBuilder =>
                 loggingBuilder.SetMinimumLevel(LogLevel.Information).AddConsole()));
             builder.EnableSensitiveDataLogging();
             builder.EnableDetailedErrors();
-
-            return builder;
         }
 
         protected static TestDbContext CreateSqliteMemoryDbContext()
@@ -47,21 +51,31 @@ namespace EfCoreTest
             return dbContext;
         }
 
+        public static void UseSqlServer(DbContextOptionsBuilder builder)
+        {
+            builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
+            //builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
+        }
+
         protected static TestDbContext CreateMsSqlDbContext()
         {
             var builder = CreateBuilder();
-            builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
-            //builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
+            UseSqlServer(builder);
 
             var dbContext = new TestDbContext(builder.Options);
 
             return dbContext;
         }
 
+        public static void UseNpgsql(DbContextOptionsBuilder builder)
+        {
+            builder.UseNpgsql(@"Host=localhost;Port=5432;Database=EfCoreTest;Username=postgres;Password=123456;");
+        }
+
         protected static TestDbContext CreatePostgreSqlDbContext()
         {
             var builder = CreateBuilder();
-            builder.UseNpgsql(@"Host=localhost;Port=5432;Database=EfCoreTest;Username=postgres;Password=123456;");
+            UseNpgsql(builder);
 
             var dbContext = new TestDbContext(builder.Options);
 
