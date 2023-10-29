@@ -6,15 +6,19 @@ namespace MemoryModelTest
     {
         private static async Task Main(string[] args)
         {
-            //while (true)
-            //{
-            //    MemoryReorderingTests.NonVolatile_Test();
-            //}
+            //VolatileTest.Worker_Test();
+            //Console.WriteLine();
+            //VolatileTest.VolatileWorker_Test();
 
-            //new MemoryReorderingTests().NonVolatile__Test();
-            //new MemoryReorderingTests().NonVolatile___Test();
+            while (true)
+            {
+                MemoryReorderingTests.NonVolatile_Test();
+            }
 
-            await ArrayPoolTest.ArrayPool_Test();
+            //MemoryReorderingTests.Volatile_data_Error_Test();
+            //MemoryReorderingTests.Volatile_initialized_Success_Test();
+
+            //await ArrayPoolTest.ArrayPool_Test();
             //await ArrayPoolTest.Array_Test();
         }
     }
