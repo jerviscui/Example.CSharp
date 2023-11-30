@@ -1,5 +1,5 @@
 using System;
-using System.Threading.Tasks;
+using System.Threading;
 
 namespace MemoryModelTest
 {
@@ -8,76 +8,53 @@ namespace MemoryModelTest
     /// </summary>
     public class MemoryReorderingTests
     {
+        private static Thread w1 = new(o => ((ITester)o).Print());
+
+        private static Thread w2 = new(o => ((ITester)o).Init());
+
         /// <summary>
         /// 当发生内存重排会输出 0
         /// </summary>
         public static void NonVolatile_Test()
         {
-            var array = new DataInit[50];
-            for (var i = 0; i < array.Length; i++)
+            int count = 1_000_000;
+            while (count-- > 0)
             {
-                array[i] = new DataInit();
-            }
+                var data = new DataInit();
 
-            Exec(array);
+                new Thread(() => { data.Print(); }).Start();
+                new Thread(() => { data.Init(); }).Start();
+            }
         }
 
         /// <summary>
-        /// 当发生内存重排会输出 Not initialized
+        /// 当发生内存重排会输出 0
         /// </summary>
-        public static void NonVolatile__Test()
+        public static void Volatile_data_Error_Test()
         {
-            var array = new DataInit2[50];
-            for (var i = 0; i < array.Length; i++)
+            int count = 1_000_000;
+            while (count-- > 0)
             {
-                array[i] = new DataInit2();
-            }
+                var data = new DataInit2();
 
-            Exec(array);
+                new Thread(() => { data.Print(); }).Start();
+                new Thread(() => { data.Init(); }).Start();
+            }
         }
 
         /// <summary>
-        /// 当发生内存重排会输出 Not initialized
+        /// 当发生内存重排会输出 0
         /// </summary>
-        public static void NonVolatile___Test()
+        public static void Volatile_initialized_Success_Test()
         {
-            var array = new DataInit3[50];
-            for (var i = 0; i < array.Length; i++)
+            int count = 1_000_000;
+            while (count-- > 0)
             {
-                array[i] = new DataInit3();
+                var data = new DataInit3();
+
+                new Thread(() => { data.Print(); }).Start();
+                new Thread(() => { data.Init(); }).Start();
             }
-
-            Exec(array);
-        }
-
-        private static void Exec(ITester[] array)
-        {
-            var tasks = new Task[array.Length * 2];
-
-            for (var i = 0; i < tasks.Length; i++)
-            {
-                var i1 = i;
-                if (i % 2 == 0)
-                {
-                    tasks[i] = new Task(() =>
-                    {
-                        array[i1 / 2].Init();
-                    });
-                }
-                else
-                {
-                    tasks[i] = new Task(() =>
-                    {
-                        array[i1 / 2].Print();
-                    });
-                }
-            }
-
-            Parallel.ForEach(tasks,
-                new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount - 1 },
-                task => task.Start());
-
-            Task.WaitAll(tasks);
         }
 
         private interface ITester
@@ -106,11 +83,11 @@ namespace MemoryModelTest
             {
                 if (_initialized) // Read 1
                 {
-                    Console.WriteLine(_data); // Read 2
+                    Console.WriteLine(_data); // Read 2 当发生内存重排会输出 0
                 }
                 else
                 {
-                    Console.WriteLine("Not initialized");
+                    Console.WriteLine($"Not initialized {_data}");
                 }
             }
         }
@@ -135,7 +112,7 @@ namespace MemoryModelTest
             {
                 if (_initialized) // Read 1
                 {
-                    Console.WriteLine(_data); // Read 2
+                    Console.WriteLine(_data); // Read 2 当发生内存重排会输出 0
                 }
                 else
                 {
@@ -164,7 +141,7 @@ namespace MemoryModelTest
             {
                 if (_initialized) // Read 1
                 {
-                    Console.WriteLine(_data); // Read 2
+                    Console.WriteLine(_data); // Read 2 当发生内存重排会输出 0
                 }
                 else
                 {
