@@ -7,11 +7,13 @@ Console.WriteLine("Hello, World!");
 
 var builder = Sdk.CreateTracerProviderBuilder();
 
-using var tracerProvider = builder.SetResourceBuilder(ResourceBuilder.CreateDefault()
-        .AddService("TraceTest"))
+using var tracerProvider = builder.SetResourceBuilder(ResourceBuilder.CreateDefault().AddService("TraceTest"))
     .AddSource("Sample.DistributedTracing")
     .AddConsoleExporter()
-    .AddZipkinExporter(options => { })
+    .AddZipkinExporter(options =>
+    {
+        options.Endpoint = new Uri("http://localhost:9411/api/v2/spans");
+    })
     .Build();
 
 var activitySource = new ActivitySource("Sample.DistributedTracing", "1.0.0");
