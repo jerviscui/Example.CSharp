@@ -247,9 +247,11 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AuthorizationTest", "Tests\
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "OpenTelemetry", "OpenTelemetry", "{8A0EA7BE-E946-42D6-9C32-20C935EBD724}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AspNetCoreTest", "plugins\OpenTelemetry\AspNetCoreTest\AspNetCoreTest.csproj", "{E082D1E1-332F-4F58-B88C-5B9733BECCEE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreTest", "plugins\OpenTelemetry\AspNetCoreTest\AspNetCoreTest.csproj", "{E082D1E1-332F-4F58-B88C-5B9733BECCEE}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraceTest", "plugins\OpenTelemetry\TraceTest\TraceTest.csproj", "{7B6EC137-88CF-4212-AA8E-152EA02F5907}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsTest", "plugins\OpenTelemetry\MetricsTest\MetricsTest.csproj", "{9D85DF38-55D2-4916-8BA5-16B290053583}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -613,6 +615,10 @@ Global
 		{7B6EC137-88CF-4212-AA8E-152EA02F5907}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7B6EC137-88CF-4212-AA8E-152EA02F5907}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7B6EC137-88CF-4212-AA8E-152EA02F5907}.Release|Any CPU.Build.0 = Release|Any CPU
+		{9D85DF38-55D2-4916-8BA5-16B290053583}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9D85DF38-55D2-4916-8BA5-16B290053583}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9D85DF38-55D2-4916-8BA5-16B290053583}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9D85DF38-55D2-4916-8BA5-16B290053583}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -719,6 +725,7 @@ Global
 		{8A0EA7BE-E946-42D6-9C32-20C935EBD724} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 		{E082D1E1-332F-4F58-B88C-5B9733BECCEE} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
 		{7B6EC137-88CF-4212-AA8E-152EA02F5907} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
+		{9D85DF38-55D2-4916-8BA5-16B290053583} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
