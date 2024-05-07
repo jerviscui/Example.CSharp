@@ -253,6 +253,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraceTest", "plugins\OpenTe
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsTest", "plugins\OpenTelemetry\MetricsTest\MetricsTest.csproj", "{9D85DF38-55D2-4916-8BA5-16B290053583}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalysisTest", "Tests\CodeAnalysisTest\CodeAnalysisTest.csproj", "{28DB4ED1-D835-4B63-81C3-1D756FF3F541}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -619,6 +621,10 @@ Global
 		{9D85DF38-55D2-4916-8BA5-16B290053583}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9D85DF38-55D2-4916-8BA5-16B290053583}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9D85DF38-55D2-4916-8BA5-16B290053583}.Release|Any CPU.Build.0 = Release|Any CPU
+		{28DB4ED1-D835-4B63-81C3-1D756FF3F541}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{28DB4ED1-D835-4B63-81C3-1D756FF3F541}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{28DB4ED1-D835-4B63-81C3-1D756FF3F541}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{28DB4ED1-D835-4B63-81C3-1D756FF3F541}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -726,6 +732,7 @@ Global
 		{E082D1E1-332F-4F58-B88C-5B9733BECCEE} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
 		{7B6EC137-88CF-4212-AA8E-152EA02F5907} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
 		{9D85DF38-55D2-4916-8BA5-16B290053583} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
+		{28DB4ED1-D835-4B63-81C3-1D756FF3F541} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
