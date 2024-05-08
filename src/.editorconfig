@@ -478,20 +478,25 @@ dotnet_diagnostic.IDE0290.severity = suggestion
 
 # IDE0010: Add missing cases
 dotnet_diagnostic.IDE0010.severity = error
+# IDE0130: 命名空间与文件夹结构不匹配
+dotnet_diagnostic.IDE0130.severity = suggestion
 # 样式已移除只保留重构
 # IDE0035: Remove unreachable code
-dotnet_diagnostic.IDE0035.severity = none
+# dotnet_diagnostic.IDE0035.severity = none
 # IDE0050: Convert anonymous type to tuple
-dotnet_diagnostic.IDE0050.severity = none
-
+# dotnet_diagnostic.IDE0050.severity = none
+# .net 8 需要验证！提高了可读性，但是降低了性能
+# 使用范围运算符(IDE0057) 可能产生更多的计算操作
+# csharp_style_prefer_range_operator = false
+# 简化内插(IDE0071) 可能产生额外装箱操作
+# dotnet_style_prefer_simplified_interpolation = false
 
 
 
 # IDE0055: 修正格式
 dotnet_diagnostic.IDE0055.severity = suggestion
 
-# IDE0130: 命名空间与文件夹结构不匹配
-dotnet_diagnostic.IDE0130.severity = none
+
 
 # IDE2000: 避免出现多个空白行
 dotnet_diagnostic.IDE2000.severity = suggestion
@@ -598,3 +603,6 @@ dotnet_diagnostic.S1854.severity = none
 
 # S1481: Unused local variables should be removed
 dotnet_diagnostic.S1481.severity = none
+
+# S2328: "GetHashCode" should not reference mutable fields
+dotnet_diagnostic.S2328.severity = error

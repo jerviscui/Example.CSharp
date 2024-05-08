@@ -1,3 +1,5 @@
+using System.Globalization;
+
 namespace CodeAnalysisTest;
 
 internal sealed class ExpressionLevelTest
@@ -60,7 +62,7 @@ internal sealed class ExpressionLevelTest
         string? age = Random.Shared.Next() > 0 ? null : "";
         var tuple = (age: age, name: name);
 
-        // ide0037 dotnet_style_prefer_inferred_anonymous_type_member_names = true ,样式已移除只保留重构
+        // ide0037 dotnet_style_prefer_inferred_anonymous_type_member_names = true
         var anon = new { age = age, name = name };
 
         // ide0041 dotnet_style_prefer_is_null_check_over_reference_equality_method = true
@@ -93,7 +95,7 @@ internal sealed class ExpressionLevelTest
 
     private static int M3()
     {
-        // ide0050 Convert anonymous type to tuple，样式已移除，只保留重构
+        // ide0050 Convert anonymous type to tuple锛屾牱寮忓凡绉婚櫎锛屽彧淇濈暀閲嶆瀯
         var t1 = new { a = 1, b = 2 };
 
         // ide0054 dotnet_style_prefer_compound_assignment = true
@@ -108,7 +110,40 @@ internal sealed class ExpressionLevelTest
         v = Random.Shared.Next();
         int y = v;
 
+        // ide0071 dotnet_style_prefer_simplified_interpolation = true
+        var str = $"prefix {y.ToString()} suffix";
+
+        // ide0075 dotnet_style_prefer_simplified_boolean_expressions = true
+        var result1 = M4() && M5() ? true : false;
+        var result2 = M4() ? true : M5();
+
+        // ide0082 Convert typeof to nameof
+        var n1 = typeof(ExpressionLevelTest).Name;
+        var n2 = typeof(int).Name;
+
+        // ide0100 Remove unnecessary equality operator
+        if (result1 == true)
+        {
+            y = 0;
+        }
+        if (M4() != false)
+        {
+            y = 1;
+        }
+
+        // ide0120
+        IEnumerable<string> words = new List<string> { "hello", "world", "!" };
+        var result = words.Where(x => x.Equals("hello")).Any();
+
         return y;
+    }
+    private static bool M5()
+    {
+        throw new NotImplementedException();
+    }
+    private static bool M4()
+    {
+        throw new NotImplementedException();
     }
 
     private static void M()
@@ -128,6 +163,17 @@ internal sealed class ExpressionLevelTest
     {
         A,
         B
+    }
+
+    private readonly int j = 1;
+
+    // IDE0070: GetHashCode can be simplified.
+    public override int GetHashCode()
+    {
+        var hashCode = 339610899;
+        hashCode = hashCode * -1521134295 + base.GetHashCode();
+        hashCode = hashCode * -1521134295 + j.GetHashCode();
+        return hashCode;
     }
 }
 
