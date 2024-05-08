@@ -161,11 +161,11 @@ csharp_style_var_when_type_is_apparent = true
 
 # Expression-bodied 成员
 csharp_style_expression_bodied_accessors = true
-csharp_style_expression_bodied_constructors = true
+csharp_style_expression_bodied_constructors = false
 csharp_style_expression_bodied_indexers = true
 csharp_style_expression_bodied_lambdas = true
 csharp_style_expression_bodied_local_functions = true
-csharp_style_expression_bodied_methods = true
+csharp_style_expression_bodied_methods = false
 csharp_style_expression_bodied_operators = true
 csharp_style_expression_bodied_properties = true
 
@@ -466,17 +466,24 @@ dotnet_naming_rule.parameters_rule.severity             = warning
 # dotnet analyzer suppress
 ##########################################
 
+# IDE0005: Using directive is unnecessary.
+dotnet_diagnostic.IDE0005.severity = suggestion
+
 # IDE0161: 转换为文件范围限定的 namespace
 dotnet_diagnostic.IDE0161.severity = suggestion
-
-# IDE0130: 命名空间与文件夹结构不匹配
-dotnet_diagnostic.IDE0130.severity = none
-
+# IDE0210: Convert to top-level statements
+dotnet_diagnostic.IDE0210.severity = suggestion
 # IDE0290: 使用主构造函数
 dotnet_diagnostic.IDE0290.severity = suggestion
 
+# IDE0010: Add missing cases
+dotnet_diagnostic.IDE0010.severity = error
+
 # IDE0055: 修正格式
 dotnet_diagnostic.IDE0055.severity = suggestion
+
+# IDE0130: 命名空间与文件夹结构不匹配
+dotnet_diagnostic.IDE0130.severity = none
 
 # IDE2000: 避免出现多个空白行
 dotnet_diagnostic.IDE2000.severity = suggestion
@@ -496,14 +503,15 @@ dotnet_diagnostic.IDE0007.severity = suggestion
 # IDE0305: 简化集合初始化
 dotnet_diagnostic.IDE0305.severity = suggestion
 
-# IDE0005: Using directive is unnecessary.
-dotnet_diagnostic.IDE0005.severity = suggestion
+
 
 # 使结构字段可写
 dotnet_diagnostic.IDE0064.severity = error
 
 # IDE0300: Simplify collection initialization
 dotnet_diagnostic.IDE0300.severity = suggestion
+
+
 
 # CS4014: 由于此调用不会等待，因此在调用完成前将继续执行当前方法
 dotnet_diagnostic.CS4014.severity = error
@@ -522,8 +530,6 @@ dotnet_diagnostic.CS8618.severity = error
 
 # CS8625: Cannot convert null literal to non-nullable reference type.
 dotnet_diagnostic.CS8625.severity = error
-
-
 
 #### SonarLint ####
 
@@ -562,3 +568,18 @@ dotnet_diagnostic.S101.severity = none
 
 # S2930: "IDisposables" should be disposed
 dotnet_diagnostic.S2930.severity = error
+
+# S2589: Boolean expressions should not be gratuitous
+dotnet_diagnostic.S2589.severity = error
+
+# S108: Nested blocks of code should not be left empty
+dotnet_diagnostic.S108.severity = error
+
+# S2933: Fields that are only assigned in the constructor should be "readonly"
+dotnet_diagnostic.S2933.severity = none
+
+# S2583: Conditionally executed code should be reachable
+dotnet_diagnostic.S2583.severity = error
+
+# S3923: All branches in a conditional structure should not have exactly the same implementation
+dotnet_diagnostic.S3923.severity = error
