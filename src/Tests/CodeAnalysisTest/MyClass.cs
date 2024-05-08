@@ -11,8 +11,13 @@ internal sealed class MyClass
     {
     }
 
-
-    public int Age { get; set; }
+    // ide0032 dotnet_style_prefer_auto_properties = false
+    private int age;
+    public int Age
+    {
+        get { return age; }
+        set { age = value; }
+    }
 
     internal static readonly int[] sourceArray = new[] { 1, 2, 3 };
 
