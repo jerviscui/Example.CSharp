@@ -159,7 +159,7 @@ internal sealed class ExpressionLevelTest
         throw new NotImplementedException();
     }
 
-    private enum E
+    public enum E
     {
         A,
         B
