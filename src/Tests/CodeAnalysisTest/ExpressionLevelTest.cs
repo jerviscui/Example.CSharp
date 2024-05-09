@@ -179,7 +179,7 @@ internal sealed class ExpressionLevelTest
 
 
 
-internal class Unused
+internal sealed class Unused
 {
     // IDE0051: Remove unused private members
     private readonly int _fieldPrivate;

@@ -491,7 +491,8 @@ dotnet_diagnostic.IDE0130.severity = suggestion
 # 简化内插(IDE0071) 可能产生额外装箱操作
 # dotnet_style_prefer_simplified_interpolation = false
 
-
+# IDE0039: Use local function
+dotnet_diagnostic.IDE0039.severity = error
 
 # IDE0055: 修正格式
 dotnet_diagnostic.IDE0055.severity = suggestion
