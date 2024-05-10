@@ -466,6 +466,8 @@ dotnet_naming_rule.parameters_rule.severity             = warning
 # dotnet analyzer suppress
 ##########################################
 
+#### category-Style ####
+
 # IDE0005: Using directive is unnecessary.
 dotnet_diagnostic.IDE0005.severity = suggestion
 
@@ -484,6 +486,10 @@ dotnet_diagnostic.IDE0072.severity = error
 dotnet_diagnostic.IDE0130.severity = suggestion
 # IDE0220: Add explicit cast
 dotnet_diagnostic.IDE0220.severity = error
+# IDE0300: Simplify collection initialization
+dotnet_diagnostic.IDE0300.severity = suggestion
+# IDE0305: 简化集合初始化
+dotnet_diagnostic.IDE0305.severity = suggestion
 # 样式已移除只保留重构
 # IDE0035: Remove unreachable code
 # dotnet_diagnostic.IDE0035.severity = none
@@ -519,34 +525,16 @@ dotnet_diagnostic.IDE2006.severity = suggestion
 # IDE1005: Delegate invocation can be simplified.
 dotnet_diagnostic.IDE1005.severity = suggestion
 
-# IDE0055: 修正格式
-dotnet_diagnostic.IDE0055.severity = suggestion
-
-
-
-
-
 # IDE0007: 使用隐式类型
 dotnet_diagnostic.IDE0007.severity = suggestion
 
-# IDE0052: 删除未读的私有成员
-# dotnet_diagnostic.IDE0052.severity = warning
+# IDE0003: Remove qualification
+dotnet_diagnostic.IDE0003.severity = suggestion
 
-# IDE0060: 删除未使用的参数
-# dotnet_diagnostic.IDE0060.severity = warning
+# IDE0055: 修正格式
+dotnet_diagnostic.IDE0055.severity = suggestion
 
-
-# IDE0305: 简化集合初始化
-dotnet_diagnostic.IDE0305.severity = suggestion
-
-
-
-
-
-# IDE0300: Simplify collection initialization
-dotnet_diagnostic.IDE0300.severity = suggestion
-
-
+#### compile warning ####
 
 # CS4014: 由于此调用不会等待，因此在调用完成前将继续执行当前方法
 dotnet_diagnostic.CS4014.severity = error
@@ -566,7 +554,9 @@ dotnet_diagnostic.CS8618.severity = error
 # CS8625: Cannot convert null literal to non-nullable reference type.
 dotnet_diagnostic.CS8625.severity = error
 
-#### SonarLint ####
+##########################################
+# SonarLint
+##########################################
 
 # S1186: Methods should not be empty
 dotnet_diagnostic.S1186.severity = error

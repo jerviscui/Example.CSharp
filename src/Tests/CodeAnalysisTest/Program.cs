@@ -120,4 +120,8 @@ namespace CodeAnalysisTest // IDE0160 csharp_style_namespace_declarations
             return i;
         }
     }
+
+
 }
+
+
