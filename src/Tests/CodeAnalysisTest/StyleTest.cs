@@ -124,8 +124,12 @@ internal sealed class StyleTest
         static int doubleLambda(int x) { return x * 2; }
     }
 
+
+
     private static int M(E e)
     {
+
+
         // IDE0072: Add missing cases
         var a = e switch
         {
@@ -133,7 +137,12 @@ internal sealed class StyleTest
             E.B => throw new NotImplementedException(),
             _ => -1,
         };
+        int b = a;
 
-        return a;
+
+        return b;
+
+
     }
 }
+

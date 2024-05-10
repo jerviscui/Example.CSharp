@@ -498,13 +498,33 @@ dotnet_diagnostic.IDE0220.severity = error
 # IDE0039: Use local function
 dotnet_diagnostic.IDE0039.severity = error
 
+# 使结构字段可写
+dotnet_diagnostic.IDE0064.severity = error
+
+# IDE2000: 避免出现多个空白行
+dotnet_diagnostic.IDE2000.severity = suggestion
+# IDE2001: 允许在同一行嵌入语句
+dotnet_diagnostic.IDE2001.severity = suggestion
+# IDE2002: 允许连续大括号之间有空行
+dotnet_diagnostic.IDE2002.severity = suggestion
+# IDE2003: 允许语句紧接在块之后
+dotnet_diagnostic.IDE2003.severity = suggestion
+# IDE2004: 在构造函数初始值设定项中允许冒号后有空行
+dotnet_diagnostic.IDE2004.severity = suggestion
+# IDE2005: 条件表达式中的标记后允许空行
+dotnet_diagnostic.IDE2005.severity = suggestion
+# IDE2006: 箭头表达式中的标记后允许空行
+dotnet_diagnostic.IDE2006.severity = suggestion
+
+# IDE1005: Delegate invocation can be simplified.
+dotnet_diagnostic.IDE1005.severity = suggestion
+
 # IDE0055: 修正格式
 dotnet_diagnostic.IDE0055.severity = suggestion
 
 
 
-# IDE2000: 避免出现多个空白行
-dotnet_diagnostic.IDE2000.severity = suggestion
+
 
 # IDE0007: 使用隐式类型
 dotnet_diagnostic.IDE0007.severity = suggestion
@@ -521,8 +541,7 @@ dotnet_diagnostic.IDE0305.severity = suggestion
 
 
 
-# 使结构字段可写
-dotnet_diagnostic.IDE0064.severity = error
+
 
 # IDE0300: Simplify collection initialization
 dotnet_diagnostic.IDE0300.severity = suggestion
@@ -617,3 +636,6 @@ dotnet_diagnostic.S2219.severity = none
 
 # S3878: Arrays should not be created for params parameters
 dotnet_diagnostic.S3878.severity = none
+
+# S3459: Unassigned members should be removed
+dotnet_diagnostic.S3459.severity = error
