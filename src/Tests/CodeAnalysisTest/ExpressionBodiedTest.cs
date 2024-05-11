@@ -35,7 +35,7 @@ internal sealed class ExpressionBodiedTest
     public int this[int i] { get { return _age; } }
 
     // ide0053 csharp_style_expression_bodied_lambdas = true
-    private readonly Func<int, int> square = x => { return x * x; };
+    private readonly Func<int, int> _square = x => { return x * x; };
 
     private static void M()
     {
