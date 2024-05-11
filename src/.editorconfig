@@ -595,6 +595,12 @@ dotnet_diagnostic.CS8625.severity = error
 # CA2201: 不要引发保留的异常类型
 dotnet_diagnostic.CA2201.severity = error
 
+# 自动确定其他字符串格式设置方法 https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/quality-rules/ca2241
+dotnet_code_quality.CA2241.try_determine_additional_string_formatting_methods_automatically = true
+dotnet_diagnostic.CA2241.severity = error
+# IDE0043: 无效的格式字符串
+dotnet_diagnostic.IDE0043.severity = none
+
 ##########################################
 # SonarLint
 ##########################################
@@ -605,10 +611,10 @@ dotnet_diagnostic.CA2201.severity = error
 dotnet_diagnostic.S101.severity = none
 
 # S1075: URIs should not be hardcoded
-dotnet_diagnostic.S1075.severity = none
+dotnet_diagnostic.S1075.severity = suggestion
 
 # S112: General or reserved exceptions should never be thrown
-dotnet_diagnostic.S112.severity = none
+dotnet_diagnostic.S112.severity = suggestion
 
 # S1125: Boolean literals should not be redundant
 dotnet_diagnostic.S1125.severity = none
@@ -637,6 +643,9 @@ dotnet_diagnostic.S1905.severity = none
 # S2219: Runtime type checking should be simplified
 dotnet_diagnostic.S2219.severity = none
 
+# S2275: Composite format strings should not lead to unexpected behavior at runtime
+dotnet_diagnostic.S2275.severity = suggestion
+
 # S2292: Trivial properties should be auto-implemented
 dotnet_diagnostic.S2292.severity = none
 
@@ -647,13 +656,13 @@ dotnet_diagnostic.S2933.severity = none
 dotnet_diagnostic.S2971.severity = none
 
 # S3878: Arrays should not be created for params parameters
-dotnet_diagnostic.S3878.severity = none
+dotnet_diagnostic.S3878.severity = suggestion
 
 # S4487: Unread "private" fields should be removed
 dotnet_diagnostic.S4487.severity = none
 
 # S907: Remove this use of 'goto'
-dotnet_diagnostic.S907.severity = none
+dotnet_diagnostic.S907.severity = suggestion
 
 #### error ####
 
@@ -666,8 +675,14 @@ dotnet_diagnostic.S1186.severity = error
 # S1764: Identical expressions should not be used on both sides of operators
 dotnet_diagnostic.S1764.severity = error
 
+# S1994: "for" loop increment clauses should modify the loops' counters
+dotnet_diagnostic.S1994.severity = error
+
 # S2094: Classes should not be empty
 dotnet_diagnostic.S2094.severity = error
+
+# S2184: Results of integer division should not be assigned to floating point variables
+dotnet_diagnostic.S2184.severity = error
 
 # S2190: Loops and recursions should not be infinite
 dotnet_diagnostic.S2190.severity = error
@@ -684,6 +699,10 @@ dotnet_diagnostic.S2589.severity = error
 # S2930: "IDisposables" should be disposed
 dotnet_diagnostic.S2930.severity = error
 
+# S3168: "async" methods should not return "void"
+# 例外情况：具有 EventHandler 委托签名的方法。方法名称匹配 On[A-Z]\w* 模式。
+dotnet_diagnostic.S3168.severity = error
+
 # S3400: Methods should not return constants
 dotnet_diagnostic.S3400.severity = error
 
@@ -692,3 +711,6 @@ dotnet_diagnostic.S3459.severity = error
 
 # S3923: All branches in a conditional structure should not have exactly the same implementation
 dotnet_diagnostic.S3923.severity = error
+
+# S4158: Empty collections should not be accessed or iterated
+dotnet_diagnostic.S4158.severity = error
