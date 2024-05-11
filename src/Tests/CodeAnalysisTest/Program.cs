@@ -21,12 +21,9 @@ namespace CodeAnalysisTest // IDE0160 csharp_style_namespace_declarations
                 var canRead = fileStream.CanRead;
             }
 
-            // ide0062 csharp_prefer_static_local_function = true
+            // ide0062 csharp_prefer_static_local_function = false
             Hello();
-            void Hello()
-            {
-                Console.WriteLine("Hello");
-            }
+            void Hello() => Console.WriteLine("Hello");
 
             // ide1005 csharp_style_conditional_delegate_call = false
             if (func != null)
@@ -38,7 +35,7 @@ namespace CodeAnalysisTest // IDE0160 csharp_style_namespace_declarations
             var v = 1 + 1 * 1;
             Console.WriteLine(v);
             // ide0048 dotnet_style_parentheses_in_relational_binary_operators = always_for_clarity
-            var vv = 1 < 1 == 1 > 1;
+            var vv = 1 < 2 == 1 > 3;
             Console.WriteLine(vv);
             // ide0048 dotnet_style_parentheses_in_other_binary_operators = always_for_clarity
             var vvv = true || true && false;

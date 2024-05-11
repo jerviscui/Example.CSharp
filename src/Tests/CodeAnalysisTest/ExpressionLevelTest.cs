@@ -148,7 +148,7 @@ internal sealed class ExpressionLevelTest
 
     private static void M()
     {
-        throw new System.Exception();
+        throw new NotImplementedException();
 
         // IDE0035: Remove unreachable code
         //var v = 0;
@@ -186,7 +186,7 @@ internal sealed class Unused
     private static int PropertyPrivate => 1;
     private static int GetNumPrivate()
     {
-        return 1;
+        return DateTime.Now.Second;
     }
 
     // IDE0052: Remove unread private members

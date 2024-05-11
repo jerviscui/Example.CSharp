@@ -44,8 +44,8 @@ internal sealed class PatternMatchingTest
         return 0;
     }
 
-    public record Point(int X, int Y);
-    public record Segment(Point Start, Point End);
+    public sealed record Point(int X, int Y);
+    public sealed record Segment(Point Start, Point End);
 
     // ide0170 Simplify property pattern
     static bool IsEndOnXAxis(Segment segment) =>

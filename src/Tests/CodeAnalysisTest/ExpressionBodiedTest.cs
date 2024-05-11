@@ -8,6 +8,7 @@ internal sealed class ExpressionBodiedTest
     public ExpressionBodiedTest(int age)
     {
         Age = age;
+        _age = 0;
     }
 
     // ide0022 csharp_style_expression_bodied_methods = false
