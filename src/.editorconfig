@@ -164,7 +164,7 @@ csharp_style_expression_bodied_accessors = true
 csharp_style_expression_bodied_constructors = false
 csharp_style_expression_bodied_indexers = true
 csharp_style_expression_bodied_lambdas = true
-csharp_style_expression_bodied_local_functions = true
+csharp_style_expression_bodied_local_functions = false
 csharp_style_expression_bodied_methods = false
 csharp_style_expression_bodied_operators = true
 csharp_style_expression_bodied_properties = true
@@ -478,6 +478,22 @@ dotnet_diagnostic.IDE0210.severity = suggestion
 # IDE0290: 使用主构造函数
 dotnet_diagnostic.IDE0290.severity = suggestion
 
+# IDE0011: 添加大括号
+dotnet_diagnostic.IDE0011.severity = suggestion
+
+# IDE0024: 使用表达式主体来表示运算符
+dotnet_diagnostic.IDE0024.severity = suggestion
+# IDE0025: 使用表达式主体来表示属性
+dotnet_diagnostic.IDE0025.severity = suggestion
+# IDE0026: 使用索引器的表达式主体
+dotnet_diagnostic.IDE0026.severity = suggestion
+# IDE0027: 使用访问器的表达式主体
+dotnet_diagnostic.IDE0027.severity = suggestion
+# IDE0022: 使用方法的程序块主体
+dotnet_diagnostic.IDE0022.severity = suggestion
+# IDE0061: 使用本地函数的块主体
+dotnet_diagnostic.IDE0061.severity = suggestion
+
 # IDE0010: Add missing cases
 dotnet_diagnostic.IDE0010.severity = error
 # IDE0072: Add missing cases
@@ -490,19 +506,35 @@ dotnet_diagnostic.IDE0220.severity = error
 dotnet_diagnostic.IDE0300.severity = suggestion
 # IDE0305: 简化集合初始化
 dotnet_diagnostic.IDE0305.severity = suggestion
+# IDE0032: 使用自动属性
+dotnet_diagnostic.IDE0032.severity = suggestion
+# IDE0002: 简化成员访问
+dotnet_diagnostic.IDE0002.severity = suggestion
+# IDE0004: 删除不必要的转换
+dotnet_diagnostic.IDE0004.severity = suggestion
+# IDE0037: 使用推断的成员名称
+dotnet_diagnostic.IDE0037.severity = suggestion
+# IDE0054: 使用复合分配
+dotnet_diagnostic.IDE0054.severity = suggestion
+# IDE0001: 简化名称
+dotnet_diagnostic.IDE0001.severity = suggestion
 # 样式已移除只保留重构
 # IDE0035: Remove unreachable code
 # dotnet_diagnostic.IDE0035.severity = none
 # IDE0050: Convert anonymous type to tuple
 # dotnet_diagnostic.IDE0050.severity = none
-# .net 8 需要验证！提高了可读性，但是降低了性能
-# 使用范围运算符(IDE0057) 可能产生更多的计算操作
-# csharp_style_prefer_range_operator = false
-# 简化内插(IDE0071) 可能产生额外装箱操作
-# dotnet_style_prefer_simplified_interpolation = false
 
 # IDE0039: Use local function
 dotnet_diagnostic.IDE0039.severity = error
+# IDE0034: 简化 "default" 表达式
+dotnet_diagnostic.IDE0034.severity = suggestion
+# IDE0018: 内联变量声明
+dotnet_diagnostic.IDE0018.severity = suggestion
+# IDE0090: 使用 "new(...)"
+dotnet_diagnostic.IDE0090.severity = suggestion
+
+# IDE0049: 简化名称
+dotnet_diagnostic.IDE0049.severity = suggestion
 
 # 使结构字段可写
 dotnet_diagnostic.IDE0064.severity = error
@@ -525,11 +557,14 @@ dotnet_diagnostic.IDE2006.severity = suggestion
 # IDE1005: Delegate invocation can be simplified.
 dotnet_diagnostic.IDE1005.severity = suggestion
 
-# IDE0007: 使用隐式类型
-dotnet_diagnostic.IDE0007.severity = suggestion
+# IDE0047: 删除不必要的括号
+dotnet_diagnostic.IDE0047.severity = suggestion
 
 # IDE0003: Remove qualification
 dotnet_diagnostic.IDE0003.severity = suggestion
+
+# IDE0007: 使用隐式类型
+dotnet_diagnostic.IDE0007.severity = suggestion
 
 # IDE0055: 修正格式
 dotnet_diagnostic.IDE0055.severity = suggestion
@@ -554,57 +589,29 @@ dotnet_diagnostic.CS8618.severity = error
 # CS8625: Cannot convert null literal to non-nullable reference type.
 dotnet_diagnostic.CS8625.severity = error
 
+# CA2201: 不要引发保留的异常类型
+dotnet_diagnostic.CA2201.severity = error
+
 ##########################################
 # SonarLint
 ##########################################
 
-# S1186: Methods should not be empty
-dotnet_diagnostic.S1186.severity = error
-
-# S2094: Classes should not be empty
-dotnet_diagnostic.S2094.severity = error
-
-# S4487: Unread "private" fields should be removed
-dotnet_diagnostic.S4487.severity = none
-
-# S2190: Loops and recursions should not be infinite
-dotnet_diagnostic.S2190.severity = error
-
-# S125: Sections of code should not be commented out
-dotnet_diagnostic.S125.severity = none
-
-# S1075: URIs should not be hardcoded
-dotnet_diagnostic.S1075.severity = none
-
-# S1135: Track uses of "TODO" tags
-dotnet_diagnostic.S1135.severity = none
-
-# S907: Remove this use of 'goto'
-dotnet_diagnostic.S907.severity = none
+#### duplicate with dotnet analyzer ####
 
 # S101: Types should be named in PascalCase
 dotnet_diagnostic.S101.severity = none
 
-# S2930: "IDisposables" should be disposed
-dotnet_diagnostic.S2930.severity = error
+# S1075: URIs should not be hardcoded
+dotnet_diagnostic.S1075.severity = none
 
-# S2589: Boolean expressions should not be gratuitous
-dotnet_diagnostic.S2589.severity = error
+# S112: General or reserved exceptions should never be thrown
+dotnet_diagnostic.S112.severity = none
 
-# S108: Nested blocks of code should not be left empty
-dotnet_diagnostic.S108.severity = error
+# S1125: Boolean literals should not be redundant
+dotnet_diagnostic.S1125.severity = none
 
-# S2933: Fields that are only assigned in the constructor should be "readonly"
-dotnet_diagnostic.S2933.severity = none
-
-# S2583: Conditionally executed code should be reachable
-dotnet_diagnostic.S2583.severity = error
-
-# S3923: All branches in a conditional structure should not have exactly the same implementation
-dotnet_diagnostic.S3923.severity = error
-
-# S2292: Trivial properties should be auto-implemented
-dotnet_diagnostic.S2292.severity = none
+# S1135: Track uses of "TODO" tags
+dotnet_diagnostic.S1135.severity = none
 
 # S1144: Unused private types or members should be removed
 dotnet_diagnostic.S1144.severity = none
@@ -612,20 +619,73 @@ dotnet_diagnostic.S1144.severity = none
 # S1172: Unused method parameters should be removed
 dotnet_diagnostic.S1172.severity = none
 
-# S1854: Unused assignments should be removed
-dotnet_diagnostic.S1854.severity = none
+# S125: Sections of code should not be commented out
+dotnet_diagnostic.S125.severity = none
 
 # S1481: Unused local variables should be removed
 dotnet_diagnostic.S1481.severity = none
 
-# S2328: "GetHashCode" should not reference mutable fields
-dotnet_diagnostic.S2328.severity = error
+# S1854: Unused assignments should be removed
+dotnet_diagnostic.S1854.severity = none
+
+# S1905: Redundant casts should not be used
+dotnet_diagnostic.S1905.severity = none
 
 # S2219: Runtime type checking should be simplified
 dotnet_diagnostic.S2219.severity = none
 
+# S2292: Trivial properties should be auto-implemented
+dotnet_diagnostic.S2292.severity = none
+
+# S2933: Fields that are only assigned in the constructor should be "readonly"
+dotnet_diagnostic.S2933.severity = none
+
+# S2971: LINQ expressions should be simplified
+dotnet_diagnostic.S2971.severity = none
+
 # S3878: Arrays should not be created for params parameters
 dotnet_diagnostic.S3878.severity = none
 
+# S4487: Unread "private" fields should be removed
+dotnet_diagnostic.S4487.severity = none
+
+# S907: Remove this use of 'goto'
+dotnet_diagnostic.S907.severity = none
+
+#### error ####
+
+# S108: Nested blocks of code should not be left empty
+dotnet_diagnostic.S108.severity = error
+
+# S1186: Methods should not be empty
+dotnet_diagnostic.S1186.severity = error
+
+# S1764: Identical expressions should not be used on both sides of operators
+dotnet_diagnostic.S1764.severity = error
+
+# S2094: Classes should not be empty
+dotnet_diagnostic.S2094.severity = error
+
+# S2190: Loops and recursions should not be infinite
+dotnet_diagnostic.S2190.severity = error
+
+# S2328: "GetHashCode" should not reference mutable fields
+dotnet_diagnostic.S2328.severity = error
+
+# S2583: Conditionally executed code should be reachable
+dotnet_diagnostic.S2583.severity = error
+
+# S2589: Boolean expressions should not be gratuitous
+dotnet_diagnostic.S2589.severity = error
+
+# S2930: "IDisposables" should be disposed
+dotnet_diagnostic.S2930.severity = error
+
+# S3400: Methods should not return constants
+dotnet_diagnostic.S3400.severity = error
+
 # S3459: Unassigned members should be removed
 dotnet_diagnostic.S3459.severity = error
+
+# S3923: All branches in a conditional structure should not have exactly the same implementation
+dotnet_diagnostic.S3923.severity = error
