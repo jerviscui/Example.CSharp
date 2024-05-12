@@ -609,6 +609,25 @@ dotnet_diagnostic.CA2241.severity = error
 dotnet_diagnostic.IDE0043.severity = none
 
 ##########################################
+# CodeRush
+##########################################
+
+# CRR0030: Redundant 'await'
+dotnet_diagnostic.CRR0030.severity = error
+
+# CRR0033: The void async method should be in a try/catch block
+dotnet_diagnostic.CRR0033.severity = error
+
+# CRR0036: The 'await Task.FromResult()' expression is redundant
+dotnet_diagnostic.CRR0036.severity = error
+
+# CRR0037: Task.Wait is used in an async method
+dotnet_diagnostic.CRR0037.severity = error
+
+# CRR0040: The Code Metric value exceeds defined threshold
+dotnet_diagnostic.CRR0040.severity = suggestion
+
+##########################################
 # SonarLint
 ##########################################
 
