@@ -63,6 +63,7 @@
         <Item Id="{318b8900-85af-4c66-b37f-8a86508e7a89}" />
         <Item Id="{d33fb6fa-56b3-40a1-b169-71e855b2e3a2}" />
         <Item Id="{4aa0656f-7150-440b-8585-509c548e9d7e}" />
+        <DeletedItem Id="{e5dd9791-5dd0-4cde-a85e-6436940c6be2}" />
       </SubFolders>
     </RootFolder>
   </Options>

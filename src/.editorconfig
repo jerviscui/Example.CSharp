@@ -672,6 +672,9 @@ dotnet_diagnostic.S108.severity = error
 # S1186: Methods should not be empty
 dotnet_diagnostic.S1186.severity = error
 
+# S1199: Nested code blocks should not be used
+dotnet_diagnostic.S1199.severity = suggestion
+
 # S1764: Identical expressions should not be used on both sides of operators
 dotnet_diagnostic.S1764.severity = error
 
@@ -714,3 +717,6 @@ dotnet_diagnostic.S3923.severity = error
 
 # S4158: Empty collections should not be accessed or iterated
 dotnet_diagnostic.S4158.severity = error
+
+# S1206: "Equals(Object)" and "GetHashCode()" should be overridden in pairs
+dotnet_diagnostic.S1206.severity = error
