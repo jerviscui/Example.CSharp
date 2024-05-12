@@ -54,7 +54,7 @@ namespace CodeAnalysisTest // IDE0160 csharp_style_namespace_declarations
         private static int GetNum3(int unusedParam) { return 1; }
 
         // ide0280 Use nameof
-        private static int M([NotNullIfNotNull("input")] string? input) { return 1; }
+        public static int M([NotNullIfNotNull("input")] string? input) { return 1; }
     }
 
     // ide0040 dotnet_style_require_accessibility_modifiers = always
@@ -64,12 +64,16 @@ namespace CodeAnalysisTest // IDE0160 csharp_style_namespace_declarations
         private int _daysInYear = 365;
 
         // ide0049 dotnet_style_predefined_type_for_locals_parameters_members = true
-        private Int32 _member;
+        private Int32 _member = 1;
 
-        private static int M()
+        public int M()
         {
             // ide0049 dotnet_style_predefined_type_for_member_access = true
             var local = Int32.MaxValue;
+
+            Console.WriteLine(_daysInYear);
+            Console.WriteLine(_member);
+            Console.WriteLine(Days);
 
             return local;
         }
@@ -112,7 +116,7 @@ namespace CodeAnalysisTest // IDE0160 csharp_style_namespace_declarations
         }
 
         // ide0251 csharp_style_prefer_readonly_struct_member = true
-        int M()
+        public int M()
         {
             return i;
         }
