@@ -115,6 +115,10 @@ internal sealed class StyleTest
     // ide0034 csharp_prefer_simple_default_expression = true
     private static void DoWork(CancellationToken cancellationToken = default(CancellationToken))
     {
+        var x = 1;
+        doubleFunc(x);
+        doubleLambda(x);
+
         // ide0039 csharp_style_prefer_local_over_anonymous_function = false
         // 匿名方法
         //Func<int, int> doubleFunc = delegate (int x) { return x * 2; };
