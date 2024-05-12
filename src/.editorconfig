@@ -572,6 +572,19 @@ dotnet_diagnostic.IDE0007.severity = suggestion
 # IDE0055: 修正格式
 dotnet_diagnostic.IDE0055.severity = suggestion
 
+#### nullable warnings ####
+
+# https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/nullable-warnings?f1url=%3FappId%3Droslyn%26k%3Dk(CS8603)#possible-dereference-of-null
+
+# CS8603: Possible null reference return.
+dotnet_diagnostic.CS8603.severity = error
+
+# CS8618: Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+dotnet_diagnostic.CS8618.severity = error
+
+# CS8625: Cannot convert null literal to non-nullable reference type.
+dotnet_diagnostic.CS8625.severity = error
+
 #### compile warning ####
 
 # CS4014: 由于此调用不会等待，因此在调用完成前将继续执行当前方法
@@ -585,12 +598,6 @@ dotnet_diagnostic.CS1998.severity = error
 
 # CA1715: Identifiers should have correct prefix
 dotnet_diagnostic.CA1715.severity = none
-
-# CS8618: Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
-dotnet_diagnostic.CS8618.severity = error
-
-# CS8625: Cannot convert null literal to non-nullable reference type.
-dotnet_diagnostic.CS8625.severity = error
 
 # CA2201: 不要引发保留的异常类型
 dotnet_diagnostic.CA2201.severity = error
@@ -609,6 +616,9 @@ dotnet_diagnostic.IDE0043.severity = none
 
 # S101: Types should be named in PascalCase
 dotnet_diagnostic.S101.severity = none
+
+# S907: Remove this use of 'goto'
+dotnet_diagnostic.S907.severity = suggestion
 
 # S1075: URIs should not be hardcoded
 dotnet_diagnostic.S1075.severity = suggestion
@@ -661,8 +671,8 @@ dotnet_diagnostic.S3878.severity = suggestion
 # S4487: Unread "private" fields should be removed
 dotnet_diagnostic.S4487.severity = none
 
-# S907: Remove this use of 'goto'
-dotnet_diagnostic.S907.severity = suggestion
+# S4586: Non-async "Task/Task<T>" methods should not return null
+dotnet_diagnostic.S4586.severity = none
 
 #### error ####
 
@@ -674,6 +684,9 @@ dotnet_diagnostic.S1186.severity = error
 
 # S1199: Nested code blocks should not be used
 dotnet_diagnostic.S1199.severity = suggestion
+
+# S1206: "Equals(Object)" and "GetHashCode()" should be overridden in pairs
+dotnet_diagnostic.S1206.severity = error
 
 # S1764: Identical expressions should not be used on both sides of operators
 dotnet_diagnostic.S1764.severity = error
@@ -717,6 +730,3 @@ dotnet_diagnostic.S3923.severity = error
 
 # S4158: Empty collections should not be accessed or iterated
 dotnet_diagnostic.S4158.severity = error
-
-# S1206: "Equals(Object)" and "GetHashCode()" should be overridden in pairs
-dotnet_diagnostic.S1206.severity = error
