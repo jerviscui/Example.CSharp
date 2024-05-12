@@ -5,6 +5,15 @@ namespace CodeAnalysisTest;
 internal sealed class ExpressionLevelTest
 {
 
+    public static void Test()
+    {
+        M1();
+        M2(E.B);
+        M3();
+        M4();
+        M5();
+    }
+
     private static void M1()
     {
         throw new NotSupportedException();
@@ -174,6 +183,12 @@ internal sealed class ExpressionLevelTest
         hashCode = hashCode * -1521134295 + base.GetHashCode();
         hashCode = hashCode * -1521134295 + j.GetHashCode();
         return hashCode;
+    }
+
+    public override bool Equals(object? obj)
+    {
+        return obj is ExpressionLevelTest test &&
+               j == test.j;
     }
 }
 
