@@ -21,7 +21,7 @@ internal sealed class MyClass
 
     internal static readonly int[] sourceArray = new[] { 1, 2, 3 };
 
-    private static void Test()
+    public static void Test()
     {
         // ide0200 Code with violations.
         bool IsEven(int x) => x % 2 == 0;
