@@ -4,7 +4,7 @@ namespace CodeAnalysisTest;
 
 internal sealed class PatternMatchingTest
 {
-    private static int M(object o)
+    public static int M(object o)
     {
         // ide0019 csharp_style_pattern_matching_over_as_with_null_check = true
         var s = o as string;
@@ -40,6 +40,8 @@ internal sealed class PatternMatchingTest
         {
             return 1;
         }
+
+        var v = IsEndOnXAxis(new Segment(new Point(1, 1), new Point(1, 1)));
 
         return 0;
     }
