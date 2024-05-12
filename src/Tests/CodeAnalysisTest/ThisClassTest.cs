@@ -18,6 +18,8 @@ public class ThisClassTest
 
         // IDE0003 dotnet_style_qualification_for_event = false
         this.MyEvent += (sender, e) => { };
+
+        Test();
     }
     public int ID { get; set; }
 
