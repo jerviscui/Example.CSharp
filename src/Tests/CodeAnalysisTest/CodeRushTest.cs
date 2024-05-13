@@ -4,20 +4,26 @@ using System.Linq.Expressions;
 
 namespace CodeAnalysisTest;
 
-internal sealed class CodeRushTest
+internal class CodeRushTestBase
 {
-#pragma warning disable CRR0026 // Unused member
-    public static void MethodName()
+    public virtual void MethodName()
+    {
+    }
+}
+
+internal sealed class CodeRushTest : CodeRushTestBase
+{
+    public override void MethodName()
     {
         var b = Random.Shared.Next() > 1;
         // CRR0008
         if (b)
         {
-            Format();
+            Console.WriteLine();
         }
         else
         {
-            Format();
+            Console.WriteLine();
         }
 
         // CRR0009
@@ -40,7 +46,6 @@ internal sealed class CodeRushTest
         _ = MethodName37Async(1, CancellationToken.None);
 #pragma warning restore CS4014 // Because this call is not awaited, execution of the current method continues before the call is completed
     }
-#pragma warning restore CRR0026 // Unused member
 
     //CRR0034 - The asynchronous method should contain the "Async" suffix
     public static async Task<string> DemoMethod30(CancellationToken token = default)

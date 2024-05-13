@@ -511,8 +511,6 @@ dotnet_diagnostic.IDE0300.severity = suggestion
 dotnet_diagnostic.IDE0305.severity = suggestion
 # IDE0032: 使用自动属性
 dotnet_diagnostic.IDE0032.severity = suggestion
-# IDE0002: 简化成员访问
-dotnet_diagnostic.IDE0002.severity = suggestion
 # IDE0004: 删除不必要的转换
 dotnet_diagnostic.IDE0004.severity = suggestion
 # IDE0037: 使用推断的成员名称
