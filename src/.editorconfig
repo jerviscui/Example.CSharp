@@ -571,28 +571,123 @@ dotnet_diagnostic.IDE0007.severity = suggestion
 dotnet_diagnostic.IDE0055.severity = suggestion
 
 #### nullable warnings ####
+# https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/nullable-warnings
 
-# https://learn.microsoft.com/en-us/dotnet/csharp/language-reference/compiler-messages/nullable-warnings?f1url=%3FappId%3Droslyn%26k%3Dk(CS8603)#possible-dereference-of-null
-
-# CS8603: Possible null reference return.
+# CS8597 - 抛出的值可能为 null。
+dotnet_diagnostic.CS8597.severity = error
+# CS8600 - 将 null 文字或可能的 null 值转换为不可为 null 的类型。
+dotnet_diagnostic.CS8600.severity = error
+# CS8601 - 可能的空引用分配。
+dotnet_diagnostic.CS8601.severity = error
+# CS8602 - 取消引用可能为空的引用。
+dotnet_diagnostic.CS8602.severity = error
+# CS8603 - 可能返回空引用。
 dotnet_diagnostic.CS8603.severity = error
-
-# CS8618: Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
+# CS8604 - 参数的可能引用参数为空。
+dotnet_diagnostic.CS8604.severity = error
+# CS8605 - 取消装箱可能为空的值。
+dotnet_diagnostic.CS8605.severity = error
+# CS8607 - 可能的 null 值不能用于用 [NotNull] 或 [DisallowNull] 标记的类型
+dotnet_diagnostic.CS8607.severity = error
+# CS8608 - 类型中引用类型的可为空性与重写的成员不匹配。
+dotnet_diagnostic.CS8608.severity = error
+# CS8609 - 返回类型中引用类型的可为空性与重写的成员不匹配。
+dotnet_diagnostic.CS8609.severity = error
+# CS8610 - 类型参数中引用类型的可为空性与重写的成员不匹配。
+dotnet_diagnostic.CS8610.severity = error
+# CS8611 - 类型参数中引用类型的可为空性与部分方法声明不匹配。
+dotnet_diagnostic.CS8611.severity = error
+# CS8612 - 类型中引用类型的可为空性与隐式实现的成员不匹配。
+dotnet_diagnostic.CS8612.severity = error
+# CS8613 - 返回类型中引用类型的可为空性与隐式实现的成员不匹配。
+dotnet_diagnostic.CS8613.severity = error
+# CS8614 - 参数类型中引用类型的可为空性与隐式实现的成员不匹配。
+dotnet_diagnostic.CS8614.severity = error
+# CS8615 - 类型中引用类型的可为空性与实现的成员不匹配。
+dotnet_diagnostic.CS8615.severity = error
+# CS8616 - 返回类型中引用类型的可为空性与实现的成员不匹配。
+dotnet_diagnostic.CS8616.severity = error
+# CS8617 - 参数类型中引用类型的可为空性与实现的成员不匹配。
+dotnet_diagnostic.CS8617.severity = error
+# CS8618 - 退出构造函数时，不可为 null 的变量必须包含非 null 值。考虑将其声明为可为空。
 dotnet_diagnostic.CS8618.severity = error
-
-# CS8625: Cannot convert null literal to non-nullable reference type.
+# CS8619 - 值中引用类型的可为空性与目标类型不匹配。
+dotnet_diagnostic.CS8619.severity = error
+# CS8620 - 由于引用类型可空性的差异，参数不能用于参数。
+dotnet_diagnostic.CS8620.severity = error
+# CS8621 - 返回类型中引用类型的可为空性与目标委托不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8621.severity = error
+# CS8622 - 参数类型中引用类型的可为空性与目标委托不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8622.severity = error
+# CS8624 - 由于引用类型可空性的差异，参数不能用作输出。
+dotnet_diagnostic.CS8624.severity = error
+# CS8625 - 无法将 null 文字转换为不可为 null 的引用类型。
 dotnet_diagnostic.CS8625.severity = error
+# CS8629 - 可空值类型可能为空。
+dotnet_diagnostic.CS8629.severity = error
+# CS8631 - 该类型不能用作泛型类型或方法中的类型参数。类型参数的可为空性与约束类型不匹配。
+dotnet_diagnostic.CS8631.severity = error
+# CS8633 - 方法的类型参数的约束中的可为空性与接口方法的类型参数的约束不匹配。考虑使用显式接口实现。
+dotnet_diagnostic.CS8633.severity = error
+# CS8634 - 该类型不能用作泛型类型或方法中的类型参数。类型参数的可为空性与“类”约束不匹配。
+dotnet_diagnostic.CS8634.severity = error
+# CS8643 - 显式接口说明符中引用类型的可为空性与该类型实现的接口不匹配。
+dotnet_diagnostic.CS8603.severity = error
+# CS8644 - 类型未实现接口成员。基类型实现的接口中引用类型的可为空性不匹配。
+dotnet_diagnostic.CS8644.severity = error
+# CS8645 - 成员已在具有不同引用类型可空性的类型的接口列表中列出。
+dotnet_diagnostic.CS8645.severity = error
+# CS8667 - 部分方法声明在类型参数的约束中具有不一致的可空性。
+dotnet_diagnostic.CS8667.severity = error
+# CS8670 - 对象或集合初始值设定项隐式取消引用可能为 null 的成员。
+dotnet_diagnostic.CS8670.severity = error
+# CS8714 - 该类型不能用作泛型类型或方法中的类型参数。类型参数的可为空性与“notnull”约束不匹配。
+dotnet_diagnostic.CS8714.severity = error
+# CS8762 - 退出时参数必须具有非空值。
+dotnet_diagnostic.CS8762.severity = error
+# CS8763 - 标记为 [DoesNotReturn] 的方法不应返回。
+dotnet_diagnostic.CS8763.severity = error
+# CS8764 - 返回类型的可为空性与重写的成员不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8764.severity = error
+# CS8765 - 参数类型的可为空性与重写的成员不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8764.severity = error
+# CS8766 - 返回类型中引用类型的可为空性与隐式实现的成员不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8766.severity = error
+# CS8767 - 参数类型中引用类型的可为空性与隐式实现的成员不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8767.severity = error
+# CS8768 - 返回类型中引用类型的可为空性与实现的成员不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8768.severity = error
+# CS8769 - 参数类型中引用类型的可为空性与实现的成员不匹配（可能是因为可为空性属性）。
+dotnet_diagnostic.CS8769.severity = error
+# CS8770 - 方法缺少 [DoesNotReturn] 注释来匹配已实现或重写的成员。
+dotnet_diagnostic.CS8770.severity = error
+# CS8774 - 退出时成员必须具有非空值。
+dotnet_diagnostic.CS8774.severity = error
+# CS8776 - 不能在此属性中使用成员。
+dotnet_diagnostic.CS8776.severity = error
+# CS8775 - 退出时成员必须具有非空值。
+dotnet_diagnostic.CS8775.severity = error
+# CS8777 - 退出时参数必须具有非空值。
+dotnet_diagnostic.CS8777.severity = error
+# CS8819 - 返回类型中引用类型的可为空性与部分方法声明不匹配。
+dotnet_diagnostic.CS8819.severity = error
+# CS8824 - 退出时参数必须具有非空值，因为参数非空。
+dotnet_diagnostic.CS8824.severity = error
+# CS8825 - 返回值必须非空，因为参数非空。
+dotnet_diagnostic.CS8825.severity = error
+# CS8847 - switch 表达式不处理某些空输入（它并不详尽）。但是，带有“when”子句的模式可能会成功匹配该值。
+dotnet_diagnostic.CS8847.severity = error
 
 #### compile warning ####
-
-# CS4014: 由于此调用不会等待，因此在调用完成前将继续执行当前方法
-dotnet_diagnostic.CS4014.severity = error
 
 # CS0162: 检测到无法访问的代码
 dotnet_diagnostic.CS0162.severity = error
 
 # CS1998: 异步方法缺少 "await" 运算符，将以同步方式运行
 dotnet_diagnostic.CS1998.severity = error
+
+# CS4014: 由于此调用不会等待，因此在调用完成前将继续执行当前方法
+dotnet_diagnostic.CS4014.severity = error
 
 # CA1715: Identifiers should have correct prefix
 dotnet_diagnostic.CA1715.severity = none
@@ -719,6 +814,9 @@ dotnet_diagnostic.S2184.severity = error
 
 # S2190: Loops and recursions should not be infinite
 dotnet_diagnostic.S2190.severity = error
+
+# S2259: Null pointers should not be dereferenced
+dotnet_diagnostic.S2259.severity = none
 
 # S2328: "GetHashCode" should not reference mutable fields
 dotnet_diagnostic.S2328.severity = error
