@@ -1,6 +1,17 @@
 namespace CodeAnalysisTest;
 
-internal sealed class ExpressionBodiedTest
+public interface IMyInterface
+{
+    /// <summary>
+    /// Gets the age.
+    /// </summary>
+    /// <value>
+    /// The age.
+    /// </value>
+    public int Age { get; }
+}
+
+internal sealed class ExpressionBodiedTest : IMyInterface
 {
     public int Age { get; private set; }
 

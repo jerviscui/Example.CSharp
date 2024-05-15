@@ -6,6 +6,9 @@ namespace CodeAnalysisTest;
 
 internal class CodeRushTestBase
 {
+    /// <summary>
+    /// Methods the name.
+    /// </summary>
     public virtual void MethodName()
     {
     }
