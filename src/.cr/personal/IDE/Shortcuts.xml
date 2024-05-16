@@ -35,11 +35,11 @@
             <Item Id="{0e1a8f0e-939c-43d4-a574-17bc62e79d31}">
               <Bindings>
                 <Item Id="{173b3228-6b7d-4fe0-a9cc-b505df87fad2}">
-                  <Enabled>True</Enabled>
+                  <Enabled>False</Enabled>
                 </Item>
                 <Item Id="{7ba1f03b-60b0-4b24-a571-9d4a8e73a64e}" />
                 <Item Id="{93b4009f-dd82-47e7-a675-90df06c488f0}">
-                  <Enabled>True</Enabled>
+                  <Enabled>False</Enabled>
                 </Item>
                 <Item Id="{34aa3b45-77fd-4777-8a09-5a4727695746}">
                   <Enabled>True</Enabled>
