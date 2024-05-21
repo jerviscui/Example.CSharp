@@ -561,6 +561,9 @@ dotnet_diagnostic.IDE2006.severity = suggestion
 # IDE1005: Delegate invocation can be simplified.
 dotnet_diagnostic.IDE1005.severity = suggestion
 
+# IDE0046: 使用 return 的条件表达式
+dotnet_diagnostic.IDE0046.severity = none
+
 # IDE0047: 删除不必要的括号
 dotnet_diagnostic.IDE0047.severity = suggestion
 
