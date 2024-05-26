@@ -54,6 +54,7 @@
                 <Item Id="{88ab7cd7-d8c2-45b8-97b5-55990ffd18c9}" />
                 <Item Id="{c9bee03f-85d7-4ca3-bb77-00aac6990bef}" />
                 <Item Id="{72f3c77a-7526-4cda-85df-23ce91a904e1}" />
+                <DeletedItem Id="{f871e234-4108-42b9-8f70-e17fdbcd3594}" />
               </Bindings>
             </Item>
             <Item Id="{9742ad00-8e7d-4f8b-902b-cdb634e79708}" />
