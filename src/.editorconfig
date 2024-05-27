@@ -390,7 +390,8 @@ dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.severity   
 # All static readonly fields must be PascalCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1311.md
 dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_accessibilities = public, internal, protected_internal, protected, private_protected, private
-dotnet_naming_symbols.stylecop_static_readonly_fields_group.required_modifiers         = static, readonly
+# dotnet_naming_symbols.stylecop_static_readonly_fields_group.required_modifiers         = static, readonly
+dotnet_naming_symbols.stylecop_static_readonly_fields_group.required_modifiers         = static
 dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_kinds           = field
 dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.symbols    = stylecop_static_readonly_fields_group
 dotnet_naming_rule.stylecop_static_readonly_fields_must_be_pascal_case_rule.style      = pascal_case_style
@@ -425,9 +426,9 @@ dotnet_naming_rule.stylecop_local_fields_must_be_camel_case_rule.severity    = s
 # Second, it helps to raise immediate awareness if a new field type is added (as occurred recently in C#).
 dotnet_naming_symbols.sanity_check_uncovered_field_case_group.applicable_accessibilities = *
 dotnet_naming_symbols.sanity_check_uncovered_field_case_group.applicable_kinds           = field
-dotnet_naming_rule.sanity_check_uncovered_field_case_rule.symbols  = sanity_check_uncovered_field_case_group
-dotnet_naming_rule.sanity_check_uncovered_field_case_rule.style    = internal_error_style
-dotnet_naming_rule.sanity_check_uncovered_field_case_rule.severity = error
+dotnet_naming_rule.sanity_check_uncovered_field_case_rule.symbols                        = sanity_check_uncovered_field_case_group
+dotnet_naming_rule.sanity_check_uncovered_field_case_rule.style                          = internal_error_style
+dotnet_naming_rule.sanity_check_uncovered_field_case_rule.severity                       = error
 
 #### Other Naming Rules ####
 

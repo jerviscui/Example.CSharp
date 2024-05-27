@@ -44,13 +44,43 @@ public class OrganizeMembersTest : IExplicit, IImplicit
         _boolProp = boolProp;
         _strProp = strProp;
         _myField = myField;
+
+        _field1 = 0;
+        _field2 = 0;
     }
+
+    // Field3
+    private static readonly int Field3 = 1;
+    private int _field1;
+    private static string Field4 = string.Empty;
+    /// <summary>
+    /// Skip initialized fields
+    /// </summary>
+    private const string Const2 = "My Model";
+    // one line comment
+    private const int Const1 = 140;
+
 
     /// <inheritdoc/>
     public Task TaskMethodAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
+
+    private void MethodName()
+    {
+        Console.WriteLine(_field1);
+        Console.WriteLine(_field2);
+        Console.WriteLine(Field3);
+        Console.WriteLine(Field4);
+
+        throw new NotImplementedException();
+    }
+    /// <summary>
+    /// The field2
+    /// </summary>
+    private int _field2;
+
 
     Task IImplicit.TaskMethodAsync(CancellationToken cancellationToken)
     {
