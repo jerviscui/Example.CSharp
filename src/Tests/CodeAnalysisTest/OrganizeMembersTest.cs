@@ -1,41 +1,83 @@
-﻿namespace CodeAnalysisTest;
+namespace CodeAnalysisTest;
 
-public class OrganizeMembersTest
+/// <summary>
+/// Organize members test case
+/// </summary>
+public class OrganizeMembersTest : IExplicit, IImplicit
 {
-    // IDE0001 dotnet_style_predefined_type_for_locals_parameters_members = true
-    private int _id;
-
-    // IDE0001 dotnet_style_predefined_type_for_locals_parameters_members = true
-    public int ID
+    private bool _boolProp;
+    public bool BoolProp
     {
-        get => _id;
-        set => _id = value;
+        get => _boolProp;
+        set => _boolProp = value;
     }
 
-    // IDE0001 dotnet_style_predefined_type_for_locals_parameters_members = true
-    public void Display()
+    /// <summary>
+    /// The string property
+    /// </summary>
+    private string _strProp;
+    /// <summary>
+    /// Gets or sets the string property.
+    /// </summary>
+    /// <value>
+    /// The string property.
+    /// </value>
+    public string StrProp
+    {
+        get => _strProp;
+        set => _strProp = value;
+    }
+
+    /// <summary>
+    /// My field
+    /// </summary>
+    private readonly int _myField;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="OrganizeMembersTest"/> class.
+    /// </summary>
+    /// <param name="boolProp">if set to <c>true</c> [bool property].</param>
+    /// <param name="strProp">The string property.</param>
+    /// <param name="myField">My field.</param>
+    public OrganizeMembersTest(bool boolProp, string strProp, int myField)
+    {
+        _boolProp = boolProp;
+        _strProp = strProp;
+        _myField = myField;
+    }
+
+    /// <inheritdoc/>
+    public Task TaskMethodAsync(CancellationToken cancellationToken)
     {
         throw new NotImplementedException();
     }
 
-    // IDE0001 dotnet_style_predefined_type_for_locals_parameters_members = true
-    public event EventHandler MyEvent;
-
-    // IDE0001 dotnet_style_predefined_type_for_locals_parameters_members = true
-    private static bool Test()
+    Task IImplicit.TaskMethodAsync(CancellationToken cancellationToken)
     {
-        // ide0007 csharp_style_var_for_built_in_types = true
-        int x = 5;
-        int y = x;
-
-        // ide0007 csharp_style_var_when_type_is_apparent = true
-        MyClass obj = new MyClass();
-        var yy = obj.Age;
-
-        // ide0007 csharp_style_var_elsewhere = true
-        bool f = Random.Shared.Next() > 1;
-        var yyy = f;
-
-        return true;
+        throw new NotImplementedException();
     }
+}
+
+/// <summary>
+/// Explicit interface
+/// </summary>
+public interface IExplicit
+{
+    /// <summary>
+    /// Explicit method.
+    /// </summary>
+    /// <returns></returns>
+    public Task TaskMethodAsync(CancellationToken cancellationToken);
+}
+
+/// <summary>
+/// Implicit interface
+/// </summary>
+public interface IImplicit
+{
+    /// <summary>
+    /// Implicit method.
+    /// </summary>
+    /// <returns></returns>
+    public Task TaskMethodAsync(CancellationToken cancellationToken);
 }
