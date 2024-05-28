@@ -3,13 +3,13 @@ namespace CodeAnalysisTest;
 /// <summary>
 /// Organize members test case
 /// </summary>
-public class OrganizeMembersTest : IExplicit, IImplicit
+public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 {
     private bool _boolProp;
     public bool BoolProp
     {
         get => _boolProp;
-        set => _boolProp = value;
+        set => _boolProp = value && false;
     }
 
     /// <summary>
@@ -25,7 +25,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit
     public string StrProp
     {
         get => _strProp;
-        set => _strProp = value;
+        set => _strProp = value + "";
     }
 
     /// <summary>
@@ -49,6 +49,9 @@ public class OrganizeMembersTest : IExplicit, IImplicit
         _field2 = 0;
 
         PublicMehtod();
+
+        InterfaceProp = string.Empty;
+        InterfaceProp2 = string.Empty;
     }
 
     // Field3
@@ -118,6 +121,12 @@ public class OrganizeMembersTest : IExplicit, IImplicit
 
         throw new NotImplementedException();
     }
+
+    /// <inheritdoc/>
+    public string InterfaceProp { get; set; }
+
+    /// <inheritdoc/>
+    public string InterfaceProp2 { get; set; }
 }
 
 /// <summary>
@@ -142,4 +151,26 @@ public interface IImplicit
     /// </summary>
     /// <returns></returns>
     public Task TaskMethodAsync(CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Interface has method and property.
+    /// </summary>
+    /// <value>
+    /// The interface property.
+    /// </value>
+    public string InterfaceProp2 { get; set; }
+}
+
+/// <summary>
+/// Prop Interface
+/// </summary>
+public interface IPropInterface
+{
+    /// <summary>
+    /// Gets or sets the interface property.
+    /// </summary>
+    /// <value>
+    /// The interface property.
+    /// </value>
+    public string InterfaceProp { get; set; }
 }

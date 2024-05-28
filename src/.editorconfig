@@ -852,3 +852,6 @@ dotnet_diagnostic.S3923.severity = error
 
 # S4158: Empty collections should not be accessed or iterated
 dotnet_diagnostic.S4158.severity = error
+
+# S2696: Instance members should not write to "static" fields
+dotnet_diagnostic.S2696.severity = error
