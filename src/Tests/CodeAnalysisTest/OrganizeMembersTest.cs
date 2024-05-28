@@ -47,6 +47,8 @@ public class OrganizeMembersTest : IExplicit, IImplicit
 
         _field1 = 0;
         _field2 = 0;
+
+        PublicMehtod();
     }
 
     // Field3
@@ -56,34 +58,64 @@ public class OrganizeMembersTest : IExplicit, IImplicit
     /// <summary>
     /// Skip initialized fields
     /// </summary>
-    private const string Const2 = "My Model";
+    public const string Const2 = "My Model";
     // one line comment
     private const int Const1 = 140;
-
 
     /// <inheritdoc/>
     public Task TaskMethodAsync(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         throw new NotImplementedException();
     }
 
-    private void MethodName()
+    private void PrivateMethod()
     {
         Console.WriteLine(_field1);
         Console.WriteLine(_field2);
         Console.WriteLine(Field3);
         Console.WriteLine(Field4);
 
+        Console.WriteLine(BoolProp);
+        Console.WriteLine(StrProp);
+        Console.WriteLine(Const1);
+        Console.WriteLine(Const2);
+        Console.WriteLine(_myField);
+
         throw new NotImplementedException();
     }
+
+    /// <summary>
+    /// Public mehtod.
+    /// </summary>
+    public void PublicMehtod()
+    {
+        _field1 = 1;
+
+        PublicStaticMehtod();
+        PrivateMethod();
+    }
+
+    /// <summary>
+    /// Public static mehtod.
+    /// </summary>
+    public static void PublicStaticMehtod()
+    {
+        Field4 = "Hello";
+    }
+
     /// <summary>
     /// The field2
     /// </summary>
+#pragma warning disable IDE0044 // Add readonly modifier
     private int _field2;
-
+#pragma warning restore IDE0044 // Add readonly modifier
 
     Task IImplicit.TaskMethodAsync(CancellationToken cancellationToken)
     {
+        cancellationToken.ThrowIfCancellationRequested();
+
         throw new NotImplementedException();
     }
 }
