@@ -25,7 +25,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     public string StrProp
     {
         get => _strProp;
-        set => _strProp = value + "";
+        set => _strProp = $"{value}";
     }
 
     /// <summary>
@@ -117,8 +117,13 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 
     Task IImplicit.TaskMethodAsync(CancellationToken cancellationToken)
     {
-        cancellationToken.ThrowIfCancellationRequested();
+        if (cancellationToken.IsCancellationRequested)
+        {
+            goto rtag;
+        }
 
+        cancellationToken.ThrowIfCancellationRequested();
+rtag:
         throw new NotImplementedException();
     }
 
