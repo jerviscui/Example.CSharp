@@ -18,11 +18,11 @@ namespace TaskGuidanceTest
             public static async Task AttachedChildTask()
             {
                 //1
-                Console.WriteLine($"AttachedChildTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"AttachedChildTask {Environment.CurrentManagedThreadId.ToString()}");
 
                 await Task.Factory.StartNew(() =>
                 {
-                    Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    Console.WriteLine($"task {Environment.CurrentManagedThreadId.ToString()}");
 
                     for (int ctr = 0; ctr < 10; ctr++)
                     {
@@ -31,23 +31,23 @@ namespace TaskGuidanceTest
                         {
                             Thread.Sleep(1000);
                             Console.WriteLine(
-                                $"Attached child #{x} completed. {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                                $"Attached child #{x} completed. {Environment.CurrentManagedThreadId.ToString()}");
                         }, taskNo, TaskCreationOptions.AttachedToParent);
                     }
                 });
 
                 //wait for all Attached Children
-                Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Completed {Environment.CurrentManagedThreadId.ToString()}");
             }
 
             public static async Task DetachedChildTask()
             {
                 //1
-                Console.WriteLine($"DetachedChildTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"DetachedChildTask {Environment.CurrentManagedThreadId.ToString()}");
 
                 await Task.Factory.StartNew(() =>
                 {
-                    Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    Console.WriteLine($"task {Environment.CurrentManagedThreadId.ToString()}");
 
                     for (int ctr = 0; ctr < 10; ctr++)
                     {
@@ -56,12 +56,12 @@ namespace TaskGuidanceTest
                         {
                             Thread.Sleep(1000);
                             Console.WriteLine(
-                                $"Detached child #{x} completed. {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                                $"Detached child #{x} completed. {Environment.CurrentManagedThreadId.ToString()}");
                         }, taskNo);
                     }
                 });
 
-                Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Completed {Environment.CurrentManagedThreadId.ToString()}");
 
                 //wait for all Detached Children
                 await Task.Delay(1000 * 5);
@@ -71,28 +71,28 @@ namespace TaskGuidanceTest
             {
                 //1
                 Console.WriteLine(
-                    $"DirectReturnAndContinue_GetContextTest {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    $"DirectReturnAndContinue_GetContextTest {Environment.CurrentManagedThreadId.ToString()}");
 
                 await Task.Factory.StartNew(() =>
                 {
                     //4
-                    Console.WriteLine($"parent task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    Console.WriteLine($"parent task {Environment.CurrentManagedThreadId.ToString()}");
 
                     Task.Factory.StartNew(() =>
                     {
                         //5
-                        Console.WriteLine($"attached child {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                        Console.WriteLine($"attached child {Environment.CurrentManagedThreadId.ToString()}");
                     }, TaskCreationOptions.AttachedToParent);
                 }).ContinueWith(_ =>
                 {
                     //5
-                    Console.WriteLine($"continue task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    Console.WriteLine($"continue task {Environment.CurrentManagedThreadId.ToString()}");
                     Console.WriteLine(SynchronizationContext.Current?.GetType().Name ?? "null");
                 }).ConfigureAwait(false);
 
                 //5
                 Console.WriteLine(SynchronizationContext.Current?.GetType().Name ?? "null");
-                Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Completed {Environment.CurrentManagedThreadId.ToString()}");
             }
         }
     }

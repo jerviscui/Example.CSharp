@@ -39,12 +39,12 @@ namespace TaskGuidanceTest
             public static async Task SimpleTask2()
             {
                 //1
-                Console.WriteLine($"SimpleTask2 {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"SimpleTask2 {Environment.CurrentManagedThreadId.ToString()}");
                 await Task.Factory.StartNew(() =>
                 {
                     Thread.Sleep(1000 * 10);
                     //5
-                    Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    Console.WriteLine($"task {Environment.CurrentManagedThreadId.ToString()}");
                 }, TaskCreationOptions.LongRunning);
                 var s = new StackTrace().GetFrames();
                 foreach (var stackFrame in s)
@@ -53,7 +53,7 @@ namespace TaskGuidanceTest
                     Console.WriteLine($"{m.Module,-28} {m.DeclaringType,-103} {m.Name}");
                 }
                 //5
-                Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Completed {Environment.CurrentManagedThreadId.ToString()}");
                 //调用堆栈输出
                 //TaskGuidanceTest.dll         TaskGuidanceTest.Program+TaskTest+<SimpleTask2>d__2                                                     MoveNext
                 //System.Private.CoreLib.dll   System.Runtime.CompilerServices.AsyncTaskMethodBuilder`1+AsyncStateMachineBox`1[TResult,TStateMachine]  ExecutionContextCallback
@@ -77,17 +77,17 @@ namespace TaskGuidanceTest
             public static async Task ContinuationTask()
             {
                 //1
-                Console.WriteLine($"ChildTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"ChildTask {Environment.CurrentManagedThreadId.ToString()}");
                 await Task.Factory.StartNew(() =>
                 {
                     Thread.Sleep(1000 * 1);
                     //4
-                    Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    Console.WriteLine($"task {Environment.CurrentManagedThreadId.ToString()}");
                 }).ContinueWith(task =>
                 {
                     //child task
                     //5
-                    Console.WriteLine($"child {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                    Console.WriteLine($"child {Environment.CurrentManagedThreadId.ToString()}");
 
                     var s = new StackTrace().GetFrames();
                     foreach (var stackFrame in s)
@@ -98,7 +98,7 @@ namespace TaskGuidanceTest
                 }, TaskContinuationOptions.AttachedToParent);
 
                 //5
-                Console.WriteLine($"Completed {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Completed {Environment.CurrentManagedThreadId.ToString()}");
 
                 //TaskGuidanceTest.dll         TaskGuidanceTest.Program+ChildTaskTest+<>c         <ChildTask>b__1_1
                 //System.Private.CoreLib.dll   System.Threading.Tasks.ContinuationTaskFromTask    InnerInvoke

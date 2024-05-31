@@ -31,7 +31,7 @@ namespace AspectInjectorTest
 
             //Console.WriteLine();
             //var i = await around.ContinueTask();
-            //Console.WriteLine($"result {i.ToString()} {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            //Console.WriteLine($"result {i.ToString()} {Environment.CurrentManagedThreadId.ToString()}");
         }
     }
 }

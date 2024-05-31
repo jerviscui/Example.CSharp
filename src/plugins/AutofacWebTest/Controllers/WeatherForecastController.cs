@@ -23,14 +23,18 @@ namespace AutofacWebTest.Controllers
             _logger = logger;
             _weatherForecastService = weatherForecastService;
 
+#pragma warning disable CA1848 // Use the LoggerMessage delegates
             _logger.LogInformation($"create controller {Stopwatch.GetTimestamp()}");
+#pragma warning restore CA1848 // Use the LoggerMessage delegates
         }
 
         /// <inheritdoc cref="IWeatherForecastService.Get"/>
         [HttpGet]
         public IEnumerable<WeatherForecast> Get()
         {
+#pragma warning disable CA1848 // Use the LoggerMessage delegates
             _logger.LogInformation($"exec controller {Stopwatch.GetTimestamp()}");
+#pragma warning restore CA1848 // Use the LoggerMessage delegates
 
             return _weatherForecastService.Get();
         }

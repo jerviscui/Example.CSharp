@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ThreadingTest
 {
-    internal class ChannelTest
+    internal sealed class ChannelTest
     {
         private static Channel<int>? _channel;
 

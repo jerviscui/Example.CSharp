@@ -109,25 +109,33 @@ namespace StringFormatTest
     public class BenchmarkTest
     {
         //[Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public void UnBoxTest()
+#pragma warning restore CA1822 // Mark members as static
         {
             Program.UnBoxTest();
         }
 
         //[Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public void BoxTest()
+#pragma warning restore CA1822 // Mark members as static
         {
             Program.BoxTest();
         }
 
         [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public void UnBoxFormatTest()
+#pragma warning restore CA1822 // Mark members as static
         {
             Program.UnBoxFormatTest();
         }
 
         [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public void BoxFormatTest()
+#pragma warning restore CA1822 // Mark members as static
         {
             Program.BoxFormatTest();
         }

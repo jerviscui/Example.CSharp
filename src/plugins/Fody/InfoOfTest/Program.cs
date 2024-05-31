@@ -38,11 +38,13 @@ namespace InfoOfTest
 
     public class Test
     {
-        private string _f;
+        private string _f = null!;
 
-        public string Name { get; set; }
+        public string Name { get; set; } = null!;
 
+#pragma warning disable CA1822 // Mark members as static
         public TOut? TestMethod<TIn, TOut>(TIn input)
+#pragma warning restore CA1822 // Mark members as static
         {
             return default(TOut);
         }

@@ -13,7 +13,9 @@ namespace TypeHandleTest
     {
         private class Test
         {
+#pragma warning disable CA1822 // Mark members as static
             public int Method()
+#pragma warning restore CA1822 // Mark members as static
             {
                 int i = 0;
                 int j = i++;

@@ -11,19 +11,19 @@ namespace MethodBoundaryAspectTest
         /// <inheritdoc />
         public override void OnEntry(MethodExecutionArgs arg)
         {
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnEntry {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnEntry {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnExit(MethodExecutionArgs arg)
         {
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnExit {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnExit {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnException(MethodExecutionArgs arg)
         {
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnException {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} OnException {Environment.CurrentManagedThreadId.ToString()}");
             arg.FlowBehavior = FlowBehavior.Continue;
         }
     }
@@ -34,20 +34,22 @@ namespace MethodBoundaryAspectTest
         //todo: not implement
         //public async void SyncMethod()
         //{
-        //    Console.WriteLine($"front {Thread.CurrentThread.ManagedThreadId.ToString()}");
+        //    Console.WriteLine($"front {Environment.CurrentManagedThreadId.ToString()}");
         //}
 
+#pragma warning disable CA1822 // Mark members as static
         public Task TaskMethod()
+#pragma warning restore CA1822 // Mark members as static
         {
-            Console.WriteLine($"TaskMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"TaskMethod {Environment.CurrentManagedThreadId.ToString()}");
 
             var task = Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             });
 
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
             return task;
 
             //OnEntry 1
@@ -57,29 +59,33 @@ namespace MethodBoundaryAspectTest
             //Task 4
         }
 
+#pragma warning disable CA1822 // Mark members as static
         public async Task AwaitTask()
+#pragma warning restore CA1822 // Mark members as static
         {
-            Console.WriteLine($"AwaitTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"AwaitTask {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
         }
 
+#pragma warning disable CA1822 // Mark members as static
         public async Task ContinueTask()
+#pragma warning restore CA1822 // Mark members as static
         {
-            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"ContinuTask {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"continue Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
 
             //AsyncTest.ContinueTask OnEntry 1
             //<ContinueTask>d__2.MoveNext OnEntry 1
@@ -97,18 +103,20 @@ namespace MethodBoundaryAspectTest
     public class AsyncTest2
     {
         [TaskLog]
+#pragma warning disable CA1822 // Mark members as static
         public async Task<int> ContinueTaskAndReturn()
+#pragma warning restore CA1822 // Mark members as static
         {
-            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"ContinueTaskAndReturn {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"continue Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
 
             return 1;
 
@@ -124,18 +132,20 @@ namespace MethodBoundaryAspectTest
     [TaskLog(AttributeTargetMemberAttributes = MulticastAttributes.Public)]
     public class AsyncTest3
     {
+#pragma warning disable CA1822 // Mark members as static
         public async Task<int> ContinueTaskAndReturn()
+#pragma warning restore CA1822 // Mark members as static
         {
-            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"ContinueTaskAndReturn {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"continue Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
 
             return 1;
 
@@ -159,7 +169,7 @@ namespace MethodBoundaryAspectTest
                 state = (int)(arg.Instance.GetType().GetField("<>1__state")?.GetValue(arg.Instance) ?? -100);
             }
 
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnEntry {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnEntry {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
@@ -171,7 +181,7 @@ namespace MethodBoundaryAspectTest
                 state = (int)(arg.Instance.GetType().GetField("<>1__state")?.GetValue(arg.Instance) ?? -100);
             }
 
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnExit {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnExit {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
@@ -183,7 +193,7 @@ namespace MethodBoundaryAspectTest
                 state = (int)(arg.Instance.GetType().GetField("<>1__state")?.GetValue(arg.Instance) ?? -100);
             }
 
-            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnException {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{arg.Instance.GetType().Name}.{arg.Method.Name} {state} OnException {Environment.CurrentManagedThreadId.ToString()}");
             arg.FlowBehavior = FlowBehavior.Continue;
         }
     }
@@ -191,18 +201,20 @@ namespace MethodBoundaryAspectTest
     [TaskLog2]
     public class AsyncTest4
     {
+#pragma warning disable CA1822 // Mark members as static
         public async Task<int> ContinueTaskAndReturn()
+#pragma warning restore CA1822 // Mark members as static
         {
-            Console.WriteLine($"ContinueTaskAndReturn {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"ContinueTaskAndReturn {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"continue Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
 
             return 1;
 

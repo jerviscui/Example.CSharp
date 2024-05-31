@@ -46,7 +46,9 @@ namespace TypeHandleTest
         private class GenericTestClass<T>
         {
             [My(100)]
+#pragma warning disable CA1822 // Mark members as static
             public void Generic<TIn>()
+#pragma warning restore CA1822 // Mark members as static
             {
             }
         }

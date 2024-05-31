@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ThreadingTest
 {
-    internal class ReaderWriterLockTest
+    internal sealed class ReaderWriterLockTest
     {
         public static void ReaderWriterLock_Test()
         {
@@ -76,7 +76,9 @@ namespace ThreadingTest
                 }
             }, token);
 
+#pragma warning disable CA1843 // Do not use 'WaitAll' with a single task
             Task.WaitAll(write);
+#pragma warning restore CA1843 // Do not use 'WaitAll' with a single task
         }
 
         public static void UpgradeToWriterLock_Test()

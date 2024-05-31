@@ -13,37 +13,37 @@ namespace MethodBoundaryTest
         /// <inheritdoc />
         public override void OnEntry(MethodExecutionArgs args)
         {
-            Console.WriteLine($"OnEntry {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnEntry {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnSuccess(MethodExecutionArgs args)
         {
-            Console.WriteLine($"OnSuccess {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnSuccess {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnExit(MethodExecutionArgs args)
         {
-            Console.WriteLine($"OnExit {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnExit {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnException(MethodExecutionArgs args)
         {
-            Console.WriteLine($"OnException {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnException {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnResume(MethodExecutionArgs args)
         {
-            Console.WriteLine($"OnResume {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnResume {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         /// <inheritdoc />
         public override void OnYield(MethodExecutionArgs args)
         {
-            Console.WriteLine($"OnYield {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnYield {Environment.CurrentManagedThreadId.ToString()}");
         }
     }
 
@@ -54,7 +54,7 @@ namespace MethodBoundaryTest
     {
         public int Test()
         {
-            Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{Environment.CurrentManagedThreadId.ToString()}");
             return 1;
         }
 
@@ -74,24 +74,24 @@ namespace MethodBoundaryTest
         public async void AsyncTest()
 #pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         {
-            Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{Environment.CurrentManagedThreadId.ToString()}");
         }
 
         public Task NoneAwaitTaskTest()
         {
-            Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{Environment.CurrentManagedThreadId.ToString()}");
             return Task.Factory.StartNew(() =>
             {
-                Console.WriteLine($"NoneAwaitTaskTest {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"NoneAwaitTaskTest {Environment.CurrentManagedThreadId.ToString()}");
             });
         }
 
         public async Task AwaitTaskTest()
         {
-            Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
-                Console.WriteLine($"AwaitTaskTest {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"AwaitTaskTest {Environment.CurrentManagedThreadId.ToString()}");
             });
         }
     }
@@ -102,18 +102,18 @@ namespace MethodBoundaryTest
     {
         public async Task<int> ContinuationTest()
         {
-            Console.WriteLine($"{Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"{Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"task {Environment.CurrentManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"continuation task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"continuation task {Environment.CurrentManagedThreadId.ToString()}");
             });
 
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
 
             return 1;
         }

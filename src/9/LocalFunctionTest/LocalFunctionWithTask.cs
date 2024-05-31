@@ -10,14 +10,14 @@ namespace LocalFunctionTest
     {
         public static async Task Test()
         {
-            Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId.ToString()} Test");
+            Console.WriteLine($"#{Environment.CurrentManagedThreadId.ToString()} Test");
             var t = NoLocalFunc(6);
             //var t = LocalFunc(6); //LocalFunc() 在这里抛出异常
             Console.WriteLine("Got the task");
 
-            Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId.ToString()} Test");
+            Console.WriteLine($"#{Environment.CurrentManagedThreadId.ToString()} Test");
             var result = await t; //NoLocalFunc() 在这里抛出异常
-            Console.WriteLine($"#{Thread.CurrentThread.ManagedThreadId.ToString()} The returned value is {result:N0}");
+            Console.WriteLine($"#{Environment.CurrentManagedThreadId.ToString()} The returned value is {result:N0}");
         }
 
         private static async Task<int> NoLocalFunc(int delayInSeconds)

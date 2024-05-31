@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace ThreadingTest
 {
-    internal class ReaderWriterLockSlimTest
+    internal sealed class ReaderWriterLockSlimTest
     {
         public static void TryEnterReadLock_Test()
         {
@@ -68,7 +68,9 @@ namespace ThreadingTest
                 }
             }, token);
 
+#pragma warning disable CA1843 // Do not use 'WaitAll' with a single task
             Task.WaitAll(write);
+#pragma warning restore CA1843 // Do not use 'WaitAll' with a single task
             rwLock.Dispose();
         }
 
@@ -472,7 +474,9 @@ namespace ThreadingTest
                 }
             });
 
+#pragma warning disable CA1843 // Do not use 'WaitAll' with a single task
             Task.WaitAll(t);
+#pragma warning restore CA1843 // Do not use 'WaitAll' with a single task
             rwLock.Dispose();
         }
     }

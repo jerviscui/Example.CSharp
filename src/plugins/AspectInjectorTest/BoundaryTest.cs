@@ -14,14 +14,14 @@ namespace AspectInjectorTest
         public void OnBefore([Argument(Source.Triggers)] Attribute[] attributes,
             [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)] string name)
         {
-            Console.WriteLine($"OnBefore {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnBefore {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         [Advice(Kind.After, Targets = Target.Method)]
         public void OnAfter([Argument(Source.Triggers)] Attribute[] attributes,
             [Argument(Source.Arguments)] object[] arguments, [Argument(Source.Name)] string name)
         {
-            Console.WriteLine($"OnAfter {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"OnAfter {Environment.CurrentManagedThreadId.ToString()}");
         }
     }
 
@@ -37,7 +37,7 @@ namespace AspectInjectorTest
     {
         public void Method()
         {
-            Console.WriteLine($"Method {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"Method {Environment.CurrentManagedThreadId.ToString()}");
         }
     }
 
@@ -49,46 +49,46 @@ namespace AspectInjectorTest
         public async void AsyncMethod()
 #pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         {
-            Console.WriteLine($"AsyncMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"AsyncMethod {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         public Task TaskMehtod()
         {
-            Console.WriteLine($"TaskMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"TaskMethod {Environment.CurrentManagedThreadId.ToString()}");
 
             var task = Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             });
 
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
             return task;
         }
 
         public async Task AwaitTask()
         {
-            Console.WriteLine($"AwaitTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"AwaitTask {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         public async Task ContinueTask()
         {
-            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"ContinuTask {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             }).ContinueWith(_ =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"continue Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
 
             //OnBefore 4
             //ContinuTask 4

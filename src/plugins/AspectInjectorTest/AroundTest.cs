@@ -30,7 +30,7 @@ namespace AspectInjectorTest
             [Argument(Source.Name)] string name,
             [Argument(Source.ReturnType)] Type retType)
         {
-            Console.WriteLine($"Before {name} {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"Before {name} {Environment.CurrentManagedThreadId.ToString()}");
 
             if (typeof(Task).IsAssignableFrom(retType) &&
                 methodInfo.GetCustomAttributes<AsyncStateMachineAttribute>().Any()
@@ -50,7 +50,7 @@ namespace AspectInjectorTest
             try
             {
                 var result = (T)target(args);
-                Console.WriteLine($"After Sync method `{name}` {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"After Sync method `{name}` {Environment.CurrentManagedThreadId.ToString()}");
                 return result;
             }
             catch (Exception e)
@@ -65,7 +65,7 @@ namespace AspectInjectorTest
             try
             {
                 var result = await ((Task<T>)target(args)).ConfigureAwait(false);
-                Console.WriteLine($"After Async method `{name}` {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"After Async method `{name}` {Environment.CurrentManagedThreadId.ToString()}");
                 return result;
             }
             catch (Exception e)
@@ -150,7 +150,7 @@ namespace AspectInjectorTest
         {
             try
             {
-                Console.WriteLine($"Before {targetName} {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Before {targetName} {Environment.CurrentManagedThreadId.ToString()}");
 
                 var result = func(arguments);
                 if (typeof(Task).IsAssignableFrom(returnType))
@@ -162,7 +162,7 @@ namespace AspectInjectorTest
                     }
                 }
 
-                Console.WriteLine($"After {targetName} {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"After {targetName} {Environment.CurrentManagedThreadId.ToString()}");
                 return result;
             }
             catch (Exception e)
@@ -208,7 +208,7 @@ namespace AspectInjectorTest
     {
         public void Method()
         {
-            Console.WriteLine($"Method {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"Method {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -227,50 +227,50 @@ namespace AspectInjectorTest
         public async void AsyncMethod()
 #pragma warning restore CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         {
-            Console.WriteLine($"AsyncMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"AsyncMethod {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         public Task TaskMehtod()
         {
-            Console.WriteLine($"TaskMethod {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"TaskMethod {Environment.CurrentManagedThreadId.ToString()}");
 
             var task = Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             });
 
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
             return task;
         }
 
         public async Task AwaitTask()
         {
-            Console.WriteLine($"AwaitTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"AwaitTask {Environment.CurrentManagedThreadId.ToString()}");
             await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
             });
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
         }
 
         public async Task<int> ContinueTask()
         {
-            Console.WriteLine($"ContinuTask {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"ContinuTask {Environment.CurrentManagedThreadId.ToString()}");
 
             var result = await Task.Factory.StartNew(() =>
             {
                 Thread.Sleep(100);
-                Console.WriteLine($"Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"Task {Environment.CurrentManagedThreadId.ToString()}");
                 return 10;
             }).ContinueWith(t =>
             {
-                Console.WriteLine($"continue Task {Thread.CurrentThread.ManagedThreadId.ToString()}");
+                Console.WriteLine($"continue Task {Environment.CurrentManagedThreadId.ToString()}");
                 return t.Result;
             });
 
-            Console.WriteLine($"continuation {Thread.CurrentThread.ManagedThreadId.ToString()}");
+            Console.WriteLine($"continuation {Environment.CurrentManagedThreadId.ToString()}");
             return result;
 
             //Before ContinueTask 1

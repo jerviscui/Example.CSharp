@@ -16,7 +16,9 @@ namespace DictionaryTest
         private static readonly string[] StrArray = Enumerable.Range(1, 1_000_000).Select(o => o.ToString()).ToArray();
 
         [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public void AddTo_SortedDictionary()
+#pragma warning restore CA1822 // Mark members as static
         {
             var sortedDictionary = new SortedDictionary<string, string>();
 
@@ -27,7 +29,9 @@ namespace DictionaryTest
         }
 
         [Benchmark]
+#pragma warning disable CA1822 // Mark members as static
         public void AddTo_Dictionary()
+#pragma warning restore CA1822 // Mark members as static
         {
             var dictionary = new Dictionary<string, string>();
 
