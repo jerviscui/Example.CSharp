@@ -14,6 +14,7 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution 
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
 		Directory.Build.props = Directory.Build.props
+		.vserunonsave = .vserunonsave
 		Example.CSharp.sln.DotSettings = Example.CSharp.sln.DotSettings
 	EndProjectSection
 EndProject
@@ -251,9 +252,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AspNetCoreTest", "plugins\O
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TraceTest", "plugins\OpenTelemetry\TraceTest\TraceTest.csproj", "{7B6EC137-88CF-4212-AA8E-152EA02F5907}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MetricsTest", "plugins\OpenTelemetry\MetricsTest\MetricsTest.csproj", "{9D85DF38-55D2-4916-8BA5-16B290053583}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetricsTest", "plugins\OpenTelemetry\MetricsTest\MetricsTest.csproj", "{9D85DF38-55D2-4916-8BA5-16B290053583}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CodeAnalysisTest", "Tests\CodeAnalysisTest\CodeAnalysisTest.csproj", "{28DB4ED1-D835-4B63-81C3-1D756FF3F541}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeAnalysisTest", "Tests\CodeAnalysisTest\CodeAnalysisTest.csproj", "{28DB4ED1-D835-4B63-81C3-1D756FF3F541}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

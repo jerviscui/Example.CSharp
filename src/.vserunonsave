@@ -1,0 +1,10 @@
+# All Files
+[*]
+vs_command_before = Edit.FormatDocument
+vs_command_after =
+ext_command_before =
+ext_command_after =
+output_string = $(FileName) saved!
+
+[*.cs]
+vs_command_before1 = EditorContextMenus.CodeWindow.Removeemptylines, EditorContextMenus.FileHealthIndicator.RunDefaultCodeCleanup, CodeRush.OrganizeMembers, CodeRush.CleanUpDocument, Edit.FormatDocument

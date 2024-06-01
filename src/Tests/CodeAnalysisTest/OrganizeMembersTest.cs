@@ -84,23 +84,31 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     /// </summary>
     private readonly int _myField;
 
+    private OrganizeMembersTest()
+    {
+        SetProps();
+
+        InterfaceProp = string.Empty;
+        InterfaceProp2 = string.Empty;
+        InterfaceProp1 = string.Empty;
+    }
+
     /// <summary>
     /// Initializes a new instance of the <see cref="OrganizeMembersTest" /> class.
     /// </summary>
     /// <param name="myField">My field.</param>
-    public OrganizeMembersTest(int myField)
+    public OrganizeMembersTest(int myField) : this()
     {
-        SetProps();
-
         _myField = myField;
         _field1 = 0;
         _field2 = 0;
 
         PublicMehtod();
+    }
 
-        InterfaceProp = string.Empty;
-        InterfaceProp2 = string.Empty;
-        InterfaceProp1 = string.Empty;
+    protected OrganizeMembersTest(string paramName) : this()
+    {
+        Console.WriteLine(paramName);
     }
 
     // Field3
