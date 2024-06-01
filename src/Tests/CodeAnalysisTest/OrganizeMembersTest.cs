@@ -164,6 +164,12 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     private int _field2;
 #pragma warning restore IDE0044 // Add readonly modifier
 
+    public Task TaskMethod3Async(CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
+        throw new NotImplementedException();
+    }
+
     Task IImplicit.TaskMethodAsync(CancellationToken cancellationToken)
     {
         if (cancellationToken.IsCancellationRequested)
@@ -173,6 +179,12 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 
         cancellationToken.ThrowIfCancellationRequested();
 rtag:
+        throw new NotImplementedException();
+    }
+
+    public Task TaskMethod2Async(CancellationToken cancellationToken)
+    {
+        cancellationToken.ThrowIfCancellationRequested();
         throw new NotImplementedException();
     }
 
@@ -202,6 +214,18 @@ public interface IExplicit
 /// </summary>
 public interface IImplicit
 {
+    /// <summary>
+    /// Implicit method.
+    /// </summary>
+    /// <returns></returns>
+    public Task TaskMethod3Async(CancellationToken cancellationToken);
+
+    /// <summary>
+    /// Implicit method.
+    /// </summary>
+    /// <returns></returns>
+    public Task TaskMethod2Async(CancellationToken cancellationToken);
+
     /// <summary>
     /// Interface has method and property.
     /// </summary>
