@@ -1,4 +1,4 @@
-using System.Reflection.Metadata;
+using System.Diagnostics.CodeAnalysis;
 
 namespace CodeAnalysisTest;
 
@@ -7,6 +7,18 @@ namespace CodeAnalysisTest;
 /// </summary>
 public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 {
+    [MemberNotNull(nameof(_strProp))]
+    internal void SetProps()
+    {
+        BoolProp = true;
+        PrivateProp = 1;
+        ProtectedProp = 2;
+        ProInternalProp = 3;
+        InternalProp = 4;
+        PublicProp = 5;
+        StrProp = "Hello";
+    }
+
     private bool _boolProp;
     public bool BoolProp
     {
@@ -18,35 +30,35 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     private int PrivateProp
     {
         get => _privateProp;
-        set => _privateProp = value;
+        set => _privateProp = value + 1;
     }
 
     private int _protectedProp;
     protected int ProtectedProp
     {
         get => _protectedProp;
-        set => _protectedProp = value;
+        set => _protectedProp = value + 1;
     }
 
     private int _proInternalProp;
     protected internal int ProInternalProp
     {
         get => _proInternalProp;
-        set => _proInternalProp = value;
+        set => _proInternalProp = value + 1;
     }
 
     private int _internalProp;
     internal int InternalProp
     {
         get => _internalProp;
-        set => _internalProp = value;
+        set => _internalProp = value + 1;
     }
 
     private int _publicProp;
     public int PublicProp
     {
         get => _publicProp;
-        set => _publicProp = value;
+        set => _publicProp = value + 1;
     }
 
     /// <summary>
@@ -62,6 +74,8 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     public string StrProp
     {
         get => _strProp;
+
+        [MemberNotNull(nameof(_strProp))]
         set => _strProp = $"{value}";
     }
 
@@ -71,17 +85,14 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     private readonly int _myField;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="OrganizeMembersTest"/> class.
+    /// Initializes a new instance of the <see cref="OrganizeMembersTest" /> class.
     /// </summary>
-    /// <param name="boolProp">if set to <c>true</c> [bool property].</param>
-    /// <param name="strProp">The string property.</param>
     /// <param name="myField">My field.</param>
-    public OrganizeMembersTest(bool boolProp, string strProp, int myField)
+    public OrganizeMembersTest(int myField)
     {
-        _boolProp = boolProp;
-        _strProp = strProp;
-        _myField = myField;
+        SetProps();
 
+        _myField = myField;
         _field1 = 0;
         _field2 = 0;
 
@@ -103,7 +114,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     // one line comment
     private const int Const1 = 140;
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public Task TaskMethodAsync(CancellationToken cancellationToken)
     {
         cancellationToken.ThrowIfCancellationRequested();
@@ -165,12 +176,12 @@ rtag:
         throw new NotImplementedException();
     }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public string InterfaceProp { get; set; }
 
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public string InterfaceProp2 { get; set; }
-    /// <inheritdoc/>
+    /// <inheritdoc />
     public string InterfaceProp1 { get; set; }
 }
 
