@@ -1,3 +1,5 @@
+using System.Reflection.Metadata;
+
 namespace CodeAnalysisTest;
 
 /// <summary>
@@ -10,6 +12,41 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     {
         get => _boolProp;
         set => _boolProp = value && false;
+    }
+
+    private int _privateProp;
+    private int PrivateProp
+    {
+        get => _privateProp;
+        set => _privateProp = value;
+    }
+
+    private int _protectedProp;
+    protected int ProtectedProp
+    {
+        get => _protectedProp;
+        set => _protectedProp = value;
+    }
+
+    private int _proInternalProp;
+    protected internal int ProInternalProp
+    {
+        get => _proInternalProp;
+        set => _proInternalProp = value;
+    }
+
+    private int _internalProp;
+    internal int InternalProp
+    {
+        get => _internalProp;
+        set => _internalProp = value;
+    }
+
+    private int _publicProp;
+    public int PublicProp
+    {
+        get => _publicProp;
+        set => _publicProp = value;
     }
 
     /// <summary>
@@ -52,6 +89,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 
         InterfaceProp = string.Empty;
         InterfaceProp2 = string.Empty;
+        InterfaceProp1 = string.Empty;
     }
 
     // Field3
@@ -132,6 +170,8 @@ rtag:
 
     /// <inheritdoc/>
     public string InterfaceProp2 { get; set; }
+    /// <inheritdoc/>
+    public string InterfaceProp1 { get; set; }
 }
 
 /// <summary>
@@ -151,6 +191,14 @@ public interface IExplicit
 /// </summary>
 public interface IImplicit
 {
+    /// <summary>
+    /// Interface has method and property.
+    /// </summary>
+    /// <value>
+    /// The interface property.
+    /// </value>
+    public string InterfaceProp1 { get; set; }
+
     /// <summary>
     /// Implicit method.
     /// </summary>
