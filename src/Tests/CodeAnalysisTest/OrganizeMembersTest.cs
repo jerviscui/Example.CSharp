@@ -12,7 +12,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     {
         BoolProp = true;
         PrivateProp = 1;
-        ProtectedProp = 2;
+        ProtectedProp = PrivateProp;
         ProInternalProp = 3;
         InternalProp = 4;
         PublicProp = 5;
@@ -150,6 +150,22 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     /// <summary>
+    /// protected mehtod.
+    /// </summary>
+    protected void ProtectedMehtod()
+    {
+        throw new NotSupportedException();
+    }
+
+    /// <summary>
+    /// protected internal mehtod.
+    /// </summary>
+    protected internal void ProInternalMethod()
+    {
+        throw new NotSupportedException();
+    }
+
+    /// <summary>
     /// Public static mehtod.
     /// </summary>
     public static void PublicStaticMehtod()
@@ -166,7 +182,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 
     public Task TaskMethod3Async(CancellationToken cancellationToken)
     {
-        cancellationToken.ThrowIfCancellationRequested();
         throw new NotImplementedException();
     }
 
@@ -184,7 +199,6 @@ rtag:
 
     public Task TaskMethod2Async(CancellationToken cancellationToken)
     {
-        cancellationToken.ThrowIfCancellationRequested();
         throw new NotImplementedException();
     }
 
