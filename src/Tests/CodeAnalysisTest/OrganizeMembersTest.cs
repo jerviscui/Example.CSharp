@@ -20,7 +20,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     private bool _boolProp;
-
     public bool BoolProp
     {
         get => _boolProp;
@@ -28,7 +27,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     private int _privateProp;
-
     private int PrivateProp
     {
         get => _privateProp;
@@ -36,7 +34,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     private int _protectedProp;
-
     protected int ProtectedProp
     {
         get => _protectedProp;
@@ -44,7 +41,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     private int _proInternalProp;
-
     protected internal int ProInternalProp
     {
         get => _proInternalProp;
@@ -52,7 +48,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     private int _internalProp;
-
     internal int InternalProp
     {
         get => _internalProp;
@@ -60,7 +55,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     private int _publicProp;
-
     public int PublicProp
     {
         get => _publicProp;
@@ -71,7 +65,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     /// The string property
     /// </summary>
     private string _strProp;
-
     /// <summary>
     /// Gets or sets the string property.
     /// </summary>
@@ -82,7 +75,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     {
         get => _strProp;
 
-[MemberNotNull(nameof(_strProp))]
+        [MemberNotNull(nameof(_strProp))]
         set => _strProp = $"{value}";
     }
 
@@ -94,8 +87,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     static OrganizeMembersTest()
     {
         PublicStaticMehtod();
-        string varName = "Hello";
-        PrivateStaticMehtod();
+        PrivateStaticMehtod("Hello");
     }
 
     private OrganizeMembersTest()
@@ -224,7 +216,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
         }
 
         cancellationToken.ThrowIfCancellationRequested();
-        rtag:
+rtag:
         throw new NotImplementedException();
     }
 
@@ -238,7 +230,6 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 
     /// <inheritdoc />
     public string InterfaceProp2 { get; set; }
-
     /// <inheritdoc />
     public string InterfaceProp1 { get; set; }
 }
