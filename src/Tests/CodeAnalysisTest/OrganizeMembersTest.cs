@@ -87,7 +87,12 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     static OrganizeMembersTest()
     {
         PublicStaticMehtod();
-        PrivateStaticMehtod("Hello");
+
+        var hello = "Hello";
+        PrivateStaticMehtod(hello);
+
+        PublicStaticProp = hello;
+        PrivateStaticProp = hello;
     }
 
     private OrganizeMembersTest()
@@ -127,6 +132,17 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     public const string Const2 = "My Model";
     // one line comment
     private const int Const1 = 140;
+
+    private static string InnerProp;
+
+    public static string PublicStaticProp
+    {
+        get => InnerProp;
+        [MemberNotNull(nameof(InnerProp))]
+        set => InnerProp = value;
+    }
+
+    private static string PrivateStaticProp { get; set; }
 
     /// <inheritdoc />
     public Task TaskMethodAsync(CancellationToken cancellationToken)
