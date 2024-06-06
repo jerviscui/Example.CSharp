@@ -93,6 +93,8 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
 
         PublicStaticProp = hello;
         PrivateStaticProp = hello;
+
+        Field3 = 1;
     }
 
     private OrganizeMembersTest()
@@ -112,7 +114,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     {
         _myField = myField;
         _field1 = 0;
-        _field2 = 0;
+        //_field2 = 0;
 
         PublicMehtod();
     }
@@ -123,7 +125,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     }
 
     // Field3
-    private static readonly int Field3 = 1;
+    private static readonly int Field3;
     private int _field1;
     private static string Field4 = string.Empty;
     /// <summary>
@@ -139,7 +141,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     {
         get => InnerProp;
         [MemberNotNull(nameof(InnerProp))]
-        set => InnerProp = value;
+        set => InnerProp = $"{value}";
     }
 
     private static string PrivateStaticProp { get; set; }
@@ -216,7 +218,7 @@ public class OrganizeMembersTest : IExplicit, IImplicit, IPropInterface
     /// The field2
     /// </summary>
 #pragma warning disable IDE0044 // Add readonly modifier
-    private int _field2;
+    private int _field2 = 1;
 #pragma warning restore IDE0044 // Add readonly modifier
 
     public Task TaskMethod3Async(CancellationToken cancellationToken)
