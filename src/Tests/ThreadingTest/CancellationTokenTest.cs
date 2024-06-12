@@ -5,19 +5,26 @@ namespace ThreadingTest;
 
 internal sealed class CancellationTokenTest
 {
+
+    #region Constants & Statics
+
     public static void Cancel_Test()
     {
-        var cts = new CancellationTokenSource();
+        using var cts = new CancellationTokenSource();
         Console.WriteLine($"start: {Environment.CurrentManagedThreadId}");
 
-        cts.Token.Register(() =>
-        {
-            Console.WriteLine($"callback: {Environment.CurrentManagedThreadId}");
-            Thread.Sleep(5000);
-        });
+        _ = cts.Token
+            .Register(() =>
+            {
+                Console.WriteLine($"callback: {Environment.CurrentManagedThreadId}");
+                Thread.Sleep(5000);
+            });
 
         Console.WriteLine($"Canceling: {Environment.CurrentManagedThreadId}");
         cts.Cancel();
         Console.WriteLine($"Canceled: {Environment.CurrentManagedThreadId}");
     }
+
+    #endregion
+
 }

@@ -685,6 +685,12 @@ dotnet_diagnostic.CS8825.severity = error
 # CS8847 - switch 表达式不处理某些空输入（它并不详尽）。但是，带有“when”子句的模式可能会成功匹配该值。
 dotnet_diagnostic.CS8847.severity = error
 
+#### performance warnings ####
+# https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/quality-rules/performance-warnings
+
+# CA1848: Use the LoggerMessage delegates
+dotnet_diagnostic.CA1848.severity = warning
+
 #### compile warning ####
 
 # CS0162: 检测到无法访问的代码
@@ -761,7 +767,7 @@ dotnet_diagnostic.S1172.severity = none
 dotnet_diagnostic.S125.severity = none
 
 # S1481: Unused local variables should be removed
-dotnet_diagnostic.S1481.severity = none
+# dotnet_diagnostic.S1481.severity = none
 
 # S1854: Unused assignments should be removed
 dotnet_diagnostic.S1854.severity = none
@@ -834,6 +840,9 @@ dotnet_diagnostic.S2583.severity = error
 # S2589: Boolean expressions should not be gratuitous
 dotnet_diagnostic.S2589.severity = error
 
+# S2696: Instance members should not write to "static" fields
+dotnet_diagnostic.S2696.severity = error
+
 # S2930: "IDisposables" should be disposed
 dotnet_diagnostic.S2930.severity = error
 
@@ -847,11 +856,11 @@ dotnet_diagnostic.S3400.severity = error
 # S3459: Unassigned members should be removed
 dotnet_diagnostic.S3459.severity = error
 
+# S3903: Types should be defined in named namespaces
+dotnet_diagnostic.S3903.severity = none
+
 # S3923: All branches in a conditional structure should not have exactly the same implementation
 dotnet_diagnostic.S3923.severity = error
 
 # S4158: Empty collections should not be accessed or iterated
 dotnet_diagnostic.S4158.severity = error
-
-# S2696: Instance members should not write to "static" fields
-dotnet_diagnostic.S2696.severity = error
