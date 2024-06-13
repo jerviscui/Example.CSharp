@@ -13,8 +13,8 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F2FBE918-6283-45EC-9F6D-71696D10ED83}"
 	ProjectSection(SolutionItems) = preProject
 		.editorconfig = .editorconfig
-		Directory.Build.props = Directory.Build.props
 		.vserunonsave = .vserunonsave
+		Directory.Build.props = Directory.Build.props
 		Example.CSharp.sln.DotSettings = Example.CSharp.sln.DotSettings
 	EndProjectSection
 EndProject
@@ -255,6 +255,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "MetricsTest", "plugins\OpenTelemetry\MetricsTest\MetricsTest.csproj", "{9D85DF38-55D2-4916-8BA5-16B290053583}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CodeAnalysisTest", "Tests\CodeAnalysisTest\CodeAnalysisTest.csproj", "{28DB4ED1-D835-4B63-81C3-1D756FF3F541}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "StructTest", "Tests\StructTest\StructTest.csproj", "{8AA2BF21-0152-408B-AB29-0C55D2F94395}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -626,6 +628,10 @@ Global
 		{28DB4ED1-D835-4B63-81C3-1D756FF3F541}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{28DB4ED1-D835-4B63-81C3-1D756FF3F541}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{28DB4ED1-D835-4B63-81C3-1D756FF3F541}.Release|Any CPU.Build.0 = Release|Any CPU
+		{8AA2BF21-0152-408B-AB29-0C55D2F94395}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{8AA2BF21-0152-408B-AB29-0C55D2F94395}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{8AA2BF21-0152-408B-AB29-0C55D2F94395}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{8AA2BF21-0152-408B-AB29-0C55D2F94395}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -734,6 +740,7 @@ Global
 		{7B6EC137-88CF-4212-AA8E-152EA02F5907} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
 		{9D85DF38-55D2-4916-8BA5-16B290053583} = {8A0EA7BE-E946-42D6-9C32-20C935EBD724}
 		{28DB4ED1-D835-4B63-81C3-1D756FF3F541} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
+		{8AA2BF21-0152-408B-AB29-0C55D2F94395} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
