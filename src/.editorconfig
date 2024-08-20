@@ -192,7 +192,7 @@ csharp_prefer_simple_using_statement = true
 csharp_style_namespace_declarations = file_scoped
 csharp_style_prefer_method_group_conversion = true
 csharp_style_prefer_primary_constructors = true
-csharp_style_prefer_top_level_statements = true
+csharp_style_prefer_top_level_statements = false
 
 # 表达式级首选项
 csharp_prefer_simple_default_expression = true
@@ -705,6 +705,9 @@ dotnet_diagnostic.CS4014.severity = error
 # CA1715: Identifiers should have correct prefix
 dotnet_diagnostic.CA1715.severity = none
 
+# CA2017: Parameter count mismatch
+dotnet_diagnostic.CA2017.severity = error
+
 # CA2201: 不要引发保留的异常类型
 dotnet_diagnostic.CA2201.severity = error
 
@@ -729,6 +732,9 @@ dotnet_diagnostic.CRR0036.severity = error
 
 # CRR0037: Task.Wait is used in an async method
 dotnet_diagnostic.CRR0037.severity = error
+
+# CRR0038 - The CancellationToken parameter is never used
+dotnet_diagnostic.CRR0038.severity = suggestion
 
 # CRR0040: The Code Metric value exceeds defined threshold
 dotnet_diagnostic.CRR0040.severity = suggestion
@@ -767,7 +773,7 @@ dotnet_diagnostic.S1172.severity = none
 dotnet_diagnostic.S125.severity = none
 
 # S1481: Unused local variables should be removed
-# dotnet_diagnostic.S1481.severity = none
+dotnet_diagnostic.S1481.severity = none
 
 # S1854: Unused assignments should be removed
 dotnet_diagnostic.S1854.severity = none
@@ -792,6 +798,9 @@ dotnet_diagnostic.S2971.severity = none
 
 # S3878: Arrays should not be created for params parameters
 dotnet_diagnostic.S3878.severity = suggestion
+
+# S3445: Exceptions should not be explicitly rethrown
+dotnet_diagnostic.S3445.severity = none
 
 # S4487: Unread "private" fields should be removed
 dotnet_diagnostic.S4487.severity = none
