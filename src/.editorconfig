@@ -143,6 +143,7 @@ dotnet_style_prefer_simplified_interpolation = true
 dotnet_style_readonly_field = true
 
 # 参数首选项
+# all, non_public, none
 dotnet_code_quality_unused_parameters = all
 
 # 禁止显示首选项
@@ -522,7 +523,7 @@ dotnet_diagnostic.IDE0037.severity = suggestion
 # IDE0054: 使用复合分配
 dotnet_diagnostic.IDE0054.severity = suggestion
 # IDE0001: 简化名称
-dotnet_diagnostic.IDE0001.severity = suggestion
+dotnet_diagnostic.IDE0001.severity = warning
 # 样式已移除只保留重构
 # IDE0035: Remove unreachable code
 # dotnet_diagnostic.IDE0035.severity = none
@@ -573,6 +574,9 @@ dotnet_diagnostic.IDE0003.severity = suggestion
 
 # IDE0007: 使用隐式类型
 dotnet_diagnostic.IDE0007.severity = suggestion
+
+# IDE0051: Remove unused private members，关闭，防止 cleanup 自动删除成员
+dotnet_diagnostic.IDE0051.severity = suggestion
 
 # IDE0055: 修正格式
 dotnet_diagnostic.IDE0055.severity = suggestion
@@ -639,7 +643,7 @@ dotnet_diagnostic.CS8633.severity = error
 # CS8634 - 该类型不能用作泛型类型或方法中的类型参数。类型参数的可为空性与“类”约束不匹配。
 dotnet_diagnostic.CS8634.severity = error
 # CS8643 - 显式接口说明符中引用类型的可为空性与该类型实现的接口不匹配。
-dotnet_diagnostic.CS8603.severity = error
+dotnet_diagnostic.CS8643.severity = error
 # CS8644 - 类型未实现接口成员。基类型实现的接口中引用类型的可为空性不匹配。
 dotnet_diagnostic.CS8644.severity = error
 # CS8645 - 成员已在具有不同引用类型可空性的类型的接口列表中列出。
@@ -657,7 +661,7 @@ dotnet_diagnostic.CS8763.severity = error
 # CS8764 - 返回类型的可为空性与重写的成员不匹配（可能是因为可为空性属性）。
 dotnet_diagnostic.CS8764.severity = error
 # CS8765 - 参数类型的可为空性与重写的成员不匹配（可能是因为可为空性属性）。
-dotnet_diagnostic.CS8764.severity = error
+dotnet_diagnostic.CS8765.severity = error
 # CS8766 - 返回类型中引用类型的可为空性与隐式实现的成员不匹配（可能是因为可为空性属性）。
 dotnet_diagnostic.CS8766.severity = error
 # CS8767 - 参数类型中引用类型的可为空性与隐式实现的成员不匹配（可能是因为可为空性属性）。
@@ -670,10 +674,10 @@ dotnet_diagnostic.CS8769.severity = error
 dotnet_diagnostic.CS8770.severity = error
 # CS8774 - 退出时成员必须具有非空值。
 dotnet_diagnostic.CS8774.severity = error
-# CS8776 - 不能在此属性中使用成员。
-dotnet_diagnostic.CS8776.severity = error
 # CS8775 - 退出时成员必须具有非空值。
 dotnet_diagnostic.CS8775.severity = error
+# CS8776 - 不能在此属性中使用成员。
+dotnet_diagnostic.CS8776.severity = error
 # CS8777 - 退出时参数必须具有非空值。
 dotnet_diagnostic.CS8777.severity = error
 # CS8819 - 返回类型中引用类型的可为空性与部分方法声明不匹配。
@@ -721,6 +725,8 @@ dotnet_diagnostic.IDE0043.severity = none
 # CodeRush
 ##########################################
 
+#### default level is warning ####
+
 # CRR0030: Redundant 'await'
 dotnet_diagnostic.CRR0030.severity = error
 
@@ -755,7 +761,7 @@ dotnet_diagnostic.S907.severity = suggestion
 dotnet_diagnostic.S1075.severity = suggestion
 
 # S112: General or reserved exceptions should never be thrown
-dotnet_diagnostic.S112.severity = suggestion
+dotnet_diagnostic.S112.severity = none
 
 # S1125: Boolean literals should not be redundant
 dotnet_diagnostic.S1125.severity = none
@@ -771,12 +777,6 @@ dotnet_diagnostic.S1172.severity = none
 
 # S125: Sections of code should not be commented out
 dotnet_diagnostic.S125.severity = none
-
-# S1481: Unused local variables should be removed
-dotnet_diagnostic.S1481.severity = none
-
-# S1854: Unused assignments should be removed
-dotnet_diagnostic.S1854.severity = none
 
 # S1905: Redundant casts should not be used
 dotnet_diagnostic.S1905.severity = none
@@ -812,6 +812,9 @@ dotnet_diagnostic.S4586.severity = none
 
 # S108: Nested blocks of code should not be left empty
 dotnet_diagnostic.S108.severity = error
+
+# S1133: Deprecated code should be removed
+dotnet_diagnostic.S1133.severity = suggestion
 
 # S1186: Methods should not be empty
 dotnet_diagnostic.S1186.severity = error
@@ -873,3 +876,20 @@ dotnet_diagnostic.S3923.severity = error
 
 # S4158: Empty collections should not be accessed or iterated
 dotnet_diagnostic.S4158.severity = error
+
+##########################################
+# ReSharper properties
+##########################################
+
+resharper_align_linq_query = true
+resharper_align_multiline_binary_expressions_chain = false
+resharper_align_multiline_statement_conditions = false
+resharper_csharp_stick_comment = false
+resharper_indent_nested_fixed_stmt = true
+resharper_indent_nested_foreach_stmt = true
+resharper_indent_nested_for_stmt = true
+resharper_indent_nested_lock_stmt = true
+resharper_indent_nested_usings_stmt = true
+resharper_indent_nested_while_stmt = true
+resharper_indent_raw_literal_string = do_not_change
+resharper_outdent_statement_labels = true

@@ -8,3 +8,8 @@ Console.WriteLine(m2);  // output: 0 ()
 
 var ms = new Measurement[2];
 Console.WriteLine(string.Join(", ", ms));  // output: 0 (), 0 ()
+
+ValueTypeTest.ShowSize();
+
+ValueTypeTest.OutOfPrecisionTrueTest();
+ValueTypeTest.OutOfPrecisionFalseTest();
