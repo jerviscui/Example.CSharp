@@ -5,7 +5,7 @@ internal static class Program
 
     #region Constants & Statics
 
-    private static void Main()
+    private static void Main(string[] args)
     {
         // ExceptionClass.ExceptionMethod();
         // output:
@@ -52,6 +52,25 @@ internal static class Program
         // --- End of stack trace from previous location ---
         // at ExceptionHelperTest.ExceptionClass.CaptureTest() in D:\Project\GitHub\jerviscui\Example.CSharp\src\11\ExceptionHelperTest\ExceptionClass.cs:line 48
         // at Program.<Main>$(String[] args) in D:\Project\GitHub\jerviscui\Example.CSharp\src\11\ExceptionHelperTest\Program.cs:line 41
+
+        //catch when test
+        try
+        {
+            _ = args[0];
+            throw new ArgumentException("test", nameof(args));
+        }
+        catch (ArgumentException e) when (e.ParamName == nameof(args))
+        {
+            Console.WriteLine(e.ParamName);
+        }
+        catch (ArgumentException e)
+        {
+            Console.WriteLine(e.ParamName);
+        }
+        catch (Exception e)
+        {
+            Console.WriteLine(e.Message);
+        }
     }
 
     #endregion
