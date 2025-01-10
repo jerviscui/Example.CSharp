@@ -1,7 +1,12 @@
-namespace EfCoreTest
+namespace EfCoreTest;
+
+public abstract class Entity
 {
-    public class Entity
-    {
-        public long Id { get; protected set; }
-    }
+
+    #region Properties
+
+    public long Id { get; protected set; }
+
+    #endregion
+
 }

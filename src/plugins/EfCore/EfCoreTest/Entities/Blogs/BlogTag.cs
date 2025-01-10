@@ -1,18 +1,24 @@
-namespace EfCoreTest
+namespace EfCoreTest;
+
+public class BlogTag : Entity, ISoftDelete
 {
-    public class BlogTag : Entity, ISoftDelete
+    public BlogTag(long id, long blogId, string tagId)
     {
-        public BlogTag(long blogId, string tagId)
-        {
-            BlogId = blogId;
-            TagId = tagId;
-            IsDelete = false;
-        }
+        Id = id;
 
-        public long BlogId { get; set; }
-
-        public string TagId { get; set; }
-
-        public bool IsDelete { get; set; }
+        BlogId = blogId;
+        TagId = tagId;
+        IsDelete = false;
     }
+
+    #region Properties
+
+    public long BlogId { get; set; }
+
+    public bool IsDelete { get; set; }
+
+    public string TagId { get; set; }
+
+    #endregion
+
 }
