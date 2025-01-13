@@ -763,6 +763,9 @@ dotnet_diagnostic.S1075.severity = suggestion
 # S112: General or reserved exceptions should never be thrown
 dotnet_diagnostic.S112.severity = none
 
+# S125: Sections of code should not be commented out
+dotnet_diagnostic.S125.severity = none
+
 # S1125: Boolean literals should not be redundant
 dotnet_diagnostic.S1125.severity = none
 
@@ -775,8 +778,8 @@ dotnet_diagnostic.S1144.severity = none
 # S1172: Unused method parameters should be removed
 dotnet_diagnostic.S1172.severity = none
 
-# S125: Sections of code should not be commented out
-dotnet_diagnostic.S125.severity = none
+# S1481: Unused local variables should be removed
+dotnet_diagnostic.S1481.severity = suggestion
 
 # S1905: Redundant casts should not be used
 dotnet_diagnostic.S1905.severity = none
@@ -789,6 +792,9 @@ dotnet_diagnostic.S2275.severity = suggestion
 
 # S2292: Trivial properties should be auto-implemented
 dotnet_diagnostic.S2292.severity = none
+
+# S2292: Trivial properties should be auto-implemented
+dotnet_diagnostic.S2325.severity = none
 
 # S2933: Fields that are only assigned in the constructor should be "readonly"
 dotnet_diagnostic.S2933.severity = none
@@ -814,13 +820,13 @@ dotnet_diagnostic.S4586.severity = none
 dotnet_diagnostic.S108.severity = error
 
 # S1133: Deprecated code should be removed
-dotnet_diagnostic.S1133.severity = suggestion
+# dotnet_diagnostic.S1133.severity = suggestion
 
 # S1186: Methods should not be empty
 dotnet_diagnostic.S1186.severity = error
 
 # S1199: Nested code blocks should not be used
-dotnet_diagnostic.S1199.severity = suggestion
+# dotnet_diagnostic.S1199.severity = suggestion
 
 # S1206: "Equals(Object)" and "GetHashCode()" should be overridden in pairs
 dotnet_diagnostic.S1206.severity = error
@@ -841,7 +847,7 @@ dotnet_diagnostic.S2184.severity = error
 dotnet_diagnostic.S2190.severity = error
 
 # S2259: Null pointers should not be dereferenced
-dotnet_diagnostic.S2259.severity = none
+# dotnet_diagnostic.S2259.severity = none
 
 # S2328: "GetHashCode" should not reference mutable fields
 dotnet_diagnostic.S2328.severity = error
@@ -869,7 +875,7 @@ dotnet_diagnostic.S3400.severity = error
 dotnet_diagnostic.S3459.severity = error
 
 # S3903: Types should be defined in named namespaces
-dotnet_diagnostic.S3903.severity = none
+dotnet_diagnostic.S3903.severity = error
 
 # S3923: All branches in a conditional structure should not have exactly the same implementation
 dotnet_diagnostic.S3923.severity = error
@@ -893,3 +899,11 @@ resharper_indent_nested_usings_stmt = true
 resharper_indent_nested_while_stmt = true
 resharper_indent_raw_literal_string = do_not_change
 resharper_outdent_statement_labels = true
+
+[**/_Generated/**.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
+
+[**/Migrations/**.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
