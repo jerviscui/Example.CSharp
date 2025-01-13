@@ -1,15 +1,15 @@
-using BenchmarkDotNet.Running;
-
 namespace StringFormatTest;
 
-internal static class Program
+internal static partial class Program
 {
 
     #region Constants & Statics
 
     private static void Main(string[] args)
     {
-        _ = BenchmarkRunner.Run<BenchmarkTest>();
+        ValueStringBuilderTest.Test();
+
+        //_ = BenchmarkRunner.Run<BenchmarkTest>();
 
         //var watch = new Stopwatch();
         //watch.Restart();
