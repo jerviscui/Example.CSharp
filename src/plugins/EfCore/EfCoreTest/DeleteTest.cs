@@ -9,7 +9,8 @@ internal class DeleteTest : DbContextTest
 
     public static async Task DeleteItems_FromPrimaryTable_OneToMany()
     {
-        await using var dbContext = CreateSqliteMemoryDbContext();
+        //await using var dbContext = CreateSqliteMemoryDbContext();
+        await using var dbContext = CreatePostgreSqlDbContext();
 
         var blog = new Blog(20, "title1", "content1");
         AddIfNotExists(dbContext, blog);
