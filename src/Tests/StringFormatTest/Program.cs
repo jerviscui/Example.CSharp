@@ -7,7 +7,9 @@ internal static partial class Program
 
     private static void Main(string[] args)
     {
-        ValueStringBuilderTest.Test();
+        //ValueStringBuilderTest.Test();
+
+        StringBuilderCacheTest.Test();
 
         //_ = BenchmarkRunner.Run<BenchmarkTest>();
 
