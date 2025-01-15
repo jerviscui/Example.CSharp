@@ -14,15 +14,9 @@ public class Blog : Entity, ISoftDelete
 
     #region Properties
 
-    //private readonly List<BlogTag> _blogTags = [];
     private readonly HashSet<BlogTag> _blogTags = [];
 
-    //public IReadOnlyCollection<BlogTag> BlogTags
-    //{
-    //    get => _blogTags.AsReadOnly();
-    //    set => _blogTags.AddRange(value);
-    //}
-
+    // 一对多
     public IReadOnlyCollection<BlogTag> BlogTags => _blogTags;
 
     public string Content { get; set; }

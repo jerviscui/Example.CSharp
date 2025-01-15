@@ -20,7 +20,8 @@ internal class Program
 
         //await SearchTest.ProtectedProp_Test();
         //await SearchTest.CompileQuery_Test();
-        await SearchTest.CompileQuery_Include_Test();
+        //await SearchTest.CompileQuery_Include_Test();
+        await SearchTest.Exists_Test();
         //await SearchTest.CompileQuery_WithSelect_Test();
         //await SearchTest.StreamingQuery_Test();
 
@@ -42,7 +43,7 @@ internal class Program
         //DynamicLinqTest.Query_WithArg_GenerateParameterSql();
         //DynamicLinqTest.Query_Contains_WithArg_NoParameterSql();
 
-        await DeleteTest.DeleteItems_FromPrimaryTable_OneToMany();
+        //await DeleteTest.DeleteItems_FromPrimaryTable_OneToMany();
 
         //await ExceptionTest.DbUpdateException_Retry_Test();
 

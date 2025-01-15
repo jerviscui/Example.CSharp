@@ -1,9 +1,10 @@
 using Microsoft.EntityFrameworkCore;
+using System.Data;
 using System.Text;
 
 namespace EfCoreTest;
 
-internal class SearchTest : DbContextTest
+internal sealed class SearchTest : DbContextTest
 {
 
     #region Constants & Statics
@@ -69,6 +70,21 @@ internal class SearchTest : DbContextTest
         await using var dbContext = CreateSqliteMemoryDbContext();
 
         var person = PersonByIdToDto(dbContext, 1);
+    }
+
+    public static async Task Exists_Test()
+    {
+        await using var dbContext = CreatePostgreSqlDbContext();
+
+        var blogs = await dbContext.Blogs.Where(o => o.BlogTags.Any((x) => x.IsDelete)).ToListAsync();
+
+        //Executed DbCommand(6ms) [Parameters= [], CommandType = 'Text', CommandTimeout = '30']
+        //SELECT b."Id", b."Content", b."IsDelete", b."Title"
+        //FROM "Blogs" AS b
+        //WHERE EXISTS(
+        //    SELECT 1
+        //    FROM "BlogTags" AS b0
+        //    WHERE b."Id" = b0."BlogId" AND b0."IsDelete")
     }
 
     public static async Task ProtectedProp_Test()

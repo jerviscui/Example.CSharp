@@ -1,27 +1,33 @@
-using System.Collections.Generic;
-using System.Linq;
+namespace EfCoreTest;
 
-namespace EfCoreTest
+public class Post
 {
-    public class Post
+    private readonly List<Tag> _tags = [];
+
+    #region Properties
+
+    public string? Content { get; set; }
+
+    public int PostId { get; set; }
+
+    // 多对多
+    public IReadOnlyCollection<Tag> Tags
     {
-        public int PostId { get; set; }
-
-        public string Title { get; set; }
-
-        public string Content { get; set; }
-
-        public IReadOnlyCollection<Tag> Tags
-        {
-            get => _tags.AsReadOnly();
-            protected set => _tags.AddRange(value.AsEnumerable());
-        }
-
-        private readonly List<Tag> _tags = new();
-
-        public void AddTag(Tag tag)
-        {
-            _tags.Add(tag);
-        }
+        get => _tags.AsReadOnly();
+        protected set => _tags.AddRange(value.AsEnumerable());
     }
+
+    public string? Title { get; set; }
+
+    #endregion
+
+    #region Methods
+
+    public void AddTag(Tag tag)
+    {
+        _tags.Add(tag);
+    }
+
+    #endregion
+
 }
