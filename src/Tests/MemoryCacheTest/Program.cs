@@ -6,7 +6,7 @@ using Microsoft.Extensions.Primitives;
 
 namespace MemoryCacheTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static void Main(string[] args)
         {
@@ -68,7 +68,7 @@ namespace MemoryCacheTest
             }
         }
 
-        public void GetSetTest()
+        public static void GetSetTest()
         {
             IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
             string key = "key";

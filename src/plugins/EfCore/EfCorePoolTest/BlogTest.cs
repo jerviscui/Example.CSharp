@@ -4,13 +4,29 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EfCorePoolTest;
 
-internal class BlogTest
+internal sealed class BlogTest
 {
-    private IServiceProvider ServiceProvider { get; set; }
-
     public BlogTest()
     {
         ServiceProvider = DependencyInjection.ServiceProvider;
+    }
+
+    #region Properties
+
+    private IServiceProvider ServiceProvider { get; set; }
+
+    #endregion
+
+    #region Methods
+
+    private async Task AddWithFactory()
+    {
+        await using var dbContext = await ServiceProvider.GetRequiredService<IDbContextFactory<TestDbContext>>()
+            .CreateDbContextAsync();
+
+        await dbContext.Blogs.AddAsync(new Blog(1003, "add3", "test"));
+
+        await dbContext.SaveChangesAsync();
     }
 
     public async Task Add_Test()
@@ -18,8 +34,8 @@ internal class BlogTest
         using var scope = ServiceProvider.CreateScope();
         await using var dbContext = scope.ServiceProvider.GetRequiredService<TestDbContext>();
 
-        await dbContext.Blogs.AddAsync(new Blog("add1", "test"));
-        await dbContext.Blogs.AddAsync(new Blog("add2", "test"));
+        await dbContext.Blogs.AddAsync(new Blog(1001, "add1", "test"));
+        await dbContext.Blogs.AddAsync(new Blog(1002, "add2", "test"));
 
         await dbContext.SaveChangesAsync();
     }
@@ -36,14 +52,6 @@ internal class BlogTest
         await Task.WhenAll(t1, t2, t3);
     }
 
-    public async Task Select_Test()
-    {
-        using var scope = ServiceProvider.CreateScope();
-        await using var dbContext = scope.ServiceProvider.GetRequiredService<TestDbContext>();
-
-        var list = await dbContext.Blogs.ToListAsync();
-    }
-
     public async Task IDbContextFactory_Test()
     {
         var t1 = AddWithFactory();
@@ -56,13 +64,14 @@ internal class BlogTest
         await Task.WhenAll(t1, t2, t3);
     }
 
-    private async Task AddWithFactory()
+    public async Task Select_Test()
     {
-        await using var dbContext = await ServiceProvider.GetRequiredService<IDbContextFactory<TestDbContext>>()
-            .CreateDbContextAsync();
+        using var scope = ServiceProvider.CreateScope();
+        await using var dbContext = scope.ServiceProvider.GetRequiredService<TestDbContext>();
 
-        await dbContext.Blogs.AddAsync(new Blog("add3", "test"));
-
-        await dbContext.SaveChangesAsync();
+        var list = await dbContext.Blogs.ToListAsync();
     }
+
+    #endregion
+
 }

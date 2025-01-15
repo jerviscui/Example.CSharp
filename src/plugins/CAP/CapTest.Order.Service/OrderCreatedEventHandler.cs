@@ -27,7 +27,7 @@ namespace CapTest.Order.Service
         }
 
         [CapSubscribe("test.header")]
-        public void MessageWithHeaders(string data, [FromCap] CapHeader header)
+        public static void MessageWithHeaders(string data, [FromCap] CapHeader header)
         {
             var value = header["msg-by-header"];
         }

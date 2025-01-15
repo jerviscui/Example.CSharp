@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace RabbitMqTest
 {
-    internal class ConsumerTest
+    internal sealed class ConsumerTest
     {
         public static void ReceiveQueueMessage_Test(CancellationToken token)
         {

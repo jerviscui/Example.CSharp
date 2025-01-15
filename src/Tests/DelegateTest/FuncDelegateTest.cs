@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace DelegateTest
 {
-    internal class FuncDelegateTest
+    internal sealed class FuncDelegateTest
     {
         private static async Task<TResult> FuncTaskParameterMethod<TResult>(Func<Task<TResult>> func)
         {

@@ -69,6 +69,8 @@ public class SimpleSubscriber
         Console.WriteLine("subId-3 Got message: {0}", textMessage.Text);
         Console.ResetColor();
 
+#pragma warning disable CA2201 // Do not raise reserved exception types
         throw new Exception("Test exception");
+#pragma warning restore CA2201 // Do not raise reserved exception types
     }
 }

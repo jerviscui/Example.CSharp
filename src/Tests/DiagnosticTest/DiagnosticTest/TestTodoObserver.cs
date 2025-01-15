@@ -2,7 +2,7 @@ using System.Diagnostics;
 
 namespace DiagnosticTest;
 
-internal class TestTodoObserver : IObserver<DiagnosticListener>
+internal sealed class TestTodoObserver : IObserver<DiagnosticListener>
 {
     /// <inheritdoc />
     public void OnCompleted()

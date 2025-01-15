@@ -13,7 +13,7 @@ public class OrderDetail
     public int Id { get; set; }
 
     [Required]
-    public string Goods { get; set; }
+    public string Goods { get; set; } = null!;
 
     [ForeignKey(nameof(OrderId))]
     public int OrderId { get; set; }

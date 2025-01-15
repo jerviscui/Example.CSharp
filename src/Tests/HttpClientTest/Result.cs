@@ -1,23 +1,23 @@
 namespace HttpClientTest;
 
-internal class Result
+internal sealed class Result
 {
-    public object[] Data { get; set; }
+    public object[] Data { get; set; } = null!;
 
     public int Code { get; set; }
 
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
 
     public bool Success { get; set; }
 }
 
-internal class Result<T>
+internal sealed class Result<T>
 {
-    public T Data { get; set; }
+    public T Data { get; set; } = default!;
 
     public int Code { get; set; }
 
-    public string Message { get; set; }
+    public string Message { get; set; } = null!;
 
     public bool Success { get; set; }
 }

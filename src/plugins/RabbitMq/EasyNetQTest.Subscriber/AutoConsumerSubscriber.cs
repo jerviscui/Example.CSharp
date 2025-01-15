@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace EasyNetQTest.Subscriber;
 
-internal class AutoConsumerSubscriber
+internal sealed class AutoConsumerSubscriber
 {
     private readonly IBus _bus;
 

@@ -1,6 +1,6 @@
 namespace EmptyConstructorTest
 {
-    internal class PublicCtorClass
+    internal sealed class PublicCtorClass
     {
         public PublicCtorClass()
         {

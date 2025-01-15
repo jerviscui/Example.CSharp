@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest
 {
-    internal class EntityMappingTest : DbContextTest
+    internal sealed class EntityMappingTest : DbContextTest
     {
         public static void OnDelete_SqliteMemory_Test()
         {

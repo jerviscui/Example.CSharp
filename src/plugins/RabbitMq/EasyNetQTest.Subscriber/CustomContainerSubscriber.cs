@@ -2,7 +2,7 @@ using EasyNetQ;
 
 namespace EasyNetQTest.Subscriber;
 
-internal class CustomContainerSubscriber
+internal sealed class CustomContainerSubscriber
 {
     private readonly IBus _bus;
 

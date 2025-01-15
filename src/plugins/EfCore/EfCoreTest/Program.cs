@@ -1,12 +1,18 @@
+using Microsoft.EntityFrameworkCore;
+
 namespace EfCoreTest;
 
-internal class Program
+internal static class Program
 {
 
     #region Constants & Statics
 
     private static async Task Main(string[] args)
     {
+        var dbContext = new DesignPgsqlDbContextFactory().CreateDbContext([]);
+        _ = await dbContext.Database.EnsureDeletedAsync();
+        await dbContext.Database.MigrateAsync();
+
         //EntityMappingTest.OnDelete_MsSql_Test();
         //EntityMappingTest.OnDelete_PostgreSql_Test();
         //EntityMappingTest.OnDelete_SqliteMemory_Test();
@@ -16,7 +22,7 @@ internal class Program
         //await EntityMappingTest.ManyToMany_Insert_Test();
 
         //await RowVersionTest.MssqlRowVersion_Update_Test();
-        //await RowVersionTest.PgsqlRowVersion_Update_Test();
+        await RowVersionTest.PgsqlRowVersion_Update_Test();
 
         //await SearchTest.ProtectedProp_Test();
         //await SearchTest.CompileQuery_Test();

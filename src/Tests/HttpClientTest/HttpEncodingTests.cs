@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HttpClientTest;
 
-internal class HttpEncodingTests
+internal sealed class HttpEncodingTests
 {
     private readonly IHttpClientFactory _factory;
 

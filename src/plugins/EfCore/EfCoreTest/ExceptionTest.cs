@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest;
 
-internal class ExceptionTest : DbContextTest
+internal sealed class ExceptionTest : DbContextTest
 {
 
     #region Constants & Statics
@@ -10,9 +10,6 @@ internal class ExceptionTest : DbContextTest
     public static async Task DbUpdateException_CatchFirstEntry()
     {
         await using var dbContext = CreateMsSqlDbContext();
-
-        //dbContext.Database.EnsureDeleted();
-        //dbContext.Database.EnsureCreated();
 
         var blogTag = new BlogTag(11, 10, "tag4");
         var blogTag2 = new BlogTag(12, 20, "tag4");
@@ -52,9 +49,6 @@ internal class ExceptionTest : DbContextTest
     public static async Task DbUpdateException_Retry_Test()
     {
         await using var dbContext = CreateMsSqlDbContext();
-
-        //dbContext.Database.EnsureDeleted();
-        //dbContext.Database.EnsureCreated();
 
         var blogTag = new BlogTag(10, 10, "tag4");
         await dbContext.BlogTags.AddAsync(blogTag);

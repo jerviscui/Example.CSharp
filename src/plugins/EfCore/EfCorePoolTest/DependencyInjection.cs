@@ -1,6 +1,14 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+using Microsoft.Extensions.DependencyInjection;
+
+namespace EfCorePoolTest;
 
 internal static class DependencyInjection
 {
-    public static ServiceProvider ServiceProvider { get; set; }
+
+    #region Constants & Statics
+
+    public static ServiceProvider ServiceProvider { get; set; } = null!;
+
+    #endregion
+
 }

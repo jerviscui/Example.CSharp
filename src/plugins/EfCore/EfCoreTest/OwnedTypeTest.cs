@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest
 {
-    internal class OwnedTypeTest : DbContextTest
+    internal sealed class OwnedTypeTest : DbContextTest
     {
         private static async Task CreateSeedAsync(TestDbContext dbContext)
         {

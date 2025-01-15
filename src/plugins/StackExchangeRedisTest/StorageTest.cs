@@ -3,7 +3,7 @@ using System.Threading.Tasks;
 
 namespace StackExchangeRedisTest
 {
-    internal class StorageTest
+    internal sealed class StorageTest
     {
         public static async Task StorageString_Test()
         {

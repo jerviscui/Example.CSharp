@@ -3,7 +3,7 @@ using Common;
 
 namespace RangeIndexTest
 {
-    internal class StringRangeTests
+    internal sealed class StringRangeTests
     {
         private const string Content = "1234567890";
 

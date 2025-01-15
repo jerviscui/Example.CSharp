@@ -2,7 +2,7 @@ using EasyNetQ;
 
 namespace EasyNetQTest.Publisher;
 
-internal class PubConfirmPublisher
+internal sealed class PubConfirmPublisher
 {
     public static async Task PublisherConfirmsTest()
     {

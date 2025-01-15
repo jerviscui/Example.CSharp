@@ -5,7 +5,7 @@ using Nito.AsyncEx;
 
 namespace AsyncExConsoleTest
 {
-    internal class AsyncReaderWriterLockTest
+    internal sealed class AsyncReaderWriterLockTest
     {
         public static void ReaderWriterLock_Test()
         {

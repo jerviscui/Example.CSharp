@@ -5,9 +5,9 @@ namespace LINQKitTest;
 
 internal abstract class TestDbContext : DbContext
 {
-    public DbSet<Order> Orders { get; set; }
+    public DbSet<Order> Orders { get; set; } = null!;
 
-    public DbSet<OrderDetail> OrderDetails { get; set; }
+    public DbSet<OrderDetail> OrderDetails { get; set; } = null!;
 
     /// <inheritdoc />
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -16,7 +16,7 @@ internal abstract class TestDbContext : DbContext
     }
 }
 
-internal class MsSqlDbContext : TestDbContext
+internal sealed class MsSqlDbContext : TestDbContext
 {
     /// <inheritdoc />
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
@@ -28,7 +28,7 @@ internal class MsSqlDbContext : TestDbContext
     }
 }
 
-internal class PgSqlDbContext : TestDbContext
+internal sealed class PgSqlDbContext : TestDbContext
 {
     /// <inheritdoc />
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)

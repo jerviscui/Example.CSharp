@@ -1,23 +1,40 @@
-using System;
+namespace EfCoreTest;
 
-namespace EfCoreTest
+public class MssqlRowVersion : Entity
 {
-    public class MssqlRowVersion : Entity
-    {
-        public string Name { get; set; }
 
-        public byte[] RowVersion { get; set; }
-    }
+    #region Properties
 
-    public class MysqlRowVersion : Entity
-    {
-        public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
-        public DateTime RowVersion { get; set; }
-    }
+    public byte[] RowVersion { get; set; } = null!;
 
-    public class PgsqlRowVersion : Entity
-    {
-        public string Name { get; set; }
-    }
+    #endregion
+
+}
+
+public class MysqlRowVersion : Entity
+{
+
+    #region Properties
+
+    public string Name { get; set; } = null!;
+
+    public DateTime RowVersion { get; set; }
+
+    #endregion
+
+}
+
+public class PgsqlRowVersion : Entity
+{
+
+    #region Properties
+
+    public string Name { get; set; } = null!;
+
+    public uint Version { get; set; }
+
+    #endregion
+
 }

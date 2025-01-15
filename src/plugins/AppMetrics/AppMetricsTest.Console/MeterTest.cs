@@ -4,7 +4,7 @@ using App.Metrics.Scheduling;
 
 namespace AppMetricsTest.Console;
 
-internal class MeterTest : IDisposable
+internal sealed class MeterTest : IDisposable
 {
     private static readonly MeterOptions CacheHitsMeter = new() { Name = "Cache Hits", MeasurementUnit = Unit.Calls };
 

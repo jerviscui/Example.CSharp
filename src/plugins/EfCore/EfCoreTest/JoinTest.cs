@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest
 {
-    internal class JoinTest : DbContextTest
+    internal sealed class JoinTest : DbContextTest
     {
         public static async Task Search_InnerJoinPredicate_Test()
         {

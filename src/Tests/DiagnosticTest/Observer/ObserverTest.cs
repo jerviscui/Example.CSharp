@@ -1,6 +1,6 @@
 namespace DiagnosticTest;
 
-internal class ObserverTest
+internal sealed class ObserverTest
 {
     public static void SimpleTest()
     {

@@ -9,7 +9,7 @@ using Z.EntityFramework.Plus;
 
 namespace EntityFrameworkPlusTest;
 
-internal class BatchUpdateTests : DbContextTest
+internal sealed class BatchUpdateTests : DbContextTest
 {
     private static string GetCommandText(DbCommand command)
     {

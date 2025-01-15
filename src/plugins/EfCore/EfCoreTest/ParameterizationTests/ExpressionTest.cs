@@ -5,7 +5,7 @@ using System.Linq.Expressions;
 
 namespace EfCoreTest
 {
-    internal class ExpressionTest : DbContextTest
+    internal sealed class ExpressionTest : DbContextTest
     {
         public static void Query_Sql_Test()
         {

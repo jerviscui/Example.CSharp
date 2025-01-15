@@ -23,6 +23,8 @@ internal static class SimpleConsumerErrorStrategySubscriber
 
         Thread.Sleep(1000);
 
+#pragma warning disable CA2201 // Do not raise reserved exception types
         throw new Exception("requeue test");
+#pragma warning restore CA2201 // Do not raise reserved exception types
     }
 }

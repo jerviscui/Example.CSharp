@@ -39,7 +39,7 @@ namespace MoqTest.Domain.Prop
             Id = 1;
         }
 
-        public void SetPropNameId(PropValue a)
+        public static void SetPropNameId(PropValue a)
         {
             a.PropNameId = 1;
         }

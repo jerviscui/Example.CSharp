@@ -1,6 +1,6 @@
 namespace CollectionTest;
 
-internal class SortedListTests
+internal sealed class SortedListTests
 {
     public static void Order_Test()
     {

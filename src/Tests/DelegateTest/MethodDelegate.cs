@@ -6,7 +6,7 @@ using Common;
 
 namespace DelegateTest
 {
-    internal class MethodDelegate
+    internal sealed class MethodDelegate
     {
         public static void DelegatePerformanceTest()
         {

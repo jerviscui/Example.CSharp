@@ -12,7 +12,9 @@ public class LoggerMessageAttributeTest
     {
         try
         {
+#pragma warning disable CA2201 // Do not raise reserved exception types
             throw new Exception("test test.");
+#pragma warning restore CA2201 // Do not raise reserved exception types
         }
         catch (Exception e)
         {
@@ -22,7 +24,9 @@ public class LoggerMessageAttributeTest
 
     public void LogError_WithoutThis_Test()
     {
+#pragma warning disable CA2201 // Do not raise reserved exception types
         LoggerMessageAttributeExtensions.FailedWithoutThis(_logger, new Exception("test WithoutThis"));
+#pragma warning restore CA2201 // Do not raise reserved exception types
     }
 
     public void LogInfo_WithParameter_Test()

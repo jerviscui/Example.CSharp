@@ -2,7 +2,7 @@ using System;
 
 namespace CtorTest
 {
-    internal class VirtualMemberTest
+    internal sealed class VirtualMemberTest
     {
         private class Base
         {

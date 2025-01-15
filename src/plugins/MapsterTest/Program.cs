@@ -8,7 +8,7 @@ using StudentMapper = MapsterTest.Mappers.StudentMapper;
 
 namespace MapsterTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static Student? _student;
 

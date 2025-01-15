@@ -5,7 +5,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HttpClientTest;
 
-internal class SerializeTests
+internal sealed class SerializeTests
 {
     private readonly IHttpClientFactory _factory;
 

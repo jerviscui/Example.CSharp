@@ -49,7 +49,7 @@ public class Publisher : IObservable<Data>, IDisposable
     }
 }
 
-internal class Unsubscriber<T> : IDisposable
+internal sealed class Unsubscriber<T> : IDisposable
 {
     private readonly IObserver<T> _observer;
 

@@ -5,7 +5,7 @@ using App.Metrics.Scheduling;
 
 namespace AppMetricsTest.Console;
 
-internal class ApdexTest : IDisposable
+internal sealed class ApdexTest : IDisposable
 {
     private static readonly ApdexOptions Apdex = new()
     {

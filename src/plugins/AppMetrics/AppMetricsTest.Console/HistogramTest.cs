@@ -5,7 +5,7 @@ using App.Metrics.Scheduling;
 
 namespace AppMetricsTest.Console;
 
-internal class HistogramTest : IDisposable
+internal sealed class HistogramTest : IDisposable
 {
     private static readonly HistogramOptions PostAndPutRequestSize = new()
     {

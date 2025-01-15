@@ -2,7 +2,7 @@ using System.Text.Json;
 
 namespace DiagnosticTest;
 
-internal class DiagnosticObserver : IObserver<KeyValuePair<string, object?>>
+internal sealed class DiagnosticObserver : IObserver<KeyValuePair<string, object?>>
 {
     /// <inheritdoc />
     public void OnCompleted()

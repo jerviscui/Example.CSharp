@@ -7,7 +7,7 @@ using RabbitMQ.Client.Events;
 
 namespace RabbitMqTest
 {
-    internal class DelayQueueTest
+    internal sealed class DelayQueueTest
     {
         public static void Test()
         {

@@ -3,7 +3,7 @@ using StackExchange.Redis;
 
 namespace StackExchangeRedisTest
 {
-    internal class TransactionTest
+    internal sealed class TransactionTest
     {
         public static async Task Transaction_Test()
         {

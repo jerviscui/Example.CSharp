@@ -2,5 +2,5 @@ namespace EasyNetQTest;
 
 public class TextMessage
 {
-    public string Text { get; set; }
+    public string Text { get; set; } = null!;
 }

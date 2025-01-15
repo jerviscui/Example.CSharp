@@ -8,7 +8,7 @@ using Microsoft.Extensions.Logging;
 
 namespace CacheManagerTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private const string ConfigKey = "redis";
 

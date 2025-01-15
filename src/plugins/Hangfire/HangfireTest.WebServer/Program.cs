@@ -74,7 +74,7 @@ app.MapControllers();
 
 app.Run();
 
-internal class CustomBackgroundJobPerformer : IBackgroundJobPerformer
+internal sealed class CustomBackgroundJobPerformer : IBackgroundJobPerformer
 {
     private readonly IBackgroundJobPerformer _inner;
 

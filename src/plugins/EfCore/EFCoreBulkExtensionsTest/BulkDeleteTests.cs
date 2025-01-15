@@ -3,7 +3,7 @@ using EfCoreTest;
 
 namespace EFCoreBulkExtensionsTest;
 
-internal class BulkDeleteTests : DbContextTest
+internal sealed class BulkDeleteTests : DbContextTest
 {
     public static async Task BatchDelete_Test()
     {

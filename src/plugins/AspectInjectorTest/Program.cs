@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace AspectInjectorTest
 {
-    internal class Program
+    internal sealed class Program
     {
 #pragma warning disable CS1998 // 异步方法缺少 "await" 运算符，将以同步方式运行
         private static async Task Main(string[] args)

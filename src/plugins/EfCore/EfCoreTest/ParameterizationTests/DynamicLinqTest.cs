@@ -4,7 +4,7 @@ using System.Linq.Dynamic.Core;
 
 namespace EfCoreTest
 {
-    internal class DynamicLinqTest : DbContextTest
+    internal sealed class DynamicLinqTest : DbContextTest
     {
         public static void Query_NoArg_GenerateParameterSql()
         {

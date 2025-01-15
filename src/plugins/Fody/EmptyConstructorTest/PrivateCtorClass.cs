@@ -1,6 +1,6 @@
 namespace EmptyConstructorTest
 {
-    internal class PrivateCtorClass
+    internal sealed class PrivateCtorClass
     {
         //Visibility='family' MakeExistingEmptyConstructorsVisible='True'
         //will change to protected

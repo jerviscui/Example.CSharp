@@ -3,7 +3,7 @@ using System.Diagnostics;
 
 namespace StackExchangeRedisTest;
 
-internal class TimeTest
+internal sealed class TimeTest
 {
     public static void TimeToDateTime_Test()
     {

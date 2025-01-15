@@ -3,7 +3,7 @@ using LinqKit;
 
 namespace LINQKitTest;
 
-internal class NavigationFilterTest
+internal sealed class NavigationFilterTest
 {
     private readonly TestDbContext _dbContext;
 

@@ -3,7 +3,7 @@ using Common;
 
 namespace StackallocTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static int _i;
 

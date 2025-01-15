@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace HttpClientTest;
 
-internal class Http2Tests
+internal sealed class Http2Tests
 {
     private readonly IHttpClientFactory _factory;
 

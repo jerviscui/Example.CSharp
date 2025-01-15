@@ -4,7 +4,7 @@ using System.Threading;
 
 namespace RabbitMqTest
 {
-    internal class PublishTest
+    internal sealed class PublishTest
     {
         public static void PublishOneMessage_Test()
         {

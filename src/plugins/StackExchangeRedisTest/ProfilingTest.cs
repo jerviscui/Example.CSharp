@@ -11,7 +11,7 @@ internal interface IRedisProfiler
     public ProfilingSession GetSession();
 }
 
-internal class RedisProfiler : IRedisProfiler
+internal sealed class RedisProfiler : IRedisProfiler
 {
     private readonly ProfilingSession _profilingSession;
 
@@ -23,7 +23,7 @@ internal class RedisProfiler : IRedisProfiler
     public ProfilingSession GetSession() => _profilingSession;
 }
 
-internal class ProfilingTest
+internal sealed class ProfilingTest
 {
     public static async Task ProfilingSession_Test()
     {

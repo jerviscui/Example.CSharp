@@ -7,7 +7,7 @@ using Z.EntityFramework.Plus;
 
 namespace EntityFrameworkPlusTest;
 
-internal class BatchDeleteTests : DbContextTest
+internal sealed class BatchDeleteTests : DbContextTest
 {
     public static async Task DeleteAsync_MsSql_Test()
     {

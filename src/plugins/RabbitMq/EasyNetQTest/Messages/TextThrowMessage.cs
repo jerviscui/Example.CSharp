@@ -18,5 +18,5 @@ public class TextThrowMessage
 
     public string Text { get; set; }
 
-    public string Prop { get; set; }
+    public string Prop { get; set; } = null!;
 }

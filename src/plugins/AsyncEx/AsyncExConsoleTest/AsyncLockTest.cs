@@ -4,7 +4,7 @@ using Nito.AsyncEx;
 
 namespace AsyncExConsoleTest
 {
-    internal class AsyncLockTest
+    internal sealed class AsyncLockTest
     {
         public static void AsyncLock_UsedSync_Test()
         {

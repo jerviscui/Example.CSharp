@@ -3,7 +3,7 @@
 var myClass = new MyClass { Name = "aaa" };
 myClass.Name.LessThan(1); //Unhandled exception. System.ArgumentException: myClass.Name must less than 1
 
-internal class MyClass
+internal sealed class MyClass
 {
     public string Name { get; set; } = null!;
 }

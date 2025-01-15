@@ -1,6 +1,6 @@
 namespace LINQKitTest;
 
-internal class SystemLinqTest
+internal sealed class SystemLinqTest
 {
     private readonly TestDbContext _dbContext;
 
@@ -15,7 +15,7 @@ internal class SystemLinqTest
         //[Microsoft.EntityFrameworkCore.Query.QueryRootExpression].Where(o => (o.Id > 1))
     }
 
-    public void Queryable_Index_Test()
+    public static void Queryable_Index_Test()
     {
         //System.Linq.Queryable
 

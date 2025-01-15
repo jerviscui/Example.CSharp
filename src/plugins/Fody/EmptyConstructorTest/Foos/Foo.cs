@@ -1,7 +1,7 @@
 namespace EmptyConstructorTest.Foos
 {
     //ExcludeNamespaces='*.Foos*'
-    internal class Foo
+    internal sealed class Foo
     {
 #pragma warning disable IDE0051 // 删除未使用的私有成员
         private Foo(int n)

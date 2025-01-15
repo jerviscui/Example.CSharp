@@ -5,7 +5,7 @@ using Nito.AsyncEx;
 
 namespace AsyncExConsoleTest
 {
-    internal class AsyncContextTest
+    internal sealed class AsyncContextTest
     {
         public static void Run_Task_Test()
         {

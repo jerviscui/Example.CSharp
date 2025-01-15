@@ -8,9 +8,9 @@ namespace MemoryModelTest
     /// </summary>
     public class MemoryReorderingTests
     {
-        private static Thread w1 = new(o => ((ITester)o).Print());
+        private static Thread w1 = new(o => ((ITester)o!).Print());
 
-        private static Thread w2 = new(o => ((ITester)o).Init());
+        private static Thread w2 = new(o => ((ITester)o!).Init());
 
         /// <summary>
         /// 当发生内存重排会输出 0

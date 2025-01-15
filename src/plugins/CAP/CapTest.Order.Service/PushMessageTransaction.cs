@@ -3,7 +3,7 @@ using DotNetCore.CAP.Transport;
 
 namespace CapTest.Order.Service;
 
-internal class PushMessageTransaction : CapTransactionBase
+internal sealed class PushMessageTransaction : CapTransactionBase
 {
     /// <inheritdoc />
     public PushMessageTransaction(IDispatcher dispatcher) : base(dispatcher)

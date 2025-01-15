@@ -5,7 +5,7 @@ using Common;
 
 namespace RefTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static unsafe void Struct_Pointer_Test()
         {

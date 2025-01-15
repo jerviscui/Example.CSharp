@@ -104,7 +104,7 @@ public class MyClass3 : MyClass2
 }
 
 [AttributeUsage(AttributeTargets.All, AllowMultiple = true)]
-internal class MyAttribute : Attribute
+internal sealed class MyAttribute : Attribute
 {
     public int MyProperty { get; set; }
 

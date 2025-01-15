@@ -6,7 +6,7 @@ using Z.EntityFramework.Plus;
 
 namespace EntityFrameworkPlusTest;
 
-internal class AuditTests : DbContextTest
+internal sealed class AuditTests : DbContextTest
 {
     public static async Task Audit_Test()
     {

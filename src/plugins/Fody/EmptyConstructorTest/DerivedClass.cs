@@ -1,6 +1,6 @@
 namespace EmptyConstructorTest
 {
-    internal class DerivedClass : AbstractClass
+    internal sealed class DerivedClass : AbstractClass
     {
         protected DerivedClass()
         {

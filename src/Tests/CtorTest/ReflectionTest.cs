@@ -2,7 +2,7 @@ using System;
 
 namespace CtorTest
 {
-    internal class ReflectionTest
+    internal sealed class ReflectionTest
     {
         private class MyClass
         {

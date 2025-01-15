@@ -2,7 +2,7 @@ using EasyNetQ;
 
 namespace EasyNetQTest.Publisher;
 
-internal class SimplePublisher
+internal sealed class SimplePublisher
 {
     private readonly IBus _bus = BusFactory.GetBus();
 

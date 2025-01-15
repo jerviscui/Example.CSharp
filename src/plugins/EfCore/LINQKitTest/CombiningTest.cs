@@ -3,7 +3,7 @@ using LinqKit;
 
 namespace LINQKitTest;
 
-internal class CombiningTest
+internal sealed class CombiningTest
 {
     private readonly TestDbContext _dbContext;
 

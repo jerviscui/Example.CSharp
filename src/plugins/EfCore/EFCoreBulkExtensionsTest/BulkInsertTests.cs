@@ -3,7 +3,7 @@ using EfCoreTest;
 
 namespace EFCoreBulkExtensionsTest;
 
-internal class BulkInsertTests : DbContextTest
+internal sealed class BulkInsertTests : DbContextTest
 {
     public static async Task BulkInsert_Test()
     {

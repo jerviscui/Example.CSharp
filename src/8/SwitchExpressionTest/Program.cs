@@ -2,7 +2,7 @@ using System;
 
 namespace SwitchExpressionTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private enum Rainbow
         {

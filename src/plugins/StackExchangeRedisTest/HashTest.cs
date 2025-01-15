@@ -4,7 +4,7 @@ using StackExchange.Redis;
 
 namespace StackExchangeRedisTest
 {
-    internal class HashTest
+    internal sealed class HashTest
     {
         public static void HashSet_Test()
         {
@@ -68,7 +68,7 @@ namespace StackExchangeRedisTest
             var database = DatabaseProvider.GetDatabase();
             var bytes = database.HashGetLease(key, "field1");
 
-            var time = DateTime.Parse(Encoding.UTF8.GetString(bytes.Span));
+            var time = DateTime.Parse(Encoding.UTF8.GetString(bytes!.Span));
             Console.WriteLine(time.ToString("O"));
         }
     }

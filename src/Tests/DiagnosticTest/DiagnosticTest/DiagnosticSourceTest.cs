@@ -3,7 +3,7 @@ using Microsoft.Extensions.DiagnosticAdapter;
 
 namespace DiagnosticTest;
 
-internal class DiagnosticSourceTest
+internal sealed class DiagnosticSourceTest
 {
     public static void DiagnosticListener_Subscribe_Test()
     {
@@ -109,10 +109,10 @@ internal class DiagnosticSourceTest
 
 public class MyAdapter
 {
-    public string Name { get; set; }
+    public string Name { get; set; } = null!;
 
     [DiagnosticName("todo")]
-    public void M(MyAdapter data)
+    public static void M(MyAdapter data)
     {
         Console.WriteLine(data.Name);
     }

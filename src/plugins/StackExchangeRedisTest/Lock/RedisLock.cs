@@ -102,7 +102,9 @@ public sealed class RedisLock : IRedisLock
     {
         if (Interlocked.CompareExchange(ref _once, 1, 0) != 0)
         {
+#pragma warning disable CA2201 // Do not raise reserved exception types
             throw new Exception($"Can only be locked once. key:{_key}");
+#pragma warning restore CA2201 // Do not raise reserved exception types
         }
 
         var clocker = new Clocker(timeout);
@@ -162,7 +164,9 @@ public sealed class RedisLock : IRedisLock
     {
         if (Interlocked.CompareExchange(ref _once, 1, 0) != 0)
         {
+#pragma warning disable CA2201 // Do not raise reserved exception types
             throw new Exception($"Can only be locked once. key:{_key}");
+#pragma warning restore CA2201 // Do not raise reserved exception types
         }
 
         var clocker = new Clocker(timeout);

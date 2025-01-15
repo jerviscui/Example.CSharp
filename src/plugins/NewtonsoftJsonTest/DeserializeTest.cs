@@ -2,7 +2,7 @@ using Newtonsoft.Json;
 
 namespace NewtonsoftJsonTest
 {
-    internal class ProtectedSetterClass1
+    internal sealed class ProtectedSetterClass1
     {
         public ProtectedSetterClass1(string s1, string s2)
         {
@@ -15,7 +15,7 @@ namespace NewtonsoftJsonTest
         public string S2 { get; protected set; }
     }
 
-    internal class ProtectedSetterClass2
+    internal sealed class ProtectedSetterClass2
     {
         public string S3 { get; protected set; } = null!;
 
@@ -26,7 +26,7 @@ namespace NewtonsoftJsonTest
     }
 
     [JsonObject(MemberSerialization.Fields)]
-    internal class ProtectedSetterClass3
+    internal sealed class ProtectedSetterClass3
     {
         public string S3 { get; protected set; } = null!;
 
@@ -36,7 +36,7 @@ namespace NewtonsoftJsonTest
         }
     }
 
-    internal class ProtectedSetterClass4
+    internal sealed class ProtectedSetterClass4
     {
         [JsonProperty]
         public string S3 { get; protected set; } = null!;
@@ -47,7 +47,7 @@ namespace NewtonsoftJsonTest
         }
     }
 
-    internal class PrivateSetterClass
+    internal sealed class PrivateSetterClass
     {
         [JsonProperty]
         public string S3 { get; private set; } = null!;
@@ -58,7 +58,7 @@ namespace NewtonsoftJsonTest
         }
     }
 
-    internal class GetonlyPropClass
+    internal sealed class GetonlyPropClass
     {
         public GetonlyPropClass(string s)
         {
@@ -71,11 +71,11 @@ namespace NewtonsoftJsonTest
         }
 
         [JsonProperty]
-        public string S3 { get; }
+        public string S3 { get; } = null!;
     }
 
     [JsonObject(MemberSerialization.Fields)]
-    internal class GetonlyPropClass2
+    internal sealed class GetonlyPropClass2
     {
         public GetonlyPropClass2(string s)
         {
@@ -87,7 +87,7 @@ namespace NewtonsoftJsonTest
         {
         }
 
-        public string S3 { get; }
+        public string S3 { get; } = null!;
     }
 
     public class DeserializeTest

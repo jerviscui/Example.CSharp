@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EntityFrameworkPlusTest;
 
-internal class LinqDynamicTests : DbContextTest
+internal sealed class LinqDynamicTests : DbContextTest
 {
     public static void WhereDynamic_ConstantArg_Test()
     {

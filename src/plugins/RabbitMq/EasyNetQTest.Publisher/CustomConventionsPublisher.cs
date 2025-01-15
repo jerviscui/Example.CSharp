@@ -2,7 +2,7 @@ using EasyNetQ;
 
 namespace EasyNetQTest.Publisher;
 
-internal class CustomConventionsPublisher
+internal sealed class CustomConventionsPublisher
 {
     public static void PublishTest()
     {

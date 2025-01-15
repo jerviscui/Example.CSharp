@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest
 {
-    internal class LinqTranslationTest : DbContextTest
+    internal sealed class LinqTranslationTest : DbContextTest
     {
         private static async Task CreateSeedAsync(TestDbContext dbContext)
         {

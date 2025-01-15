@@ -4,7 +4,7 @@ namespace EfCoreTest
 {
     public class Tag
     {
-        public string TagId { get; set; }
+        public string TagId { get; set; } = null!;
 
         public List<Post> Posts { get; set; } = new();
     }

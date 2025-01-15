@@ -4,7 +4,7 @@ using App.Metrics.Timer;
 
 namespace AppMetricsTest.Console;
 
-internal class TimerTest : IDisposable
+internal sealed class TimerTest : IDisposable
 {
     private static readonly TimerOptions RequestTimer = new()
     {

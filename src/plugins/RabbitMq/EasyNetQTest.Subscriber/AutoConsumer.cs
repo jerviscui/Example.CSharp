@@ -2,7 +2,7 @@ using EasyNetQ.AutoSubscribe;
 
 namespace EasyNetQTest.Subscriber;
 
-internal class AutoConsumer : IConsume<AutoConsumerMessage>, IConsumeAsync<CustomNameMessage>
+internal sealed class AutoConsumer : IConsume<AutoConsumerMessage>, IConsumeAsync<CustomNameMessage>
 {
     /// <inheritdoc />
     //[ForTopic("#")] //default

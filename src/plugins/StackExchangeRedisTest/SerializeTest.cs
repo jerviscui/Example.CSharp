@@ -5,7 +5,7 @@ using JsonSerializer = System.Text.Json.JsonSerializer;
 
 namespace StackExchangeRedisTest
 {
-    internal class SerializeTest
+    internal sealed class SerializeTest
     {
         public static async Task SystemTextJson_Test()
         {
@@ -15,7 +15,7 @@ namespace StackExchangeRedisTest
 
             var value = await database.StringGetAsync("Serialize1");
             var type = value.GetStorageType(); //is byte array
-            var data = JsonSerializer.Deserialize<MyClass>((byte[])value);
+            var data = JsonSerializer.Deserialize<MyClass>((byte[])value!);
         }
 
         public static async Task NewtownJson_Test()
@@ -26,7 +26,7 @@ namespace StackExchangeRedisTest
 
             var value = await database.StringGetAsync("Serialize2");
             var type = value.GetStorageType();
-            var data = JsonConvert.DeserializeObject<MyClass>(value); //value to string
+            var data = JsonConvert.DeserializeObject<MyClass>(value!); //value to string
         }
 
         private class MyClass

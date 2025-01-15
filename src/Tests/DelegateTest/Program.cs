@@ -2,7 +2,7 @@ using System.Threading.Tasks;
 
 namespace DelegateTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static async Task Main(string[] args)
         {

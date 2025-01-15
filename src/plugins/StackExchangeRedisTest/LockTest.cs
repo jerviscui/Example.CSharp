@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace StackExchangeRedisTest
 {
-    internal class LockTest
+    internal sealed class LockTest
     {
         public static void LockTakeAsync_Test()
         {

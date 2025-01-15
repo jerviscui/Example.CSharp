@@ -3,7 +3,7 @@ using System.Threading;
 
 namespace RabbitMqTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static void Main(string[] args)
         {

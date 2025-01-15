@@ -3,9 +3,9 @@ using System.Text.Json.Serialization;
 
 namespace NewtonsoftJsonTest
 {
-    internal class SystemTextJsonTest
+    internal sealed class SystemTextJsonTest
     {
-        internal class ProtectedSetterClass3
+        internal sealed class ProtectedSetterClass3
         {
             [JsonInclude]
             public string S3 { get; protected set; } = null!;
@@ -16,7 +16,7 @@ namespace NewtonsoftJsonTest
             }
         }
 
-        internal class PrivateSetterClass
+        internal sealed class PrivateSetterClass
         {
             [JsonInclude]
             public string S3 { get; private set; } = null!;
@@ -27,7 +27,7 @@ namespace NewtonsoftJsonTest
             }
         }
 
-        internal class GetonlyPropClass
+        internal sealed class GetonlyPropClass
         {
             [JsonInclude]
             public string S3 { get; } = null!;
@@ -43,7 +43,7 @@ namespace NewtonsoftJsonTest
             }
         }
 
-        internal class GetonlyPropClass2
+        internal sealed class GetonlyPropClass2
         {
             [JsonInclude]
             public string S3 { get; }

@@ -2,7 +2,7 @@ using System;
 
 namespace TypeHandleTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static void Main(string[] args)
         {

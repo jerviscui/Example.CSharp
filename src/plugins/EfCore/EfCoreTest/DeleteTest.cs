@@ -2,7 +2,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace EfCoreTest;
 
-internal class DeleteTest : DbContextTest
+internal sealed class DeleteTest : DbContextTest
 {
 
     #region Constants & Statics

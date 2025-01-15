@@ -3,7 +3,7 @@ using StackExchange.Redis;
 
 namespace StackExchangeRedisTest
 {
-    internal class DatabaseProvider
+    internal sealed class DatabaseProvider
     {
         static DatabaseProvider()
         {

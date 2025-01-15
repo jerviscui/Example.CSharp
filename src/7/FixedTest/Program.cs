@@ -3,7 +3,7 @@ using Common;
 
 namespace FixedTest
 {
-    internal class Program
+    internal sealed class Program
     {
         private static unsafe void Main(string[] args)
         {

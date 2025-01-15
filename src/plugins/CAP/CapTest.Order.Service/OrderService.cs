@@ -64,7 +64,7 @@ namespace CapTest.Order.Service
             }
             finally
             {
-                _capPublisher.Transaction.Value = outter;
+                _capPublisher.Transaction.Value = outter!;
             }
 
             return order.Number;
@@ -73,7 +73,7 @@ namespace CapTest.Order.Service
         // ReSharper disable once InconsistentNaming
         public async Task CreateMessageWithHeaders()
         {
-            var headers = new Dictionary<string, string> { { "msg-by-header", "0" } };
+            var headers = new Dictionary<string, string?> { { "msg-by-header", "0" } };
             await _capPublisher.PublishAsync("test.header", DateTime.Now.ToString("s"), headers);
         }
     }

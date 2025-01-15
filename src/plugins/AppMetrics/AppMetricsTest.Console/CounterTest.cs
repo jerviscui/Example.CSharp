@@ -4,7 +4,7 @@ using App.Metrics.Scheduling;
 
 namespace AppMetricsTest.Console;
 
-internal class CounterTest : IDisposable
+internal sealed class CounterTest : IDisposable
 {
     private static readonly CounterOptions SentEmailsCounter = new()
     {

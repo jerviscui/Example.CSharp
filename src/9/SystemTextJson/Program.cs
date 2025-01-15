@@ -6,7 +6,7 @@ using System.Text.Json.Serialization;
 namespace SystemTextJsonTest
 {
     [SuppressMessage("CodeQuality", "IDE0051:删除未使用的私有成员", Justification = "<挂起>")]
-    internal class Program
+    internal sealed class Program
     {
         private static void Main(string[] args)
         {

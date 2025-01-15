@@ -5,7 +5,7 @@ using App.Metrics.Scheduling;
 
 namespace AppMetricsTest.Console;
 
-internal class GaugeTest : IDisposable
+internal sealed class GaugeTest : IDisposable
 {
     private static readonly GaugeOptions ProcessPhysicalMemoryGauge = new()
     {

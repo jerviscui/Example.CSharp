@@ -4,7 +4,7 @@ using StackExchange.Redis;
 
 namespace StackExchangeRedisTest
 {
-    internal class ScriptTest
+    internal sealed class ScriptTest
     {
         private const string Script = @"
 local key = @key
@@ -27,7 +27,7 @@ return redis.call('GET', key)
 
             if (!result.IsNull && result.Type == ResultType.BulkString)
             {
-                var data = Encoding.UTF8.GetString((byte[])result);
+                var data = Encoding.UTF8.GetString((byte[])result!);
             }
         }
     }

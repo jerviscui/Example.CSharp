@@ -1,8 +1,8 @@
 namespace Test;
 
-internal class P
+internal sealed class P
 {
-    public void Test()
+    public static void Test()
     {
         Console.WriteLine();
     }

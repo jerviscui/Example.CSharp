@@ -1,6 +1,6 @@
 namespace EmptyConstructorTest
 {
-    internal class TestClass
+    internal sealed class TestClass
     {
         public TestClass(string name)
         {

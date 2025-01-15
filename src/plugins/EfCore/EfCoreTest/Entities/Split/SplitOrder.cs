@@ -9,5 +9,5 @@ public class SplitOrder : Entity
 
     public OrderStatus? Status { get; set; }
 
-    public DetailedSplitOrder DetailedSplitOrder { get; set; }
+    public DetailedSplitOrder DetailedSplitOrder { get; set; } = null!;
 }
