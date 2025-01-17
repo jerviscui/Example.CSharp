@@ -900,6 +900,9 @@ resharper_indent_nested_while_stmt = true
 resharper_indent_raw_literal_string = do_not_change
 resharper_outdent_statement_labels = true
 
+[*{Test,Tests}.cs]
+dotnet_diagnostic.CA1707.severity = suggestion
+
 [**/_Generated/**.cs]
 generated_code = true
 dotnet_analyzer_diagnostic.severity = none

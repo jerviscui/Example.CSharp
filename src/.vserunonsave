@@ -4,7 +4,17 @@ vs_command_before = Edit.DeleteHorizontalWhiteSpace, Edit.FormatDocument, Editor
 vs_command_after =
 ext_command_before =
 ext_command_after =
-output_string = $(FileName) saved!
+output_start =
+output_end = $(FileName) saved!
 
 [*.cs]
+output_start = format cs: $(FileName)
 vs_command_before = Edit.DeleteHorizontalWhiteSpace, EditorContextMenus.FileHealthIndicator.RunDefaultCodeCleanup, CodeRush.OrganizeMembers, CodeRush.CleanUpDocument, Edit.FormatDocument, EditorContextMenus.CodeWindow.Removeemptylines
+
+[**/_Generated/**.cs]
+output_start = ignore generation: $(FileName)
+vs_command_before =
+
+[**/Migrations/**.cs]
+output_start = ignore migration: $(FileName)
+vs_command_before =
