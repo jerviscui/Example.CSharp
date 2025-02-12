@@ -8,13 +8,20 @@ internal static class TaskAwaiterTest
 
     #region Constants & Statics
 
-    public static void OnCompleted_Test()
+    public static async Task OnCompleted_TestAsync()
     {
-        var awaiter1 = Task.Run(() => Console.WriteLine("Hello")).GetAwaiter();
-        awaiter1.OnCompleted(() => Console.WriteLine("World"));
+        _ = Task.Run(() => "Hello").ContinueWith(t => Print(t.Result));
+        // 等效于
+        var result = await Task.Run(() => "Hello");
+        Print(result);
 
         var awaiter2 = Task.Run(() => "Hello").GetAwaiter();
-        awaiter2.OnCompleted(() => Console.WriteLine($"{awaiter2.GetResult()} World"));
+        awaiter2.OnCompleted(() => Print(awaiter2.GetResult()));
+
+        static void Print(string str)
+        {
+            Console.WriteLine($"{str} World");
+        }
     }
 
     #endregion

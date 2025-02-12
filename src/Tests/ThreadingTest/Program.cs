@@ -51,7 +51,9 @@ internal static class Program
         // await TaskRunTest.RunWithThrow_Async_ContinueAsync(CancellationToken.None);
         //TaskRunTest.CallAsync_NoWait(CancellationToken.None);
 
-        TaskAwaiterTest.OnCompleted_Test();
+        //await TaskAwaiterTest.OnCompleted_TestAsync();
+
+        await FooAwaitableTest.Await_TestAsync();
 
         using var cts = new CancellationTokenSource(10_000);
         while (!cts.IsCancellationRequested)
