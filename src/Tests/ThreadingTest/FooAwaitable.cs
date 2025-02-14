@@ -132,7 +132,9 @@ public sealed class FooAwaitable<TResult>
     }
 }
 
+// TODO: test static method
 [SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+// must public
 public struct FooAsyncMethodBuilder<TResult>
 {
     private FooAwaitable<TResult> _awaitable;
