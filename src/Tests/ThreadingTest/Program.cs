@@ -53,7 +53,11 @@ internal static class Program
 
         //await TaskAwaiterTest.OnCompleted_TestAsync();
 
-        await FooAwaitableTest.Await_TestAsync();
+        //await FooAwaitableTest.Await_TestAsync();
+        //var s = await FooAwaitableTest.ReturnType_SyncMehtod_TestAsync();
+        //Console.WriteLine(s);
+        var ss = await FooAwaitableTest.ReturnType_AsyncMehtod_TestAsync();
+        Console.WriteLine(ss);
 
         using var cts = new CancellationTokenSource(10_000);
         while (!cts.IsCancellationRequested)
