@@ -725,6 +725,9 @@ dotnet_diagnostic.IDE0043.severity = none
 # CodeRush
 ##########################################
 
+# CRR0035 - No CancellationToken parameter in the asynchronous method
+dotnet_diagnostic.CRR0035.severity = warning
+
 #### default level is warning ####
 
 # CRR0030: Redundant 'await'
@@ -901,7 +904,10 @@ resharper_indent_raw_literal_string = do_not_change
 resharper_outdent_statement_labels = true
 
 [*{Test,Tests}.cs]
+# CA1707: Identifiers should not contain underscores
 dotnet_diagnostic.CA1707.severity = suggestion
+# CRR0035 - No CancellationToken parameter in the asynchronous method
+dotnet_diagnostic.CRR0035.severity = none
 
 [**/_Generated/**.cs]
 generated_code = true
