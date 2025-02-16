@@ -132,29 +132,37 @@ public sealed class FooAwaitable<TResult>
     }
 }
 
-// TODO: test static method
-[SuppressMessage("Performance", "CA1822:Mark members as static", Justification = "<Pending>")]
+[SuppressMessage("Members", "CRR0026:Unused member", Justification = "<Pending>")]
 // must public
-public struct FooAsyncMethodBuilder<TResult>
+public class FooAsyncMethodBuilder<TResult>
 {
-    private FooAwaitable<TResult> _awaitable;
 
     #region Constants & Statics
 
-    // 2. 定义 Create 方法
+    // 1. 创建一个 AsyncTaskMethodBuilder
+#pragma warning disable CA1000 // Do not declare static members on generic types
     public static FooAsyncMethodBuilder<TResult> Create()
+#pragma warning restore CA1000 // Do not declare static members on generic types
     {
         Console.WriteLine("FooAsyncMethodBuilder.Create");
         var awaitable = new FooAwaitable<TResult>();
-        var builder = new FooAsyncMethodBuilder<TResult> { _awaitable = awaitable, };
+        var builder = new FooAsyncMethodBuilder<TResult>(awaitable);
+
         return builder;
     }
 
     #endregion
 
+    private readonly FooAwaitable<TResult> _awaitable;
+
+    public FooAsyncMethodBuilder(FooAwaitable<TResult> awaitable)
+    {
+        _awaitable = awaitable;
+    }
+
     #region Properties
 
-    // 1. 定义 Task 属性
+    // 5. 作为 async 方法的返回值
     public FooAwaitable<TResult> Task
     {
         get
@@ -168,9 +176,7 @@ public struct FooAsyncMethodBuilder<TResult>
 
     #region Methods
 
-    // 4. 定义 AwaitOnCompleted/AwaitUnsafeOnCompleted 方法
-
-    // 如果 awaiter 实现了 INotifyCompletion 接口，就调用 AwaitOnCompleted 方法
+    // 3. 将状态机的 MoveNext 方法注册为 async 方法内 await 的 Task 的回调
     public void AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
         where TAwaiter : INotifyCompletion
         where TStateMachine : IAsyncStateMachine
@@ -179,6 +185,7 @@ public struct FooAsyncMethodBuilder<TResult>
         awaiter.OnCompleted(stateMachine.MoveNext);
     }
 
+    // 4. 同 AwaitOnCompleted，但是清空 ExecutionContext
     public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine)
         where TAwaiter : ICriticalNotifyCompletion
         where TStateMachine : IAsyncStateMachine
@@ -187,26 +194,29 @@ public struct FooAsyncMethodBuilder<TResult>
         awaiter.UnsafeOnCompleted(stateMachine.MoveNext);
     }
 
+    // 7. SetException
     public void SetException(Exception exception)
     {
         Console.WriteLine("FooAsyncMethodBuilder.SetException");
         _awaitable.TrySetException(exception);
     }
 
-    // 5. 定义 SetResult/SetException 方法
+    // 8. SetResult
     public void SetResult(TResult result)
     {
         Console.WriteLine("FooAsyncMethodBuilder.SetResult");
         _awaitable.TrySetResult(result);
     }
 
-    // 6. 定义 SetStateMachine 方法，虽然编译器不会调用，但是编译器要求必须有这个方法
+    // 6. 绑定状态机，但编译器的编译结果不会调用
+#pragma warning disable IDE0060 // Remove unused parameter
     public void SetStateMachine(IAsyncStateMachine stateMachine)
+#pragma warning restore IDE0060 // Remove unused parameter
     {
         Console.WriteLine("FooAsyncMethodBuilder.SetStateMachine");
     }
 
-    // 3. 定义 Start 方法
+    // 2. 开始执行 AsyncTaskMethodBuilder 及其绑定的状态机
     public void Start<TStateMachine>(ref TStateMachine stateMachine)
         where TStateMachine : IAsyncStateMachine
     {
