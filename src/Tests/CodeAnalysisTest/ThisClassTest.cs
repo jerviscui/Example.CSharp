@@ -3,32 +3,7 @@ namespace CodeAnalysisTest;
 public class ThisClassTest
 {
 
-    private int capacity;
-
-    public ThisClassTest()
-    {
-        // IDE0003 dotnet_style_qualification_for_field = false
-        this.capacity = 0;
-
-        // IDE0003 dotnet_style_qualification_for_property = false
-        this.ID = 0;
-
-        // IDE0003 dotnet_style_qualification_for_method = false
-        this.Display();
-
-        // IDE0003 dotnet_style_qualification_for_event = false
-        this.MyEvent += (sender, e) => { };
-
-        Test();
-    }
-    public int ID { get; set; }
-
-    private void Display()
-    {
-        throw new NotImplementedException();
-    }
-
-    public event EventHandler MyEvent;
+    #region Constants & Statics
 
     private static bool Test()
     {
@@ -46,4 +21,45 @@ public class ThisClassTest
 
         return true;
     }
+
+    #endregion
+
+    private int capacity;
+
+    public ThisClassTest()
+    {
+        // IDE0003 dotnet_style_qualification_for_field = false
+        this.capacity = 0;
+
+        // IDE0003 dotnet_style_qualification_for_property = false
+        this.ID = 0;
+
+        // IDE0003 dotnet_style_qualification_for_method = false
+        this.Display();
+
+        // IDE0003 dotnet_style_qualification_for_event = false
+        this.MyEvent += (sender, e) =>
+        {
+        };
+
+        Test();
+    }
+
+    public event EventHandler MyEvent;
+
+    #region Properties
+
+    public int ID { get; set; }
+
+    #endregion
+
+    #region Methods
+
+    private void Display()
+    {
+        throw new NotImplementedException();
+    }
+
+    #endregion
+
 }
