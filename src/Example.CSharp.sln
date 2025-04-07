@@ -265,6 +265,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "11", "11", "{3EAB4251-F872-
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ExceptionHelperTest", "11\ExceptionHelperTest\ExceptionHelperTest.csproj", "{BB9D0A15-F03D-4000-BAD3-CFF79A168E3C}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NRedisStackTest", "plugins\NRedisStackTest\NRedisStackTest.csproj", "{805752FF-E206-49FA-8959-AE79DDA1DBEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -643,6 +645,10 @@ Global
 		{BB9D0A15-F03D-4000-BAD3-CFF79A168E3C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{BB9D0A15-F03D-4000-BAD3-CFF79A168E3C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{BB9D0A15-F03D-4000-BAD3-CFF79A168E3C}.Release|Any CPU.Build.0 = Release|Any CPU
+		{805752FF-E206-49FA-8959-AE79DDA1DBEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805752FF-E206-49FA-8959-AE79DDA1DBEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805752FF-E206-49FA-8959-AE79DDA1DBEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{805752FF-E206-49FA-8959-AE79DDA1DBEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -753,6 +759,7 @@ Global
 		{28DB4ED1-D835-4B63-81C3-1D756FF3F541} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 		{8AA2BF21-0152-408B-AB29-0C55D2F94395} = {719AF6DF-48D1-4C7B-A8E9-493482D109DE}
 		{BB9D0A15-F03D-4000-BAD3-CFF79A168E3C} = {3EAB4251-F872-4E23-AFEE-C55FEC5856DD}
+		{805752FF-E206-49FA-8959-AE79DDA1DBEA} = {630114C3-1AE7-468E-8ADD-1CDE3E9EEF26}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {CBE0CD6C-2E47-4D9F-B072-C138AA4A6D5A}
