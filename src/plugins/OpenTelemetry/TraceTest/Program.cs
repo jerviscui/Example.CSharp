@@ -16,7 +16,7 @@ using var tracerProvider = builder.SetResourceBuilder(ResourceBuilder.CreateDefa
     })
     .Build();
 
-var activitySource = new ActivitySource("Sample.DistributedTracing", "1.0.0");
+using var activitySource = new ActivitySource("Sample.DistributedTracing", "1.0.0");
 
 using (var activity = activitySource.StartActivity("Do", ActivityKind.Server))
 {

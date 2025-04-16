@@ -7,7 +7,7 @@ internal sealed class BulkReadTests : DbContextTest
 {
     public static async Task BulkRead_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         var list = new List<Person>();
         for (int i = 0; i < 2000; i++)

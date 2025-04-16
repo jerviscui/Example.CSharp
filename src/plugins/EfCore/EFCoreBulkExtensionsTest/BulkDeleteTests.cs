@@ -7,7 +7,7 @@ internal sealed class BulkDeleteTests : DbContextTest
 {
     public static async Task BatchDelete_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         await context.Persons.Where(o => o.Id >= Consts.BaseId).BatchDeleteAsync();
 
@@ -19,7 +19,7 @@ internal sealed class BulkDeleteTests : DbContextTest
 
     public static async Task BatchDelete_PostgreSql_Test()
     {
-        var context = CreatePostgreSqlDbContext();
+        using var context = CreatePostgreSqlDbContext();
 
         await context.Persons.Where(o => o.Id >= Consts.BaseId).BatchDeleteAsync();
     }

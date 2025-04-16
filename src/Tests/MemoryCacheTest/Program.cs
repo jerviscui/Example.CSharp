@@ -19,7 +19,7 @@ namespace MemoryCacheTest
 
         private static void DependencyTest()
         {
-            IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
+            using var cache = new MemoryCache(new MemoryCacheOptions());
             string inner = "inner";
             string outer = "outer";
 
@@ -54,7 +54,7 @@ namespace MemoryCacheTest
 
         private static void UsingScopeTest()
         {
-            IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
+            using var cache = new MemoryCache(new MemoryCacheOptions());
             string key = "inner";
 
             SetCache(cache, key);
@@ -70,7 +70,7 @@ namespace MemoryCacheTest
 
         public static void GetSetTest()
         {
-            IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
+            using var cache = new MemoryCache(new MemoryCacheOptions());
             string key = "key";
 
             // Look for cache key.
@@ -113,9 +113,9 @@ namespace MemoryCacheTest
             string inner = "inner";
             string outer = "outer";
 
-            var cts = new CancellationTokenSource();
+            using var cts = new CancellationTokenSource();
 
-            IMemoryCache cache = new MemoryCache(new MemoryCacheOptions());
+            using var cache = new MemoryCache(new MemoryCacheOptions());
 
             using (var entry = cache.CreateEntry(outer))
             {

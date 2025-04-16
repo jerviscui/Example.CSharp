@@ -76,8 +76,7 @@ public abstract class DbContextTest
 
     public static void SettingBuilder(DbContextOptionsBuilder builder)
     {
-        builder.UseLoggerFactory(LoggerFactory.Create(loggingBuilder =>
-            loggingBuilder.SetMinimumLevel(LogLevel.Information).AddConsole()));
+        builder.LogTo(Console.WriteLine, LogLevel.Information);
         builder.EnableSensitiveDataLogging();
         builder.EnableDetailedErrors();
     }

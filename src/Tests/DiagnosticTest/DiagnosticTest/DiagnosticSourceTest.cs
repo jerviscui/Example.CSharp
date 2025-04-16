@@ -7,7 +7,7 @@ internal sealed class DiagnosticSourceTest
 {
     public static void DiagnosticListener_Subscribe_Test()
     {
-        DiagnosticSource diagnostic = new DiagnosticListener("TestDiagnostic");
+        using var diagnostic = new DiagnosticListener("TestDiagnostic");
 
         var disposable = ((IObservable<KeyValuePair<string, object?>>)diagnostic).Subscribe(new DiagnosticObserver());
 
@@ -37,8 +37,8 @@ internal sealed class DiagnosticSourceTest
 
     public static void AllListeners_Subscribe_Test()
     {
-        var diagnostic = new DiagnosticListener("Test");
-        var diagnostic2 = new DiagnosticListener("TestTwice");
+        using var diagnostic = new DiagnosticListener("Test");
+        using var diagnostic2 = new DiagnosticListener("TestTwice");
 
         DiagnosticListener.AllListeners.Subscribe(new TestTodoObserver());
 
@@ -83,7 +83,7 @@ internal sealed class DiagnosticSourceTest
 
     public static void DiagnosticAdapter_Test()
     {
-        var diagnostic = new DiagnosticListener("Test.Adapter");
+        using var diagnostic = new DiagnosticListener("Test.Adapter");
 
         diagnostic.SubscribeWithAdapter(new MyAdapter());
 

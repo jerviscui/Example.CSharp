@@ -13,7 +13,7 @@ namespace RabbitMqTest
         {
             CreateConsumer();
 
-            var channel = CreatePublisher();
+            using var channel = CreatePublisher();
 
             var data = JsonSerializer.SerializeToUtf8Bytes(DateTime.Now);
             channel.BasicPublish("Ex.DelayQueue", "route.DelayQueue.Order", body: data);
@@ -29,7 +29,7 @@ namespace RabbitMqTest
 
         private static IModel CreatePublisher()
         {
-            var connection = RabbitMq.CreateConnection("DelayQueuePublisher");
+            using var connection = RabbitMq.CreateConnection("DelayQueuePublisher");
             var channel = connection.CreateModel();
 
             channel.ExchangeDeclare("Ex.DelayQueue", ExchangeType.Topic, true);
@@ -47,7 +47,7 @@ namespace RabbitMqTest
 
         private static void CreateConsumer()
         {
-            var connection = RabbitMq.CreateConnection("DeadLetterConsumer");
+            using var connection = RabbitMq.CreateConnection("DeadLetterConsumer");
             var channel = connection.CreateModel();
 
             channel.ExchangeDeclare("Ex.dl.Order", ExchangeType.Topic, true);

@@ -7,7 +7,7 @@ internal sealed class BulkUpdateTests : DbContextTest
 {
     public static async Task BulkUpdate_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         var list = new List<Person>();
         for (int i = 0; i < 10; i++)
@@ -27,7 +27,7 @@ internal sealed class BulkUpdateTests : DbContextTest
 
     public static async Task BatchUpdate_updateExpression_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         await context.Persons.Where(o => o.Id >= Consts.BaseId && o.Id < Consts.BaseId + 500)
             .BatchUpdateAsync(p => new Person(p.Id, "", p.FamilyId, p.TeacherId) { Name = p.Name + "_u" });
@@ -40,7 +40,7 @@ internal sealed class BulkUpdateTests : DbContextTest
 
     public static async Task BatchUpdate_updateExpression_DynamicValue_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         await context.Persons.Where(o => o.Id >= Consts.BaseId && o.Id < Consts.BaseId + 500)
             .BatchUpdateAsync(p =>

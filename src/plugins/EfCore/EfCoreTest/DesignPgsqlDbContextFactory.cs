@@ -15,8 +15,7 @@ public class DesignPgsqlDbContextFactory : IDesignTimeDbContextFactory<PgsqlDbCo
     public PgsqlDbContext CreateDbContext(string[] args)
     {
         var optionsBuilder = new DbContextOptionsBuilder<TestDbContext>();
-        _ = optionsBuilder.UseLoggerFactory(
-            LoggerFactory.Create(loggingBuilder => loggingBuilder.SetMinimumLevel(LogLevel.Information).AddConsole()));
+        _ = optionsBuilder.LogTo(Console.WriteLine, LogLevel.Information);
 
         DbContextTest.UseNpgsql(optionsBuilder);
 

@@ -33,7 +33,7 @@ internal sealed class BatchUpdateTests : DbContextTest
 
     public static async Task UpdateAsync_MsSql_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var updated = await dbContext.Persons.Where(o => o.Id < 3).UpdateAsync(
             // ReSharper disable once UseStringInterpolation
@@ -61,7 +61,7 @@ internal sealed class BatchUpdateTests : DbContextTest
 
     public static async Task UpdateAsync_WithParameters_MsSql_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();
@@ -124,7 +124,7 @@ internal sealed class BatchUpdateTests : DbContextTest
 
     public static async Task UpdateAsync_WithParameters_PostgreSql_Test()
     {
-        var dbContext = CreatePostgreSqlDbContext();
+        using var dbContext = CreatePostgreSqlDbContext();
 
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();

@@ -7,7 +7,7 @@ internal sealed class LinqDynamicTests : DbContextTest
 {
     public static void WhereDynamic_ConstantArg_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var list = dbContext.Persons.WhereDynamic(o => "o.Id < 3").ToListDynamic();
 
@@ -19,7 +19,7 @@ internal sealed class LinqDynamicTests : DbContextTest
 
     public static void WhereDynamic_ParameterizedArg_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var list = dbContext.Persons.WhereDynamic(o => "o.Id < y", new { y = 3 }).ToListDynamic();
 
@@ -31,7 +31,7 @@ internal sealed class LinqDynamicTests : DbContextTest
 
     public static async Task WhereDynamic_ToListAsync_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var list = await dbContext.Persons.WhereDynamic(o => "o.Id < y", new { y = 3 }).SelectDynamic(o => "o.Name")
             .ToListAsync();

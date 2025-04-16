@@ -7,7 +7,7 @@ internal sealed class BulkInsertTests : DbContextTest
 {
     public static async Task BulkInsert_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         var list = new List<Person>();
         for (int i = 0; i < 5000; i++)
@@ -23,7 +23,7 @@ internal sealed class BulkInsertTests : DbContextTest
 
     public static async Task BulkInsert_PostgreSql_Test()
     {
-        var context = CreatePostgreSqlDbContext();
+        using var context = CreatePostgreSqlDbContext();
 
         var list = new List<Person>();
         for (int i = 0; i < 5000; i++)
@@ -39,7 +39,7 @@ internal sealed class BulkInsertTests : DbContextTest
 
     public static async Task BulkInsertOrUpdate_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         var list = new List<Person>();
         for (int i = 0; i < 5000; i++)
@@ -58,7 +58,7 @@ internal sealed class BulkInsertTests : DbContextTest
 
     public static async Task BulkInsertOrUpdateOrDelete_Test()
     {
-        var context = CreateMsSqlDbContext();
+        using var context = CreateMsSqlDbContext();
 
         var list = new List<Person>();
         for (int i = 0; i < 5000; i++)

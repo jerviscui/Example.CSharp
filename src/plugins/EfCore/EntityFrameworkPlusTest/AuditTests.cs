@@ -10,7 +10,7 @@ internal sealed class AuditTests : DbContextTest
 {
     public static async Task Audit_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var options = new JsonSerializerOptions(JsonSerializerDefaults.Web);
         options.ReferenceHandler = ReferenceHandler.Preserve;

@@ -11,7 +11,7 @@ internal sealed class BatchDeleteTests : DbContextTest
 {
     public static async Task DeleteAsync_MsSql_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var deleted = await dbContext.Persons.Where(o => o.Id < 3).DeleteAsync(delete =>
         {
@@ -52,7 +52,7 @@ internal sealed class BatchDeleteTests : DbContextTest
 
     public static async Task DeleteAsync_WithParameters_MsSql_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();
@@ -103,7 +103,7 @@ internal sealed class BatchDeleteTests : DbContextTest
 
     public static async Task DeleteAsync_ChangeTracking_MsSql_DbUpdateConcurrencyException_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();
@@ -129,7 +129,7 @@ internal sealed class BatchDeleteTests : DbContextTest
 
     public static async Task DeleteAsync_WithParameters_PostgreSql_Test()
     {
-        var dbContext = CreatePostgreSqlDbContext();
+        using var dbContext = CreatePostgreSqlDbContext();
 
         await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.EnsureCreatedAsync();

@@ -9,7 +9,7 @@ internal sealed class PagingTest : DbContextTest
     #region Constants & Statics
     public static async Task MsSql_NoOffset_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var count = await dbContext.FactSales.AsNoTracking().CountAsync();
 
@@ -36,7 +36,7 @@ internal sealed class PagingTest : DbContextTest
 
     public static async Task MsSql_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var count = await dbContext.FactSales.AsNoTracking().CountAsync();
 
@@ -51,7 +51,7 @@ internal sealed class PagingTest : DbContextTest
 
     public static async Task PostgreSql_NoOffset_Test()
     {
-        var dbContext = CreatePostgreSqlDbContext();
+        using var dbContext = CreatePostgreSqlDbContext();
 
         var count = await dbContext.FactSales.AsNoTracking().CountAsync();
 
@@ -80,7 +80,7 @@ internal sealed class PagingTest : DbContextTest
 
     public static async Task PostgreSql_Opetimization_Test()
     {
-        var dbContext = CreatePostgreSqlDbContext();
+        using var dbContext = CreatePostgreSqlDbContext();
 
         var count = await dbContext.FactSales.AsNoTracking().CountAsync();
 
@@ -104,7 +104,7 @@ internal sealed class PagingTest : DbContextTest
 
     public static async Task PostgreSql_Test()
     {
-        var dbContext = CreatePostgreSqlDbContext();
+        using var dbContext = CreatePostgreSqlDbContext();
 
         var count = await dbContext.FactSales.AsNoTracking().CountAsync();
 
@@ -117,7 +117,7 @@ internal sealed class PagingTest : DbContextTest
     }
     public static async Task SkipAll_Test(int pageIndex = 1, int pageSize = 10)
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         var total = await dbContext.FactSales.AsNoTracking().CountAsync();
 

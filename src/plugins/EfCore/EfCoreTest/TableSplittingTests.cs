@@ -26,7 +26,7 @@ internal sealed class TableSplittingTests : DbContextTest
 
     public static async Task Insert_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         await CreateSeedAsync(dbContext);
 
@@ -38,7 +38,7 @@ internal sealed class TableSplittingTests : DbContextTest
 
     public static async Task Search_DetailedSplitOrder_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
         await CreateSeedAsync(dbContext);
 
         var detail = await dbContext.DetailedSplitOrders.FirstOrDefaultAsync(o => o.Id == 1);
@@ -51,7 +51,7 @@ internal sealed class TableSplittingTests : DbContextTest
 
     public static async Task Search_SplitOrder_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
         await CreateSeedAsync(dbContext);
 
         var count = await dbContext.SplitOrders.CountAsync(o => o.Status == OrderStatus.Pending);
@@ -63,7 +63,7 @@ internal sealed class TableSplittingTests : DbContextTest
 
     public static void TableSplitting_MsSql_Test()
     {
-        var dbContext = CreateMsSqlDbContext();
+        using var dbContext = CreateMsSqlDbContext();
 
         //CREATE TABLE [SplitOrder] (
         //    [Id] bigint NOT NULL IDENTITY,
@@ -76,12 +76,12 @@ internal sealed class TableSplittingTests : DbContextTest
 
     public static void TableSplitting_PostgreSql_Test()
     {
-        var dbContext = CreatePostgreSqlDbContext();
+        using var dbContext = CreatePostgreSqlDbContext();
 
     }
     public static void TableSplitting_Sqlite_Test()
     {
-        var dbContext = CreateSqliteMemoryDbContext();
+        using var dbContext = CreateSqliteMemoryDbContext();
 
         //CREATE TABLE "SplitOrder" (
         //  "Id" INTEGER NOT NULL CONSTRAINT "PK_SplitOrder" PRIMARY KEY,

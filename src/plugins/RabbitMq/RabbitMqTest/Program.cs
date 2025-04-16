@@ -7,7 +7,7 @@ namespace RabbitMqTest
     {
         private static void Main(string[] args)
         {
-            var cts = new CancellationTokenSource();
+            using var cts = new CancellationTokenSource();
             //Task.Factory.StartNew(() => ConsumerTest.ReceiveQueueMessage_Test(cts.Token), cts.Token);
             //Task.Factory.StartNew(() => ConsumerTest.ReceiveQueueMessage_AsyncConsumer_Test(cts.Token), cts.Token);
 

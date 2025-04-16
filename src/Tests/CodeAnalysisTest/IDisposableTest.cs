@@ -19,30 +19,40 @@ public class IDisposableTest : IDisposable, IAsyncDisposable
     public static void NewDisposableObject_Test()
     {
         // CA2000
+#pragma warning disable CA2000 // Dispose objects before losing scope
         var a = new BaseClassWithFinalizer();
+#pragma warning restore CA2000 // Dispose objects before losing scope
         //a.Dispose();
     }
 
     public static async Task ReturnDisposable_Async_Test()
     {
         // CA2000
+#pragma warning disable CA2000 // Dispose objects before losing scope
         var a = await ReturnDisposableAsync();
+#pragma warning restore CA2000 // Dispose objects before losing scope
         //await a.DisposeAsync();
     }
 
     public static void ReturnDisposable_Sync_Test()
     {
         // CA2000
+#pragma warning disable CA2000 // Dispose objects before losing scope
         var a = ReturnDisposable();
+#pragma warning restore CA2000 // Dispose objects before losing scope
         //a.Dispose();
     }
 
     #endregion
 
     // CA2213
+#pragma warning disable CA2213 // Disposable fields should be disposed
     private readonly BaseClassWithFinalizer _field;
+#pragma warning restore CA2213 // Disposable fields should be disposed
 
+#pragma warning disable CA1859 // Use concrete types when possible for improved performance
     private readonly IReturnDisposable _returnInterface;
+#pragma warning restore CA1859 // Use concrete types when possible for improved performance
     private readonly ReturnDisposableClass _returnClass;
 
     public IDisposableTest()
@@ -57,6 +67,7 @@ public class IDisposableTest : IDisposable, IAsyncDisposable
     public ValueTask DisposeAsync()
     {
         //await _field.DisposeAsync();
+        throw new NotImplementedException();
     }
 
     #endregion
@@ -75,14 +86,18 @@ public class IDisposableTest : IDisposable, IAsyncDisposable
     public async Task Return_Class_Async_Test()
     {
         // CA2000
+#pragma warning disable CA2000 // Dispose objects before losing scope
         var a = await _returnClass.ReturnDisposableAsync();
+#pragma warning restore CA2000 // Dispose objects before losing scope
         //a.Dispose();
     }
 
     public void Return_Class_Sync_Test()
     {
         // CA2000
+#pragma warning disable CA2000 // Dispose objects before losing scope
         var a = _returnClass.ReturnDisposable();
+#pragma warning restore CA2000 // Dispose objects before losing scope
         //a.Dispose(); 
     }
 

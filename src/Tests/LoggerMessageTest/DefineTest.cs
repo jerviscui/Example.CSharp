@@ -6,40 +6,53 @@ namespace LoggerMessageTest;
 
 public class DefineTest
 {
+
+    #region Constants & Statics
+
+    private static readonly Action<ILogger, string, int, Exception?> ErrorMessage =
+        LoggerMessage.Define<string, int>(LogLevel.Error, new EventId(0, "ERROR"), "{Message} {Count}");
+
+    #endregion
+
     private readonly ILogger<DefineTest> _logger;
 
     public DefineTest()
     {
-        var loggerFactory = new LoggerFactory(new[]
-        {
-            new ConsoleLoggerProvider(
-                new OptionsMonitor<ConsoleLoggerOptions>(
-                    new OptionsFactory<ConsoleLoggerOptions>(
-                        new List<IConfigureOptions<ConsoleLoggerOptions>>(),
-                        new List<IPostConfigureOptions<ConsoleLoggerOptions>>()),
-                    Array.Empty<IOptionsChangeTokenSource<ConsoleLoggerOptions>>(),
-                    new OptionsCache<ConsoleLoggerOptions>()))
-        });
+        using var optionsMonitor = new OptionsMonitor<ConsoleLoggerOptions>(
+            new OptionsFactory<ConsoleLoggerOptions>([], []),
+            [],
+            new OptionsCache<ConsoleLoggerOptions>());
+        using var loggerFactory = new LoggerFactory(
+            new[]
+            {
+                new ConsoleLoggerProvider(
+                optionsMonitor)
+            });
 
         _logger = loggerFactory.CreateLogger<DefineTest>();
     }
 
-    private static readonly Action<ILogger, string, int, Exception?> ErrorMessage =
-        LoggerMessage.Define<string, int>(LogLevel.Error, new EventId(0, "ERROR"), "{Message} {Count}");
+    #region Methods
+
+    public void LogExtensionTest()
+    {
+        _logger.InfoMessage("sth.", 1);
+    }
 
     public void LogTest()
     {
         ErrorMessage(_logger, "sth.", 123, null);
     }
 
-    public void LogExtensionTest()
-    {
-        _logger.InfoMessage("sth.", 1);
-    }
+    #endregion
+
 }
 
 public static class LoggerExtensions
 {
+
+    #region Constants & Statics
+
     private static readonly Action<ILogger, string, int, Exception?> TestInfoMessage =
         LoggerMessage.Define<string, int>(LogLevel.Information, new EventId(0, "ERROR"), "{Message} {Count}");
 
@@ -47,4 +60,7 @@ public static class LoggerExtensions
     {
         TestInfoMessage(logger, message, count, null);
     }
+
+    #endregion
+
 }

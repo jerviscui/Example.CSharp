@@ -142,6 +142,8 @@ namespace RabbitMqTest
 
             if (disposing)
             {
+                _channel?.Dispose();
+                _channel = null;
                 _connection?.Dispose();
                 _connection = null;
             }

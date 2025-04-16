@@ -9,7 +9,7 @@ internal static class Program
 
     private static async Task Main(string[] args)
     {
-        var dbContext = new DesignPgsqlDbContextFactory().CreateDbContext([]);
+        using var dbContext = new DesignPgsqlDbContextFactory().CreateDbContext([]);
         _ = await dbContext.Database.EnsureDeletedAsync();
         await dbContext.Database.MigrateAsync();
 
