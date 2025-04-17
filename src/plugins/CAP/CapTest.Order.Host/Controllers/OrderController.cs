@@ -24,6 +24,13 @@ public class OrderController : ControllerBase
     }
 
     [HttpPost]
+    [Route("CreateDelay/{id}")]
+    public Task<string> CreateDelayAsync(int id)
+    {
+        return _orderService.CreateDelay(id);
+    }
+
+    [HttpPost]
     [Route("CreateMessageWithHeaders")]
     // ReSharper disable once InconsistentNaming
     public async Task<IActionResult> CreateTTLMessage()

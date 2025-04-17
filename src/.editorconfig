@@ -805,6 +805,9 @@ dotnet_diagnostic.S2292.severity = none
 # S2292: Trivial properties should be auto-implemented
 dotnet_diagnostic.S2325.severity = none
 
+# S2629: Logging templates should be constant
+dotnet_diagnostic.S2629.severity = none
+
 # S2933: Fields that are only assigned in the constructor should be "readonly"
 dotnet_diagnostic.S2933.severity = none
 

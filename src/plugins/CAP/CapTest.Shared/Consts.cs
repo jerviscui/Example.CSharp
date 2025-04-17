@@ -1,14 +1,25 @@
-namespace CapTest.Shared
+namespace CapTest.Shared;
+
+public static class OrderConsts
 {
-    public static class OrderConsts
-    {
-        public const string DbContextConnName = "Order";
 
-        public const string MessageGroupName = "Order";
-    }
+    #region Constants & Statics
 
-    public static class DepotConsts
-    {
-        public const string DbContextConnName = "Default";
-    }
+    public const string DbContextConnName = "Order";
+
+    public const string MessageGroupName = "Order";
+
+    #endregion
+
+}
+
+public static class DepotConsts
+{
+
+    #region Constants & Statics
+
+    public const string DbContextConnName = "Default";
+
+    #endregion
+
 }
