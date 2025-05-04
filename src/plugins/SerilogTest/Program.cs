@@ -1,11 +1,12 @@
 using Serilog;
+using Serilog.Core;
 using Serilog.Exceptions;
 using Serilog.Exceptions.Core;
 using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
 
 namespace SerilogTest;
 
-internal static class Program
+internal class Program
 {
 
     #region Constants & Statics
@@ -20,14 +21,10 @@ internal static class Program
                 true)
             .Build();
 
-        Log.Logger = new LoggerConfiguration()
+        var loggerConfiguration = new LoggerConfiguration()
             .ReadFrom
-            .Configuration(configuration) // BUG: invalid
-            .Enrich
-            .WithExceptionDetails(
-                new DestructuringOptionsBuilder().WithDefaultDestructurers()
-                    .WithDestructurers([new DbUpdateExceptionDestructurer()]))
-            .CreateBootstrapLogger();
+            .Configuration(configuration);
+        Log.Logger = ConfigureLogger(loggerConfiguration).CreateBootstrapLogger();
 
         try
         {
@@ -46,6 +43,7 @@ internal static class Program
                     {
                         _ = options.ReadFrom.Configuration(builderContext.Configuration).ReadFrom
                             .Services(serviceProvider);
+                        _ = ConfigureLogger(options);
                     });
 
             _ = builder.Services.AddControllers();
@@ -65,16 +63,16 @@ internal static class Program
                 _ = app.UseHsts();
             }
 
-            _ = app.UseSerilogRequestLogging(
-                (options) =>
-                {
-                    // Attach additional properties to the request completion event
-                    options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
-                    {
-                        diagnosticContext.Set("RequestHost", httpContext.Request.Host);
-                        diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
-                    };
-                });
+            //_ = app.UseSerilogRequestLogging(
+            //    (options) =>
+            //    {
+            //        // Attach additional properties to the request completion event
+            //        options.EnrichDiagnosticContext = (diagnosticContext, httpContext) =>
+            //        {
+            //            diagnosticContext.Set("RequestHost", httpContext.Request.Host);
+            //            diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
+            //        };
+            //    });
 
             _ = app.UseHttpsRedirection();
 
@@ -94,8 +92,22 @@ internal static class Program
         {
             await Log.CloseAndFlushAsync();
         }
+
+        static LoggerConfiguration ConfigureLogger(LoggerConfiguration configuration)
+        {
+            return configuration.Enrich
+                .WithProperty(Constants.SourceContextPropertyName, typeof(Program).FullName, false)
+                .Enrich
+                .WithExceptionDetails(
+                    new DestructuringOptionsBuilder().WithDefaultDestructurers()
+                        //.WithRootName("x")
+                        .WithDestructurers([new DbUpdateExceptionDestructurer()]));
+        }
     }
 
     #endregion
 
+    protected Program()
+    {
+    }
 }
