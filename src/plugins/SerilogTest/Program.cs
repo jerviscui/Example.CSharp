@@ -100,7 +100,7 @@ internal class Program
                 .Enrich
                 .WithExceptionDetails(
                     new DestructuringOptionsBuilder().WithDefaultDestructurers()
-                        //.WithRootName("x")
+                        .WithIgnoreStackTraceAndTargetSiteExceptionFilter()
                         .WithDestructurers([new DbUpdateExceptionDestructurer()]));
         }
     }

@@ -30,12 +30,17 @@ public class LogTestController : ControllerBase
         var arr = Enumerable.Range(1, 5)
             .Select(
                 index =>
-                    new WeatherForecast
+                {
+                    var dateTime = DateTime.Now.AddDays(index);
+                    return new WeatherForecast
                     {
-                        Date = DateOnly.FromDateTime(DateTime.Now.AddDays(index)),
+                        Date = DateOnly.FromDateTime(dateTime),
+                        DateTime = dateTime,
+                        DateTimeOffset = DateTimeOffset.UtcNow,
                         TemperatureC = Random.Shared.Next(-20, 55),
                         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
-                    })
+                    };
+                })
             .ToArray();
 
         _logger.LogWarning("result is {@Arr}", arr);
