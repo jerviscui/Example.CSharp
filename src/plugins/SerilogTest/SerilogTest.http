@@ -14,3 +14,8 @@ GET {{SerilogTest_HostAddress}}/LogTest/LogErrorThrow/
 Accept: application/json
 
 ###
+
+GET {{SerilogTest_HostAddress}}/LogTest/UseLogContext/
+Accept: application/json
+
+###

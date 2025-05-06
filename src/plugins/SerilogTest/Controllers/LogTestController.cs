@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Serilog.Context;
 
 namespace SerilogTest.Controllers;
 
@@ -14,10 +15,12 @@ public class LogTestController : ControllerBase
     #endregion
 
     private readonly ILogger<LogTestController> _logger;
+    private readonly IHttpContextAccessor _httpContextAccessor;
 
-    public LogTestController(ILogger<LogTestController> logger)
+    public LogTestController(ILogger<LogTestController> logger, IHttpContextAccessor httpContextAccessor)
     {
         _logger = logger;
+        _httpContextAccessor = httpContextAccessor;
     }
 
     #region Methods
@@ -69,6 +72,17 @@ public class LogTestController : ControllerBase
         Console.WriteLine(abc);
 
         throw new MyException("the InnerMehtod throw");
+    }
+
+    [HttpGet("UseLogContext")]
+    public IActionResult UseLogContext()
+    {
+        using var _ = LogContext.PushProperty("TenantId", Guid.NewGuid());
+        using var __ = LogContext.PushProperty("UserId", 1);
+
+        _logger.LogInformation("method starting: {Method}", nameof(UseLogContext));
+
+        return Ok();
     }
 
     #endregion

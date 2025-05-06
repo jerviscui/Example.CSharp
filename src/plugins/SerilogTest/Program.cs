@@ -1,3 +1,4 @@
+                                                                                                                                                                                                                               using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using Serilog.Core;
 using Serilog.Exceptions;
@@ -46,11 +47,27 @@ internal class Program
                         _ = ConfigureLogger(options);
                     });
 
-            _ = builder.Services.AddControllers();
+            var services = builder.Services;
+            _ = services.AddControllers();
+            _ = services.AddHttpContextAccessor();
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
-            _ = builder.Services.AddOpenApi();
+            _ = services.AddOpenApi();
+
+            _ = services
+                .AddHttpLogging(
+                    (options) =>
+                    {
+                        options.LoggingFields = HttpLoggingFields.All;
+                    });
+
+            _ = services.AddHealthChecks();
 
             var app = builder.Build();
+
+            _ = app.UseForwardedHeaders();
+            _ = app.UseHttpsRedirection();
+
+            _ = app.UseStaticFiles();
 
             // Configure the HTTP request pipeline.
             if (app.Environment.IsDevelopment())
@@ -63,6 +80,10 @@ internal class Program
                 _ = app.UseHsts();
             }
 
+            _ = app.UseHttpLogging();
+
+            _ = app.UseHealthChecks("/health");
+
             //_ = app.UseSerilogRequestLogging(
             //    (options) =>
             //    {
@@ -73,8 +94,6 @@ internal class Program
             //            diagnosticContext.Set("RequestScheme", httpContext.Request.Scheme);
             //        };
             //    });
-
-            _ = app.UseHttpsRedirection();
 
             _ = app.UseAuthorization();
 
