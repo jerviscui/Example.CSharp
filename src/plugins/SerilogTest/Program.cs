@@ -1,4 +1,4 @@
-                                                                                                                                                                                                                               using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.HttpLogging;
 using Serilog;
 using Serilog.Core;
 using Serilog.Exceptions;
@@ -7,7 +7,7 @@ using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
 
 namespace SerilogTest;
 
-internal class Program
+internal sealed class Program
 {
 
     #region Constants & Statics
@@ -53,12 +53,21 @@ internal class Program
             // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
             _ = services.AddOpenApi();
 
-            _ = services
-                .AddHttpLogging(
-                    (options) =>
-                    {
-                        options.LoggingFields = HttpLoggingFields.All;
-                    });
+            _ = services.AddHttpLogging(
+                (options) =>
+                {
+                    options.LoggingFields = HttpLoggingFields.All;
+                    options.CombineLogs = true;
+                });
+
+            _ = services.AddRedaction();
+            _ = services.AddHttpLoggingRedaction(
+                options =>
+                {
+                    // Add the paths that should be filtered, with a leading '/'.
+                    _ = options.ExcludePathStartsWith.Add("/openapi");
+                    options.IncludeUnmatchedRoutes = true;
+                });
 
             _ = services.AddHealthChecks();
 
@@ -126,7 +135,7 @@ internal class Program
 
     #endregion
 
-    protected Program()
+    private Program()
     {
     }
 }
