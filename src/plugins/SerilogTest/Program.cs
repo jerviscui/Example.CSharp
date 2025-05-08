@@ -4,6 +4,7 @@ using Serilog.Core;
 using Serilog.Exceptions;
 using Serilog.Exceptions.Core;
 using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
+using Serilog.Sinks.Grafana.Loki;
 
 namespace SerilogTest;
 
@@ -36,6 +37,8 @@ internal sealed class Program
 #pragma warning restore CA2201 // Do not raise reserved exception types
 
             var builder = WebApplication.CreateBuilder(args);
+
+            _ = builder.Logging.ClearProviders();
 
             // Add services to the container.
             _ = builder.Host
@@ -129,7 +132,9 @@ internal sealed class Program
                 .WithExceptionDetails(
                     new DestructuringOptionsBuilder().WithDefaultDestructurers()
                         .WithIgnoreStackTraceAndTargetSiteExceptionFilter()
-                        .WithDestructurers([new DbUpdateExceptionDestructurer()]));
+                        .WithDestructurers([new DbUpdateExceptionDestructurer()]))
+                .WriteTo
+                .GrafanaLoki("http://localhost:3100");
         }
     }
 
