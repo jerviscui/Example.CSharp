@@ -1,28 +1,46 @@
-using System.Text.Json;
-using LoggerMessageTest;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using System.Text.Json;
 
-//new DefineTest().LogTest();
-//new DefineTest().LogExtensionTest();
+namespace LoggerMessageTest;
 
-var services = new ServiceCollection();
-services.AddLogging(builder =>
+internal sealed class Program
 {
-    builder.AddJsonConsole(options => options.JsonWriterOptions = new JsonWriterOptions { Indented = true });
-    //builder.AddConsole();
-});
 
-services.AddTransient<LoggerMessageAttributeTest>();
+    #region Constants & Statics
 
-var factory = new DefaultServiceProviderFactory();
-var serviceProvider = factory.CreateServiceProvider(services);
+    private static void Main(string[] args)
+    {
+        //new DefineTest().LogTest();
+        //new DefineTest().LogExtensionTest();
 
-var attributeTest = serviceProvider.GetRequiredService<LoggerMessageAttributeTest>();
-attributeTest.LogErrorTest();
-//attributeTest.LogError_WithoutThis_Test();
-//attributeTest.LogInfo_WithParameter_Test();
-//attributeTest.DynamicLevel_Info_Test();
-//attributeTest.DynamicLevel_Error_Test();
+        var services = new ServiceCollection();
+        _ = services.AddLogging(
+            builder =>
+            {
+                _ = builder.AddJsonConsole(
+                    options => options.JsonWriterOptions = new JsonWriterOptions { Indented = true });
+                //builder.AddConsole();
+            });
 
-Thread.Sleep(1000);
+        _ = services.AddTransient<LoggerMessageAttributeTest>();
+
+        var factory = new DefaultServiceProviderFactory();
+        var serviceProvider = factory.CreateServiceProvider(services);
+
+        var attributeTest = serviceProvider.GetRequiredService<LoggerMessageAttributeTest>();
+        attributeTest.LogErrorTest();
+        //attributeTest.LogError_WithoutThis_Test();
+        //attributeTest.LogInfo_WithParameter_Test();
+        //attributeTest.DynamicLevel_Info_Test();
+        //attributeTest.DynamicLevel_Error_Test();
+
+        Thread.Sleep(1000);
+    }
+
+    #endregion
+
+    private Program()
+    {
+    }
+}

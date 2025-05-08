@@ -53,7 +53,6 @@ public class LogTestController : ControllerBase
 
     [HttpGet("LoggerScope")]
     [HttpLogging(HttpLoggingFields.RequestPropertiesAndHeaders)]
-    [ProducesResponseType<WeatherForecast>(((int)HttpStatusCode.OK))]
     public IActionResult LoggerScope()
     {
         using (_logger.BeginScope("scope 1"))

@@ -6,7 +6,29 @@ public class LoggerMessageAttributeTest
 {
     private readonly ILogger<LoggerMessageAttributeTest> _logger;
 
-    public LoggerMessageAttributeTest(ILogger<LoggerMessageAttributeTest> logger) => _logger = logger;
+    public LoggerMessageAttributeTest(ILogger<LoggerMessageAttributeTest> logger)
+    {
+        _logger = logger;
+    }
+
+    #region Methods
+
+    public void DynamicLevel_Error_Test()
+    {
+        _logger.LogWithDynamicLogLevel(LogLevel.Error, "error", "gz");
+    }
+
+    public void DynamicLevel_Info_Test()
+    {
+        _logger.LogWithDynamicLogLevel(LogLevel.Information, "info", "gz");
+    }
+
+    public void LogError_WithoutThis_Test()
+    {
+#pragma warning disable CA2201 // Do not raise reserved exception types
+        LoggerMessageAttributeExtensions.FailedWithoutThis(_logger, new Exception("test WithoutThis"));
+#pragma warning restore CA2201 // Do not raise reserved exception types
+    }
 
     public void LogErrorTest()
     {
@@ -22,25 +44,11 @@ public class LoggerMessageAttributeTest
         }
     }
 
-    public void LogError_WithoutThis_Test()
-    {
-#pragma warning disable CA2201 // Do not raise reserved exception types
-        LoggerMessageAttributeExtensions.FailedWithoutThis(_logger, new Exception("test WithoutThis"));
-#pragma warning restore CA2201 // Do not raise reserved exception types
-    }
-
     public void LogInfo_WithParameter_Test()
     {
         _logger.CityInfo("sz", "gz");
     }
 
-    public void DynamicLevel_Info_Test()
-    {
-        _logger.LogWithDynamicLogLevel(LogLevel.Information, "info", "gz");
-    }
+    #endregion
 
-    public void DynamicLevel_Error_Test()
-    {
-        _logger.LogWithDynamicLogLevel(LogLevel.Error, "error", "gz");
-    }
 }
