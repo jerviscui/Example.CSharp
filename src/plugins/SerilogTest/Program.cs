@@ -4,7 +4,6 @@ using Serilog.Core;
 using Serilog.Exceptions;
 using Serilog.Exceptions.Core;
 using Serilog.Exceptions.EntityFrameworkCore.Destructurers;
-using Serilog.Sinks.Grafana.Loki;
 
 namespace SerilogTest;
 
@@ -132,9 +131,7 @@ internal sealed class Program
                 .WithExceptionDetails(
                     new DestructuringOptionsBuilder().WithDefaultDestructurers()
                         .WithIgnoreStackTraceAndTargetSiteExceptionFilter()
-                        .WithDestructurers([new DbUpdateExceptionDestructurer()]))
-                .WriteTo
-                .GrafanaLoki("http://localhost:3100");
+                        .WithDestructurers([new DbUpdateExceptionDestructurer()]));
         }
     }
 

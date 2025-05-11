@@ -1,6 +1,6 @@
 namespace SerilogTest;
 
-public class WeatherForecast
+public class WeatherForecast : A
 {
 
     #region Properties
@@ -16,6 +16,30 @@ public class WeatherForecast
     public int TemperatureC { get; set; }
 
     public int TemperatureF => 32 + (int)(TemperatureC / 0.5556);
+
+    public override string TypeName { get; } = nameof(WeatherForecast);
+
+    #endregion
+
+}
+
+public abstract class A
+{
+
+    #region Properties
+
+    public long Id { get; protected set; }
+
+    public abstract string TypeName { get; }
+
+    #endregion
+
+    #region Methods
+
+    public override string ToString()
+    {
+        return $"{TypeName} Id:{Id}";
+    }
 
     #endregion
 

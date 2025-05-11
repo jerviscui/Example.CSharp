@@ -728,6 +728,73 @@ dotnet_diagnostic.CA2241.severity = error
 dotnet_diagnostic.IDE0043.severity = none
 
 ##########################################
+# ReSharper properties
+##########################################
+
+#### LoggerMessage ####
+dotnet_diagnostic.LOGGEN000.severity = warning
+dotnet_diagnostic.LOGGEN001.severity = warning
+dotnet_diagnostic.LOGGEN002.severity = warning
+dotnet_diagnostic.LOGGEN003.severity = warning
+dotnet_diagnostic.LOGGEN004.severity = warning
+dotnet_diagnostic.LOGGEN005.severity = warning
+dotnet_diagnostic.LOGGEN006.severity = warning
+dotnet_diagnostic.LOGGEN007.severity = warning
+dotnet_diagnostic.LOGGEN008.severity = warning
+dotnet_diagnostic.LOGGEN009.severity = warning
+dotnet_diagnostic.LOGGEN010.severity = warning
+dotnet_diagnostic.LOGGEN011.severity = warning
+dotnet_diagnostic.LOGGEN012.severity = warning
+dotnet_diagnostic.LOGGEN013.severity = warning
+dotnet_diagnostic.LOGGEN014.severity = warning
+dotnet_diagnostic.LOGGEN015.severity = warning
+dotnet_diagnostic.LOGGEN016.severity = warning
+dotnet_diagnostic.LOGGEN017.severity = warning
+dotnet_diagnostic.LOGGEN018.severity = warning
+dotnet_diagnostic.LOGGEN019.severity = warning
+dotnet_diagnostic.LOGGEN020.severity = warning
+dotnet_diagnostic.LOGGEN021.severity = warning
+dotnet_diagnostic.LOGGEN022.severity = warning
+dotnet_diagnostic.LOGGEN023.severity = warning
+dotnet_diagnostic.LOGGEN024.severity = warning
+dotnet_diagnostic.LOGGEN025.severity = warning
+dotnet_diagnostic.LOGGEN026.severity = warning
+dotnet_diagnostic.LOGGEN027.severity = warning
+dotnet_diagnostic.LOGGEN028.severity = warning
+dotnet_diagnostic.LOGGEN029.severity = warning
+dotnet_diagnostic.LOGGEN030.severity = warning
+dotnet_diagnostic.LOGGEN031.severity = warning
+dotnet_diagnostic.LOGGEN032.severity = warning
+dotnet_diagnostic.LOGGEN033.severity = warning
+dotnet_diagnostic.LOGGEN034.severity = warning
+dotnet_diagnostic.LOGGEN035.severity = warning
+dotnet_diagnostic.LOGGEN036.severity = warning
+dotnet_diagnostic.LOGGEN037.severity = warning
+dotnet_diagnostic.LOGGEN038.severity = warning
+
+#### Metrics ####
+dotnet_diagnostic.METGEN000.severity = warning
+dotnet_diagnostic.METGEN001.severity = warning
+dotnet_diagnostic.METGEN002.severity = warning
+dotnet_diagnostic.METGEN003.severity = warning
+dotnet_diagnostic.METGEN004.severity = warning
+dotnet_diagnostic.METGEN005.severity = warning
+dotnet_diagnostic.METGEN006.severity = warning
+dotnet_diagnostic.METGEN007.severity = warning
+dotnet_diagnostic.METGEN008.severity = warning
+dotnet_diagnostic.METGEN009.severity = warning
+dotnet_diagnostic.METGEN010.severity = warning
+dotnet_diagnostic.METGEN011.severity = warning
+dotnet_diagnostic.METGEN012.severity = warning
+dotnet_diagnostic.METGEN013.severity = warning
+dotnet_diagnostic.METGEN014.severity = warning
+dotnet_diagnostic.METGEN015.severity = warning
+dotnet_diagnostic.METGEN016.severity = warning
+dotnet_diagnostic.METGEN017.severity = warning
+dotnet_diagnostic.METGEN018.severity = warning
+dotnet_diagnostic.METGEN019.severity = warning
+
+##########################################
 # CodeRush
 ##########################################
 

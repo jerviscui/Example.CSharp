@@ -42,7 +42,7 @@ public partial class LoggerMessageTestController : ControllerBase
             Summary = "summary"
         };
 
-        _logger.LogInformation("UseLogContext {@Data}", data);
+        LogDestructObject(data);
 
         return Ok(data);
     }
@@ -93,7 +93,7 @@ public partial class LoggerMessageTestController : ControllerBase
     public partial void LogErrorMessage(Exception ex);
 
     [NonAction]
-    [LoggerMessage(300, LogLevel.Information, "@{Data}")]
+    [LoggerMessage(300, LogLevel.Information, "{@Data}")]
     public partial void LogDestructObject(WeatherForecast data);
 
     #endregion
