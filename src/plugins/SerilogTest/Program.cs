@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.HttpLogging;
+using Microsoft.AspNetCore.HttpOverrides;
 using Serilog;
 using Serilog.Core;
 using Serilog.Exceptions;
@@ -75,7 +76,15 @@ internal sealed class Program
 
             var app = builder.Build();
 
-            _ = app.UseForwardedHeaders();
+            var forwardOptions = new ForwardedHeadersOptions
+            {
+                ForwardedHeaders = ForwardedHeaders.All,
+                ForwardLimit = null
+            };
+            //forwardOptions.KnownProxies.Add(new IPAddress(0L));
+            //forwardOptions.KnownNetworks.Add(new Microsoft.AspNetCore.HttpOverrides.IPNetwork(new IPAddress(0L), 0));
+
+            _ = app.UseForwardedHeaders(forwardOptions);
             _ = app.UseHttpsRedirection();
 
             _ = app.UseStaticFiles();
