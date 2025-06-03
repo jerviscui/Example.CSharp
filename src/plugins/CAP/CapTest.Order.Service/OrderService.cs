@@ -19,60 +19,74 @@ public class OrderService
 
     #region Methods
 
-    public async Task<string> Create(int id)
+    public async Task<string> CreateAsync(int id, CancellationToken cancellationToken = default)
     {
         using var scope = _serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
 
-        await using var transaction = dbContext.Database.BeginTransaction(_capPublisher);
+        await using var transaction = await dbContext.Database
+            .BeginTransactionAsync(_capPublisher, cancellationToken: cancellationToken);
 
         var order = new Order(id, DateTime.Now.ToString("s"));
-        _ = await dbContext.Orders.AddAsync(order);
-        await _capPublisher.PublishAsync(OrderCreatedEventData.Name, new OrderCreatedEventData(order.Number));
+        _ = await dbContext.Orders.AddAsync(order, cancellationToken);
 
-        _ = await dbContext.SaveChangesAsync();
+        await _capPublisher.PublishAsync(
+            OrderCreatedEventData.Name,
+            new OrderCreatedEventData(order.Number),
+            cancellationToken: cancellationToken);
 
-        await transaction.CommitAsync();
+        _ = await dbContext.SaveChangesAsync(cancellationToken);
+
+        await transaction.CommitAsync(cancellationToken);
 
         return order.Number;
     }
 
-    public async Task<string> CreateDelay(int id)
+    public async Task<string> CreateDelayAsync(int id, CancellationToken cancellationToken = default)
     {
         using var scope = _serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
 
-        await using var transaction = dbContext.Database.BeginTransaction(_capPublisher);
+        await using var transaction = await dbContext.Database
+            .BeginTransactionAsync(_capPublisher, cancellationToken: cancellationToken);
 
         var order = new Order(id, DateTime.Now.ToString("s"));
-        _ = await dbContext.Orders.AddAsync(order);
+        _ = await dbContext.Orders.AddAsync(order, cancellationToken);
+
         await _capPublisher.PublishDelayAsync(
             TimeSpan.FromMinutes(1),
             OrderCreatedEventData.Name,
-            new OrderCreatedEventData(order.Number));
-        _ = await dbContext.SaveChangesAsync();
+            new OrderCreatedEventData(order.Number),
+            cancellationToken: cancellationToken);
+        _ = await dbContext.SaveChangesAsync(cancellationToken);
 
-        await transaction.CommitAsync();
+        await transaction.CommitAsync(cancellationToken);
 
         return order.Number;
     }
 
     // ReSharper disable once InconsistentNaming
-    public async Task CreateMessageWithHeaders()
+#pragma warning disable CRR0034 // An asynchronous method's name is missing an 'Async' suffix
+    public async Task CreateMessageWithHeaders(CancellationToken cancellationToken = default)
+#pragma warning restore CRR0034 // An asynchronous method's name is missing an 'Async' suffix
     {
         var headers = new Dictionary<string, string?> { { "msg-by-header", "0" } };
-        await _capPublisher.PublishAsync("test.header", DateTime.Now.ToString("s"), headers);
+        await _capPublisher.PublishAsync(
+            OrderConsts.HeaderMessageName,
+            DateTime.Now.ToString("s"),
+            headers,
+            cancellationToken);
     }
 
-    public async Task<string> CreateWithoutCapPgsql(int id)
+    public async Task<string> CreateWithoutCapPgsqlAsync(int id, CancellationToken cancellationToken = default)
     {
         using var scope = _serviceProvider.CreateScope();
         var dbContext = scope.ServiceProvider.GetRequiredService<OrderDbContext>();
 
-        await using var transaction = await dbContext.Database.BeginTransactionAsync();
+        await using var transaction = await dbContext.Database.BeginTransactionAsync(cancellationToken);
 
         var order = new Order(id, DateTime.Now.ToString("s"));
-        _ = await dbContext.Orders.AddAsync(order);
+        _ = await dbContext.Orders.AddAsync(order, cancellationToken);
 
         var outter = _capPublisher.Transaction;
 
@@ -86,12 +100,15 @@ public class OrderService
                 };
             _capPublisher.Transaction = capTransaction;
 
-            await _capPublisher.PublishAsync(OrderCreatedEventData.Name, new OrderCreatedEventData(order.Number));
+            await _capPublisher.PublishAsync(
+                OrderCreatedEventData.Name,
+                new OrderCreatedEventData(order.Number),
+                cancellationToken: cancellationToken);
 
-            _ = await dbContext.SaveChangesAsync();
-            await transaction.CommitAsync(); //此时 message 没有 EnqueueToPublish
+            _ = await dbContext.SaveChangesAsync(cancellationToken);
+            await transaction.CommitAsync(cancellationToken); //此时 message 没有 EnqueueToPublish
 
-            await capTransaction.CommitAsync();
+            await capTransaction.CommitAsync(cancellationToken);
         }
         finally
         {

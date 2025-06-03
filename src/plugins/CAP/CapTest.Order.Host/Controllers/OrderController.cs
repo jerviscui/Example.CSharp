@@ -18,33 +18,33 @@ public class OrderController : ControllerBase
 
     [HttpPost]
     [Route("{id}")]
-    public Task<string> CreateAsync(int id)
+    public Task<string> CreateAsync(int id, CancellationToken cancellationToken)
     {
-        return _orderService.Create(id);
+        return _orderService.CreateAsync(id, cancellationToken);
     }
 
     [HttpPost]
     [Route("CreateDelay/{id}")]
-    public Task<string> CreateDelayAsync(int id)
+    public Task<string> CreateDelayAsync(int id, CancellationToken cancellationToken)
     {
-        return _orderService.CreateDelay(id);
+        return _orderService.CreateDelayAsync(id, cancellationToken);
     }
 
     [HttpPost]
     [Route("CreateMessageWithHeaders")]
     // ReSharper disable once InconsistentNaming
-    public async Task<IActionResult> CreateTTLMessage()
+    public async Task<IActionResult> CreateMessageWithHeadersAsync(CancellationToken cancellationToken)
     {
-        await _orderService.CreateMessageWithHeaders();
+        await _orderService.CreateMessageWithHeaders(cancellationToken);
 
         return Ok();
     }
 
     [HttpPost]
     [Route("CreateWithTransaction/{id}")]
-    public Task<string> CreateWithTransactionAsync(int id)
+    public Task<string> CreateWithTransactionAsync(int id, CancellationToken cancellationToken)
     {
-        return _orderService.CreateWithoutCapPgsql(id);
+        return _orderService.CreateWithoutCapPgsqlAsync(id, cancellationToken);
     }
 
     #endregion

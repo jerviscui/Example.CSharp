@@ -5,16 +5,17 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="8.3.3" />
-    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="8.3.3" />
-    <PackageReference Include="DotNetCore.CAP.PostgreSql" Version="8.3.3" />
-    <PackageReference Include="DotNetCore.CAP.RedisStreams" Version="8.3.3" />
-    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.4">
+    <PackageReference Include="DotNetCore.CAP.Dashboard" Version="8.3.5" />
+    <PackageReference Include="DotNetCore.CAP.RabbitMQ" Version="8.3.5" />
+    <PackageReference Include="DotNetCore.CAP.PostgreSql" Version="8.3.5" />
+    <PackageReference Include="DotNetCore.CAP.RedisStreams" Version="8.3.5" />
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="9.0.5" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.5">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
     <PackageReference Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
-    <PackageReference Include="Swashbuckle.AspNetCore" Version="8.1.1" />
+    <PackageReference Include="Scalar.AspNetCore" Version="2.4.7" />
   </ItemGroup>
 
   <ItemGroup>

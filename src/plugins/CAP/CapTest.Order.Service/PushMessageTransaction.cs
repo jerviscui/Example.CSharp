@@ -5,18 +5,20 @@ namespace CapTest.Order.Service;
 
 internal sealed class PushMessageTransaction : CapTransactionBase
 {
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public PushMessageTransaction(IDispatcher dispatcher) : base(dispatcher)
     {
     }
 
-    /// <inheritdoc />
+    #region Methods
+
+    /// <inheritdoc/>
     public override void Commit()
     {
         Flush();
     }
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public override Task CommitAsync(CancellationToken cancellationToken = new())
     {
         Flush();
@@ -24,19 +26,23 @@ internal sealed class PushMessageTransaction : CapTransactionBase
         return Task.CompletedTask;
     }
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
+    public override void Dispose()
+    {
+        base.Dispose();
+    }
+
+    /// <inheritdoc/>
     public override void Rollback()
     {
     }
 
-    /// <inheritdoc />
+    /// <inheritdoc/>
     public override Task RollbackAsync(CancellationToken cancellationToken = new())
     {
         return Task.CompletedTask;
     }
 
-    /// <inheritdoc />
-    public override void Dispose()
-    {
-    }
+    #endregion
+
 }

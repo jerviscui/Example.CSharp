@@ -2,7 +2,8 @@ using CapTest.Order.Service;
 using CapTest.Shared;
 using DotNetCore.CAP;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.OpenApi.Models;
+using Scalar.AspNetCore;
+using StackExchange.Redis;
 
 namespace CapTest.Order.Host;
 
@@ -24,18 +25,22 @@ public class Startup
     // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
     {
-        if (env.IsDevelopment())
-        {
-            _ = app.UseDeveloperExceptionPage();
-            _ = app.UseSwagger();
-            _ = app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "CapTest.Order.Host v1"));
-        }
-
         _ = app.UseHttpsRedirection();
 
         _ = app.UseRouting();
 
         _ = app.UseAuthorization();
+
+        if (env.IsDevelopment())
+        {
+            _ = app.UseDeveloperExceptionPage();
+            _ = app.UseEndpoints(
+                (builder) =>
+                {
+                    _ = builder.MapOpenApi();
+                    _ = builder.MapScalarApiReference();
+                });
+        }
 
         _ = app.UseEndpoints(
             endpoints =>
@@ -51,11 +56,7 @@ public class Startup
         _ = services.AddTransient<OrderCreatedEventHandler>();
 
         _ = services.AddControllers();
-        _ = services.AddSwaggerGen(
-            c =>
-            {
-                c.SwaggerDoc("v1", new OpenApiInfo { Title = "CapTest.Order.Host", Version = "v1" });
-            });
+        _ = services.AddOpenApi();
 
         _ = services.AddDbContextPool<OrderDbContext>(
             builder => builder.UseNpgsql(Configuration.GetConnectionString(OrderConsts.DbContextConnName)));
@@ -68,14 +69,22 @@ public class Startup
 
                 _ = options.UseEntityFramework<OrderDbContext>(efOptions => efOptions.Schema = "cap");
 
-                _ = options.UseRabbitMQ(
-                    mqOptions =>
+                //_ = options.UseRabbitMQ(
+                //    mqOptions =>
+                //    {
+                //        mqOptions.HostName = "localhost";
+                //        //mqOptions.Port = ;
+                //        //mqOptions.UserName = "";
+                //        //mqOptions.Password = "";
+                //    });
+
+                options.UseRedis(
+                    (redisOptions) =>
                     {
-                        mqOptions.HostName = "localhost";
-                        //mqOptions.Port = ;
-                        //mqOptions.UserName = "";
-                        //mqOptions.Password = "";
+                        redisOptions.Configuration = ConfigurationOptions.Parse(
+                            Configuration.GetConnectionString("Redis")!);
                     });
+
                 options.DefaultGroupName = OrderConsts.MessageGroupName;
 
                 _ = options.UseDashboard(dashboardOptions => dashboardOptions.PathMatch = "/cap");
