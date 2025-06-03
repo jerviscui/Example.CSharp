@@ -66,6 +66,7 @@ public class Startup
             options =>
             {
                 options.TopicNamePrefix = "test";
+                options.UseStorageLock = true;
 
                 _ = options.UseEntityFramework<OrderDbContext>(efOptions => efOptions.Schema = "cap");
 

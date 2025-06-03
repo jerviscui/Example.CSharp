@@ -21,6 +21,12 @@ public class OrderCreatedEventHandler : ICapSubscribe
         _logger.LogInformation("event received: node2 {Number}", data.Number);
     }
 
+    [CapSubscribe(OrderCreatedEventData.Name, Group = OrderConsts.MessageGroupName + "2")]
+    public void Handler2(OrderCreatedEventData data)
+    {
+        _logger.LogInformation("event received group2: node2 {Number}", data.Number);
+    }
+
     #endregion
 
 }
