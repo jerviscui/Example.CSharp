@@ -7,17 +7,6 @@ namespace CapTest.Order.Service;
 
 public class OrderCreatedEventHandler : ICapSubscribe
 {
-
-    #region Constants & Statics
-
-    [CapSubscribe(OrderConsts.HeaderMessageName)]
-    public static void MessageWithHeaders(string data, [FromCap] CapHeader header)
-    {
-        var value = header["msg-by-header"];
-    }
-
-    #endregion
-
     private readonly IConfiguration _configuration;
     private readonly ILogger<OrderCreatedEventHandler> _logger;
 
@@ -36,6 +25,14 @@ public class OrderCreatedEventHandler : ICapSubscribe
         var port = _configuration.GetSection("ASPNETCORE_PORT").Value;
 
         _logger.LogInformation($"event received: node1 {data.Number}");
+    }
+
+    [CapSubscribe(OrderConsts.HeaderMessageName)]
+#pragma warning disable CA1822 // Mark members as static
+    public void MessageWithHeaders(string data, [FromCap] CapHeader header)
+#pragma warning restore CA1822 // Mark members as static
+    {
+        var value = header["msg-by-header"];
     }
 
     #endregion

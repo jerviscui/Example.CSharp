@@ -1,20 +1,27 @@
-using Microsoft.AspNetCore.Hosting;
-using Microsoft.Extensions.Hosting;
+namespace CapTest.Order.Host;
 
-namespace CapTest.Order.Host
+public class Program
 {
-    public class Program
-    {
-        public static void Main(string[] args)
-        {
-            CreateHostBuilder(args).Build().Run();
-        }
 
-        public static IHostBuilder CreateHostBuilder(string[] args) =>
-            Microsoft.Extensions.Hosting.Host.CreateDefaultBuilder(args)
-                .ConfigureWebHostDefaults(webBuilder =>
+    #region Constants & Statics
+
+    public static IHostBuilder CreateHostBuilder(string[] args)
+    {
+        return Microsoft.Extensions.Hosting.Host
+            .CreateDefaultBuilder(args)
+            .ConfigureLogging((logging) => logging.AddConsole())
+            .ConfigureWebHostDefaults(
+                webBuilder =>
                 {
                     webBuilder.UseStartup<Startup>();
                 });
     }
+
+    public static void Main(string[] args)
+    {
+        CreateHostBuilder(args).Build().Run();
+    }
+
+    #endregion
+
 }
