@@ -1,67 +1,91 @@
 using Hangfire;
 using Hangfire.Dashboard;
-using Hangfire.Redis;
+using Hangfire.Redis.StackExchange;
 using HangfireTest.Service;
 
-var builder = WebApplication.CreateBuilder(args);
+namespace HangfireTest.Web;
 
-// Add services to the container.
-
-var services = builder.Services;
-services.AddControllers();
-// Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
-services.AddEndpointsApiExplorer();
-services.AddSwaggerGen();
-
-services.AddTestJobs();
-
-services.AddHangfire(configuration =>
+internal static class Program
 {
-    configuration.UseRedisStorage("10.99.59.47:7000,DefaultDatabase=7,allowAdmin=true");
 
-    foreach (var metric in DashboardMetrics.GetMetrics())
+    #region Constants & Statics
+
+    private static void Main(string[] args)
     {
-        configuration.UseDashboardMetric(metric);
+        var builder = WebApplication.CreateBuilder(args);
+
+        // Add services to the container.
+
+        var services = builder.Services;
+        _ = services.AddControllers();
+        // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
+        _ = services.AddEndpointsApiExplorer();
+        _ = services.AddSwaggerGen();
+
+        _ = services.AddTestJobs();
+        _ = services.AddSingleton<ExternalDataFilterAttribute>();
+
+        _ = services.AddHangfire(
+            (serviceProvider, configuration) =>
+            {
+                _ = configuration.UseRedisStorage("127.0.0.1:6379,DefaultDatabase=7,allowAdmin=true");
+
+                var filter = serviceProvider.GetRequiredService<ExternalDataFilterAttribute>();
+                _ = configuration.UseFilter(filter);
+
+                _ = configuration.UseDashboardMetrics(DashboardMetrics.GetMetrics().ToArray());
+
+                //_ = configuration.UseDashboardMetric(
+                //    RedisStorage.GetDashboardMetricFromRedisInfo("使用内存", RedisInfoKeys.used_memory_human));
+                //_ = configuration.UseDashboardMetric(
+                //    RedisStorage.GetDashboardMetricFromRedisInfo("高峰内存", RedisInfoKeys.used_memory_peak_human));
+            });
+
+        _ = services.AddHangfireServer(
+            options =>
+            {
+                options.ServerName = "HangfireTest.Web";
+                options.Queues = ["default"];
+            });
+
+        var app = builder.Build();
+
+        var filter = app.Services.GetRequiredService<ExternalDataFilterAttribute>();
+        _ = app.Lifetime.ApplicationStarted
+            .Register(
+                () =>
+                {
+                    GlobalJobFilters.Filters.Add(filter);
+                },
+                true);
+
+        var options = new DashboardOptions
+        {
+            Authorization = [new AllowAnonymousAuthorizationFilter()],
+            IgnoreAntiforgeryToken = true
+        };
+        if (app.Environment.IsProduction())
+        {
+            options.DisplayStorageConnectionString = false;
+        }
+        _ = app.UseHangfireDashboard("/hangfire", options);
+
+        // Configure the HTTP request pipeline.
+        if (app.Environment.IsDevelopment())
+        {
+            _ = app.UseSwagger();
+            _ = app.UseSwaggerUI();
+        }
+
+        _ = app.UseHttpsRedirection();
+
+        _ = app.UseAuthorization();
+
+        _ = app.MapControllers();
+
+        app.Run();
     }
 
-    configuration.UseDashboardMetric(
-        RedisStorage.GetDashboardMetricFromRedisInfo("使用内存", RedisInfoKeys.used_memory_human));
-    configuration.UseDashboardMetric(
-        RedisStorage.GetDashboardMetricFromRedisInfo("高峰内存", RedisInfoKeys.used_memory_peak_human));
-});
+    #endregion
 
-var jobServerOptions = new BackgroundJobServerOptions { ServerName = "HangfireTest.Web", Queues = new[] { "default" } };
-services.AddSingleton(jobServerOptions);
-services.AddHangfireServer(options =>
-{
-    options.ServerName = jobServerOptions.ServerName;
-    options.Queues = jobServerOptions.Queues;
-});
-
-var app = builder.Build();
-
-var options = new DashboardOptions
-{
-    Authorization = new IDashboardAuthorizationFilter[] { new AllowAnonymousAuthorizationFilter() },
-    IgnoreAntiforgeryToken = true
-};
-if (app.Environment.IsProduction())
-{
-    options.DisplayStorageConnectionString = false;
 }
-app.UseHangfireDashboard("/hangfire", options);
-
-// Configure the HTTP request pipeline.
-if (app.Environment.IsDevelopment())
-{
-    app.UseSwagger();
-    app.UseSwaggerUI();
-}
-
-app.UseHttpsRedirection();
-
-app.UseAuthorization();
-
-app.MapControllers();
-
-app.Run();
