@@ -1,3 +1,5 @@
+using Microsoft.AspNetCore.HttpLogging;
+
 namespace WebPollyTest;
 
 internal static class Program
@@ -9,21 +11,29 @@ internal static class Program
     {
         var builder = WebApplication.CreateBuilder(args);
 
-        // Add services to the container.
+        _ = builder.Logging.AddConsole();
 
         _ = builder.Services.AddControllers();
-        // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
         _ = builder.Services.AddOpenApi();
+
+        _ = builder.Services
+            .AddHttpLogging(
+                (options) =>
+                {
+                    options.LoggingFields = HttpLoggingFields.All;
+                    options.CombineLogs = true;
+                });
 
         var app = builder.Build();
 
-        // Configure the HTTP request pipeline.
+        _ = app.UseHttpLogging();
+
         if (app.Environment.IsDevelopment())
         {
             _ = app.MapOpenApi();
         }
 
-        _ = app.UseHttpsRedirection();
+        //_ = app.UseHttpsRedirection();
 
         _ = app.UseAuthorization();
 
