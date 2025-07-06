@@ -1,0 +1,6 @@
+@WebPollyTest_HostAddress = http://localhost:5222
+
+GET {{WebPollyTest_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
