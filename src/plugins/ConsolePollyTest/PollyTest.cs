@@ -1,5 +1,7 @@
+using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Retry;
+using Polly.Telemetry;
 
 namespace ConsolePollyTest;
 
@@ -19,6 +21,19 @@ public static class PollyTest
     private static Uri GetUri(string path)
     {
         return new Uri(Host, path);
+    }
+
+    private static TelemetryOptions GetTelemetry()
+    {
+        var telemetryOptions = new TelemetryOptions
+        {
+            // Configure logging
+            LoggerFactory = LoggerFactory.Create(builder => builder.AddConsole()),
+        };
+        telemetryOptions.TelemetryListeners.Add(new MyTelemetryListener());
+        telemetryOptions.MeteringEnrichers.Add(new MyMeteringEnricher());
+
+        return telemetryOptions;
     }
 
     public static async Task NoStrategy_TestAsync()
@@ -41,17 +56,26 @@ public static class PollyTest
 
     public static async Task Retry_ExecThree_TestAsync()
     {
-        var builder = new ResiliencePipelineBuilder().AddRetry(
-            new RetryStrategyOptions
-            {
-                Delay = TimeSpan.FromSeconds(1),
-                MaxRetryAttempts = 2,
-                ShouldHandle = (args) =>
-                        {
-                            Console.WriteLine(args.AttemptNumber);
-                            return ValueTask.FromResult(args.AttemptNumber >= 0);
-                        }
-            });
+        var builder = new ResiliencePipelineBuilder().ConfigureTelemetry(GetTelemetry())
+            .AddRetry(
+                new RetryStrategyOptions
+                {
+                    Delay = TimeSpan.FromSeconds(1),
+                    //MaxDelay = 
+                    BackoffType = DelayBackoffType.Exponential,
+                    UseJitter = true,
+                    MaxRetryAttempts = 2,
+                    //DelayGenerator = (args) =>
+                    //        {
+                    //            return ValueTask.FromResult(
+                    //                (TimeSpan?)TimeSpan.FromSeconds(Math.Pow(2, args.AttemptNumber)));
+                    //        },
+                    ShouldHandle = (args) =>
+                            {
+                                Console.WriteLine(args.AttemptNumber);
+                                return ValueTask.FromResult(args.AttemptNumber >= 0);
+                            }
+                });
         var pipeline = builder.Build();
 
         using var client = GetClient();
