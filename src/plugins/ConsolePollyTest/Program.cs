@@ -9,9 +9,9 @@ internal static class Program
     {
         //await PollyTest.NoStrategy_TestAsync();
 
-        //await PollyTest.Retry_ExecThree_TestAsync();
+        await PollyTest.Retry_ExecThree_TestAsync();
 
-        await PollyTest.Retry_UseSamePipeline_TestAsync();
+        //await PollyTest.Retry_UseOnePipeline_TestAsync();
 
         _ = Console.ReadKey();
     }

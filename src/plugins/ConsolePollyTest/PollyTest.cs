@@ -92,14 +92,14 @@ public static class PollyTest
         Console.WriteLine(result);
     }
 
-    public static async Task Retry_UseSamePipeline_TestAsync()
+    public static async Task Retry_UseOnePipeline_TestAsync()
     {
-        var builder = new ResiliencePipelineBuilder().ConfigureTelemetry(GetTelemetry().LoggerFactory)
+        var builder = new ResiliencePipelineBuilder { Name }.ConfigureTelemetry(GetTelemetry().LoggerFactory)
             .AddRetry(
                 new RetryStrategyOptions
                 {
                     Delay = TimeSpan.FromSeconds(1),
-                    MaxRetryAttempts = 5,
+                    MaxRetryAttempts = 3,
                     ShouldHandle = (args) =>
                             {
                                 Console.WriteLine(args.AttemptNumber);
@@ -111,7 +111,8 @@ public static class PollyTest
 
         using var client = GetClient();
 
-        var t1 = pipeline.ExecuteAsync(
+        // retry three times
+        var t1 = await pipeline.ExecuteAsync(
             async (token) =>
             {
                 var r = await client.GetAsync(GetUri("/weatherforecast/"), token);
@@ -119,7 +120,8 @@ public static class PollyTest
             },
             cancellationToken: default);
 
-        var t2 = pipeline.ExecuteAsync(
+        // retry three times
+        var t2 = await pipeline.ExecuteAsync(
             async (token) =>
             {
                 var r = await client.GetAsync(GetUri("/weatherforecast/"), token);
@@ -127,9 +129,9 @@ public static class PollyTest
             },
             cancellationToken: default);
 
-        var result = await Task.WhenAll(t1.AsTask(), t2.AsTask());
-
-        Console.WriteLine(result[0]);
+        //var result = await Task.WhenAll(t1.AsTask(), t2.AsTask());
+        //Console.WriteLine(result[0]);
+        Console.WriteLine(t1);
     }
 
     #endregion
