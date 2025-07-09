@@ -94,10 +94,11 @@ public static class PollyTest
 
     public static async Task Retry_UseOnePipeline_TestAsync()
     {
-        var builder = new ResiliencePipelineBuilder { Name }.ConfigureTelemetry(GetTelemetry().LoggerFactory)
+        var builder = new ResiliencePipelineBuilder().ConfigureTelemetry(GetTelemetry().LoggerFactory)
             .AddRetry(
                 new RetryStrategyOptions
                 {
+                    
                     Delay = TimeSpan.FromSeconds(1),
                     MaxRetryAttempts = 3,
                     ShouldHandle = (args) =>
