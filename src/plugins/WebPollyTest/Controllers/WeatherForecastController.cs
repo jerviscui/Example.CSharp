@@ -25,7 +25,7 @@ public class WeatherForecastController : ControllerBase
 
     #region Methods
 
-    [HttpGet(Name = "GetWeatherForecast")]
+    [HttpGet("GetWeatherForecast")]
     public IEnumerable<WeatherForecast> Get()
     {
         return Enumerable.Range(1, 5)
@@ -38,6 +38,12 @@ public class WeatherForecastController : ControllerBase
                         Summary = Summaries[Random.Shared.Next(Summaries.Length)]
                     })
             .ToArray();
+    }
+
+    [HttpGet("Hello")]
+    public IActionResult Hello()
+    {
+        return Ok("Hello world!");
     }
 
     #endregion

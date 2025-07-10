@@ -1,52 +1,24 @@
-using Microsoft.Extensions.Logging;
 using Polly;
 using Polly.Retry;
-using Polly.Telemetry;
 
 namespace ConsolePollyTest;
 
-public static class PollyTest
+public static class PollyRetryTest
 {
 
     #region Constants & Statics
-
-    public static Uri Host { get; set; } = new Uri("http://localhost:5222");
-
-    private static HttpClient GetClient()
-    {
-        var client = new HttpClient { BaseAddress = Host };
-        return client;
-    }
-
-    private static Uri GetUri(string path)
-    {
-        return new Uri(Host, path);
-    }
-
-    private static TelemetryOptions GetTelemetry()
-    {
-        var telemetryOptions = new TelemetryOptions
-        {
-            // Configure logging
-            LoggerFactory = LoggerFactory.Create(builder => builder.AddConsole()),
-        };
-        telemetryOptions.TelemetryListeners.Add(new MyTelemetryListener());
-        telemetryOptions.MeteringEnrichers.Add(new MyMeteringEnricher());
-
-        return telemetryOptions;
-    }
 
     public static async Task NoStrategy_TestAsync()
     {
         var builder = new ResiliencePipelineBuilder();
         var pipeline = builder.Build();
 
-        using var client = GetClient();
+        using var client = TestBase.GetClient();
 
         var result = await pipeline.ExecuteAsync(
             async (token) =>
             {
-                var r = await client.GetAsync(GetUri("/weatherforecast/"), token);
+                var r = await client.GetAsync(TestBase.GetUri("/weatherforecast/GetWeatherForecast"), token);
                 return r;
             },
             cancellationToken: default);
@@ -56,7 +28,7 @@ public static class PollyTest
 
     public static async Task Retry_ExecThree_TestAsync()
     {
-        var options = GetTelemetry();
+        var options = TestBase.GetTelemetry();
         var builder = new ResiliencePipelineBuilder().ConfigureTelemetry(options)
             .AddRetry(
                 new RetryStrategyOptions
@@ -79,12 +51,12 @@ public static class PollyTest
                 });
         var pipeline = builder.Build();
 
-        using var client = GetClient();
+        using var client = TestBase.GetClient();
 
         var result = await pipeline.ExecuteAsync(
             async (token) =>
             {
-                var r = await client.GetAsync(GetUri("/weatherforecast/"), token);
+                var r = await client.GetAsync(TestBase.GetUri("/weatherforecast/GetWeatherForecast"), token);
                 return r;
             },
             cancellationToken: default);
@@ -94,11 +66,10 @@ public static class PollyTest
 
     public static async Task Retry_UseOnePipeline_TestAsync()
     {
-        var builder = new ResiliencePipelineBuilder().ConfigureTelemetry(GetTelemetry().LoggerFactory)
+        var builder = new ResiliencePipelineBuilder().ConfigureTelemetry(TestBase.GetTelemetry().LoggerFactory)
             .AddRetry(
                 new RetryStrategyOptions
                 {
-                    
                     Delay = TimeSpan.FromSeconds(1),
                     MaxRetryAttempts = 3,
                     ShouldHandle = (args) =>
@@ -110,13 +81,13 @@ public static class PollyTest
 
         var pipeline = builder.Build();
 
-        using var client = GetClient();
+        using var client = TestBase.GetClient();
 
         // retry three times
         var t1 = await pipeline.ExecuteAsync(
             async (token) =>
             {
-                var r = await client.GetAsync(GetUri("/weatherforecast/"), token);
+                var r = await client.GetAsync(TestBase.GetUri("/weatherforecast/GetWeatherForecast"), token);
                 return r;
             },
             cancellationToken: default);
@@ -125,7 +96,7 @@ public static class PollyTest
         var t2 = await pipeline.ExecuteAsync(
             async (token) =>
             {
-                var r = await client.GetAsync(GetUri("/weatherforecast/"), token);
+                var r = await client.GetAsync(TestBase.GetUri("/weatherforecast/GetWeatherForecast"), token);
                 return r;
             },
             cancellationToken: default);

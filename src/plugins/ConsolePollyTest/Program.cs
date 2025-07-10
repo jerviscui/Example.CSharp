@@ -7,11 +7,11 @@ internal static class Program
 
     private static async Task Main(string[] args)
     {
-        //await PollyTest.NoStrategy_TestAsync();
+        //await PollyRetryTest.NoStrategy_TestAsync();
+        //await PollyRetryTest.Retry_ExecThree_TestAsync();
+        //await PollyRetryTest.Retry_UseOnePipeline_TestAsync();
 
-        await PollyTest.Retry_ExecThree_TestAsync();
-
-        //await PollyTest.Retry_UseOnePipeline_TestAsync();
+        await PollyCircuitTest.Circuit_3Per2sec_TestAsync();
 
         _ = Console.ReadKey();
     }
