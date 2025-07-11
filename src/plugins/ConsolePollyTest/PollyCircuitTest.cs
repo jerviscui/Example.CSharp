@@ -51,7 +51,7 @@ public static class PollyCircuitTest
                 Console.WriteLine(i);
                 Console.WriteLine(e);
                 Console.WriteLine();
-                await Task.Delay(2_000);
+                await Task.Delay(e.RetryAfter ?? TimeSpan.FromSeconds(5));
             }
         }
     }
