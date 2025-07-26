@@ -1,6 +1,6 @@
 namespace StructTest;
 
-public class ValueTypeTest
+public static class ValueTypeTest
 {
 
     #region Constants & Statics
