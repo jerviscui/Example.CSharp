@@ -1,0 +1,5 @@
+GenerateType unmanaged MessagePackTest.ImmutableVector3
+---
+float X
+float Y
+float Z

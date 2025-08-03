@@ -1,0 +1,5 @@
+GenerateType unmanaged MessagePackTest.MyVector3
+---
+float X
+float Y
+float Z

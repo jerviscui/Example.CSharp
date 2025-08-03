@@ -1,0 +1,36 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net9.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>_Generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="_Generated\**\*.g.cs" />
+    <None Include="_Generated\**\*.g.cs" />
+  </ItemGroup>
+
+  <PropertyGroup>
+    <MemoryPackGenerator_SerializationInfoOutputDirectory>$(MSBuildProjectDirectory)\MemoryPackLogs</MemoryPackGenerator_SerializationInfoOutputDirectory>
+  </PropertyGroup>
+  <ItemGroup>
+    <CompilerVisibleProperty Include="MemoryPackGenerator_SerializationInfoOutputDirectory" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
+    <PackageReference Include="MemoryPack" Version="1.21.4" />
+    <PackageReference Include="MemoryPack.AspNetCoreMvcFormatter" Version="1.21.4" />
+    <PackageReference Include="MemoryPack.Streaming" Version="1.21.4" />
+    <PackageReference Include="MessagePack" Version="3.1.4" />
+    <PackageReference Include="Microsoft.Orleans.Serialization" Version="9.2.1" />
+    <PackageReference Include="ResultCore.J" Version="0.2.0" />
+  </ItemGroup>
+
+</Project>
