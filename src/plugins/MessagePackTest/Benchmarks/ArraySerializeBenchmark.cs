@@ -25,6 +25,11 @@ public class ArraySerializeBenchmark
 
     #region Constants & Statics
 
+    private static readonly MyVector3[] _value = Enumerable.Repeat(
+        new MyVector3 { X = 10.3f, Y = 40.5f, Z = 13411.3f },
+        1000)
+        .ToArray();
+
     private static readonly ArrayBufferWriter<byte> _arrayBufferWriter;
     private static readonly Utf8JsonWriter _jsonWriter;
 
@@ -37,15 +42,11 @@ public class ArraySerializeBenchmark
             readerScheduler: PipeScheduler.Inline,
             writerScheduler: PipeScheduler.Inline,
             pauseWriterThreshold: 0));
-    private static readonly MyVector3[] _value = Enumerable.Repeat(
-        new MyVector3 { X = 10.3f, Y = 40.5f, Z = 13411.3f },
-        1000)
-        .ToArray();
 
     static ArraySerializeBenchmark()
     {
         var serviceProvider = new ServiceCollection()
-            .AddSerializer(builder => builder.AddAssembly(typeof(ArraySerializeBenchmark).Assembly))
+            .AddSerializer()
             .BuildServiceProvider();
         _orleansSerializer = serviceProvider.GetRequiredService<Serializer<MyVector3[]>>();
         _session = serviceProvider.GetRequiredService<SerializerSessionPool>().GetSession();
@@ -108,16 +109,18 @@ public class ArraySerializeBenchmark
 
     [Benchmark(Baseline = true)]
     [BenchmarkCategory("BufferWriter")]
-    public byte[] MemoryPackBufferWriter()
+    public void MemoryPackBufferWriter()
     {
-        return MemoryPackSerializer.Serialize(_value, MemoryPackSerializerOptions.Default);
+        MemoryPackSerializer.Serialize(_arrayBufferWriter, _value, MemoryPackSerializerOptions.Default);
+        _arrayBufferWriter.Clear();
     }
 
     [Benchmark]
     [BenchmarkCategory("BufferWriter")]
-    public byte[] MemoryPackBufferWriterUtf16()
+    public void MemoryPackBufferWriterUtf16()
     {
-        return MemoryPackSerializer.Serialize(_value, MemoryPackSerializerOptions.Utf16);
+        MemoryPackSerializer.Serialize(_arrayBufferWriter, _value, MemoryPackSerializerOptions.Utf16);
+        _arrayBufferWriter.Clear();
     }
 
     [Benchmark]
@@ -130,7 +133,7 @@ public class ArraySerializeBenchmark
 
     [Benchmark]
     [BenchmarkCategory("BufferWriter")]
-    public void OrleansBufferWriter()
+    public void OrleansWriterPooledArrayBufferWriter()
     {
         var writer = Writer.CreatePooled(_session);
         try
@@ -141,14 +144,14 @@ public class ArraySerializeBenchmark
         {
             writer.Dispose();
             _session.Reset();
+            //_session.PartialReset();
         }
     }
 
     [Benchmark]
     [BenchmarkCategory("BufferWriter")]
-    public void OrleansBufferWriter2()
+    public void OrleansWriterArrayBufferWriter()
     {
-        // wrap ArrayBufferWriter<byte>
         var writer = _arrayBufferWriter.CreateWriter(_session);
         try
         {
@@ -158,6 +161,7 @@ public class ArraySerializeBenchmark
         {
             writer.Dispose();
             _session.Reset();
+            //_session.PartialReset();
         }
 
         _arrayBufferWriter.Clear(); // clear ArrayBufferWriter<byte>
@@ -168,12 +172,19 @@ public class ArraySerializeBenchmark
     public void OrleansPipeWriter()
     {
         var writer = _pipe.Writer.CreateWriter(_session);
-        _orleansSerializer.Serialize(_value, ref writer);
-        _session.Reset();
+        try
+        {
+            _orleansSerializer.Serialize(_value, ref writer);
+        }
+        finally
+        {
+            writer.Dispose();
+            _session.Reset();
 
-        _pipe.Writer.Complete();
-        _pipe.Reader.Complete();
-        _pipe.Reset();
+            _pipe.Writer.Complete();
+            _pipe.Reader.Complete();
+            _pipe.Reset();
+        }
     }
 
     [Benchmark]

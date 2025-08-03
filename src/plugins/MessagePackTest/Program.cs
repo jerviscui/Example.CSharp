@@ -10,6 +10,7 @@ internal sealed class Program
     private static void Main()
     {
         _ = BenchmarkRunner.Run<ArraySerializeBenchmark>();
+        _ = BenchmarkRunner.Run<ArrayDeserializeBenchmark>();
     }
 
     #endregion

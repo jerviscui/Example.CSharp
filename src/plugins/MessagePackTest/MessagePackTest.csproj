@@ -29,6 +29,7 @@
     <PackageReference Include="MemoryPack.AspNetCoreMvcFormatter" Version="1.21.4" />
     <PackageReference Include="MemoryPack.Streaming" Version="1.21.4" />
     <PackageReference Include="MessagePack" Version="3.1.4" />
+    <PackageReference Include="Microsoft.CodeAnalysis.Workspaces.Common" Version="4.14.0" />
     <PackageReference Include="Microsoft.Orleans.Serialization" Version="9.2.1" />
     <PackageReference Include="ResultCore.J" Version="0.2.0" />
   </ItemGroup>

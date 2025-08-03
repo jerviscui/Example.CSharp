@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>MessagePackTest.ArraySerializeBenchmark-20250804-031631</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.2, Windows 10 (10.0.19045.6093/22H2/2022Update)
+12th Gen Intel Core i7-12800HX 2.00GHz, 1 CPU, 24 logical and 16 physical cores
+.NET SDK 9.0.302
+  [Host]     : .NET 9.0.7 (9.0.725.31616), X64 RyuJIT AVX2
+  DefaultJob : .NET 9.0.7 (9.0.725.31616), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                        </th><th>Mean </th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>MemoryPackSerialize</td><td>351.4 ns</td><td>3.96 ns</td><td>3.30 ns</td><td>1.00</td><td>0.01</td><td>0.9170</td><td>12032 B</td><td>1.00</td>
+</tr><tr><td>MemoryPackSerializeUtf16</td><td>348.1 ns</td><td>5.57 ns</td><td>5.21 ns</td><td>0.99</td><td>0.02</td><td>0.9170</td><td>12032 B</td><td>1.00</td>
+</tr><tr><td>MessagePackSerialize</td><td>11,668.6 ns</td><td>69.16 ns</td><td>57.75 ns</td><td>33.21</td><td>0.34</td><td>1.2207</td><td>16032 B</td><td>1.33</td>
+</tr><tr><td>OrleansSerialize</td><td>9,743.9 ns</td><td>57.69 ns</td><td>51.14 ns</td><td>27.73</td><td>0.29</td><td>1.2970</td><td>17032 B</td><td>1.42</td>
+</tr><tr><td>SystemTextJsonSerialize</td><td>23,521.3 ns</td><td>120.68 ns</td><td>100.77 ns</td><td>66.95</td><td>0.67</td><td>2.7161</td><td>35521 B</td><td>2.95</td>
+</tr><tr><td>MemoryPackBufferWriter</td><td>127.6 ns</td><td>0.98 ns</td><td>0.87 ns</td><td>1.00</td><td>0.01</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>MemoryPackBufferWriterUtf16</td><td>130.8 ns</td><td>2.59 ns</td><td>3.80 ns</td><td>1.03</td><td>0.03</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>MessagePackBufferWriter</td><td>10,616.3 ns</td><td>59.05 ns</td><td>55.24 ns</td><td>83.23</td><td>0.69</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>OrleansWriterPooledArrayBufferWriter</td><td>8,631.8 ns</td><td>63.93 ns</td><td>59.80 ns</td><td>67.67</td><td>0.63</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>OrleansWriterArrayBufferWriter</td><td>9,850.8 ns</td><td>68.35 ns</td><td>57.07 ns</td><td>77.22</td><td>0.67</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>OrleansPipeWriter</td><td>12,714.4 ns</td><td>112.24 ns</td><td>104.99 ns</td><td>99.67</td><td>1.03</td><td>0.0305</td><td>480 B</td><td>NA</td>
+</tr><tr><td>SystemTextJsonBufferWriter</td><td>25,184.4 ns</td><td>199.50 ns</td><td>186.61 ns</td><td>197.43</td><td>1.92</td><td>2.4719</td><td>32312 B</td><td>NA</td>
+</tr></tbody></table>
+</body>
+</html>
