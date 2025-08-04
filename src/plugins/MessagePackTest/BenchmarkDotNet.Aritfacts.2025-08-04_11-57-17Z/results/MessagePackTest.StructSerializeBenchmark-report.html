@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>MessagePackTest.StructSerializeBenchmark-20250804-115735</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.2, Windows 10 (10.0.19045.6093/22H2/2022Update)
+12th Gen Intel Core i7-12800HX 2.00GHz, 1 CPU, 24 logical and 16 physical cores
+.NET SDK 9.0.302
+  [Host]     : .NET 9.0.7 (9.0.725.31616), X64 RyuJIT AVX2
+  DefaultJob : .NET 9.0.7 (9.0.725.31616), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method                        </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>MemoryPack</td><td>3.586 ns</td><td>0.0974 ns</td><td>0.1083 ns</td><td>1.00</td><td>0.04</td><td>0.0049</td><td>64 B</td><td>1.00</td>
+</tr><tr><td>MessagePackCSharp</td><td>33.212 ns</td><td>0.6831 ns</td><td>0.8389 ns</td><td>9.27</td><td>0.36</td><td>0.0030</td><td>40 B</td><td>0.62</td>
+</tr><tr><td>OrleansSerialize</td><td>66.085 ns</td><td>0.4841 ns</td><td>0.4291 ns</td><td>18.44</td><td>0.56</td><td>0.0036</td><td>48 B</td><td>0.75</td>
+</tr><tr><td>SystemTextJson</td><td>171.689 ns</td><td>0.9768 ns</td><td>0.9137 ns</td><td>47.92</td><td>1.43</td><td>0.0317</td><td>416 B</td><td>6.50</td>
+</tr><tr><td>MemoryPackBufferWriter</td><td>3.212 ns</td><td>0.0225 ns</td><td>0.0188 ns</td><td>1.00</td><td>0.01</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>MessagePackBufferWriter</td><td>40.043 ns</td><td>0.1472 ns</td><td>0.1377 ns</td><td>12.47</td><td>0.08</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>OrleansWriterPooledArrayBufferWriter</td><td>46.411 ns</td><td>0.1973 ns</td><td>0.1845 ns</td><td>14.45</td><td>0.10</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>OrleansWriterArrayBufferWriter</td><td>33.667 ns</td><td>0.1175 ns</td><td>0.1099 ns</td><td>10.48</td><td>0.07</td><td>-</td><td>-</td><td>NA</td>
+</tr><tr><td>SystemTextJsonBufferWriter</td><td>127.652 ns</td><td>0.6479 ns</td><td>0.6060 ns</td><td>39.74</td><td>0.29</td><td>0.0041</td><td>56 B</td><td>NA</td>
+</tr></tbody></table>
+</body>
+</html>

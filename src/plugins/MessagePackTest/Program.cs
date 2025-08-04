@@ -11,6 +11,10 @@ internal sealed class Program
     {
         _ = BenchmarkRunner.Run<ArraySerializeBenchmark>();
         _ = BenchmarkRunner.Run<ArrayDeserializeBenchmark>();
+        _ = BenchmarkRunner.Run<ClassSerializeBenchmark>();
+        _ = BenchmarkRunner.Run<ClassDeserializeBenchmark>();
+        _ = BenchmarkRunner.Run<StructSerializeBenchmark>();
+        _ = BenchmarkRunner.Run<StructDeserializeBenchmark>();
     }
 
     #endregion

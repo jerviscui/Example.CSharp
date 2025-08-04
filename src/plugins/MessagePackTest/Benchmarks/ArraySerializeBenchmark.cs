@@ -9,7 +9,6 @@ using Orleans.Serialization.Session;
 using System.Buffers;
 using System.Diagnostics.CodeAnalysis;
 using System.IO.Pipelines;
-using System.Text;
 using System.Text.Json;
 
 namespace MessagePackTest;
@@ -54,7 +53,7 @@ public class ArraySerializeBenchmark
         var serialize1 = _orleansSerializer.SerializeToArray(_value);
         var serialize2 = MessagePackSerializer.Serialize(_value);
         var serialize3 = MemoryPackSerializer.Serialize(_value);
-        var serialize4 = Encoding.UTF8.GetBytes(JsonSerializer.Serialize(_value));
+        var serialize4 = JsonSerializer.SerializeToUtf8Bytes(_value);
         _arrayBufferWriter = new ArrayBufferWriter<byte>(
             new[] { serialize1, serialize2, serialize3, serialize4 }.Max(x => x.Length));
 

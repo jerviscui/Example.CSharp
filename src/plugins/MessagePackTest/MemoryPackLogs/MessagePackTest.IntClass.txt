@@ -1,0 +1,11 @@
+GenerateType Object MessagePackTest.IntClass
+---
+int MyProperty1
+int MyProperty2
+int MyProperty3
+int MyProperty4
+int MyProperty5
+int MyProperty6
+int MyProperty7
+int MyProperty8
+int MyProperty9
