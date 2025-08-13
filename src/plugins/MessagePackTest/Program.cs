@@ -9,6 +9,9 @@ internal sealed class Program
 
     private static void Main()
     {
+        //var array = new ClassSerializeBenchmark();
+        //var r = array.SystemTextJsonGenerator();
+
         _ = BenchmarkRunner.Run<ArraySerializeBenchmark>();
         _ = BenchmarkRunner.Run<ArrayDeserializeBenchmark>();
         _ = BenchmarkRunner.Run<ClassSerializeBenchmark>();

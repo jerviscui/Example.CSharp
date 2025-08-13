@@ -1,8 +1,16 @@
 using MemoryPack;
 using MessagePack;
 using Orleans;
+using System.Text.Json.Serialization;
 
 namespace MessagePackTest;
+
+[JsonSourceGenerationOptions(GenerationMode = JsonSourceGenerationMode.Default)]
+[JsonSerializable(typeof(IntClass))]
+//[JsonSerializable(typeof(int))]
+public sealed partial class CustomSerializerContext : JsonSerializerContext
+{
+}
 
 [Serializable]
 [MemoryPackable]

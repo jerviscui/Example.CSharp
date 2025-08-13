@@ -83,4 +83,10 @@ public class ClassDeserializeBenchmark
     {
         return SumResult(JsonSerializer.Deserialize<IntClass>(_stjPayload)!);
     }
+
+    [Benchmark]
+    public int SystemTextJsonGenerator()
+    {
+        return SumResult(JsonSerializer.Deserialize(_stjPayload, CustomSerializerContext.Default.IntClass)!);
+    }
 }

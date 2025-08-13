@@ -89,6 +89,16 @@ public class ClassSerializeBenchmark
         return array.Length;
     }
 
+    [Benchmark]
+    [BenchmarkCategory(" byte[]")]
+    public int SystemTextJsonGenerator()
+    {
+        JsonSerializer.Serialize(SystemTextJsonOutput, _value, CustomSerializerContext.Default.IntClass);
+        var array = SystemTextJsonOutput.ToArray();
+        SystemTextJsonOutput.Position = 0;
+        return array.Length;
+    }
+
     #endregion
 
     #region BufferWriter
@@ -148,6 +158,16 @@ public class ClassSerializeBenchmark
     public void SystemTextJsonBufferWriter()
     {
         JsonSerializer.Serialize(SystemTextJsonWriter, _value);
+        SystemTextJsonWriter.Flush();
+        _arrayBufferWriter.Clear();
+        SystemTextJsonWriter.Reset(_arrayBufferWriter);
+    }
+
+    [Benchmark]
+    [BenchmarkCategory("BufferWriter")]
+    public void SystemTextJsonBufferWriterGenerator()
+    {
+        JsonSerializer.Serialize(SystemTextJsonWriter, _value, CustomSerializerContext.Default.IntClass);
         SystemTextJsonWriter.Flush();
         _arrayBufferWriter.Clear();
         SystemTextJsonWriter.Reset(_arrayBufferWriter);

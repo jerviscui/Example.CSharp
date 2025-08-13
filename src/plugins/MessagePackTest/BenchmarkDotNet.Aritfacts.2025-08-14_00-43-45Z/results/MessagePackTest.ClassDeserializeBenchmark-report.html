@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+<meta charset='utf-8' />
+<title>MessagePackTest.ClassDeserializeBenchmark-20250814-004351</title>
+
+<style type="text/css">
+	table { border-collapse: collapse; display: block; width: 100%; overflow: auto; }
+	td, th { padding: 6px 13px; border: 1px solid #ddd; text-align: right; }
+	tr { background-color: #fff; border-top: 1px solid #ccc; }
+	tr:nth-child(even) { background: #f8f8f8; }
+</style>
+</head>
+<body>
+<pre><code>
+BenchmarkDotNet v0.15.2, Windows 10 (10.0.19045.6093/22H2/2022Update)
+12th Gen Intel Core i7-12800HX 2.00GHz, 1 CPU, 24 logical and 16 physical cores
+.NET SDK 9.0.304
+  [Host]     : .NET 9.0.8 (9.0.825.36511), X64 RyuJIT AVX2
+  DefaultJob : .NET 9.0.8 (9.0.825.36511), X64 RyuJIT AVX2
+</code></pre>
+<pre><code></code></pre>
+
+<table>
+<thead><tr><th>Method           </th><th>Mean</th><th>Error</th><th>StdDev</th><th>Ratio</th><th>RatioSD</th><th>Gen0</th><th>Allocated</th><th>Alloc Ratio</th>
+</tr>
+</thead><tbody><tr><td>MemoryPack</td><td>17.49 ns</td><td>0.128 ns</td><td>0.113 ns</td><td>1.00</td><td>0.01</td><td>0.0043</td><td>56 B</td><td>1.00</td>
+</tr><tr><td>MessagePackCSharp</td><td>48.65 ns</td><td>0.333 ns</td><td>0.312 ns</td><td>2.78</td><td>0.02</td><td>0.0042</td><td>56 B</td><td>1.00</td>
+</tr><tr><td>Orleans</td><td>47.95 ns</td><td>0.550 ns</td><td>0.487 ns</td><td>2.74</td><td>0.03</td><td>0.0042</td><td>56 B</td><td>1.00</td>
+</tr><tr><td>OrleansReader</td><td>45.77 ns</td><td>0.301 ns</td><td>0.282 ns</td><td>2.62</td><td>0.02</td><td>0.0042</td><td>56 B</td><td>1.00</td>
+</tr><tr><td>SystemTextJson</td><td>323.23 ns</td><td>4.782 ns</td><td>4.473 ns</td><td>18.48</td><td>0.27</td><td>0.0038</td><td>56 B</td><td>1.00</td>
+</tr><tr><td>SystemTextJsonGenerator</td><td>300.46 ns</td><td>1.988 ns</td><td>1.860 ns</td><td>17.18</td><td>0.15</td><td>0.0038</td><td>56 B</td><td>1.00</td>
+</tr></tbody></table>
+</body>
+</html>
