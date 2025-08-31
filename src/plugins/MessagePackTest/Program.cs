@@ -1,5 +1,3 @@
-using BenchmarkDotNet.Running;
-
 namespace MessagePackTest;
 
 internal sealed class Program
@@ -9,15 +7,15 @@ internal sealed class Program
 
     private static void Main()
     {
-        //var array = new ClassSerializeBenchmark();
-        //var r = array.SystemTextJsonGenerator();
+        var array = new ClassSerializeBenchmark();
+        array.MemoryPackBufferWriter();
 
-        _ = BenchmarkRunner.Run<ArraySerializeBenchmark>();
-        _ = BenchmarkRunner.Run<ArrayDeserializeBenchmark>();
-        _ = BenchmarkRunner.Run<ClassSerializeBenchmark>();
-        _ = BenchmarkRunner.Run<ClassDeserializeBenchmark>();
-        _ = BenchmarkRunner.Run<StructSerializeBenchmark>();
-        _ = BenchmarkRunner.Run<StructDeserializeBenchmark>();
+        //_ = BenchmarkRunner.Run<ArraySerializeBenchmark>();
+        //_ = BenchmarkRunner.Run<ArrayDeserializeBenchmark>();
+        //_ = BenchmarkRunner.Run<ClassSerializeBenchmark>();
+        //_ = BenchmarkRunner.Run<ClassDeserializeBenchmark>();
+        //_ = BenchmarkRunner.Run<StructSerializeBenchmark>();
+        //_ = BenchmarkRunner.Run<StructDeserializeBenchmark>();
     }
 
     #endregion

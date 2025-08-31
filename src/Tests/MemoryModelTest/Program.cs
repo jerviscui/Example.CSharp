@@ -1,5 +1,3 @@
-using System;
-
 namespace MemoryModelTest;
 
 internal static class Program
@@ -24,11 +22,13 @@ internal static class Program
         //await ArrayPoolTest.ArrayPool_Test();
         //await ArrayPoolTest.Array_Test();
 
-        CacheLineTest.SharedCacheLine_Test();
-        CacheLineTest.ExcCacheLine_Test();
-        Console.WriteLine();
-        CacheLineTest.SharedCacheLine_Test();
-        CacheLineTest.ExcCacheLine_Test();
+        //CacheLineTest.SharedCacheLine_Test();
+        //CacheLineTest.ExcCacheLine_Test();
+        //Console.WriteLine();
+        //CacheLineTest.SharedCacheLine_Test();
+        //CacheLineTest.ExcCacheLine_Test();
+
+        ArrayBufferWriterTest.Test();
     }
 
     #endregion
