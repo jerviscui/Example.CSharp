@@ -28,7 +28,9 @@ internal static class Program
         //CacheLineTest.SharedCacheLine_Test();
         //CacheLineTest.ExcCacheLine_Test();
 
-        ArrayBufferWriterTest.Test();
+        //ArrayBufferWriterTest.Test();
+
+        ArrayPoolBufferWriterTest.Test();
     }
 
     #endregion
