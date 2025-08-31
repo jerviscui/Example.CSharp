@@ -1,0 +1,10 @@
+{
+    "version": "1.0",
+    "components": [],
+    "extensions": [
+        "https://marketplace.visualstudio.com/items?itemName=DevExpress.CodeRushforVS2022",
+        "https://marketplace.visualstudio.com/items?itemName=Mybiblipi.EmptyLineExtension22",
+        "https://marketplace.visualstudio.com/items?itemName=SonarSource.SonarLintforVisualStudio2022",
+        "https://marketplace.visualstudio.com/items?itemName=Bayaraa.VSERunOnSave"
+    ]
+}

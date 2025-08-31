@@ -1,0 +1,69 @@
+<Project>
+  <PropertyGroup>
+    <ManagePackageVersionsCentrally>true</ManagePackageVersionsCentrally>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageVersion Include="MemoryPack" Version="1.21.4" />
+    <PackageVersion Include="MemoryPack.Streaming" Version="1.21.4" />
+    <PackageVersion Include="MessagePack" Version="3.1.4" />
+    <PackageVersion Include="MessagePack.Annotations" Version="2.5.172" />
+    <PackageVersion Include="MessagePackAnalyzer" Version="2.5.172" />
+    <PackageVersion Include="Microsoft.AspNetCore.Diagnostics.Middleware" Version="9.6.0" />
+    <PackageVersion Include="Microsoft.AspNetCore.OpenApi" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore" Version="9.0.5" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Relational" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.EntityFrameworkCore.Tools" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.Compliance.Redaction" Version="9.6.0" />
+    <PackageVersion Include="Microsoft.Extensions.Configuration.Abstractions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="9.0.6" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting" Version="9.0.6" />
+    <PackageVersion Include="Microsoft.Extensions.Hosting.Abstractions" Version="9.0.7" />
+    <PackageVersion Include="Microsoft.Orleans.Client" Version="9.2.1" />
+    <PackageVersion Include="Microsoft.Orleans.Clustering.Redis" Version="9.2.1" />
+    <PackageVersion Include="Microsoft.Orleans.Core" Version="9.2.1" />
+    <PackageVersion Include="Microsoft.Orleans.Core.Abstractions" Version="9.1.2" />
+    <PackageVersion Include="Microsoft.Orleans.GrainDirectory.Redis" Version="9.2.1" />
+    <PackageVersion Include="Microsoft.Orleans.Persistence.AdoNet" Version="8.2.0" />
+    <PackageVersion Include="Microsoft.Orleans.Runtime" Version="9.1.2" />
+    <PackageVersion Include="Microsoft.Orleans.Sdk" Version="9.1.2" />
+    <PackageVersion Include="Microsoft.Orleans.Serialization.MessagePack" Version="9.2.1" />
+    <PackageVersion Include="Microsoft.Orleans.Serialization.SystemTextJson" Version="8.2.0" />
+    <PackageVersion Include="Microsoft.Orleans.Server" Version="9.2.1" />
+    <PackageVersion Include="Microsoft.Orleans.Transactions.AzureStorage" Version="8.2.0" />
+    <PackageVersion Include="Microsoft.Orleans.Transactions" Version="8.2.0" />
+    <PackageVersion Include="Microsoft.VisualStudio.Azure.Containers.Tools.Targets" Version="1.21.0" />
+    <PackageVersion Include="Npgsql.EntityFrameworkCore.PostgreSQL" Version="9.0.4" />
+    <PackageVersion Include="OpenTelemetry.Exporter.OpenTelemetryProtocol" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Extensions.Hosting" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.AspNetCore" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.EntityFrameworkCore" Version="1.12.0-beta.2" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Hangfire" Version="1.12.0-beta.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Http" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Process" Version="1.12.0-beta.1" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.Runtime" Version="1.12.0" />
+    <PackageVersion Include="OpenTelemetry.Instrumentation.StackExchangeRedis" Version="1.12.0-beta.2" />
+    <PackageVersion Include="OrleansDashboard" Version="8.2.0" />
+    <PackageVersion Include="Polly.Extensions" Version="8.6.2" />
+    <PackageVersion Include="Polly.RateLimiting" Version="8.6.2" />
+    <PackageVersion Include="ResultCore.J" Version="0.2.0" />
+    <PackageVersion Include="RetryCore" Version="0.3.3" />
+    <PackageVersion Include="Scalar.AspNetCore" Version="2.6.5" />
+    <PackageVersion Include="Serilog.AspNetCore" Version="9.0.0" />
+    <PackageVersion Include="Serilog.Enrichers.ClientInfo" Version="2.3.0" />
+    <PackageVersion Include="Serilog.Enrichers.Environment" Version="3.0.1" />
+    <PackageVersion Include="Serilog.Enrichers.Process" Version="3.0.0" />
+    <PackageVersion Include="Serilog.Enrichers.Thread" Version="4.0.0" />
+    <PackageVersion Include="Serilog.Exceptions" Version="8.4.0" />
+    <PackageVersion Include="Serilog.Exceptions.EntityFrameworkCore" Version="8.4.0" />
+    <PackageVersion Include="Serilog.Exceptions.Refit" Version="8.4.0" />
+    <PackageVersion Include="Serilog.Sinks.Async" Version="2.1.0" />
+    <PackageVersion Include="Serilog.Sinks.Loki.YetAnother" Version="3.0.7" />
+    <PackageVersion Include="StackExchange.Redis" Version="2.8.58" />
+    <PackageVersion Include="StackExchange.Redis.Extensions.Core" Version="11.0.0" />
+    <PackageVersion Include="StackExchange.Redis.Extensions.MsgPack" Version="11.0.0" />
+    <PackageVersion Include="StackExchange.Redis.Extensions.Utf8Json" Version="11.0.0" />
+    <PackageVersion Include="System.Text.Json" Version="9.0.6" />
+    <PackageVersion Include="Volo.Abp.AspNetCore" Version="9.2.1" />
+    <PackageVersion Include="Volo.Abp.Core" Version="9.2.3" />
+  </ItemGroup>
+</Project>
