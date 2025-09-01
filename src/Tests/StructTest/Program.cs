@@ -1,6 +1,8 @@
+using BenchmarkDotNet.Running;
+
 namespace StructTest;
 
-internal class Program
+internal sealed class Program
 {
 
     #region Constants & Statics
@@ -27,9 +29,11 @@ internal class Program
         //Console.WriteLine();
         //ValueTypeTest.RoundAlgorithm();
 
-        ValidationTest.ValidationError();
-        Console.WriteLine();
-        ValidationTest.ValidationAllow();
+        //ValidationTest.ValidationError();
+        //Console.WriteLine();
+        //ValidationTest.ValidationAllow();
+
+        _ = BenchmarkRunner.Run<ClassBenchmark>();
     }
 
     #endregion
