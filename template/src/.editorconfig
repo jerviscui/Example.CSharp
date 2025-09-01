@@ -746,7 +746,8 @@ dotnet_diagnostic.CA2241.severity = error
 dotnet_diagnostic.IDE0043.severity = none
 
 ##########################################
-# ReSharper properties
+# dotnet extensions
+# https://github.com/dotnet/extensions/blob/d494f06e36affa83f5d216ddfe0bef2eb3f37c0d/docs/list-of-diagnostics.md
 ##########################################
 
 #### LoggerMessage ####
@@ -1434,8 +1435,14 @@ dotnet_diagnostic.S101.severity = none
 # General or reserved exceptions should never be thrown
 dotnet_diagnostic.S112.severity = none
 
+# "Obsolete" attributes should include explanations
+dotnet_diagnostic.S1123.severity = none
+
 # Track uses of "TODO" tags
 dotnet_diagnostic.S1135.severity = none
+
+# Composite format strings should not lead to unexpected behavior at runtime
+dotnet_diagnostic.S2275.severity = none
 
 # Trivial properties should be auto-implemented
 dotnet_diagnostic.S2325.severity = none
@@ -1449,20 +1456,14 @@ dotnet_diagnostic.S2933.severity = none
 # Exceptions should not be explicitly rethrown
 dotnet_diagnostic.S3445.severity = none
 
+# Overloads with a "CultureInfo" or an "IFormatProvider" parameter should be used
+dotnet_diagnostic.S4056.severity = none
+
 # Unread "private" fields should be removed
 dotnet_diagnostic.S4487.severity = none
 
 # Non-async "Task/Task<T>" methods should not return null
 dotnet_diagnostic.S4586.severity = none
-
-# Composite format strings should not lead to unexpected behavior at runtime
-dotnet_diagnostic.S2275.severity = none
-
-# Overloads with a "CultureInfo" or an "IFormatProvider" parameter should be used
-dotnet_diagnostic.S4056.severity = none
-
-# "Obsolete" attributes should include explanations
-dotnet_diagnostic.S1123.severity = none
 
 #### error ####
 
@@ -1533,6 +1534,30 @@ dotnet_diagnostic.S3923.severity = error
 
 # S4158: Empty collections should not be accessed or iterated
 dotnet_diagnostic.S4158.severity = error
+
+##########################################
+# MessagePack-CSharp
+# https://github.com/MessagePack-CSharp/MessagePack-CSharp/blob/master/doc/analyzers/index.md
+##########################################
+
+dotnet_diagnostic.MsgPack001.severity = none
+dotnet_diagnostic.MsgPack002.severity = error
+dotnet_diagnostic.MsgPack003.severity = error
+dotnet_diagnostic.MsgPack004.severity = error
+dotnet_diagnostic.MsgPack005.severity = error
+dotnet_diagnostic.MsgPack006.severity = error
+dotnet_diagnostic.MsgPack007.severity = error
+dotnet_diagnostic.MsgPack008.severity = error
+dotnet_diagnostic.MsgPack009.severity = error
+dotnet_diagnostic.MsgPack010.severity = error
+dotnet_diagnostic.MsgPack011.severity = error
+dotnet_diagnostic.MsgPack012.severity = error
+dotnet_diagnostic.MsgPack013.severity = error
+dotnet_diagnostic.MsgPack014.severity = error
+dotnet_diagnostic.MsgPack015.severity = error
+dotnet_diagnostic.MsgPack016.severity = error
+dotnet_diagnostic.MsgPack017.severity = error
+dotnet_diagnostic.MsgPack018.severity = error
 
 ##########################################
 # ReSharper properties
