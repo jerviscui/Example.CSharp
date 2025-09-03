@@ -1,6 +1,8 @@
+using BenchmarkDotNet.Running;
+
 namespace CollectionTest;
 
-internal class Program
+internal sealed class Program
 {
 
     #region Constants & Statics
@@ -11,9 +13,11 @@ internal class Program
 
         //SortedListTests.Order_Test();
 
-        ConditionalWeakTableTests.Test();
+        //ConditionalWeakTableTests.Test();
 
-        Console.ReadLine();
+        //Console.ReadLine();
+
+        BenchmarkRunner.Run<FrozenCollectionBenchmark>();
     }
 
     #endregion

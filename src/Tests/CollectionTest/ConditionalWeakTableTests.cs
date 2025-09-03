@@ -79,7 +79,7 @@ public static class ConditionalWeakTableTests
 
     #endregion
 
-    private class ManagedClass
+    private sealed class ManagedClass
     {
 
         #region Properties
@@ -89,7 +89,7 @@ public static class ConditionalWeakTableTests
         #endregion
     }
 
-    private class ClassData
+    private sealed class ClassData
     {
         public ClassData()
         {
