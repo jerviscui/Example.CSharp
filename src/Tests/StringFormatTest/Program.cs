@@ -9,7 +9,7 @@ internal static partial class Program
     {
         //ValueStringBuilderTest.Test();
 
-        StringBuilderCacheTest.Test();
+        //StringBuilderCacheTest.Test();
 
         //_ = BenchmarkRunner.Run<BenchmarkTest>();
 
@@ -53,6 +53,8 @@ internal static partial class Program
         //Print.Microsecond(watch);
         ////233,697 us
         ////277,426 us
+
+        SearchValuesTest.Test();
     }
 
     public static string BoxFormatTest()

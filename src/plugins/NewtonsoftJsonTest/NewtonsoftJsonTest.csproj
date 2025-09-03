@@ -11,6 +11,7 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>_Generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="_Generated\**\*.g.cs" />
     <None Include="_Generated\**\*.g.cs" />
@@ -18,10 +19,6 @@
 
   <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="_Generated\System.Text.Json.SourceGeneration\" />
   </ItemGroup>
 
 </Project>
