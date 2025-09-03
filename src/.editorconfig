@@ -1479,6 +1479,9 @@ dotnet_diagnostic.S1186.severity = error
 # S1206: "Equals(Object)" and "GetHashCode()" should be overridden in pairs
 dotnet_diagnostic.S1206.severity = error
 
+# "GC.Collect" should not be called
+dotnet_diagnostic.S1215.severity = error
+
 # Floating point numbers should not be tested for equality 浮点数不应测试相等性
 dotnet_diagnostic.S1244.severity = error
 

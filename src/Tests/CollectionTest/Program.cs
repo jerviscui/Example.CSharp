@@ -1,11 +1,21 @@
+namespace CollectionTest;
 
+internal class Program
+{
 
-using CollectionTest;
+    #region Constants & Statics
 
-//SortedSetTests.Order_Test();
+    private static void Main(string[] args)
+    {
+        //SortedSetTests.Order_Test();
 
-//SortedListTests.Order_Test();
+        //SortedListTests.Order_Test();
 
-ConditionalWeakTableTests.Test();
+        ConditionalWeakTableTests.Test();
 
-Console.ReadLine();
+        Console.ReadLine();
+    }
+
+    #endregion
+
+}
