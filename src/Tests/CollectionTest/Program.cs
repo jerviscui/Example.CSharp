@@ -1,5 +1,3 @@
-using BenchmarkDotNet.Running;
-
 namespace CollectionTest;
 
 internal sealed class Program
@@ -17,7 +15,11 @@ internal sealed class Program
 
         //Console.ReadLine();
 
-        BenchmarkRunner.Run<FrozenCollectionBenchmark>();
+        //BenchmarkRunner.Run<FrozenCollectionBenchmark>();
+
+        //ImmutableListTest.Test();
+        //ImmutableListTest.CopyOnWriteTest();
+        ImmutableListTest.ImmutableInterlockedTest();
     }
 
     #endregion
