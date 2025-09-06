@@ -50,6 +50,8 @@ public static class SystemTextJsonTestGeneratorTest
     {
         var data = new WeatherForecast { Data = "Sunny", DataList = [true, 1] };
 
+        JsonSerializer.Serialize(Stream.Null, data, WeatherForecastContext.Default.WeatherForecast);
+
         var jsonString = JsonSerializer.Serialize(data, WeatherForecastContext.Default.WeatherForecast);
         //output:
         //{
