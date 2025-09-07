@@ -1,0 +1,6 @@
+GenerateType Object Orleans.Serialization.MemoryPack.MyMessagePackClass
+---
+int IntProperty
+string StringProperty
+Orleans.Serialization.MemoryPack.MyMessagePackSubClass SubClass
+Orleans.Serialization.MemoryPack.IMyMessagePackUnion Union

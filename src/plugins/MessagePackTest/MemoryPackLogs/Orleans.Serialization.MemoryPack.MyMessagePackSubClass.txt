@@ -1,0 +1,3 @@
+GenerateType Object Orleans.Serialization.MemoryPack.MyMessagePackSubClass
+---
+System.Guid Id

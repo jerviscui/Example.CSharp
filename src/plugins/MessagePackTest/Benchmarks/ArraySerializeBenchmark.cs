@@ -24,9 +24,7 @@ public class ArraySerializeBenchmark
 
     #region Constants & Statics
 
-    private static readonly MyVector3[] _value = Enumerable.Repeat(
-        new MyVector3 { X = 10.3f, Y = 40.5f, Z = 13411.3f },
-        1000)
+    private static readonly MyVector3[] _value = Enumerable.Repeat(new MyVector3(10.3f, 40.5f, 13411.3f), 1000)
         .ToArray();
 
     private static readonly ArrayBufferWriter<byte> _arrayBufferWriter;

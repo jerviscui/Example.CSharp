@@ -1,0 +1,3 @@
+GenerateType Object Orleans.Serialization.MemoryPack.MyMessagePackUnionVariant2
+---
+string StringProperty
