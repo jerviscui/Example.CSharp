@@ -397,7 +397,7 @@ dotnet_naming_style.internal_error_style.required_suffix = ____INTERNAL_ERROR___
 
 # All constant fields must be PascalCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1303.md
-dotnet_naming_symbols.stylecop_constant_fields_group.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected, local
+dotnet_naming_symbols.stylecop_constant_fields_group.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 dotnet_naming_symbols.stylecop_constant_fields_group.required_modifiers         = const
 dotnet_naming_symbols.stylecop_constant_fields_group.applicable_kinds           = field
 dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.symbols    = stylecop_constant_fields_group
@@ -406,7 +406,7 @@ dotnet_naming_rule.stylecop_constant_fields_must_be_pascal_case_rule.severity   
 
 # All static readonly fields must be PascalCase
 # https://github.com/DotNetAnalyzers/StyleCopAnalyzers/blob/master/documentation/SA1311.md
-dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected, local
+dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_accessibilities = public, internal, private, protected, protected_internal, private_protected
 # dotnet_naming_symbols.stylecop_static_readonly_fields_group.required_modifiers         = static, readonly
 dotnet_naming_symbols.stylecop_static_readonly_fields_group.required_modifiers         = static
 dotnet_naming_symbols.stylecop_static_readonly_fields_group.applicable_kinds           = field
@@ -918,7 +918,7 @@ dotnet_diagnostic.S1210.severity = warning
 dotnet_diagnostic.S1215.severity = warning
 dotnet_diagnostic.S122.severity = warning
 dotnet_diagnostic.S1226.severity = warning
-dotnet_diagnostic.S1227.severity = warning
+# dotnet_diagnostic.S1227.severity = warning # This rule is deprecated
 dotnet_diagnostic.S1244.severity = warning
 dotnet_diagnostic.S125.severity = warning
 dotnet_diagnostic.S126.severity = warning
