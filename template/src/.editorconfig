@@ -843,6 +843,10 @@ dotnet_diagnostic.CRR0030.severity = error
 # CRR0033: The void async method should be in a try/catch block
 dotnet_diagnostic.CRR0033.severity = error
 
+# CRR0034 - The asynchronous method should contain the "Async" suffix
+# duplicate with S4261
+dotnet_diagnostic.CRR0034.severity = none
+
 # CRR0035 - No CancellationToken parameter in the asynchronous method
 dotnet_diagnostic.CRR0035.severity = suggestion
 

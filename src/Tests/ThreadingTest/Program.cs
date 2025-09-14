@@ -1,4 +1,3 @@
-using System;
 using System.Threading.Tasks;
 
 namespace ThreadingTest;
@@ -65,9 +64,12 @@ internal static class Program
         //    Console.WriteLine($"ThreadCount: {ThreadPool.ThreadCount}");
         //}
 
-        await new AsyncLocalTest().AsyncLocal_TestAsync(default);
-        Console.WriteLine();
-        await new AsyncLocalTest().Wrapper_TestAsync(default);
+        //await new AsyncLocalTest().AsyncLocal_TestAsync(default);
+        //Console.WriteLine();
+        //await new AsyncLocalTest().Wrapper_TestAsync(default);
+
+        await TaskFactoryTest.StartNewUnwrappedTest1();
+        await TaskFactoryTest.StartNewUnwrappedTest2();
     }
 
     #endregion
