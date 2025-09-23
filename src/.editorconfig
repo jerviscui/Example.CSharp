@@ -88,8 +88,8 @@ dotnet_analyzer_diagnostic.severity = warning
 # dotnet_analyzer_diagnostic.category-Naming.severity = warning
 dotnet_analyzer_diagnostic.category-Performance.severity = error
 # dotnet_analyzer_diagnostic.category-SingleFile.severity = warning
-# dotnet_analyzer_diagnostic.category-Reliability.severity = warning
-# dotnet_analyzer_diagnostic.category-Security.severity = warning
+dotnet_analyzer_diagnostic.category-Reliability.severity = error
+dotnet_analyzer_diagnostic.category-Security.severity = error
 # dotnet_analyzer_diagnostic.category-Style.severity = warning
 # dotnet_analyzer_diagnostic.category-Usage.severity = warning
 
@@ -551,7 +551,7 @@ dotnet_diagnostic.IDE0047.severity = suggestion
 # IDE0049: 简化名称
 dotnet_diagnostic.IDE0049.severity = suggestion
 
-# IDE0051: Remove unused private members，关闭，防止 cleanup 自动删除成员
+# IDE0051: Remove unused private members，改为 suggestion 防止 cleanup 自动删除成员并保留灰色，使用 S1144 警告
 dotnet_diagnostic.IDE0051.severity = suggestion
 
 # IDE0054: 使用复合分配
@@ -572,7 +572,7 @@ dotnet_diagnostic.IDE0061.severity = suggestion
 # 使结构字段可写，不要使用可写字段
 dotnet_diagnostic.IDE0064.severity = error
 # 结构可以使用字段
-dotnet_code_quality.ca1051.exclude_structs = true
+dotnet_code_quality.CA1051.exclude_structs = true
 
 # IDE0072: Add missing cases
 dotnet_diagnostic.IDE0072.severity = error
@@ -728,6 +728,12 @@ dotnet_diagnostic.CS8847.severity = error
 #### performance warnings ####
 # https://learn.microsoft.com/zh-cn/dotnet/fundamentals/code-analysis/quality-rules/performance-warnings
 
+# CA1815:重写值类型上的 Equals 和相等运算符 改为 none 防止 cleanup 自动，使用 S3898 警告
+dotnet_diagnostic.CA1815.severity = none
+
+# CA1822: Mark members as static 改为 none 防止 cleanup 自动 static，使用 S2325 警告
+dotnet_diagnostic.CA1822.severity = none
+
 # CA1848: Use the LoggerMessage delegates
 dotnet_diagnostic.CA1848.severity = warning
 
@@ -741,6 +747,9 @@ dotnet_diagnostic.CS1998.severity = error
 
 # CS4014: 由于此调用不会等待，因此在调用完成前将继续执行当前方法
 dotnet_diagnostic.CS4014.severity = error
+
+# 在适用处使用属性
+dotnet_diagnostic.CA1024.severity = suggestion
 
 # CA1715: Identifiers should have correct prefix
 dotnet_diagnostic.CA1715.severity = none
@@ -901,6 +910,7 @@ dotnet_diagnostic.S1133.severity = warning
 dotnet_diagnostic.S1134.severity = warning
 dotnet_diagnostic.S1135.severity = warning
 dotnet_diagnostic.S114.severity = warning
+# Unused private types or members should be removed
 dotnet_diagnostic.S1144.severity = warning
 dotnet_diagnostic.S1147.severity = warning
 dotnet_diagnostic.S1151.severity = warning
@@ -1383,9 +1393,6 @@ dotnet_diagnostic.S109.severity = suggestion
 # Sections of code should not be commented out
 dotnet_diagnostic.S125.severity = suggestion
 
-# Unused private types or members should be removed
-dotnet_diagnostic.S1144.severity = suggestion
-
 # Unused assignments should be removed
 dotnet_diagnostic.S1854.severity = suggestion
 
@@ -1401,16 +1408,11 @@ dotnet_diagnostic.S4018.severity = suggestion
 # Exceptions should provide standard constructorss
 dotnet_diagnostic.S4027.severity = suggestion
 
-# Properties should be preferred
-dotnet_diagnostic.S4049.severity = suggestion
-
 # Use "DateTimeOffset" instead of "DateTime"
 dotnet_diagnostic.S6566.severity = suggestion
 
 # # Boolean literals should not be redundant
 # dotnet_diagnostic.S1125.severity = suggestion
-# # Unused method parameters should be removed
-# dotnet_diagnostic.S1172.severity = suggestion
 # # Redundant casts should not be used
 # dotnet_diagnostic.S1905.severity = suggestion
 
@@ -1443,6 +1445,9 @@ dotnet_diagnostic.S2360.severity = none
 # Types and methods should not have too many generic parameters
 dotnet_diagnostic.S2436.severity = none
 
+# Properties should be preferred, duplicate with CA1024
+dotnet_diagnostic.S4049.severity = none
+
 # Literals should not be passed as localized parameters
 dotnet_diagnostic.S4055.severity = none
 
@@ -1463,11 +1468,11 @@ dotnet_diagnostic.S1123.severity = none
 # Track uses of "TODO" tags
 dotnet_diagnostic.S1135.severity = none
 
+# Unused method parameters should be removed, duplicate with IDE0060
+dotnet_diagnostic.S1172.severity = none
+
 # Composite format strings should not lead to unexpected behavior at runtime
 dotnet_diagnostic.S2275.severity = none
-
-# Trivial properties should be auto-implemented
-dotnet_diagnostic.S2325.severity = none
 
 # Logging templates should be constant
 dotnet_diagnostic.S2629.severity = none
@@ -1560,6 +1565,9 @@ dotnet_diagnostic.S3923.severity = error
 # S4158: Empty collections should not be accessed or iterated
 dotnet_diagnostic.S4158.severity = error
 
+# S5034: "ValueTask" should be consumed correctly
+dotnet_diagnostic.S5034.severity = error
+
 ##########################################
 # MessagePack-CSharp
 # https://github.com/MessagePack-CSharp/MessagePack-CSharp/blob/master/doc/analyzers/index.md
@@ -1601,13 +1609,32 @@ resharper_indent_nested_while_stmt = true
 resharper_indent_raw_literal_string = do_not_change
 resharper_outdent_statement_labels = true
 
+##########################################
+# change when AnalysisMode is All
+##########################################
+
+# Consider making public types internal
+dotnet_diagnostic.CA1515.severity = suggestion
+
+# Avoid unused private fields
+dotnet_diagnostic.CA1823.severity = none
+
+# CA2007: Do not directly await a Task
+dotnet_diagnostic.CA2007.severity = none
+
+# duplicate with IDE0059
+# Unused local variables should be removed 
+dotnet_diagnostic.S1481.severity = none
+
+# duplicate with CA2213
+# Classes should "Dispose" of members from the classes' own "Dispose" methods
+dotnet_diagnostic.S2952.severity = none
+
 [*{Benchmark,Benchmarks}.cs]
 # CA1707: Identifiers should not contain underscores
 dotnet_diagnostic.CA1707.severity = none
 # CRR0035 - No CancellationToken parameter in the asynchronous method
 dotnet_diagnostic.CRR0035.severity = none
-# CA1822: Mark members as static
-dotnet_diagnostic.CA1822.severity = none
 
 [*{Test,Tests}.cs]
 # CA1707: Identifiers should not contain underscores
