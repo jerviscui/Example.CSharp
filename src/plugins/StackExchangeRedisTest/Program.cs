@@ -48,8 +48,10 @@ internal static class Program
 
         ExtensionDatabaseProvider.Start();
 
-        await RedisExtensionsTest.MemoryPackSerializer_TestAsync();
-        await RedisExtensionsTest.MemoryPackSerializer_Null_TestAsync();
+        //await RedisExtensionsTest.MemoryPackSerializer_TestAsync();
+        //await RedisExtensionsTest.MemoryPackSerializer_Null_TestAsync();
+        //await RedisExtensionsTest.MaxLength_TestAsync();
+        await RedisExtensionsTest.Tagging_TestAsync();
 
         ExtensionDatabaseProvider.Dispose();
     }

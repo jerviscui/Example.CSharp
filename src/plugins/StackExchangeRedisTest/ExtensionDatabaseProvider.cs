@@ -17,10 +17,9 @@ public static class ExtensionDatabaseProvider
         AbortOnConnectFail = true,
         Hosts = [new() { Host = "localhost", Port = 6379 }],
         Database = 5,
-        //Ssl = true,
         AllowAdmin = true,
         KeyPrefix = "ExtensionTest:",
-        //MaxValueLength = 1024,
+        //MaxValueLength = 24,
         IsDefault = true,
         Name = "ExtensionTest",
     };

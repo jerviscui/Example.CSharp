@@ -7,6 +7,14 @@ public static class RedisExtensionsTest
 
     #region Constants & Statics
 
+    public static async Task MaxLength_TestAsync()
+    {
+        var database = ExtensionDatabaseProvider.GetDatabase();
+        _ = await database.AddAsync("test3", new MyClass2(1, "null", "abcdefg"));
+
+        // System.ArgumentException: 'value cannot be longer than the MaxValueLength (Parameter 'test2')'
+    }
+
     public static async Task MemoryPackSerializer_Null_TestAsync()
     {
         var database = ExtensionDatabaseProvider.GetDatabase();
@@ -21,6 +29,14 @@ public static class RedisExtensionsTest
         _ = await database.AddAsync("test2", new MyClass2(1, "null", "abcdefg"));
 
         var data = await database.GetAsync<MyClass2>("test2");
+    }
+
+    public static async Task Tagging_TestAsync()
+    {
+        var database = ExtensionDatabaseProvider.GetDatabase();
+        _ = await database.AddAsync("test4", new MyClass2(1, "null", "abcdefg"), tags: ["tag1"]);
+
+        await database.RemoveByTagAsync("tag1");
     }
 
     #endregion
