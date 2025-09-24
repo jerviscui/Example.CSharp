@@ -4,6 +4,7 @@
     <ServerGarbageCollection>true</ServerGarbageCollection>
     <ConcurrentGarbageCollection>true</ConcurrentGarbageCollection>
     <UseArtifactsOutput>true</UseArtifactsOutput>
+    <AnalysisMode>All</AnalysisMode>
   </PropertyGroup>
 
 </Project>
