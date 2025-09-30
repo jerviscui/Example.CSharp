@@ -30,7 +30,11 @@ internal static class Program
 
         //ArrayBufferWriterTest.Test();
 
-        ArrayPoolBufferWriterTest.Test();
+        //ArrayPoolBufferWriterTest.Test();
+
+        //MemoryOwnerTest.SliceTest();
+
+        SpanOwnerTest.Test();
     }
 
     #endregion
