@@ -1,3 +1,5 @@
+using System.Threading.Tasks;
+
 namespace MemoryModelTest;
 
 internal static class Program
@@ -5,7 +7,7 @@ internal static class Program
 
     #region Constants & Statics
 
-    public static void Main(string[] args)
+    public static async Task Main(string[] args)
     {
         //VolatileTest.Worker_Test();
         //Console.WriteLine();
@@ -34,7 +36,9 @@ internal static class Program
 
         //MemoryOwnerTest.SliceTest();
 
-        SpanOwnerTest.Test();
+        //SpanOwnerTest.Test();
+
+        await MemoryTest.MemoryToSpanTestAsync();
     }
 
     #endregion
