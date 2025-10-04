@@ -34,11 +34,13 @@ internal static class Program
 
         //ArrayPoolBufferWriterTest.Test();
 
+        //await MemoryTest.MemoryToSpanTestAsync();
+        //await MemoryTest.MemoryPoolTestAsync();
+
         //MemoryOwnerTest.SliceTest();
+        //await MemoryOwnerTest.AllocateLengthTestAsync();
 
-        //SpanOwnerTest.Test();
-
-        await MemoryTest.MemoryToSpanTestAsync();
+        await SpanOwnerTest.Test();
     }
 
     #endregion
