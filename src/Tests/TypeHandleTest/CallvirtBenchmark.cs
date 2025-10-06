@@ -5,13 +5,6 @@ namespace TypeHandleTest;
 
 public class CallvirtBenchmark
 {
-
-    #region Constants & Statics
-
-    private const int Iterations = 1_000;
-
-    #endregion
-
     private Derived? _derived;
     private SealedDerived? _sealedObj;
 
