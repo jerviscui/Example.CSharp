@@ -1,34 +1,41 @@
-using System;
+using BenchmarkDotNet.Running;
 
-namespace TypeHandleTest
+namespace TypeHandleTest;
+
+internal static class Program
 {
-    internal sealed class Program
+
+    #region Constants & Statics
+
+    private static void Main(string[] args)
     {
-        private static void Main(string[] args)
-        {
-            //new TypeInfoTests().Type_GetProperties_Test();
-            //Console.WriteLine();
-            //new TypeInfoTests().Type_GetRuntimeProperties_Test();
-            //Console.WriteLine();
-            //new TypeInfoTests().TypeInfo_DeclaredProperties_Test();
-            //Console.WriteLine();
+        //new TypeInfoTests().Type_GetProperties_Test();
+        //Console.WriteLine();
+        //new TypeInfoTests().Type_GetRuntimeProperties_Test();
+        //Console.WriteLine();
+        //new TypeInfoTests().TypeInfo_DeclaredProperties_Test();
+        //Console.WriteLine();
 
-            //BenchmarkRunner.Run<BenchmarkTests>();
+        //BenchmarkRunner.Run<BenchmarkTests>();
 
-            //new Test().GetAttributes();
-            //Console.WriteLine();
-            //new Test().Handle();
-            //Console.WriteLine();
-            //new Test().GenericHandle();
-            //Console.WriteLine();
-            //new Test().ReferenceGenericHandle();
+        //new Test().GetAttributes();
+        //Console.WriteLine();
+        //new Test().Handle();
+        //Console.WriteLine();
+        //new Test().GenericHandle();
+        //Console.WriteLine();
+        //new Test().ReferenceGenericHandle();
 
-            //Console.WriteLine();
-            //new HandleSizeTest().RuntimeHandleAndType();
+        //Console.WriteLine();
+        //new HandleSizeTest().RuntimeHandleAndType();
 
-            ReflectedTypeTest.OverrideMethod_Test();
-            Console.WriteLine();
-            ReflectedTypeTest.DerivedMethod_Test();
-        }
+        //ReflectedTypeTest.OverrideMethod_Test();
+        //Console.WriteLine();
+        //ReflectedTypeTest.DerivedMethod_Test();
+
+        _ = BenchmarkRunner.Run<CallvirtBenchmark>();
     }
+
+    #endregion
+
 }

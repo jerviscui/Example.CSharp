@@ -1550,6 +1550,9 @@ dotnet_diagnostic.S2930.severity = error
 # 例外情况：具有 EventHandler 委托签名的方法。方法名称匹配 On[A-Z]\w* 模式。
 dotnet_diagnostic.S3168.severity = error
 
+# Non-derived "private" classes and records should be "sealed"
+dotnet_diagnostic.S3260.severity = error
+
 # S3400: Methods should not return constants
 dotnet_diagnostic.S3400.severity = error
 

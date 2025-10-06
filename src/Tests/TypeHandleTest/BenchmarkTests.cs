@@ -11,22 +11,8 @@ namespace TypeHandleTest
     [MemoryDiagnoser]
     public class BenchmarkTests
     {
-        private class Test
-        {
-#pragma warning disable CA1822 // Mark members as static
-            public int Method()
-#pragma warning restore CA1822 // Mark members as static
-            {
-                int i = 0;
-                int j = i++;
 
-                return j;
-            }
-        }
-
-        public Dictionary<string, MethodInfo> MethodInfos { get; set; } = new();
-
-        public Dictionary<string, RuntimeMethodHandle> MethodHandles { get; set; } = new();
+        #region Constants & Statics
 
         public static string Key;
 
@@ -35,6 +21,8 @@ namespace TypeHandleTest
             var method = typeof(Test).GetMethod(nameof(Test.Method))!;
             Key = $"{method.ReflectedType}+{method.Name}";
         }
+
+        #endregion
 
         public BenchmarkTests()
         {
@@ -54,12 +42,15 @@ namespace TypeHandleTest
             }
         }
 
-        [BenchmarkCategory("ExecTime")]
-        [Benchmark(Description = "MethodInfoTest", Baseline = true)]
-        public MethodInfo? MethodInfoTest()
-        {
-            return MethodInfos.GetValueOrDefault(Key);
-        }
+        #region Properties
+
+        public Dictionary<string, RuntimeMethodHandle> MethodHandles { get; set; } = new();
+
+        public Dictionary<string, MethodInfo> MethodInfos { get; set; } = new();
+
+        #endregion
+
+        #region Methods
 
         [BenchmarkCategory("ExecTime")]
         [Benchmark(Description = "MethodHandleTest")]
@@ -68,6 +59,33 @@ namespace TypeHandleTest
             var hand = MethodHandles.GetValueOrDefault(Key);
 
             return MethodBase.GetMethodFromHandle(hand);
+        }
+
+        [BenchmarkCategory("ExecTime")]
+        [Benchmark(Description = "MethodInfoTest", Baseline = true)]
+        public MethodInfo? MethodInfoTest()
+        {
+            return MethodInfos.GetValueOrDefault(Key);
+        }
+
+        #endregion
+
+        private sealed class Test
+        {
+
+            #region Methods
+
+#pragma warning disable CA1822 // Mark members as static
+            public int Method()
+#pragma warning restore CA1822 // Mark members as static
+            {
+                int i = 0;
+                int j = i++;
+
+                return j;
+            }
+
+            #endregion
         }
     }
 }
