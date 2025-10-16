@@ -1,6 +1,6 @@
 namespace CollectionTest;
 
-internal sealed class Program
+internal static class Program
 {
 
     #region Constants & Statics
@@ -19,7 +19,17 @@ internal sealed class Program
 
         //ImmutableListTest.Test();
         //ImmutableListTest.CopyOnWriteTest();
-        ImmutableListTest.ImmutableInterlockedTest();
+        //ImmutableListTest.ImmutableInterlockedTest();
+        ImmutableListTest.RefCopy_Test();
+        ImmutableListTest.RefChange_Test();
+
+        var i = 0;
+        while (true)
+        {
+            var s = $"abcdefghijklopqrstuvwxyz{i}";
+            i++;
+            Thread.Sleep(100);
+        }
     }
 
     #endregion
