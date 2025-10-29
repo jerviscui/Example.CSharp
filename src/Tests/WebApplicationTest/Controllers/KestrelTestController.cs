@@ -25,7 +25,7 @@ public class KestrelTestController : ControllerBase
 
         var context = _contextAccessor.HttpContext!;
         var feature = context.Features.GetRequiredFeature<IHttpResponseBodyFeature>();
-        feature.DisableBuffering(); // 无效果，掉不掉用都不使用响应缓冲区
+        feature.DisableBuffering(); // 无效果，调不调用都不使用响应缓冲区
 
         context.Response.StatusCode = 200;
         context.Response.ContentType = "text/plain; charset=utf-8";
@@ -35,7 +35,7 @@ public class KestrelTestController : ControllerBase
 
         for (var i = 0; i < 5; ++i)
         {
-            var line = $"this is line {i}\r\n";
+            var line = $"this is line {i}";
             var bytes = Encoding.UTF8.GetBytes(line);
             // it seems context.Response.Body.WriteAsync() and
             // context.Response.BodyWriter.WriteAsync() work exactly the same
@@ -63,7 +63,7 @@ public class KestrelTestController : ControllerBase
         var builder = new StringBuilder();
         for (var i = 0; i < 5; ++i)
         {
-            var s = $"this is line {i}\r\n";
+            var s = $"this is line {i}";
             _ = builder.Append(s);
             await Task.Delay(1000, cancellation);
         }
