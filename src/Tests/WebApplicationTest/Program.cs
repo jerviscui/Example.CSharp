@@ -9,6 +9,9 @@ public static class Program
 
     private static void Main(string[] args)
     {
+        Console.WriteLine(TimeSpan.MaxValue);//10675199.02:48:05.4775807
+        Console.WriteLine(Timeout.InfiniteTimeSpan);//-00:00:00.0010000
+
         var builder = WebApplication.CreateBuilder(args);
 
         // Add services to the container.
@@ -35,7 +38,8 @@ public static class Program
             .ConfigureKestrel(
                 serverOptions =>
                 {
-                    serverOptions.Limits.MaxResponseBufferSize = 10; // Disable response buffering limit
+                    serverOptions.ConfigurationLoader?.Configuration.GetSection("Limits").Bind(serverOptions.Limits);
+                    //serverOptions.Limits.MaxResponseBufferSize = null; // Disable response buffering limit
                 });
 
         var app = builder.Build();
