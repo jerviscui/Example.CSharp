@@ -19,6 +19,7 @@ internal static class Program
         ValueTypeTest.ShowSize();
 
         ValueTypeTest.OutOfPrecision_True_Test();
+        ValueTypeTest.OutOfPrecision_True2_Test();
         ValueTypeTest.OutOfPrecision_False_Test();
 
         Console.WriteLine();
@@ -29,7 +30,7 @@ internal static class Program
 
         ValidationTest.ValidationError();
         Console.WriteLine();
-        ValidationTest.ValidationAllow();
+        //ValidationTest.ValidationAllow();
 
         //var config = DefaultConfig.Instance
         //    .WithArtifactsPath(

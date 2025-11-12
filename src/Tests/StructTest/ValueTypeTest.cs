@@ -19,11 +19,22 @@ public static class ValueTypeTest
         Console.WriteLine($"double 6+4 {a}");
         Console.WriteLine($"double 9+4 {b}");
         Console.WriteLine($"double 12+4 {c}");
+        Console.WriteLine($"double 13+4 {9999999999999.9999}"); //无效
         Console.WriteLine($"double 15+4 {e}"); // 无效，15 位整数部分 + 4 位小数
         Console.WriteLine($"double 18+4 {f}"); // 无效，18 位整数部分 + 4 位小数
 
         Console.WriteLine($"decimal 15+4 {ee}");
         Console.WriteLine($"decimal 18+4 {ff}");
+
+        //double 6+4 999999.9999
+        //double 9+4 999999999.9999
+        //double 12+4 999999999999.9999
+        //double 13+4 10000000000000
+        //double 15+4 1000000000000000
+        //double 18+4 1E+18
+
+        //decimal 15+4 999999999999999.9999
+        //decimal 18+4 999999999999999999.9999
     }
 
     public static void OutOfPrecision_False_Test()
@@ -43,8 +54,19 @@ public static class ValueTypeTest
         var maxValue = 1_999_999_999_999.9999; // 超过 12 位整数部分 + 4 位小数
         var beyondMax = 2_000_000_000_000;
 
-        Console.WriteLine($"Max value with 4 decimals: {maxValue}");
+        Console.WriteLine($"Max value with 4 decimals: {maxValue}"); // 近似为 2000000000000
         Console.WriteLine($"Beyond max value with 4 decimals: {beyondMax}");
+        Console.WriteLine($"Are maxValue and beyondMax equal? {maxValue == beyondMax}");
+    }
+
+    public static void OutOfPrecision_True2_Test()
+    {
+        //（15 - 16 位有效数字）
+        var maxValue = 999_999_999_999.9999;
+        var beyondMax = 999_999_999_999.99991; // 12 位整数部分 + 4 位小数
+
+        Console.WriteLine($"Max value with 4 decimals: {maxValue}");
+        Console.WriteLine($"Beyond max value with 4 decimals: {beyondMax}");// 近似为 999_999_999_999.9999
         Console.WriteLine($"Are maxValue and beyondMax equal? {maxValue == beyondMax}");
     }
 
