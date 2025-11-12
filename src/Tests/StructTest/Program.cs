@@ -32,7 +32,8 @@ internal static class Program
         //Console.WriteLine();
         //ValidationTest.ValidationAllow();
 
-        StructTest.Test();
+        //StructTest.Simple_Test();
+        StructTest.Complex_Test();
 
         //var config = DefaultConfig.Instance
         //    .WithArtifactsPath(
