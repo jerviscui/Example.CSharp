@@ -1,5 +1,6 @@
 using EfCoreTest.Paging;
 using Microsoft.EntityFrameworkCore;
+using System.Diagnostics;
 using System.Reflection;
 
 namespace EfCoreTest;
@@ -19,14 +20,14 @@ public class TestDbContext : DbContext
         var teacher = new Teacher(2, "teacher");
         _ = modelBuilder.Entity<Teacher>().HasData(teacher);
 
-        var person = new Person(1, "name", family.Id, null);
+        var person = new Person(1, "name", family.Id);
         var person2 = new Person(2, "name", family2.Id, teacher.Id);
         var person3 = new Person(3, "name", family3.Id, teacher.Id);
         _ = modelBuilder.Entity<Person>().HasData(person, person2, person3);
 
         for (var i = 0; i < 100; i++)
         {
-            _ = modelBuilder.Entity<Person>().HasData(new Person(100 + i, $"name{i}", family2.Id, null));
+            _ = modelBuilder.Entity<Person>().HasData(new Person(100 + i, $"name{i}", family2.Id));
         }
 
         //todo: Data Seeding not support navigations https://github.com/dotnet/efcore/issues/25586
@@ -60,6 +61,7 @@ public class TestDbContext : DbContext
 
     public TestDbContext(DbContextOptions<TestDbContext> options) : base(options)
     {
+        Id = Stopwatch.GetTimestamp();
     }
 
     #region Properties
@@ -122,6 +124,12 @@ public class TestDbContext : DbContext
 
         return base.SaveChanges(acceptAllChangesOnSuccess);
     }
+
+    #endregion
+
+    #region Self props
+
+    public long Id;
 
     #endregion
 

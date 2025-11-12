@@ -1,25 +1,36 @@
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace EfCoreTest
+namespace EfCoreTest;
+
+public class BlogMapping : IEntityTypeConfiguration<Blog>
 {
-    public class BlogMapping : IEntityTypeConfiguration<Blog>
+
+    #region IEntityTypeConfiguration implementations
+
+    /// <inheritdoc/>
+    public void Configure(EntityTypeBuilder<Blog> builder)
     {
-        /// <inheritdoc />
-        public void Configure(EntityTypeBuilder<Blog> builder)
-        {
-            builder.HasKey(o => o.Id);
-            //*..1
-            builder.HasMany(p => p.BlogTags).WithOne().HasForeignKey(o => o.BlogId).OnDelete(DeleteBehavior.Cascade);
-        }
+        builder.HasKey(o => o.Id);
+        //*..1
+        builder.HasMany(p => p.BlogTags).WithOne().HasForeignKey(o => o.BlogId).OnDelete(DeleteBehavior.Cascade);
     }
 
-    public class BlogTaggMapping : IEntityTypeConfiguration<BlogTag>
+    #endregion
+
+}
+
+public class BlogTagMapping : IEntityTypeConfiguration<BlogTag>
+{
+
+    #region IEntityTypeConfiguration implementations
+
+    /// <inheritdoc/>
+    public void Configure(EntityTypeBuilder<BlogTag> builder)
     {
-        /// <inheritdoc />
-        public void Configure(EntityTypeBuilder<BlogTag> builder)
-        {
-            builder.HasKey(o => o.Id);
-        }
+        builder.HasKey(o => o.Id);
     }
+
+    #endregion
+
 }

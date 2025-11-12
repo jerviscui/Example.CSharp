@@ -9,14 +9,16 @@ public abstract class DbContextTest
 {
 
     #region Constants & Statics
-    public static SqliteConnection? SqliteConnection;
 
-    protected static void AddIfNotExists<T>(TestDbContext dbContext, T entity) where T : Entity
+    public static SqliteConnection? SqliteConnection { get; private set; }
+
+    protected static void AddIfNotExists<T>(TestDbContext dbContext, T entity)
+        where T : Entity
     {
         var dbSet = dbContext.Set<T>();
         if (!dbSet.Any(arg => EF.Property<long>(arg, "Id") == entity.Id))
         {
-            dbSet.Add(entity);
+            _ = dbSet.Add(entity);
         }
     }
 
@@ -58,7 +60,7 @@ public abstract class DbContextTest
         }
 
         var builder = CreateBuilder();
-        builder.UseSqlite(SqliteConnection);
+        _ = builder.UseSqlite(SqliteConnection);
 
         if (SqliteConnection.State != ConnectionState.Open)
         {
@@ -68,7 +70,7 @@ public abstract class DbContextTest
 
         if (createDb)
         {
-            dbContext.Database.EnsureCreated();
+            _ = dbContext.Database.EnsureCreated();
         }
 
         return dbContext;
@@ -76,21 +78,23 @@ public abstract class DbContextTest
 
     public static void SettingBuilder(DbContextOptionsBuilder builder)
     {
-        builder.LogTo(Console.WriteLine, LogLevel.Information);
-        builder.EnableSensitiveDataLogging();
-        builder.EnableDetailedErrors();
+        _ = builder.LogTo(Console.WriteLine, LogLevel.Information);
+        _ = builder.EnableSensitiveDataLogging();
+        _ = builder.EnableDetailedErrors();
     }
 
     public static void UseNpgsql(DbContextOptionsBuilder builder)
     {
-        builder.UseNpgsql(@"Host=localhost;Port=5432;Database=EfCoreTest;Username=postgres;Password=123456;");
+        _ = builder.UseNpgsql(@"Host=localhost;Port=5432;Database=EfCoreTest;Username=postgres;Password=123456;");
     }
 
     public static void UseSqlServer(DbContextOptionsBuilder builder)
     {
-        builder.UseSqlServer(@"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456");
+        _ = builder.UseSqlServer(
+            @"Server=.\sql2017;Initial Catalog=EfCoreTest;User ID=sa;Password=123456;TrustServerCertificate=true");
         //builder.UseSqlServer(@"Server=localhost;Initial Catalog=EfCoreTest;User ID=sa;Password=qwer@1234");
     }
+
     #endregion
 
 }

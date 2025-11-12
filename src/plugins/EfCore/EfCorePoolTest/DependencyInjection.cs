@@ -7,7 +7,7 @@ internal static class DependencyInjection
 
     #region Constants & Statics
 
-    public static ServiceProvider ServiceProvider { get; set; } = null!;
+    internal static ServiceProvider ServiceProvider { get; set; } = null!;
 
     #endregion
 

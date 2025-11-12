@@ -1,0 +1,9 @@
+//SonarQube Extension save in C:\Users\x\AppData\Roaming\SonarLint for Visual Studio
+{
+  "sonarlint.rules": {
+  },
+  "sonarlint.analyzerProperties": {
+    "sonar.cs.analyzeGeneratedCode": "false"
+  },
+  "sonarlint.analysisExcludesStandalone": "**/_Generated/**,**/Migrations/**"
+}
