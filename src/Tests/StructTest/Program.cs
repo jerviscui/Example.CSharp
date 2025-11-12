@@ -7,30 +7,32 @@ internal static class Program
 
     private static void Main(string[] args)
     {
-        var m1 = new Measurement();
-        Console.WriteLine(m1);  // output: NaN (Undefined)
+        //var m1 = new Measurement();
+        //Console.WriteLine(m1);  // output: NaN (Undefined)
 
-        var m2 = default(Measurement);
-        Console.WriteLine(m2);  // output: 0 ()
+        //var m2 = default(Measurement);
+        //Console.WriteLine(m2);  // output: 0 ()
 
-        var ms = new Measurement[2];
-        Console.WriteLine(string.Join(", ", ms));  // output: 0 (), 0 ()
+        //var ms = new Measurement[2];
+        //Console.WriteLine(string.Join(", ", ms));  // output: 0 (), 0 ()
 
-        ValueTypeTest.ShowSize();
+        //ValueTypeTest.ShowSize();
 
-        ValueTypeTest.OutOfPrecision_True_Test();
-        ValueTypeTest.OutOfPrecision_True2_Test();
-        ValueTypeTest.OutOfPrecision_False_Test();
+        //ValueTypeTest.OutOfPrecision_True_Test();
+        //ValueTypeTest.OutOfPrecision_True2_Test();
+        //ValueTypeTest.OutOfPrecision_False_Test();
 
-        Console.WriteLine();
-        ValueTypeTest.EffectiveLength_4();
+        //Console.WriteLine();
+        //ValueTypeTest.EffectiveLength_4();
 
-        Console.WriteLine();
-        ValueTypeTest.RoundAlgorithm();
+        //Console.WriteLine();
+        //ValueTypeTest.RoundAlgorithm();
 
-        ValidationTest.ValidationError();
-        Console.WriteLine();
+        //ValidationTest.ValidationError();
+        //Console.WriteLine();
         //ValidationTest.ValidationAllow();
+
+        StructTest.Test();
 
         //var config = DefaultConfig.Instance
         //    .WithArtifactsPath(
