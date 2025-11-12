@@ -1451,11 +1451,23 @@ dotnet_diagnostic.S2360.severity = none
 # Types and methods should not have too many generic parameters
 dotnet_diagnostic.S2436.severity = none
 
+# URI properties should not be strings
+dotnet_diagnostic.S3996.severity = none
+
+# Method signatures should not contain nested generic types
+dotnet_diagnostic.S4017.severity = none
+
 # Properties should be preferred, duplicate with CA1024
 dotnet_diagnostic.S4049.severity = none
 
 # Literals should not be passed as localized parameters
 dotnet_diagnostic.S4055.severity = none
+
+# Use UTC when recording DateTime instants
+dotnet_diagnostic.S6563.severity = none
+
+# Don't hardcode the format when turning dates and times to strings
+dotnet_diagnostic.S6585.severity = none
 
 # Controllers should not have mixed responsibilities
 dotnet_diagnostic.S6960.severity = none
@@ -1565,6 +1577,9 @@ dotnet_diagnostic.S3400.severity = error
 # S3459: Unassigned members should be removed
 dotnet_diagnostic.S3459.severity = error
 
+# Track use of "NotImplementedException"
+dotnet_diagnostic.S3717.severity = error
+
 # S3903: Types should be defined in named namespaces
 dotnet_diagnostic.S3903.severity = error
 
@@ -1623,7 +1638,7 @@ resharper_outdent_statement_labels = true
 ##########################################
 
 # Consider making public types internal
-dotnet_diagnostic.CA1515.severity = suggestion
+dotnet_diagnostic.CA1515.severity = none
 
 # Avoid unused private fields
 dotnet_diagnostic.CA1823.severity = none
@@ -1634,6 +1649,9 @@ dotnet_diagnostic.CA2007.severity = none
 # duplicate with IDE0059
 # Unused local variables should be removed 
 dotnet_diagnostic.S1481.severity = none
+
+# Operator overloads have named alternates
+dotnet_diagnostic.CA2225.severity = none
 
 # duplicate with CA2213
 # Classes should "Dispose" of members from the classes' own "Dispose" methods

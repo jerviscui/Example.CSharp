@@ -100,6 +100,13 @@ public class ExtendedStandardClass : StandardClass
 [SuppressMessage("Naming", "CA1707:Identifiers should not contain underscores", Justification = "<Pending>")]
 public class ClassBenchmark
 {
+
+    #region Constants & Statics
+
+    private const int Count = 1_000_000;
+
+    #endregion
+
     private readonly DerivedClass _derivedClassInstance = new() { DerivedProperty = 42 };
     private readonly ExtendedStandardClass _extendedClassInstance = new()
     {
@@ -114,30 +121,55 @@ public class ClassBenchmark
     [Benchmark]
     public int DerivedClass_Property()
     {
+        //for (var i = 0; i < Count; i++)
+        //{
+        //    _derivedClassInstance.GetBaseProperty();
+        //}
+
         return _derivedClassInstance.GetBaseProperty();
     }
 
     [Benchmark]
     public int ExtendedClass_AdditionalProperty()
     {
+        //for (var i = 0; i < Count; i++)
+        //{
+        //    _extendedClassInstance.GetAdditionalProperty();
+        //}
+
         return _extendedClassInstance.GetAdditionalProperty();
     }
 
     [Benchmark]
     public int ExtendedClass_StandardProperty()
     {
+        //for (var i = 0; i < Count; i++)
+        //{
+        //    _extendedClassInstance.GetStandardProperty();
+        //}
+
         return _extendedClassInstance.GetStandardProperty();
     }
 
     [Benchmark]
     public int SealedClass_Property()
     {
+        //for (var i = 0; i < Count; i++)
+        //{
+        //    _sealedClassInstance.GetSealedProperty();
+        //}
+
         return _sealedClassInstance.GetSealedProperty();
     }
 
     [Benchmark(Baseline = true)]
     public int StandardClass_Property()
     {
+        //for (var i = 0; i < Count; i++)
+        //{
+        //    _standardClassInstance.GetStandardProperty();
+        //}
+
         return _standardClassInstance.GetStandardProperty();
     }
 

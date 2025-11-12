@@ -26,7 +26,7 @@ public static class ValueTypeTest
         Console.WriteLine($"decimal 18+4 {ff}");
     }
 
-    public static void OutOfPrecisionFalseTest()
+    public static void OutOfPrecision_False_Test()
     {
         //（15 - 16 位有效数字）
         var maxValue = 999_999_999_999.9999; // 12 位整数部分 + 4 位小数
@@ -37,7 +37,7 @@ public static class ValueTypeTest
         Console.WriteLine($"Are maxValue and beyondMax equal? {maxValue == beyondMax}");
     }
 
-    public static void OutOfPrecisionTrueTest()
+    public static void OutOfPrecision_True_Test()
     {
         //（15 - 16 位有效数字）
         var maxValue = 1_999_999_999_999.9999; // 超过 12 位整数部分 + 4 位小数
