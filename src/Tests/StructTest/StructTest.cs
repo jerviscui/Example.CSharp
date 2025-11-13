@@ -13,6 +13,24 @@ internal static class StructTest
     {
         var r = new Result<BaseError>(new BaseError(11, null, null));
         TypeLayout.PrintLayout(r.GetType(), true);
+        //Type layout for 'Result`1'
+        //Size: 32 bytes. Paddings: 11 bytes (%34 of empty space)
+        //|==========================================|
+        //|     0: Boolean _hasError (1 byte)        |
+        //|------------------------------------------|
+        //|   1-7: padding (7 bytes)                 |
+        //|------------------------------------------|
+        //|  8-31: BaseError _error (24 bytes)       |
+        //| |======================================| |
+        //| |   0-7: Exception Exception (8 bytes) | |
+        //| |--------------------------------------| |
+        //| |  8-15: String Reason (8 bytes)       | |
+        //| |--------------------------------------| |
+        //| | 16-19: Int32 Code (4 bytes)          | |
+        //| |--------------------------------------| |
+        //| | 20-23: padding (4 bytes)             | |
+        //| |======================================| |
+        //|==========================================|
     }
 
     public static void Simple_Test()
@@ -107,7 +125,7 @@ public readonly record struct InnerStruct
 
 #region Complex
 
-[StructLayout(LayoutKind.Auto, Pack = 1)]
+[StructLayout(LayoutKind.Auto)]
 //[StructLayout(LayoutKind.Sequential, Pack = 1)]
 [SuppressMessage("Style", "IDE1006:Naming Styles", Justification = "<Pending>")]
 public readonly record struct Result<TError>
@@ -139,28 +157,33 @@ public readonly record struct Result<TError>
     }
 }
 
-[StructLayout(LayoutKind.Auto, Pack = 1)]
+[StructLayout(LayoutKind.Auto)]
 //[StructLayout(LayoutKind.Sequential, Pack = 1)]
 public readonly record struct BaseError
 {
-    public readonly int Code;
-
-    /// <summary>
-    /// Gets the exception.
-    /// </summary>
-    public readonly Exception? Exception;
-
-    /// <summary>
-    /// Gets the reason.
-    /// </summary>
-    public readonly string? Reason;
-
     public BaseError(int code, Exception? exception, string? reason)
     {
         Code = code;
         //Exception = exception;
-        Reason = reason;
+        //Reason = reason;
     }
+
+    #region Properties
+
+    public readonly int Code { get; }
+
+    /// <summary>
+    /// Gets the exception.
+    /// </summary>
+    public readonly Exception? Exception { get; }
+
+    /// <summary>
+    /// Gets the reason.
+    /// </summary>
+    public readonly string? Reason { get; }
+
+    #endregion
+
 }
 
 #endregion
