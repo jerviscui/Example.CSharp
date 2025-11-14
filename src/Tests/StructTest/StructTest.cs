@@ -108,6 +108,7 @@ public readonly record struct BoxStruct
 }
 
 [StructLayout(LayoutKind.Sequential)]
+//[StructLayout(LayoutKind.Sequential, Size = 16)]
 public readonly record struct InnerStruct
 {
     public readonly bool _boolField2;

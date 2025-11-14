@@ -32,7 +32,7 @@ internal static class Program
         //Console.WriteLine();
         //ValidationTest.ValidationAllow();
 
-        //StructTest.Simple_Test();
+        StructTest.Simple_Test();
         StructTest.Complex_Test();
 
         //var config = DefaultConfig.Instance
