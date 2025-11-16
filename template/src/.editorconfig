@@ -1402,6 +1402,9 @@ dotnet_diagnostic.S125.severity = suggestion
 # Unused assignments should be removed
 dotnet_diagnostic.S1854.severity = suggestion
 
+# Underscores should be used to make large numbers readable
+dotnet_diagnostic.S2148.severity = suggestion
+
 # "Exception" should not be caught
 dotnet_diagnostic.S2221.severity = suggestion
 

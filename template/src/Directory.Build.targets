@@ -4,9 +4,14 @@
     <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
     <CompilerGeneratedFilesOutputPath>_Generated</CompilerGeneratedFilesOutputPath>
   </PropertyGroup>
+
   <ItemGroup>
     <Compile Remove="_Generated\**\*.g.cs" />
     <None Include="_Generated\**\*.g.cs" />
   </ItemGroup>
+
+  <Target Name="CustomClean" AfterTargets="Clean">
+    <RemoveDir Directories="_Generated" />
+  </Target>
 
 </Project>
