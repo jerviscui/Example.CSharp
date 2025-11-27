@@ -27,7 +27,12 @@ internal static class Program
 
         // ChannelTest.Reader_Test();
 
-        // CancellationTokenTest.Cancel_Test();
+        //await CancellationTokenTest.Cancel_TaskCanceledException_Test();
+        await CancellationTokenTest.Cancel_OperationCanceledException_Test();
+        //CancellationTokenTest.Register_Test();
+        //CancellationTokenTest.Register_Twice_Test();
+        //CancellationTokenTest.Register_Twice_ThrowFirst_Test();
+        //await CancellationTokenTest.Cancel_ThrowFirst_Test();
 
         // InterruptTest.Sleeping_Interrupt_Test();
 
