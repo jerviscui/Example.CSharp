@@ -9,7 +9,7 @@ namespace NewtonsoftJsonTest;
 public class SystemTextJsonBenchmarks
 {
     // Adjust buffer size
-    private readonly JsonSerializerOptions _optionsBuffer = new()
+    private readonly JsonSerializerOptions _options = new()
     {
         PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
         DefaultBufferSize = 2 * 1024 * 1024
@@ -33,12 +33,6 @@ public class SystemTextJsonBenchmarks
     }
 
     [Benchmark]
-    public async Task MyDtoNoSG()
-    {
-        await JsonSerializer.SerializeAsync(Stream.Null, TestData.Instance.WithPlainData(), _optionsBuffer);
-    }
-
-    [Benchmark]
     public async Task MyDtoLarge()
     {
         await JsonSerializer.SerializeAsync(
@@ -59,7 +53,13 @@ public class SystemTextJsonBenchmarks
     [Benchmark]
     public async Task MyDtoLargeNoSG()
     {
-        await JsonSerializer.SerializeAsync(Stream.Null, TestData.Instance.WithLargeData(), _optionsBuffer);
+        await JsonSerializer.SerializeAsync(Stream.Null, TestData.Instance.WithLargeData(), _options);
+    }
+
+    [Benchmark]
+    public async Task MyDtoNoSG()
+    {
+        await JsonSerializer.SerializeAsync(Stream.Null, TestData.Instance.WithPlainData(), _options);
     }
 
     #endregion
@@ -129,11 +129,6 @@ public class TestData
 
     #region Methods
 
-    public MyDto WithPlain()
-    {
-        return _withPlain;
-    }
-
     public MyDtoLarge WithLarge()
     {
         return _withLarge;
@@ -142,6 +137,11 @@ public class TestData
     public List<MyDtoLarge> WithLargeData()
     {
         return _withLargeData;
+    }
+
+    public MyDto WithPlain()
+    {
+        return _withPlain;
     }
 
     public List<MyDto> WithPlainData()

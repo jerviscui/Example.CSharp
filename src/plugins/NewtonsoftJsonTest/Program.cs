@@ -1,5 +1,3 @@
-using BenchmarkDotNet.Running;
-
 namespace NewtonsoftJsonTest;
 
 internal sealed class Program
@@ -21,11 +19,12 @@ internal sealed class Program
         //SystemTextJsonTest.PrivateProp_DeserializeWithJsonInclude_IsAssigned();
         //SystemTextJsonTest.GetonlyProp_DeserializeWithJsonInclude_IsNotAssigned();
         //SystemTextJsonTest.GetonlyProp_DeserializeWithJsonConstructor_IsAssigned();
+        SystemTextJsonTest.NumberHandling_Serialize_Test();
 
         //SystemTextJsonTestGeneratorTest.SerializeTest();
         //SystemTextJsonTestGeneratorTest.DeserializeTest();
 
-        BenchmarkRunner.Run<SystemTextJsonBenchmarks>();
+        //BenchmarkRunner.Run<SystemTextJsonBenchmarks>();
     }
 
     #endregion
