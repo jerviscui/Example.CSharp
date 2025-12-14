@@ -1,0 +1,9 @@
+{
+  "configProperties": {
+    "System.GC.Server": true,
+    "System.GC.Concurrent": true,
+    "System.GC.NoAffinitize": true,
+    "System.GC.DynamicAdaptationMode": 1
+    //"System.GC.LOHThreshold": 131072 // 128 KB
+  }
+}
