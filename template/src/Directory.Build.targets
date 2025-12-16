@@ -8,8 +8,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="_Generated\**\*.g.cs" />
-    <None Include="_Generated\**\*.g.cs" />
+    <Compile Remove="_Generated\**\*.cs" />
+    <None Include="_Generated\**\*.cs" />
   </ItemGroup>
 
   <Target Name="CustomClean" AfterTargets="Clean">

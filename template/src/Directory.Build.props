@@ -3,6 +3,7 @@
   <PropertyGroup>
     <UseArtifactsOutput>true</UseArtifactsOutput>
     <AnalysisMode>All</AnalysisMode>
+    <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
 
 </Project>

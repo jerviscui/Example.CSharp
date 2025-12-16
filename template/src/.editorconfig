@@ -742,11 +742,20 @@ dotnet_diagnostic.CA1848.severity = warning
 # CS0162: 检测到无法访问的代码
 dotnet_diagnostic.CS0162.severity = error
 
+# CS1573: Parameter has no matching param tag in the XML comment (but other parameters do)
+dotnet_diagnostic.CS1573.severity = none
+
+# CS1591: Missing XML comment for publicly visible type or member
+dotnet_diagnostic.CS1591.severity = none
+
 # CS1998: 异步方法缺少 "await" 运算符，将以同步方式运行
 dotnet_diagnostic.CS1998.severity = error
 
 # CS4014: 由于此调用不会等待，因此在调用完成前将继续执行当前方法
 dotnet_diagnostic.CS4014.severity = error
+
+# CA1008:枚举应具有零值
+dotnet_diagnostic.CA1008.severity = suggestion
 
 # 在适用处使用属性
 dotnet_diagnostic.CA1024.severity = suggestion
@@ -883,7 +892,7 @@ dotnet_diagnostic.CRR0040.severity = suggestion
 ##########################################
 
 #### make all warning ####
-# https://github.com/SonarSource/sonarlint-visualstudio/blob/master/src/Roslyn.Suppressions/Roslyn.Suppressions/SupportedSuppressionBuilder.g.cs
+# https://github.com/SonarSource/sonarlint-visualstudio/blob/ee558fccfe1e4df50d9ac33d8e5df9d698648ccd/src/Roslyn.Suppressions/Roslyn.Suppressions/SupportedSuppressionBuilder.g.cs
 
 dotnet_diagnostic.S100.severity = warning
 dotnet_diagnostic.S1006.severity = warning
@@ -956,7 +965,8 @@ dotnet_diagnostic.S1449.severity = warning
 dotnet_diagnostic.S1450.severity = warning
 dotnet_diagnostic.S1451.severity = warning
 dotnet_diagnostic.S1479.severity = warning
-dotnet_diagnostic.S1481.severity = warning
+# Unused local variables should be removed 
+dotnet_diagnostic.S1481.severity = warning # don't change, no repetition with IDE0059
 dotnet_diagnostic.S1541.severity = warning
 dotnet_diagnostic.S1542.severity = warning
 dotnet_diagnostic.S1607.severity = warning
@@ -1058,7 +1068,7 @@ dotnet_diagnostic.S2374.severity = warning
 dotnet_diagnostic.S2375.severity = warning
 dotnet_diagnostic.S2376.severity = warning
 dotnet_diagnostic.S2386.severity = warning
-dotnet_diagnostic.S2387.severity = warning
+# dotnet_diagnostic.S2387.severity = warning # This rule is deprecated
 dotnet_diagnostic.S2429.severity = warning
 dotnet_diagnostic.S2436.severity = warning
 dotnet_diagnostic.S2437.severity = warning
@@ -1194,7 +1204,7 @@ dotnet_diagnostic.S3877.severity = warning
 dotnet_diagnostic.S3878.severity = warning
 dotnet_diagnostic.S3880.severity = warning
 dotnet_diagnostic.S3881.severity = warning
-dotnet_diagnostic.S3884.severity = warning
+# dotnet_diagnostic.S3884.severity = warning # This rule is deprecated
 dotnet_diagnostic.S3885.severity = warning
 dotnet_diagnostic.S3887.severity = warning
 dotnet_diagnostic.S3889.severity = warning
@@ -1273,8 +1283,8 @@ dotnet_diagnostic.S4200.severity = warning
 dotnet_diagnostic.S4201.severity = warning
 dotnet_diagnostic.S4210.severity = warning
 dotnet_diagnostic.S4211.severity = warning
-dotnet_diagnostic.S4212.severity = warning
-dotnet_diagnostic.S4214.severity = warning
+# dotnet_diagnostic.S4212.severity = warning # This rule is deprecated
+# dotnet_diagnostic.S4214.severity = warning # This rule is deprecated
 dotnet_diagnostic.S4220.severity = warning
 dotnet_diagnostic.S4225.severity = warning
 dotnet_diagnostic.S4226.severity = warning
@@ -1301,7 +1311,7 @@ dotnet_diagnostic.S4586.severity = warning
 dotnet_diagnostic.S4635.severity = warning
 dotnet_diagnostic.S4663.severity = warning
 dotnet_diagnostic.S4790.severity = warning
-dotnet_diagnostic.S4792.severity = warning
+# dotnet_diagnostic.S4792.severity = warning # This rule is deprecated
 dotnet_diagnostic.S4830.severity = warning
 dotnet_diagnostic.S5034.severity = warning
 dotnet_diagnostic.S5042.severity = warning
@@ -1369,7 +1379,7 @@ dotnet_diagnostic.S6797.severity = warning
 dotnet_diagnostic.S6798.severity = warning
 dotnet_diagnostic.S6800.severity = warning
 dotnet_diagnostic.S6802.severity = warning
-dotnet_diagnostic.S6803.severity = warning
+# dotnet_diagnostic.S6803.severity = warning # This rule is deprecated
 dotnet_diagnostic.S6930.severity = warning
 dotnet_diagnostic.S6931.severity = warning
 dotnet_diagnostic.S6932.severity = warning
@@ -1407,6 +1417,9 @@ dotnet_diagnostic.S2148.severity = suggestion
 
 # "Exception" should not be caught
 dotnet_diagnostic.S2221.severity = suggestion
+
+# The simplest possible condition syntax should be used
+dotnet_diagnostic.S3240.severity = suggestion
 
 # Method parameters should be declared with base types
 dotnet_diagnostic.S3242.severity = suggestion
@@ -1620,6 +1633,20 @@ dotnet_diagnostic.MsgPack017.severity = error
 dotnet_diagnostic.MsgPack018.severity = error
 
 ##########################################
+# ORLEANS
+##########################################
+
+# ORLEANS0009: Grain interfaces methods must return a compatible type
+dotnet_diagnostic.ORLEANS0009.severity = error
+
+##########################################
+# source-generator syslib-diagnostics
+# https://learn.microsoft.com/zh-cn/dotnet/fundamentals/syslib-diagnostics/source-generator-overview
+##########################################
+
+dotnet_diagnostic.SYSLIB1038.severity = error
+
+##########################################
 # ReSharper properties
 ##########################################
 
@@ -1648,10 +1675,6 @@ dotnet_diagnostic.CA1823.severity = none
 
 # CA2007: Do not directly await a Task
 dotnet_diagnostic.CA2007.severity = none
-
-# duplicate with IDE0059
-# Unused local variables should be removed 
-dotnet_diagnostic.S1481.severity = none
 
 # Operator overloads have named alternates
 dotnet_diagnostic.CA2225.severity = none
