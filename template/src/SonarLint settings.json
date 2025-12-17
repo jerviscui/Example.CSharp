@@ -1,6 +1,18 @@
-//SonarQube Extension save in C:\Users\x\AppData\Roaming\SonarLint for Visual Studio
 {
   "sonarlint.rules": {
+    "csharpsquid:S138": {
+      "level": "On",
+      "parameters": {
+        "max": "80"
+      }
+    },
+    "csharpsquid:S3776": {
+      "level": "On",
+      "parameters": {
+        "propertyThreshold": "3",
+        "threshold": "15"
+      }
+    }
   },
   "sonarlint.analyzerProperties": {
     "sonar.cs.analyzeGeneratedCode": "false"

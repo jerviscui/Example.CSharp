@@ -24,7 +24,7 @@ internal sealed class Program
         //SystemTextJsonTestGeneratorTest.SerializeTest();
         //SystemTextJsonTestGeneratorTest.DeserializeTest();
 
-        //BenchmarkRunner.Run<SystemTextJsonBenchmarks>();
+        //BenchmarkRunner.Run<SystemTextJsonBenchmarks>();        
     }
 
     #endregion

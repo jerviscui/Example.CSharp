@@ -18,6 +18,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <AdditionalFiles Include="CodeMetricsConfig.txt" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
     <PackageReference Include="BenchmarkDotNet" Version="0.15.2" />
   </ItemGroup>
