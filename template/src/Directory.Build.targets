@@ -16,4 +16,8 @@
     <RemoveDir Directories="_Generated" />
   </Target>
 
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)CodeMetricsConfig.txt" Condition="Exists('$(MSBuildThisFileDirectory)CodeMetricsConfig.txt')" Link="CodeMetricsConfig.txt" />
+  </ItemGroup>
+
 </Project>

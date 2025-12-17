@@ -1,9 +1,71 @@
 {
   "sonarlint.rules": {
+    "csharpsquid:S107": {
+      "level": "On",
+      "parameters": {
+        "max": "7"
+      }
+    },
+    "csharpsquid:S110": {
+      "level": "On",
+      "parameters": {
+        "filteredClasses": "",
+        "max": "5"
+      }
+    },
+    "csharpsquid:S134": {
+      "level": "On",
+      "parameters": {
+        "maximumNestingLevel": "3"
+      }
+    },
     "csharpsquid:S138": {
       "level": "On",
       "parameters": {
         "max": "80"
+      }
+    },
+    "csharpsquid:S1067": {
+      "level": "On",
+      "parameters": {
+        "max": "3"
+      }
+    },
+    "csharpsquid:S1151": {
+      "level": "On",
+      "parameters": {
+        "max": "8"
+      }
+    },
+    "csharpsquid:S1192": {
+      "level": "On",
+      "parameters": {
+        "threshold": "3"
+      }
+    },
+    "csharpsquid:S1200": {
+      "level": "On",
+      "parameters": {
+        "max": "30"
+      }
+    },
+    "csharpsquid:S1479": {
+      "level": "On",
+      "parameters": {
+        "maximum": "30"
+      }
+    },
+    "csharpsquid:S2342": {
+      "level": "On",
+      "parameters": {
+        "max": "30"
+      }
+    },
+    "csharpsquid:S2436": {
+      "level": "On",
+      "parameters": {
+        "max": "2",
+        "maxMethod": "3"
       }
     },
     "csharpsquid:S3776": {

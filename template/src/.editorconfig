@@ -787,6 +787,36 @@ dotnet_diagnostic.CA2241.severity = error
 # IDE0043: 无效的格式字符串
 dotnet_diagnostic.IDE0043.severity = none
 
+#### Maintainability rules ####
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/maintainability-warnings
+
+# CA1501: Avoid excessive inheritance
+dotnet_diagnostic.CA1501.severity = warning
+# CA1502: Avoid excessive complexity
+dotnet_diagnostic.CA1502.severity = warning
+# CA1505: Avoid unmaintainable code
+dotnet_diagnostic.CA1505.severity = warning
+# CA1506: Avoid excessive class coupling
+dotnet_diagnostic.CA1506.severity = warning
+
+# CA1508: Avoid dead conditional code
+dotnet_diagnostic.CA1508.severity = error
+
+# CA1509: Invalid entry in code metrics configuration file
+dotnet_diagnostic.CA1509.severity = error
+
+# CA1510: Use ArgumentNullException throw helper
+dotnet_diagnostic.CA1510.severity = error
+# CA1511: Use ArgumentException throw helper
+dotnet_diagnostic.CA1511.severity = error
+# CA1512: Use ArgumentOutOfRangeException throw helper
+dotnet_diagnostic.CA1512.severity = error
+# CA1513: Use ObjectDisposedException throw helper
+dotnet_diagnostic.CA1513.severity = error
+
+# Consider making public types internal
+dotnet_diagnostic.CA1515.severity = none
+
 ##########################################
 # dotnet extensions
 # https://github.com/dotnet/extensions/blob/d494f06e36affa83f5d216ddfe0bef2eb3f37c0d/docs/list-of-diagnostics.md
@@ -888,7 +918,7 @@ dotnet_diagnostic.CRR0040.severity = suggestion
 
 ##########################################
 # SonarLint
-# https://rules.sonarsource.com/csharp/RSPEC-112/
+# https://next.sonarqube.com/sonarqube/coding_rules?languages=cs&q=S138&open=csharpsquid%3AS138
 ##########################################
 
 #### make all warning ####
@@ -1433,11 +1463,6 @@ dotnet_diagnostic.S4027.severity = suggestion
 # Use "DateTimeOffset" instead of "DateTime"
 dotnet_diagnostic.S6566.severity = suggestion
 
-# # Boolean literals should not be redundant
-# dotnet_diagnostic.S1125.severity = suggestion
-# # Redundant casts should not be used
-# dotnet_diagnostic.S1905.severity = suggestion
-
 #### Turn it on when needed ####
 
 # Remove this use of 'goto'
@@ -1487,6 +1512,15 @@ dotnet_diagnostic.S6585.severity = none
 
 # Controllers should not have mixed responsibilities
 dotnet_diagnostic.S6960.severity = none
+
+#### maintainability ####
+
+# Functions should not have too many lines of code
+# dotnet_diagnostic.S138.severity = none
+
+# Methods and properties should not be too complex
+# instead of S3776
+dotnet_diagnostic.S1541.severity = none
 
 #### duplicate with dotnet analyzer ####
 
@@ -1562,8 +1596,8 @@ dotnet_diagnostic.S2184.severity = error
 dotnet_diagnostic.S2190.severity = error
 
 # S2259: Null pointers should not be dereferenced
-# 不生效？
-# dotnet_diagnostic.S2259.severity = none
+# 经测试没有效果！
+dotnet_diagnostic.S2259.severity = error
 
 # S2328: "GetHashCode" should not reference mutable fields
 dotnet_diagnostic.S2328.severity = error
@@ -1644,7 +1678,102 @@ dotnet_diagnostic.ORLEANS0009.severity = error
 # https://learn.microsoft.com/zh-cn/dotnet/fundamentals/syslib-diagnostics/source-generator-overview
 ##########################################
 
+# System.Text.Json 源生成器遇到使用 [JsonInclude] 注释的属性，该属性具有不可访问的访问器
 dotnet_diagnostic.SYSLIB1038.severity = error
+
+##########################################
+# Mapperly
+# https://github.com/riok/mapperly/blob/main/src/Riok.Mapperly/Diagnostics/DiagnosticDescriptors.cs
+##########################################
+
+dotnet_diagnostic.RMG001.severity = error
+dotnet_diagnostic.RMG002.severity = error
+dotnet_diagnostic.RMG003.severity = error # warning
+dotnet_diagnostic.RMG004.severity = error # warning
+dotnet_diagnostic.RMG005.severity = error
+dotnet_diagnostic.RMG006.severity = error
+dotnet_diagnostic.RMG007.severity = error
+dotnet_diagnostic.RMG008.severity = error
+dotnet_diagnostic.RMG009.severity = error # info
+dotnet_diagnostic.RMG010.severity = error # info
+dotnet_diagnostic.RMG011.severity = error # info
+dotnet_diagnostic.RMG012.severity = error # warning
+dotnet_diagnostic.RMG013.severity = error
+dotnet_diagnostic.RMG014.severity = error # warning
+dotnet_diagnostic.RMG015.severity = error # info
+dotnet_diagnostic.RMG016.severity = error
+dotnet_diagnostic.RMG020.severity = error # warning
+dotnet_diagnostic.RMG021.severity = error # warning
+dotnet_diagnostic.RMG022.severity = error
+dotnet_diagnostic.RMG023.severity = error
+dotnet_diagnostic.RMG024.severity = error
+dotnet_diagnostic.RMG025.severity = error
+dotnet_diagnostic.RMG029.severity = error
+dotnet_diagnostic.RMG030.severity = error
+dotnet_diagnostic.RMG031.severity = error # warning
+dotnet_diagnostic.RMG032.severity = error # warning
+dotnet_diagnostic.RMG033.severity = error # info
+dotnet_diagnostic.RMG034.severity = error
+dotnet_diagnostic.RMG035.severity = error
+dotnet_diagnostic.RMG036.severity = error
+dotnet_diagnostic.RMG037.severity = error # warning
+dotnet_diagnostic.RMG038.severity = error # warning
+dotnet_diagnostic.RMG039.severity = error
+dotnet_diagnostic.RMG040.severity = error
+dotnet_diagnostic.RMG041.severity = error
+dotnet_diagnostic.RMG042.severity = error
+dotnet_diagnostic.RMG043.severity = error # warning
+dotnet_diagnostic.RMG044.severity = error # warning
+dotnet_diagnostic.RMG045.severity = error # warning
+dotnet_diagnostic.RMG046.severity = error
+dotnet_diagnostic.RMG047.severity = error
+dotnet_diagnostic.RMG048.severity = error
+dotnet_diagnostic.RMG049.severity = error # warning
+dotnet_diagnostic.RMG050.severity = error # warning
+dotnet_diagnostic.RMG051.severity = error # warning
+dotnet_diagnostic.RMG052.severity = error # warning
+dotnet_diagnostic.RMG053.severity = error
+dotnet_diagnostic.RMG054.severity = error
+dotnet_diagnostic.RMG055.severity = error
+dotnet_diagnostic.RMG056.severity = error
+dotnet_diagnostic.RMG057.severity = error
+dotnet_diagnostic.RMG058.severity = error
+dotnet_diagnostic.RMG059.severity = error
+dotnet_diagnostic.RMG060.severity = error # warning
+dotnet_diagnostic.RMG061.severity = error
+dotnet_diagnostic.RMG062.severity = error
+dotnet_diagnostic.RMG063.severity = error
+dotnet_diagnostic.RMG064.severity = error
+dotnet_diagnostic.RMG065.severity = error # warning
+dotnet_diagnostic.RMG066.severity = error # warning
+dotnet_diagnostic.RMG067.severity = error
+dotnet_diagnostic.RMG068.severity = error # info
+dotnet_diagnostic.RMG069.severity = error # warning
+dotnet_diagnostic.RMG070.severity = error
+dotnet_diagnostic.RMG071.severity = error # warning
+dotnet_diagnostic.RMG072.severity = error # warning
+dotnet_diagnostic.RMG073.severity = error # warning
+dotnet_diagnostic.RMG074.severity = error
+dotnet_diagnostic.RMG075.severity = error
+dotnet_diagnostic.RMG076.severity = error # warning
+dotnet_diagnostic.RMG077.severity = error
+dotnet_diagnostic.RMG078.severity = error
+dotnet_diagnostic.RMG079.severity = error
+dotnet_diagnostic.RMG080.severity = error
+dotnet_diagnostic.RMG081.severity = error
+dotnet_diagnostic.RMG082.severity = error # warning
+dotnet_diagnostic.RMG083.severity = error # info
+dotnet_diagnostic.RMG084.severity = error
+dotnet_diagnostic.RMG085.severity = error
+dotnet_diagnostic.RMG086.severity = error
+dotnet_diagnostic.RMG087.severity = error
+dotnet_diagnostic.RMG088.severity = error # info
+dotnet_diagnostic.RMG089.severity = error # info
+dotnet_diagnostic.RMG090.severity = error # info
+dotnet_diagnostic.RMG091.severity = error
+dotnet_diagnostic.RMG092.severity = error
+dotnet_diagnostic.RMG093.severity = error
+dotnet_diagnostic.RMG094.severity = error
 
 ##########################################
 # ReSharper properties
@@ -1666,9 +1795,6 @@ resharper_outdent_statement_labels = true
 ##########################################
 # change when AnalysisMode is All
 ##########################################
-
-# Consider making public types internal
-dotnet_diagnostic.CA1515.severity = none
 
 # Avoid unused private fields
 dotnet_diagnostic.CA1823.severity = none
