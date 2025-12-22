@@ -1,13 +1,13 @@
 namespace MapperlyTest;
 
-internal class Program
+internal static class Program
 {
 
     #region Constants & Statics
 
     private static void Main(string[] args)
     {
-        MapperTest.Test();
+        MapperTest.CarMapper_Test();
     }
 
     #endregion

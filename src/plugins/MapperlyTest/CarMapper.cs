@@ -17,7 +17,7 @@ public class Car
 
 }
 
-internal record CarDto(string Name, int NumberOfWheels)
+internal sealed record CarDto(string Name, int NumberOfWheels)
 {
 
     #region Properties
@@ -33,27 +33,27 @@ internal record CarDto(string Name, int NumberOfWheels)
 }
 
 [Mapper]
-internal partial class CarMapper
+internal sealed partial class CarMapper
 {
 
     #region Methods
 
     [MapperIgnoreSource(nameof(Car.NullStr))]
     [MapperIgnoreTarget(nameof(CarDto.IntNull))]
-    internal partial CarDto CarToCarDto(Car car);
+    internal partial CarDto ToCarDto(Car car);
 
     #endregion
 
 }
 
 [Mapper]
-internal partial class CarNullThrowMapper
+internal sealed partial class CarNullThrowMapper
 {
 
     #region Methods
 
     [MapProperty(nameof(Car.NullStr), nameof(CarDto.StringNull))]
-    internal partial CarDto CarToCarDto(Car car);
+    internal partial CarDto ToCarDto(Car car);
 
     #endregion
 

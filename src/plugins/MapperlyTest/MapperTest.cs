@@ -5,11 +5,21 @@ public static class MapperTest
 
     #region Constants & Statics
 
-    public static void Test()
+    public static void CarMapper_Test()
     {
         var mapper = new CarMapper();
+
         var car = new Car { Name = "Fiat", NumberOfWheels = 4 };
-        var dto = mapper.CarToCarDto(car);
+        var dto = mapper.ToCarDto(car);
+        Console.WriteLine($"Car: {dto.Name}, Wheels: {dto.NumberOfWheels}");
+    }
+
+    public static void CarNullThrowMapper_Test()
+    {
+        var mapper = new CarNullThrowMapper();
+
+        var car = new Car { Name = "Fiat", NumberOfWheels = 4 };
+        var dto = mapper.ToCarDto(car);
         Console.WriteLine($"Car: {dto.Name}, Wheels: {dto.NumberOfWheels}");
     }
 
