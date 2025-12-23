@@ -2014,6 +2014,10 @@ dotnet_diagnostic.CRR0035.severity = none
 generated_code = true
 dotnet_analyzer_diagnostic.severity = none
 
+[**/**.g.cs]
+generated_code = true
+dotnet_analyzer_diagnostic.severity = none
+
 [**/Migrations/**.cs]
 generated_code = true
 dotnet_analyzer_diagnostic.severity = none
