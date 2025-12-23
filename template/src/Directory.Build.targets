@@ -4,8 +4,16 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AnalysisMode>All</AnalysisMode>
-    <UseArtifactsOutput>true</UseArtifactsOutput>    
+    <UseArtifactsOutput>true</UseArtifactsOutput>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <ItemGroup>
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)CodeMetricsConfig.txt" Condition="Exists('$(MSBuildThisFileDirectory)CodeMetricsConfig.txt')" Link="CodeMetricsConfig.txt" />
+  </ItemGroup>
+
+  <ItemGroup Condition="@(PackageReference->AnyHaveMetadataValue('Identity', 'Riok.Mapperly'))">
+    <AdditionalFiles Include="$(MSBuildThisFileDirectory)MapperlyGlobalConfig.cs" Condition="Exists('$(MSBuildThisFileDirectory)MapperlyGlobalConfig.cs')" Link="MapperlyGlobalConfig.cs" />
+  </ItemGroup>
 
 </Project>

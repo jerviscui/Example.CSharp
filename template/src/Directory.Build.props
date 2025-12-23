@@ -14,12 +14,4 @@
     <RemoveDir Directories="_Generated" />
   </Target>
 
-  <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)CodeMetricsConfig.txt" Condition="Exists('$(MSBuildThisFileDirectory)CodeMetricsConfig.txt')" Link="CodeMetricsConfig.txt" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <AdditionalFiles Include="$(MSBuildThisFileDirectory)MapperlyGlobalConfig.cs" Condition="Exists('$(MSBuildThisFileDirectory)MapperlyGlobalConfig.cs')" Link="MapperlyGlobalConfig.cs" />
-  </ItemGroup>
-
 </Project>
