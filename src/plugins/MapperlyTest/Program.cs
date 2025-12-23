@@ -7,7 +7,10 @@ internal static class Program
 
     private static void Main(string[] args)
     {
-        MapperTest.CarMapper_Test();
+        //MapperTest.CarMapper_Test();
+        //MapperTest.CarNullThrowMapper_Test();
+        //MapperTest.Ctro_Test();
+        MapperTest.ProjectTo_Test();
     }
 
     #endregion

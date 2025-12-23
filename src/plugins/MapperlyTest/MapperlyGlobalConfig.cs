@@ -6,4 +6,5 @@ using Riok.Mapperly.Abstractions;
     ThrowOnMappingNullMismatch = true,
     RequiredMappingStrategy = RequiredMappingStrategy.None,
     AutoUserMappings = false,
-    IgnoreObsoleteMembersStrategy = IgnoreObsoleteMembersStrategy.None)]
+    IgnoreObsoleteMembersStrategy = IgnoreObsoleteMembersStrategy.None,
+    PreferParameterlessConstructors = true)]
