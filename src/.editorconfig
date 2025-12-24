@@ -1687,6 +1687,9 @@ dotnet_diagnostic.S3996.severity = none
 # Method signatures should not contain nested generic types
 dotnet_diagnostic.S4017.severity = none
 
+# Extensions should be in separate namespaces
+dotnet_diagnostic.S4226.severity = none
+
 # Properties should be preferred, duplicate with CA1024
 dotnet_diagnostic.S4049.severity = none
 
