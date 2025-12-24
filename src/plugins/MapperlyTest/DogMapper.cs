@@ -67,7 +67,7 @@ internal sealed partial class DogMapper
     [MapProperty(nameof(Dog.NullStr), nameof(DogDto.StringNull))]
     internal partial DogDto ToDogDto(Dog dog);
 
-    internal partial ICollection<DogDto> ToDogDto(ICollection<Dog> dogs);
+    internal partial ICollection<DogDto> ToDogDtos(ICollection<Dog> dogs);
 
     #endregion
 
@@ -79,10 +79,50 @@ internal static partial class DogProjectToMapper
 
     #region Constants & Statics
 
-    [MapProperty(nameof(Dog.NullStr), nameof(DogDto.StringNull))]
+    [IncludeMappingConfiguration(nameof(@DogMapper.ToDogDto))]
     private static partial DogDto ToDogDto(Dog dog);
 
     internal static partial IQueryable<DogDto> ProjectToDogDto(this IQueryable<Dog> query);
+
+    #endregion
+
+}
+
+[Mapper]
+internal static partial class DogProjectToWithCustomMapper
+{
+
+    #region Constants & Statics
+
+    private static string StringNullSet(string? source)
+    {
+        return source ?? "default str";
+    }
+
+    [MapProperty(nameof(Dog.NullStr), nameof(DogDto.StringNull), Use = nameof(StringNullSet))]
+    private static partial DogDto ToDogDto(Dog dog);
+
+    internal static partial IQueryable<DogDto> ProjectToDogDto2(this IQueryable<Dog> query);
+
+    #endregion
+
+}
+
+[Mapper]
+internal static partial class DogDtoExtensionsMapper
+{
+
+    #region Constants & Statics
+
+    private static string StringNullSet(Dog dog)
+    {
+        return dog.NullStr ?? "default str";
+    }
+
+    [MapPropertyFromSource(nameof(DogDto.StringNull), Use = nameof(StringNullSet))]
+    [MapperIgnoreTarget(nameof(DogDto.Name))]
+    [MapperIgnoreTarget(nameof(DogDto.NumberOfWheels))]
+    internal static partial void FromDog([MappingTarget] this DogDto dogDto, Dog dog);
 
     #endregion
 

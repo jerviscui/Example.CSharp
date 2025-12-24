@@ -10,7 +10,8 @@ internal static class Program
         //MapperTest.CarMapper_Test();
         //MapperTest.CarNullThrowMapper_Test();
         //MapperTest.Ctro_Test();
-        MapperTest.ProjectTo_Test();
+        //MapperTest.ProjectTo_Test();
+        MapperTest.ExistingTarget_Test();
     }
 
     #endregion

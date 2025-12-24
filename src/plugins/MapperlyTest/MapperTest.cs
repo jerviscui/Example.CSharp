@@ -34,6 +34,16 @@ public static class MapperTest
         Console.WriteLine($"StringNull: {dto.StringNull}");
     }
 
+    public static void ExistingTarget_Test()
+    {
+        var dog = new Dog { Name = "Fiat", NumberOfWheels = 4, NullStr = "aaa" };
+        var dto = new DogDto { Name = "OldName", NumberOfWheels = 99, StringNull = "OldString" };
+        dto.FromDog(dog);
+
+        Console.WriteLine($"{dto.Name}, Wheels: {dto.NumberOfWheels}");
+        Console.WriteLine($"StringNull: {dto.StringNull}");
+    }
+
     public static void List_Test()
     {
         var mapper = new DogMapper();
@@ -44,7 +54,7 @@ public static class MapperTest
             new() { Name = "Max", NumberOfWheels = 3, NullStr = "bbb" }
         };
 
-        var list = mapper.ToDogDto(dogs);
+        var list = mapper.ToDogDtos(dogs);
 
         foreach (var dto in list)
         {
