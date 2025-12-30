@@ -4,23 +4,31 @@ using System.Globalization;
 
 namespace NodaMoneyTest;
 
-public static partial class MoneyTest
+public static class MoneyTest
 {
 
     #region Constants & Statics
 
     public static void DefaultCurrency_Test()
     {
-        var myDefaultContext = MoneyContext.Create(
-            opt =>
+        _ = MoneyContext.CreateAndSetDefault(
+            (options) =>
             {
-                opt.MaxScale = 4;
-                opt.DefaultCurrency = CurrencyInfo.FromCode(CurrencyCode.CNY);
-                opt.EnforceZeroCurrencyMatching = true;
+                options.MaxScale = 4;
+                options.DefaultCurrency = CurrencyInfo.FromCode(CurrencyCode.CNY);
             });
-        MoneyContext.DefaultThreadContext = myDefaultContext;
 
-        var money = new Money(10.1234m);
+        // or
+        //var myDefaultContext = MoneyContext.Create(
+        //    opt =>
+        //    {
+        //        opt.MaxScale = 4;
+        //        opt.DefaultCurrency = CurrencyInfo.FromCode(CurrencyCode.CNY);
+        //        opt.EnforceZeroCurrencyMatching = true;
+        //    });
+        //MoneyContext.DefaultThreadContext = myDefaultContext;
+
+        var money = new Money(10.12345m);
         Console.WriteLine(money); // ¥10.1234
     }
 
@@ -48,7 +56,7 @@ public static partial class MoneyTest
         // $15.72
 
         // Split without losing cents
-        var shares = (total + 0.01m).Split(3);
+        _ = (total + 0.01m).Split(3);
         // [$5.24, $5.24, $5.25]
     }
 
@@ -58,11 +66,11 @@ public static partial class MoneyTest
 
         var str = money.ToString("R", CultureInfo.InvariantCulture);
         Console.WriteLine(str); // EUR 76543.21
-        var euro = Money.Parse(str, CultureInfo.InvariantCulture);
+        _ = Money.Parse(str, CultureInfo.InvariantCulture);
 
         str = money.ToString(CultureInfo.InvariantCulture);
         Console.WriteLine(str); // €76,543.21
-        euro = Money.Parse(str, CultureInfo.InvariantCulture);
+        _ = Money.Parse(str, CultureInfo.InvariantCulture);
     }
 
     #endregion
