@@ -1,7 +1,5 @@
 using NodaMoney;
 using System.ComponentModel.DataAnnotations;
-using System.Diagnostics.CodeAnalysis;
-using System.Globalization;
 using System.Text.Json;
 
 namespace NodaMoneyTest;
@@ -11,11 +9,29 @@ public static class SerializationTest
 
     #region Constants & Statics
 
-    public static void Input_Validation_Test()
+    public static void Input_Validation_ModelState_Test()
     {
-        var input = new MyInput("Jane Doe", 25, new FastMoneyDto { Amount = 49.95m, });
-        var json = JsonSerializer.Serialize(input);
-        Console.WriteLine(json);
+        var input = new MyInput("Jane Doe", 25, new FastMoneyDto { Amount = 101m, });
+        var context = new ValidationContext(input);
+        var results = new List<ValidationResult>();
+        var isValid = Validator.TryValidateObject(input, context, results, true);
+
+        Console.WriteLine($"MyInput Over Max IsValid: {isValid}");
+        foreach (var result in results)
+        {
+            Console.WriteLine($"Error: {result.ErrorMessage}");
+        }
+
+        var input2 = new MyInput("Jane Doe", 25, new FastMoneyDto { Amount = 1m, Currency = "abc" });
+        context = new ValidationContext(input2);
+        results = [];
+        isValid = Validator.TryValidateObject(input2, context, results, true);
+
+        Console.WriteLine($"MyInput Currency IsValid: {isValid}");
+        foreach (var result in results)
+        {
+            Console.WriteLine($"Error: {result.ErrorMessage}");
+        }
     }
 
     public static void Output_Serialization_Test()
@@ -43,105 +59,6 @@ public static class SerializationTest
 
 public record MyDto(string Name, int Age, FastMoney Price);
 
-public record MyInput(string Name, int Age, [AmountValidation("1.00000", "100")] FastMoneyDto Price);
+public record MyInput(string Name, int Age, [property: FastMoneyRange("1.0000", "100")] FastMoneyDto Price);
 
 public record MyOutput(string Name, int Age, FastMoneyDto Price);
-
-public static class FastMoneyExtensions
-{
-
-    #region Constants & Statics
-
-    public static FastMoneyDto ToDto(this FastMoney fastMoney)
-    {
-        return new FastMoneyDto { Amount = fastMoney.Amount, Currency = fastMoney.Currency.Code };
-    }
-
-    #endregion
-
-}
-
-public class FastMoneyDto : IValidatableObject
-{
-
-    #region Properties
-
-    public decimal Amount { get; init; }
-
-    public string Currency { get; init; } = CurrencyCode.CNY;
-
-    #endregion
-
-    #region IValidatableObject implementations
-
-    public IEnumerable<ValidationResult> Validate(ValidationContext validationContext)
-    {
-        var results = new List<ValidationResult>();
-
-        //validate AmountValidationAttribute
-        var context = new ValidationContext(this);
-        _ = Validator.TryValidateProperty(Amount, context, results);
-
-        try
-        {
-            _ = CurrencyInfo.FromCode(Currency);
-        }
-        catch
-        {
-            results.Add(new ValidationResult("Invalid currency code.", [nameof(Currency)]));
-        }
-
-        return results;
-    }
-
-    #endregion
-
-}
-
-[AttributeUsage(AttributeTargets.Property | AttributeTargets.Field | AttributeTargets.Parameter, AllowMultiple = false)]
-public sealed class AmountValidationAttribute : ValidationAttribute
-{
-    [SuppressMessage("Design", "CA1019:Define accessors for attribute arguments", Justification = "<Pending>")]
-    public AmountValidationAttribute(string minimum, string maximum)
-    {
-        Minimum = decimal.Parse(minimum, CultureInfo.InvariantCulture);
-        Maximum = decimal.Parse(maximum, CultureInfo.InvariantCulture);
-
-        ArgumentOutOfRangeException.ThrowIfLessThan(Minimum, FastMoney.MinValue.Amount);
-        ArgumentOutOfRangeException.ThrowIfGreaterThan(Maximum, FastMoney.MaxValue.Amount);
-
-        if (Minimum.Scale > 4)
-        {
-            throw new ArgumentException("Scale cannot be greater than 4.", nameof(minimum));
-        }
-        if (Maximum.Scale > 4)
-        {
-            throw new ArgumentException("Scale cannot be greater than 4.", nameof(maximum));
-        }
-    }
-
-    #region Properties
-
-    /// <summary>
-    /// Gets the maximum allowed field value.
-    /// </summary>
-    public decimal Maximum { get; }
-
-    /// <summary>
-    /// Specifies whether validation should fail for values that are equal to System.ComponentModel.DataAnnotations.RangeAttribute.Maximum.
-    /// </summary>
-    public bool MaximumIsExclusive { get; set; }
-
-    /// <summary>
-    /// Gets the minimum allowed field value.
-    /// </summary>
-    public decimal Minimum { get; }
-
-    /// <summary>
-    /// Specifies whether validation should fail for values that are equal to System.ComponentModel.DataAnnotations.RangeAttribute.Minimum.
-    /// </summary>
-    public bool MinimumIsExclusive { get; set; }
-
-    #endregion
-
-}

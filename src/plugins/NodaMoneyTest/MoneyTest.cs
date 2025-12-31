@@ -34,7 +34,7 @@ public static class MoneyTest
 
     public static void FastMoney_Test()
     {
-        var eur = new FastMoney(10.1264m, CurrencyCode.EUR);
+        var eur = new FastMoney(10.12645m, CurrencyCode.EUR);
         var fee = new FastMoney(0.1000m, CurrencyCode.EUR);
         var total = eur + fee;
 

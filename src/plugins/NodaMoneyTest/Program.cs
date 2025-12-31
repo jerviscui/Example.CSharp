@@ -12,7 +12,9 @@ internal static class Program
         //MoneyTest.Parse_Test();
         //MoneyTest.FastMoney_Test();
 
-        SerializationTest.Serialize_Test();
+        //SerializationTest.Serialize_Test();
+        SerializationTest.Output_Serialization_Test();
+        SerializationTest.Input_Validation_ModelState_Test();
     }
 
     #endregion
