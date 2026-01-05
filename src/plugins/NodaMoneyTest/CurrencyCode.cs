@@ -3,6 +3,10 @@ using System.Collections.Frozen;
 
 namespace NodaMoneyTest;
 
+[System.Diagnostics.CodeAnalysis.SuppressMessage(
+    "Critical Code Smell",
+    "S2339:Public constant members should not be used",
+    Justification = "<Pending>")]
 public static class CurrencyCode
 {
 
@@ -30,8 +34,8 @@ public static class CurrencyCode
     public const string USD = "USD";
 
     public static readonly FrozenDictionary<string, Currency> SupportedCurrency = typeof(CurrencyCode).GetFields()
-        .Where(o => o.IsLiteral)
-        .Select(o => Currency.FromCode((string)o.GetValue(null)!))
+        .Where(static o => o.IsLiteral)
+        .Select(static o => Currency.FromCode((string)(o.GetValue(null) ?? throw new InvalidOperationException())))
         .ToFrozenDictionary(static o => o.Code, o => o);
 
     #endregion
