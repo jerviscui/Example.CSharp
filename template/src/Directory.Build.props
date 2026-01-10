@@ -1,17 +1,7 @@
 <Project>
 
   <PropertyGroup>
-    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
-    <CompilerGeneratedFilesOutputPath>_Generated</CompilerGeneratedFilesOutputPath>
+    <UseArtifactsOutput>true</UseArtifactsOutput>
   </PropertyGroup>
-
-  <ItemGroup>
-    <Compile Remove="_Generated\**\*.cs" />
-    <None Include="_Generated\**\*.cs" />
-  </ItemGroup>
-
-  <Target Name="CustomClean" AfterTargets="Clean">
-    <RemoveDir Directories="_Generated" />
-  </Target>
 
 </Project>

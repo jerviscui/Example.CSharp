@@ -4,9 +4,20 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <Nullable>enable</Nullable>
     <AnalysisMode>All</AnalysisMode>
-    <UseArtifactsOutput>true</UseArtifactsOutput>
     <GenerateDocumentationFile>True</GenerateDocumentationFile>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <EmitCompilerGeneratedFiles>true</EmitCompilerGeneratedFiles>
+    <CompilerGeneratedFilesOutputPath>_Generated</CompilerGeneratedFilesOutputPath>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="_Generated\**\*.cs" />
+    <None Include="_Generated\**\*.cs" />
+  </ItemGroup>
+  <Target Name="CustomClean" AfterTargets="Clean">
+    <RemoveDir Directories="_Generated" />
+  </Target>
 
   <ItemGroup>
     <AdditionalFiles Include="$(MSBuildThisFileDirectory)CodeMetricsConfig.txt" Condition="Exists('$(MSBuildThisFileDirectory)CodeMetricsConfig.txt')" Link="CodeMetricsConfig.txt" />
