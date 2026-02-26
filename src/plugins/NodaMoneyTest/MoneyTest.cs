@@ -28,8 +28,9 @@ public static class MoneyTest
         //    });
         //MoneyContext.DefaultThreadContext = myDefaultContext;
 
-        var money = new Money(10.12345m);
-        Console.WriteLine(money); // ¥10.1234
+        var money = new Money(1001.12346m); // Amount = 1001.1235
+        Console.WriteLine(money); // ¥1,001.12
+        Console.WriteLine(money.ToString("C4", CultureInfo.CurrentCulture)); // ¥1,001.1235
     }
 
     public static void FastMoney_Test()

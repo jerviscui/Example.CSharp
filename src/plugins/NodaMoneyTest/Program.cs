@@ -8,6 +8,7 @@ internal static class Program
     private static void Main()
     {
         MoneyTest.DefaultCurrency_Test();
+
         //MoneyTest.Money_Test();
         //MoneyTest.Parse_Test();
         //MoneyTest.FastMoney_Test();

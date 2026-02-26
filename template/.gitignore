@@ -435,4 +435,4 @@ FodyWeavers.xsd
 *.msp
 
 # Source Generator files
-**/_Generated/**/*.g.cs
+**/_Generated/**

@@ -11,6 +11,8 @@ public class FastMoneyDto
 
     public string Currency { get; init; } = CurrencyCode.CNY;
 
+    public string Symbol { get; init; } = "¥";
+
     #endregion
 
 }
@@ -22,7 +24,12 @@ public static class FastMoneyExtensions
 
     public static FastMoneyDto ToDto(this FastMoney fastMoney)
     {
-        return new FastMoneyDto { Amount = fastMoney.Amount, Currency = fastMoney.Currency.Code };
+        return new FastMoneyDto
+        {
+            Amount = fastMoney.Amount,
+            Currency = fastMoney.Currency.Code,
+            Symbol = fastMoney.Currency.Symbol
+        };
     }
 
     #endregion

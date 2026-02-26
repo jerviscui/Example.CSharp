@@ -1,5 +1,6 @@
 using NodaMoney;
 using System.ComponentModel.DataAnnotations;
+using System.Text.Encodings.Web;
 using System.Text.Json;
 
 namespace NodaMoneyTest;
@@ -8,6 +9,11 @@ public static class SerializationTest
 {
 
     #region Constants & Statics
+
+    private static readonly JsonSerializerOptions JsonOptions = new()
+    {
+        Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping
+    };
 
     public static void Input_Validation_ModelState_Test()
     {
@@ -38,9 +44,8 @@ public static class SerializationTest
     {
         var money = new FastMoney(99.99m);
         var dto = money.ToDto();
-
         var output = new MyOutput("Alice Smith", 28, dto);
-        var json = JsonSerializer.Serialize(output);
+        var json = JsonSerializer.Serialize(output, JsonOptions);
         Console.WriteLine(json);
     }
 

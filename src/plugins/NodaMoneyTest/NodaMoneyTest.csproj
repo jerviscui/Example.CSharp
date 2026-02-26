@@ -8,7 +8,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="NodaMoney" Version="2.6.0" />
+    <PackageReference Include="NodaMoney" Version="2.7.0" />
   </ItemGroup>
 
 </Project>
