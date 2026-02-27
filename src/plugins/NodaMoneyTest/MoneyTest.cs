@@ -30,6 +30,7 @@ public static class MoneyTest
 
         var money = new Money(1001.12346m); // Amount = 1001.1235
         Console.WriteLine(money); // ¥1,001.12
+        Console.WriteLine(money.ToString("c", CultureInfo.CurrentCulture)); // ¥1K
         Console.WriteLine(money.ToString("C4", CultureInfo.CurrentCulture)); // ¥1,001.1235
     }
 
