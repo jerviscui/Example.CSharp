@@ -1,4 +1,6 @@
+using OtherNamespace;
 using Riok.Mapperly.Abstractions;
+using System.Diagnostics.CodeAnalysis;
 
 namespace MapperlyTest;
 
@@ -9,12 +11,24 @@ public class Dog
 
     public string Name { get; set; } = string.Empty;
 
+    public NestedClass Nested { get; set; } = new NestedClass();
+
     public string? NullStr { get; set; }
 
     public int NumberOfWheels { get; set; }
 
     #endregion
 
+    [SuppressMessage("Design", "CA1034:Nested types should not be visible", Justification = "<Pending>")]
+    public class NestedClass
+    {
+
+        #region Properties
+
+        public string Prop { get; private set; } = "Default";
+
+        #endregion
+    }
 }
 
 internal sealed record DogDto
@@ -54,8 +68,19 @@ internal sealed record DogDto
 
     internal string? StringNull { get; set; }
 
+    public NestedDto NestedTarget { get; set; } = new NestedDto();
+
     #endregion
 
+    public sealed class NestedDto
+    {
+
+        #region Properties
+
+        public string PropDto { get; set; } = string.Empty;
+
+        #endregion
+    }
 }
 
 [Mapper]
@@ -80,7 +105,11 @@ internal static partial class DogProjectToMapper
     #region Constants & Statics
 
     [IncludeMappingConfiguration(nameof(@DogMapper.ToDogDto))]
+    [MapProperty(nameof(Dog.Nested), nameof(DogDto.NestedTarget), Use = nameof(ToNested))]
     private static partial DogDto ToDogDto(Dog dog);
+
+    [IncludeMappingConfiguration(nameof(@NestedClassMapper.ToNestedDto))]
+    private static partial DogDto.NestedDto ToNested(Dog.NestedClass nested);
 
     internal static partial IQueryable<DogDto> ProjectToDogDto(this IQueryable<Dog> query);
 
